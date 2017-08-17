@@ -25,5 +25,6 @@ coverage <- sprintf("[![%s Coverage Status](https://img.shields.io/codecov/c/git
 
 # `scopr` [![Travis-CI Build Status](https://travis-ci.org/rethomics/scopr.svg?branch=master)](https://travis-ci.org/rethomics/scopr)[![Coverage Status](https://img.shields.io/codecov/c/github/rethomics/scopr/master.svg)](https://codecov.io/github/scopr/behavr?branch=master)
 library(knitr)
-kable(data.frame(Package = package_name, Description=titles, "Travis.CI"=travis_ci, Coverage=coverage))
+kable(data.frame(Package = package_name, Description=titles, "Travis.CI"=travis_ci, Coverage=coverage),
+      row.names = FALSE)
 ```

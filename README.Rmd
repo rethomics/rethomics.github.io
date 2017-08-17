@@ -19,12 +19,19 @@ titles <- sapply(packages,
   )
 
 package_name <- sprintf("[%s](https://github.com/rethomics/%s)", packages, packages)
+
+doc <- sprintf("![ PDF img/pdf_icon.png](https://github.com/rethomics/%s/%s.pdf)", packages, packages)
 travis_ci <- sprintf("[![%s Travis-CI Status](https://travis-ci.org/rethomics/%s.svg?branch=master)](https://travis-ci.org/rethomics/%s)", packages,packages,packages)
 
 coverage <- sprintf("[![%s Coverage Status](https://img.shields.io/codecov/c/github/rethomics/%s/master.svg)](https://codecov.io/github/%s/behavr?branch=master)", packages, packages, packages)
 
 # `scopr` [![Travis-CI Build Status](https://travis-ci.org/rethomics/scopr.svg?branch=master)](https://travis-ci.org/rethomics/scopr)[![Coverage Status](https://img.shields.io/codecov/c/github/rethomics/scopr/master.svg)](https://codecov.io/github/scopr/behavr?branch=master)
 library(knitr)
-kable(data.frame(Package = package_name, Description=titles, "Travis.CI"=travis_ci, Coverage=coverage),
+kable(data.frame(
+              Package = package_name,
+              Doc = doc, 
+              Description = titles,
+              Travis.CI = travis_ci,
+              Coverage = coverage),
       row.names = FALSE)
 ```

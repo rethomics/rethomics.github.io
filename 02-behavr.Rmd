@@ -1,0 +1,203 @@
+# Generalities {#behavr}
+
+This part is a conceptual section about the workflow and challenges of behavioural data analysis, and how we address them in `rethomics`.
+
+## Workflow
+
+
+![todo figure]()
+
+
+
+## Queries
+
+When performing many experiments, with multiple condidions and replicates, 
+it becomes challenging to keep track of each individual and to link it to its actual data.
+In `rethomics`, regardless of the tool used to generate data, loading results always involves a query. 
+**A query is a simple CSV file** (basically a spreadsheet) in which **each row defines one unique animal**.
+The query contains technical information (column) such as "date", "name of the machine used" and others. 
+They will be used to match an animal to its data. 
+In addition, it records arbitrary biological information describing the experiment.
+For instance, this is a toy query with only 3 animals:
+
+```{r, echo=FALSE}
+library(knitr)
+dd <- data.frame(
+              date=c("2015-02-20", "2015-02-20","2015-02-20"),
+              machine_name = c("machine_01","machine_03","machine_07"), 
+              region_id = c(1,2,1),
+              sex=c("M", "F", "F"),
+              genotype=c("xxx", "xxx", "zzz"))
+
+kable(dd,
+      row.names = FALSE)
+``` 
+
+
+
+The `region_id` column define the region of interest in the behavioural arena.
+
+When performing a replicates of an experiment, it is very simple to expand a pre-existing query:
+```{r, echo=FALSE}
+dd2 <- dd
+dd2$date <- "2015-03-05"
+dd$replicate <- "A"
+dd2$replicate <- "B"
+dd <- rbind(dd,dd2)
+kable(dd,
+      row.names = FALSE)
+```
+
+It is a good habit to *record as much information as possible in our queries* -- even if it seems redundant. 
+For instance, if we put animals in different incubators, we can simply add an "incubator" column in our query:
+
+```{r, echo=FALSE}
+
+
+dd$incubator <- ifelse(dd$region_id <2, 3,4)
+kable(dd,
+      row.names = FALSE)
+```
+
+This way, we keep all our experimental notes, as much as possible, inside one file.
+Not only this will help us to "debug" if anything goes wrong in one incubator, but we will also be able to account for incubator as a covariate later on.
+
+According to the acquicisition platform (e.g. ethoscopes and DAMS), the queries may be slightly different, and we will show examples of such queries in the next parts of the tutorial. 
+Regardless of the acquisition, though, **queries are a canonical way to both record and load behavioural data**.
+They are both computer and human friendly. In other words, if you give a query to a colaborator, she/he will be able to tell very quickly what animal underwent which treatment, where and when.
+
+## Variables and metavariables
+
+When performing behavioural experiments, many animals are individually monitored.
+For each of these individual, we record a set of **variables** (e.g. position, orientation, beam breaking,...).
+Each variable is recorded at successive intervals, **over long durations**.
+In addition to these variables, which change over time we also have **metavariables**.
+Metavariables contain information **about each individual**.
+This information can be defined (or recorded) before or after the experiment, but in all cases the point is that it **does not change over time** (e.g. treatment, genotype, lifespan).
+Typically, metavariables are defined as extra *columns a the query file*, but they can also be computed.
+
+For example, if we recorded `x` and `y` positions over time, for animals of different `sex` and `genotype`,
+`x` and `y` would be the variables whilst `sex` and `genotype` would be the metavariables.
+
+
+Regardless to what device was used to generate our data and how we loaded it, in `rethomics`, we will always have data and metadata linked together.
+
+## `behavr` tables
+
+
+In order to handle efficiently large amounts of data (toghter with metadata), we have designed the `behavr` package.
+A `behavr` table is essentially a [data.table](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html) enhanced with metadata.
+**When we load any behavioural data in `rethomics`, we get a `behavr` table as a result.**
+Therefore, it is important to understand how to manipulate and operate on this data structure.
+
+### Toy data
+
+The `behavr` package has a set of functions to make toy data. 
+In order to have a look at a `behavr` object, lets create one.
+First, we make a query:
+```{r}
+library(behavr)
+query <- data.frame( experiment_id = "toy_experiment",
+                    region_id = 1:10,
+                    condition = c("A", "B") )
+query
+```
+
+Then, we use `toy_dam_data()` to simulate one day of DAMS-like data for these ten animals (and two conditions):
+
+```{r}
+dt <- toy_dam_data(query, duration = days(1))
+dt
+```
+As you can see, when we print `dt`, our `behavr` table, we have two fields: `METADATA` and `DATA`.
+The former has only one row per animal and looks very much like query, with an extra column named `id`.
+The later is the actual data of **all animals**. The special column `id` is also known as a key. It allows to map data to metadata. 
+In other words, there is a unique id for each individual. 
+In this specific example, `t` is the time and  `activity` is the number of beam crosses.
+
+
+
+### Operating on `behavr` tables
+
+####  Variables{-}
+Playing with variables is just like in `data.table`.
+Read the [official data.table tutorial](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html) for more functionalities.
+For instance, we can add a new variable, `very_active` that is `TRUE` if and only if
+there was at least two beam crosses in a minute:
+
+```{r}
+dt[, very_active := activity >= 2]
+```
+One can also filter data. For instance, we want to show only point before three hours:
+```{r}
+dt[t < hours(3)]
+```
+
+Note that `hours(3)` just converts 3h in seconds, because time is expressed in seconds in `rethomics` (there is also a `days()` and a `mins()` function).
+
+
+
+####  Expand metavariables{-}
+
+Sometimes, you would like to **use metavariables as if they were variables**.
+Imagine, for instance, that we want to correct activity according to the condition, say we need to multiply activity by two for condition "A". 
+For this purpoe, we can use the function `xmv` (eXpand MetaVariable):
+
+
+```{r}
+dt[, activity_corrected := ifelse(xmv(condition) == "A", activity * 2, activity)]
+```
+
+If `condition` were a variable, we would use ` ifelse(condition == "A", activity * 2, activity)`.
+Since it is in metadata, we just replace `condition` by `xmv(condition)`.
+
+
+####  Metadata{-}
+
+The Metadata is itself a table.
+To perform operations on metadata, on can use `meta=TRUE` inside the `[]` operator.
+For intace, only to display the metadata:
+
+```{r}
+dt[meta=TRUE]
+```
+
+
+We can use the same principle to add new metavariable:
+
+
+```{r}
+dt[, 
+   my_new_column := interaction(region_id, condition),
+   meta=TRUE]
+dt[meta=TRUE]
+```
+
+#### Summarise data{-}
+
+At some point, we will want to compute one or several summary variables for each animal and, for instance, 
+model these versus metavariable. For instance, we could compute the sum of all activity for each animal.
+Since each animal is identified by its `id`, we use `by=id` for this:
+
+```{r}
+summary_dt <- dt[, 
+                  .(sum_activity = sum(activity)), 
+                  by=id]
+summary_dt
+```
+Now, the data is only one point per animal, with `id`, and our new variable.
+We aggreated the data, so it is quite managable to put the summary data and the metadata in the same table.
+For that, we use `rejoin`:
+
+```{r}
+final_dt <- rejoin(summary_dt)
+final_dt
+```
+
+This table is now perfectly suited for further statistical analysis and visualisation!
+
+
+#### Stitching{-}
+TODO
+
+

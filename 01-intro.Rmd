@@ -33,7 +33,8 @@ For instance, you could install `ggetho` with `install_github("rethomics/ggetho"
 
 ## All our packages
 
-Here is a list of all the `rethomics` packages as well as their individual description and status:
+Below is a list of all the `rethomics` packages as well as their individual pdf documentaion, description and status.
+
 
 ```{r kable, echo=FALSE}
 packages <- c("behavr", 

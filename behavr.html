@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Rethomics Tutorial</title>
+  <meta name="description" content="This is a tutorial for Rethomics, a framework to analyse high-throuput behavioural data in <code>R</code>.">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Rethomics Tutorial" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a tutorial for Rethomics, a framework to analyse high-throuput behavioural data in <code>R</code>." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Rethomics Tutorial" />
+  
+  <meta name="twitter:description" content="This is a tutorial for Rethomics, a framework to analyse high-throuput behavioural data in <code>R</code>." />
+  
+
+<meta name="author" content="Quentin Geissmann">
+
+
+<meta name="date" content="2017-08-23">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="intro.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Rethomics Tutorial</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#the-rethomics-workflow"><i class="fa fa-check"></i><b>1.1</b> The Rethomics workflow</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> First Steps</a><ul>
+<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#getting-r"><i class="fa fa-check"></i><b>2.1</b> Getting <code>R</code></a></li>
+<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#installing-rethomics-packages"><i class="fa fa-check"></i><b>2.2</b> Installing rethomics packages</a></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#all-our-packages"><i class="fa fa-check"></i><b>2.3</b> All our packages</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="behavr.html"><a href="behavr.html"><i class="fa fa-check"></i><b>3</b> Generalities</a><ul>
+<li class="chapter" data-level="3.1" data-path="behavr.html"><a href="behavr.html#workflow"><i class="fa fa-check"></i><b>3.1</b> Workflow</a></li>
+<li class="chapter" data-level="3.2" data-path="behavr.html"><a href="behavr.html#queries"><i class="fa fa-check"></i><b>3.2</b> Queries</a></li>
+<li class="chapter" data-level="3.3" data-path="behavr.html"><a href="behavr.html#variables-and-metavariables"><i class="fa fa-check"></i><b>3.3</b> Variables and metavariables</a></li>
+<li class="chapter" data-level="3.4" data-path="behavr.html"><a href="behavr.html#behavr-tables"><i class="fa fa-check"></i><b>3.4</b> <code>behavr</code> tables</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="behavr.html"><a href="behavr.html#toy-data"><i class="fa fa-check"></i><b>3.4.1</b> Toy data</a></li>
+<li class="chapter" data-level="3.4.2" data-path="behavr.html"><a href="behavr.html#operating-on-behavr-tables"><i class="fa fa-check"></i><b>3.4.2</b> Operating on <code>behavr</code> tables</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rethomics/rethomics.github.io" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Rethomics Tutorial</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="behavr" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Generalities</h1>
+<p>This part is a conceptual section about the workflow and challenges of behavioural data analysis, and how we address them in <code>rethomics</code>.</p>
+<div id="workflow" class="section level2">
+<h2><span class="header-section-number">3.1</span> Workflow</h2>
+<div class="figure">
+<img src="" alt="todo figure" />
+<p class="caption">todo figure</p>
+</div>
+</div>
+<div id="queries" class="section level2">
+<h2><span class="header-section-number">3.2</span> Queries</h2>
+<p>When performing many experiments, with multiple condidions and replicates, it becomes challenging to keep track of each individual and to link it to its actual data. In <code>rethomics</code>, regardless of the tool used to generate data, loading results always involves a query. <strong>A query is a simple CSV file</strong> (basically a spreadsheet) in which <strong>each row defines one unique animal</strong>. The query contains technical information (column) such as “date”, “name of the machine used” and others. They will be used to match an animal to its data. In addition, it records arbitrary biological information describing the experiment. For instance, this is a toy query with only 3 animals:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">date</th>
+<th align="left">machine_name</th>
+<th align="right">region_id</th>
+<th align="left">sex</th>
+<th align="left">genotype</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">2015-02-20</td>
+<td align="left">machine_01</td>
+<td align="right">1</td>
+<td align="left">M</td>
+<td align="left">xxx</td>
+</tr>
+<tr class="even">
+<td align="left">2015-02-20</td>
+<td align="left">machine_03</td>
+<td align="right">2</td>
+<td align="left">F</td>
+<td align="left">xxx</td>
+</tr>
+<tr class="odd">
+<td align="left">2015-02-20</td>
+<td align="left">machine_07</td>
+<td align="right">1</td>
+<td align="left">F</td>
+<td align="left">zzz</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>region_id</code> column define the region of interest in the behavioural arena.</p>
+<p>When performing a replicates of an experiment, it is very simple to expand a pre-existing query:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">date</th>
+<th align="left">machine_name</th>
+<th align="right">region_id</th>
+<th align="left">sex</th>
+<th align="left">genotype</th>
+<th align="left">replicate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">2015-02-20</td>
+<td align="left">machine_01</td>
+<td align="right">1</td>
+<td align="left">M</td>
+<td align="left">xxx</td>
+<td align="left">A</td>
+</tr>
+<tr class="even">
+<td align="left">2015-02-20</td>
+<td align="left">machine_03</td>
+<td align="right">2</td>
+<td align="left">F</td>
+<td align="left">xxx</td>
+<td align="left">A</td>
+</tr>
+<tr class="odd">
+<td align="left">2015-02-20</td>
+<td align="left">machine_07</td>
+<td align="right">1</td>
+<td align="left">F</td>
+<td align="left">zzz</td>
+<td align="left">A</td>
+</tr>
+<tr class="even">
+<td align="left">2015-03-05</td>
+<td align="left">machine_01</td>
+<td align="right">1</td>
+<td align="left">M</td>
+<td align="left">xxx</td>
+<td align="left">B</td>
+</tr>
+<tr class="odd">
+<td align="left">2015-03-05</td>
+<td align="left">machine_03</td>
+<td align="right">2</td>
+<td align="left">F</td>
+<td align="left">xxx</td>
+<td align="left">B</td>
+</tr>
+<tr class="even">
+<td align="left">2015-03-05</td>
+<td align="left">machine_07</td>
+<td align="right">1</td>
+<td align="left">F</td>
+<td align="left">zzz</td>
+<td align="left">B</td>
+</tr>
+</tbody>
+</table>
+<p>It is a good habit to <em>record as much information as possible in our queries</em> – even if it seems redundant. For instance, if we put animals in different incubators, we can simply add an “incubator” column in our query:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">date</th>
+<th align="left">machine_name</th>
+<th align="right">region_id</th>
+<th align="left">sex</th>
+<th align="left">genotype</th>
+<th align="left">replicate</th>
+<th align="right">incubator</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">2015-02-20</td>
+<td align="left">machine_01</td>
+<td align="right">1</td>
+<td align="left">M</td>
+<td align="left">xxx</td>
+<td align="left">A</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">2015-02-20</td>
+<td align="left">machine_03</td>
+<td align="right">2</td>
+<td align="left">F</td>
+<td align="left">xxx</td>
+<td align="left">A</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="left">2015-02-20</td>
+<td align="left">machine_07</td>
+<td align="right">1</td>
+<td align="left">F</td>
+<td align="left">zzz</td>
+<td align="left">A</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">2015-03-05</td>
+<td align="left">machine_01</td>
+<td align="right">1</td>
+<td align="left">M</td>
+<td align="left">xxx</td>
+<td align="left">B</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="left">2015-03-05</td>
+<td align="left">machine_03</td>
+<td align="right">2</td>
+<td align="left">F</td>
+<td align="left">xxx</td>
+<td align="left">B</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="left">2015-03-05</td>
+<td align="left">machine_07</td>
+<td align="right">1</td>
+<td align="left">F</td>
+<td align="left">zzz</td>
+<td align="left">B</td>
+<td align="right">3</td>
+</tr>
+</tbody>
+</table>
+<p>This way, we keep all our experimental notes, as much as possible, inside one file. Not only this will help us to “debug” if anything goes wrong in one incubator, but we will also be able to account for incubator as a covariate later on.</p>
+<p>According to the acquicisition platform (e.g. ethoscopes and DAMS), the queries may be slightly different, and we will show examples of such queries in the next parts of the tutorial. Regardless of the acquisition, though, <strong>queries are a canonical way to both record and load behavioural data</strong>. They are both computer and human friendly. In other words, if you give a query to a colaborator, she/he will be able to tell very quickly what animal underwent which treatment, where and when.</p>
+</div>
+<div id="variables-and-metavariables" class="section level2">
+<h2><span class="header-section-number">3.3</span> Variables and metavariables</h2>
+<p>When performing behavioural experiments, many animals are individually monitored. For each of these individual, we record a set of <strong>variables</strong> (e.g. position, orientation, beam breaking,…). Each variable is recorded at successive intervals, <strong>over long durations</strong>. In addition to these variables, which change over time we also have <strong>metavariables</strong>. Metavariables contain information <strong>about each individual</strong>. This information can be defined (or recorded) before or after the experiment, but in all cases the point is that it <strong>does not change over time</strong> (e.g. treatment, genotype, lifespan). Typically, metavariables are defined as extra <em>columns a the query file</em>, but they can also be computed.</p>
+<p>For example, if we recorded <code>x</code> and <code>y</code> positions over time, for animals of different <code>sex</code> and <code>genotype</code>, <code>x</code> and <code>y</code> would be the variables whilst <code>sex</code> and <code>genotype</code> would be the metavariables.</p>
+<p>Regardless to what device was used to generate our data and how we loaded it, in <code>rethomics</code>, we will always have data and metadata linked together.</p>
+</div>
+<div id="behavr-tables" class="section level2">
+<h2><span class="header-section-number">3.4</span> <code>behavr</code> tables</h2>
+<p>In order to handle efficiently large amounts of data (toghter with metadata), we have designed the <code>behavr</code> package. A <code>behavr</code> table is essentially a <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html">data.table</a> enhanced with metadata. <strong>When we load any behavioural data in <code>rethomics</code>, we get a <code>behavr</code> table as a result.</strong> Therefore, it is important to understand how to manipulate and operate on this data structure.</p>
+<div id="toy-data" class="section level3">
+<h3><span class="header-section-number">3.4.1</span> Toy data</h3>
+<p>The <code>behavr</code> package has a set of functions to make toy data. In order to have a look at a <code>behavr</code> object, lets create one. First, we make a query:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(behavr)
+query &lt;-<span class="st"> </span><span class="kw">data.frame</span>( <span class="dt">experiment_id =</span> <span class="st">&quot;toy_experiment&quot;</span>,
+                    <span class="dt">region_id =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,
+                    <span class="dt">condition =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>) )
+query</code></pre></div>
+<pre><code>##     experiment_id region_id condition
+## 1  toy_experiment         1         A
+## 2  toy_experiment         2         B
+## 3  toy_experiment         3         A
+## 4  toy_experiment         4         B
+## 5  toy_experiment         5         A
+## 6  toy_experiment         6         B
+## 7  toy_experiment         7         A
+## 8  toy_experiment         8         B
+## 9  toy_experiment         9         A
+## 10 toy_experiment        10         B</code></pre>
+<p>Then, we use <code>toy_dam_data()</code> to simulate one day of DAMS-like data for these ten animals (and two conditions):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt &lt;-<span class="st"> </span><span class="kw">toy_dam_data</span>(query, <span class="dt">duration =</span> <span class="kw">days</span>(<span class="dv">1</span>))
+dt</code></pre></div>
+<pre><code>## 
+##  ==== METADATA ====
+## 
+##      experiment_id region_id condition                id
+##             &lt;fctr&gt;     &lt;int&gt;    &lt;fctr&gt;            &lt;char&gt;
+##  1: toy_experiment         1         A 01|toy_experiment
+##  2: toy_experiment         2         B 02|toy_experiment
+##  3: toy_experiment         3         A 03|toy_experiment
+##  4: toy_experiment         4         B 04|toy_experiment
+##  5: toy_experiment         5         A 05|toy_experiment
+##  6: toy_experiment         6         B 06|toy_experiment
+##  7: toy_experiment         7         A 07|toy_experiment
+##  8: toy_experiment         8         B 08|toy_experiment
+##  9: toy_experiment         9         A 09|toy_experiment
+## 10: toy_experiment        10         B 10|toy_experiment
+## 
+##  ====== DATA ======
+## 
+##                       id     t    activity
+##                   &lt;char&gt; &lt;num&gt;       &lt;num&gt;
+##     1: 01|toy_experiment     0 0.000000000
+##     2: 01|toy_experiment    60 0.016666667
+##     3: 01|toy_experiment   120 0.000000000
+##     4: 01|toy_experiment   180 0.008333333
+##    ---                                    
+## 14406: 10|toy_experiment 86160 0.000000000
+## 14407: 10|toy_experiment 86220 0.000000000
+## 14408: 10|toy_experiment 86280 0.016666667
+## 14409: 10|toy_experiment 86340 0.008333333
+## 14410: 10|toy_experiment 86400 0.000000000</code></pre>
+<p>As you can see, when we print <code>dt</code>, our <code>behavr</code> table, we have two fields: <code>METADATA</code> and <code>DATA</code>. The former has only one row per animal and looks very much like query, with an extra column named <code>id</code>. The later is the actual data of <strong>all animals</strong>. The special column <code>id</code> is also known as a key. It allows to map data to metadata. In other words, there is a unique id for each individual. In this specific example, <code>t</code> is the time and <code>activity</code> is the number of beam crosses.</p>
+</div>
+<div id="operating-on-behavr-tables" class="section level3">
+<h3><span class="header-section-number">3.4.2</span> Operating on <code>behavr</code> tables</h3>
+<div id="variables" class="section level4 unnumbered">
+<h4>Variables</h4>
+<p>Playing with variables is just like in <code>data.table</code>. Read the <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html">official data.table tutorial</a> for more functionalities. For instance, we can add a new variable, <code>very_active</code> that is <code>TRUE</code> if and only if there was at least two beam crosses in a minute:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt[, very_active <span class="op">:</span><span class="er">=</span><span class="st"> </span>activity <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span>]</code></pre></div>
+<p>One can also filter data. For instance, we want to show only point before three hours:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt[t <span class="op">&lt;</span><span class="st"> </span><span class="kw">hours</span>(<span class="dv">3</span>)]</code></pre></div>
+<pre><code>## 
+##  ==== METADATA ====
+## 
+##      experiment_id region_id condition                id
+##             &lt;fctr&gt;     &lt;int&gt;    &lt;fctr&gt;            &lt;char&gt;
+##  1: toy_experiment         1         A 01|toy_experiment
+##  2: toy_experiment         2         B 02|toy_experiment
+##  3: toy_experiment         3         A 03|toy_experiment
+##  4: toy_experiment         4         B 04|toy_experiment
+##  5: toy_experiment         5         A 05|toy_experiment
+##  6: toy_experiment         6         B 06|toy_experiment
+##  7: toy_experiment         7         A 07|toy_experiment
+##  8: toy_experiment         8         B 08|toy_experiment
+##  9: toy_experiment         9         A 09|toy_experiment
+## 10: toy_experiment        10         B 10|toy_experiment
+## 
+##  ====== DATA ======
+## 
+##                      id     t    activity very_active
+##                  &lt;char&gt; &lt;num&gt;       &lt;num&gt;      &lt;lgcl&gt;
+##    1: 01|toy_experiment     0 0.000000000       FALSE
+##    2: 01|toy_experiment    60 0.016666667       FALSE
+##    3: 01|toy_experiment   120 0.000000000       FALSE
+##    4: 01|toy_experiment   180 0.008333333       FALSE
+##   ---                                                
+## 1796: 10|toy_experiment 10500 0.000000000       FALSE
+## 1797: 10|toy_experiment 10560 0.008333333       FALSE
+## 1798: 10|toy_experiment 10620 0.000000000       FALSE
+## 1799: 10|toy_experiment 10680 0.000000000       FALSE
+## 1800: 10|toy_experiment 10740 0.000000000       FALSE</code></pre>
+<p>Note that <code>hours(3)</code> just converts 3h in seconds, because time is expressed in seconds in <code>rethomics</code> (there is also a <code>days()</code> and a <code>mins()</code> function).</p>
+</div>
+<div id="expand-metavariables" class="section level4 unnumbered">
+<h4>Expand metavariables</h4>
+<p>Sometimes, you would like to <strong>use metavariables as if they were variables</strong>. Imagine, for instance, that we want to correct activity according to the condition, say we need to multiply activity by two for condition “A”. For this purpoe, we can use the function <code>xmv</code> (eXpand MetaVariable):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt[, activity_corrected <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">xmv</span>(condition) <span class="op">==</span><span class="st"> &quot;A&quot;</span>, activity <span class="op">*</span><span class="st"> </span><span class="dv">2</span>, activity)]</code></pre></div>
+<p>If <code>condition</code> were a variable, we would use <code>ifelse(condition == &quot;A&quot;, activity * 2, activity)</code>. Since it is in metadata, we just replace <code>condition</code> by <code>xmv(condition)</code>.</p>
+</div>
+<div id="metadata" class="section level4 unnumbered">
+<h4>Metadata</h4>
+<p>The Metadata is itself a table. To perform operations on metadata, on can use <code>meta=TRUE</code> inside the <code>[]</code> operator. For intace, only to display the metadata:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt[meta=<span class="ot">TRUE</span>]</code></pre></div>
+<pre><code>##      experiment_id region_id condition                id
+##  1: toy_experiment         1         A 01|toy_experiment
+##  2: toy_experiment         2         B 02|toy_experiment
+##  3: toy_experiment         3         A 03|toy_experiment
+##  4: toy_experiment         4         B 04|toy_experiment
+##  5: toy_experiment         5         A 05|toy_experiment
+##  6: toy_experiment         6         B 06|toy_experiment
+##  7: toy_experiment         7         A 07|toy_experiment
+##  8: toy_experiment         8         B 08|toy_experiment
+##  9: toy_experiment         9         A 09|toy_experiment
+## 10: toy_experiment        10         B 10|toy_experiment</code></pre>
+<p>We can use the same principle to add new metavariable:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt[, 
+   my_new_column <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">interaction</span>(region_id, condition),
+   meta=<span class="ot">TRUE</span>]
+dt[meta=<span class="ot">TRUE</span>]</code></pre></div>
+<pre><code>##      experiment_id region_id condition                id my_new_column
+##  1: toy_experiment         1         A 01|toy_experiment           1.A
+##  2: toy_experiment         2         B 02|toy_experiment           2.B
+##  3: toy_experiment         3         A 03|toy_experiment           3.A
+##  4: toy_experiment         4         B 04|toy_experiment           4.B
+##  5: toy_experiment         5         A 05|toy_experiment           5.A
+##  6: toy_experiment         6         B 06|toy_experiment           6.B
+##  7: toy_experiment         7         A 07|toy_experiment           7.A
+##  8: toy_experiment         8         B 08|toy_experiment           8.B
+##  9: toy_experiment         9         A 09|toy_experiment           9.A
+## 10: toy_experiment        10         B 10|toy_experiment          10.B</code></pre>
+</div>
+<div id="summarise-data" class="section level4 unnumbered">
+<h4>Summarise data</h4>
+<p>At some point, we will want to compute one or several summary variables for each animal and, for instance, model these versus metavariable. For instance, we could compute the sum of all activity for each animal. Since each animal is identified by its <code>id</code>, we use <code>by=id</code> for this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">summary_dt &lt;-<span class="st"> </span>dt[, 
+                  .(<span class="dt">sum_activity =</span> <span class="kw">sum</span>(activity)), 
+                  by=id]
+summary_dt</code></pre></div>
+<pre><code>## 
+##  ==== METADATA ====
+## 
+##      experiment_id region_id condition                id my_new_column
+##             &lt;fctr&gt;     &lt;int&gt;    &lt;fctr&gt;            &lt;char&gt;        &lt;fctr&gt;
+##  1: toy_experiment         1         A 01|toy_experiment           1.A
+##  2: toy_experiment         2         B 02|toy_experiment           2.B
+##  3: toy_experiment         3         A 03|toy_experiment           3.A
+##  4: toy_experiment         4         B 04|toy_experiment           4.B
+##  5: toy_experiment         5         A 05|toy_experiment           5.A
+##  6: toy_experiment         6         B 06|toy_experiment           6.B
+##  7: toy_experiment         7         A 07|toy_experiment           7.A
+##  8: toy_experiment         8         B 08|toy_experiment           8.B
+##  9: toy_experiment         9         A 09|toy_experiment           9.A
+## 10: toy_experiment        10         B 10|toy_experiment          10.B
+## 
+##  ====== DATA ======
+## 
+##                    id sum_activity
+##                &lt;char&gt;        &lt;num&gt;
+##  1: 01|toy_experiment     3.125000
+##  2: 02|toy_experiment     5.683333
+##  3: 03|toy_experiment     6.141667
+##  4: 04|toy_experiment     2.700000
+##  5: 05|toy_experiment     5.391667
+##  6: 06|toy_experiment     6.175000
+##  7: 07|toy_experiment     2.058333
+##  8: 08|toy_experiment     5.691667
+##  9: 09|toy_experiment     2.191667
+## 10: 10|toy_experiment     3.241667</code></pre>
+<p>Now, the data is only one point per animal, with <code>id</code>, and our new variable. We aggreated the data, so it is quite managable to put the summary data and the metadata in the same table. For that, we use <code>rejoin</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">final_dt &lt;-<span class="st"> </span><span class="kw">rejoin</span>(summary_dt)
+final_dt</code></pre></div>
+<pre><code>##      experiment_id region_id condition                id my_new_column
+##  1: toy_experiment         1         A 01|toy_experiment           1.A
+##  2: toy_experiment         2         B 02|toy_experiment           2.B
+##  3: toy_experiment         3         A 03|toy_experiment           3.A
+##  4: toy_experiment         4         B 04|toy_experiment           4.B
+##  5: toy_experiment         5         A 05|toy_experiment           5.A
+##  6: toy_experiment         6         B 06|toy_experiment           6.B
+##  7: toy_experiment         7         A 07|toy_experiment           7.A
+##  8: toy_experiment         8         B 08|toy_experiment           8.B
+##  9: toy_experiment         9         A 09|toy_experiment           9.A
+## 10: toy_experiment        10         B 10|toy_experiment          10.B
+##     sum_activity
+##  1:     3.125000
+##  2:     5.683333
+##  3:     6.141667
+##  4:     2.700000
+##  5:     5.391667
+##  6:     6.175000
+##  7:     2.058333
+##  8:     5.691667
+##  9:     2.191667
+## 10:     3.241667</code></pre>
+<p>This table is now perfectly suited for further statistical analysis and visualisation!</p>
+</div>
+<div id="stitching" class="section level4 unnumbered">
+<h4>Stitching</h4>
+<p>TODO</p>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="intro.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rethomics/rethomics.github.io/edit/source/02-behavr.Rmd",
+"text": "Edit"
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

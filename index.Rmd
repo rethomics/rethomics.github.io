@@ -1,6 +1,6 @@
 --- 
-title: "A Minimal Book Example"
-author: "Yihui Xie"
+title: "Rethomics Tutorial"
+author: "Quentin Geissmann"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
@@ -9,26 +9,24 @@ bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 github-repo: rstudio/bookdown-demo
-description: "This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook."
+description: "This is a tutorial for Rethomics, a framework to analyse high-throuput behavioural data in `R`."
 ---
 
-# Prerequisites
+# Introduction
 
-This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports, e.g., a math equation $a^2 + b^2 = c^2$.
+In the last few years the ability to acquire large amount of behavioural data
+from multiple individual experimental animal has increased.
+However, there are still very few tools that allows biologist to **read**, **store**, **visualise** and **process** data 
+in a modular and consistant pipeline.
 
-For now, you have to install the development versions of **bookdown** from Github:
+The rethomics framework is a collection of `R` packages that work together in order to provide a **programatic and efficient environment to analyse behavioural data**.
+Since `R` is a state of the art software for scientific data visualisation and analysis,
+rethomics integrates in a its rich ecosystem of high-standard packages already available.
 
-```{r eval=FALSE}
-devtools::install_github("rstudio/bookdown")
-```
+This tutorial is intended for experimenters and data analysts and provided a suite of 
+both **theoritical explanations** and very **concrete examples** of analysis.
 
-Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading `#`.
+## The Rethomics workflow
 
-To compile this example to PDF, you need to install XeLaTeX.
+![TODO figure]()
 
-```{r include=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
-```

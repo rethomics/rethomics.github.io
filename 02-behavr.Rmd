@@ -103,7 +103,7 @@ query <- data.frame( experiment_id = "toy_experiment",
 query
 ```
 
-Then, we use `toy_dam_data()` to simulate one day of DAMS-like data for these ten animals (and two conditions):
+Then, we use `toy_dam_data()` to **simulate** one day of DAMS-like data for these ten animals (and two conditions):
 
 ```{r}
 dt <- toy_dam_data(query, duration = days(1))
@@ -115,6 +115,14 @@ The later is the actual data of **all animals**. The special column `id` is also
 In other words, there is a unique id for each individual. 
 In this specific example, `t` is the time and  `activity` is the number of beam crosses.
 
+A quick way to retreive general information about a `behavr` table is to use `summary`:
+
+```{r}
+summary(dt)
+```
+
+This tells us immediately how many variables and metavariables we have. 
+It also tells us when are the first and last recording for each animal.
 
 
 ### Operating on `behavr` tables

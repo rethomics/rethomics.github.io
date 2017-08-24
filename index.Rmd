@@ -14,7 +14,7 @@ description: "This is a tutorial for Rethomics, a framework to analyse high-thro
 
 # Introduction
 
-### A framework to analyse high throughput behaviour in `R`{-}
+### A framework to analyse high throughput behaviour in R{-}
 
 ![TODO figure]()
 

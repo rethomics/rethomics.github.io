@@ -12,11 +12,14 @@ github-repo: rstudio/bookdown-demo
 description: "This is a tutorial for Rethomics, a framework to analyse high-throuput behavioural data in `R`."
 ---
 
-# Introduction
+# Analysis of high-throughput behaviour in `R`
 
-In the last few years the ability to acquire large amount of behavioural data
+![TODO figure]()
+
+
+In the last few years the ability to acquire **large amount of behavioural data**
 from multiple individual experimental animal has increased.
-However, there are still very few tools that allows biologist to **read**, **store**, **visualise** and **process** data 
+However, there are still very few tools that allows biologists to **read**, **store**, **visualise** and **process** data 
 in a modular and consistant pipeline.
 
 The rethomics framework is a collection of `R` packages that work together in order to provide a **programatic and efficient environment to analyse behavioural data**.
@@ -26,7 +29,5 @@ rethomics integrates in a its rich ecosystem of high-standard packages already a
 This tutorial is intended for experimenters and data analysts and provided a suite of 
 both **theoritical explanations** and very **concrete examples** of analysis.
 
-## The Rethomics workflow
 
-![TODO figure]()
 

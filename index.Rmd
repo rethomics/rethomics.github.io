@@ -25,12 +25,12 @@ It provides a suite of both **theoretical explanations** and very **concrete exa
 
 ### Background{-}
 
-In the last few years the ability to acquire **large amount of behavioural data**
+In the last few years, the ability to acquire **large amount of behavioural data**
 from multiple individual experimental animals has dramatically increased.
-However, there are still very few tools that allows biologists to **read**, **store**, **visualise** and **process** data 
+However, there are still very few tools that allow biologists to **read**, **store**, **visualise** and **process** data 
 in a modular and consistent pipeline.
 
 The rethomics framework is a collection of `R` packages that work together in order to provide a **programmatic and efficient environment to analyse behavioural data**.
 Since `R` is a state of the art software for scientific data visualisation and analysis,
-rethomics integrates in a its rich ecosystem of high-standard packages already available.
+rethomics integrates into a rich ecosystem of high-standard tools.
 

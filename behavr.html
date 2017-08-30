@@ -25,7 +25,7 @@
 <meta name="author" content="Quentin Geissmann">
 
 
-<meta name="date" content="2017-08-24">
+<meta name="date" content="2017-08-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -110,7 +110,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> First Steps</a><ul>
 <li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#getting-r"><i class="fa fa-check"></i><b>2.1</b> Getting <code>R</code></a></li>
 <li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#installing-rethomics-packages"><i class="fa fa-check"></i><b>2.2</b> Installing rethomics packages</a></li>
-<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#all-our-packages"><i class="fa fa-check"></i><b>2.3</b> All our packages</a></li>
+<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#all-rethomics-packages"><i class="fa fa-check"></i><b>2.3</b> All rethomics packages</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="behavr.html"><a href="behavr.html"><i class="fa fa-check"></i><b>3</b> Generalities</a><ul>
 <li class="chapter" data-level="3.1" data-path="behavr.html"><a href="behavr.html#workflow"><i class="fa fa-check"></i><b>3.1</b> Workflow</a></li>
@@ -337,13 +337,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="toy-data" class="section level3">
 <h3><span class="header-section-number">3.4.1</span> Toy data</h3>
 <p>The <code>behavr</code> package has a set of functions to make toy data. In order to have a look at a <code>behavr</code> object, lets create one. First, we make a query:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(behavr)</code></pre></div>
-<pre><code>## 
-## Attaching package: &#39;behavr&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:knitr&#39;:
-## 
-##     stitch</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">query &lt;-<span class="st"> </span><span class="kw">data.frame</span>( <span class="dt">experiment_id =</span> <span class="st">&quot;toy_experiment&quot;</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(behavr)
+query &lt;-<span class="st"> </span><span class="kw">data.frame</span>( <span class="dt">experiment_id =</span> <span class="st">&quot;toy_experiment&quot;</span>,
                     <span class="dt">region_id =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,
                     <span class="dt">condition =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>) )
 query</code></pre></div>

@@ -1,5 +1,5 @@
 --- 
-title: "Rethomics Tutorial"
+title: "Rethomics, a framework for high-throughput behaviour analysis in R"
 author: "Quentin Geissmann"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -14,9 +14,32 @@ description: "This is a tutorial for Rethomics, a framework to analyse high-thro
 
 # Introduction
 
-### A framework to analyse high throughput behaviour in R{-}
+### If we share a common data structure,  we can use a commmon set of tools{-}
 
-![TODO figure]()
+![](assets/framework.svg)
+
+In the last few years, there has been growing interests in ethomics -- that is, the analysis of large behavioural data sets.
+Many software and hardware solutions have been proposed to record different behavioural variables
+on several model organisms.
+Although are many similarities in the analysis and visualisation that are independent of the acquisition tool,
+each method tends to provide its own output format and, in practice, its own analysis software.
+This results in a lot of replicated work and 
+prohibits interation between methods of analysis.
+
+Rethomics attempts to unify analysis of behaviour by providing:
+* `behavr` tables -- a  flexible and **universal structure** to handle very large behavioural data sets
+* `damr`, `scopr`, ... -- packages to **load data** from [DAMS](http://www.trikinetics.com/), [ethoscopes](gilestrolab.github.io/ethoscope) and others into `behavr` tables
+* `ggetho` -- a package, based on `ggplot2`, to produce high quality visualisation of  behavioural data
+* `sleepr`, `rhythmr`, ... -- packages to analyse behavioural data (sleep analysis, circadian rhythm, ...).
+
+
+#These solutions mostly generate their own data format
+#Although, analysis of the data
+
+
+
+
+
 
 
 This document is a tutorial intended for experimenters and data analysts.

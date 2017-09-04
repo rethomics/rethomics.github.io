@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Rethomics Tutorial</title>
+  <title>Rethomics, a framework for high-throughput behaviour analysis in R</title>
   <meta name="description" content="This is a tutorial for Rethomics, a framework to analyse high-throuput behavioural data in <code>R</code>.">
   <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
-  <meta property="og:title" content="Rethomics Tutorial" />
+  <meta property="og:title" content="Rethomics, a framework for high-throughput behaviour analysis in R" />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Rethomics Tutorial" />
+  <meta name="twitter:title" content="Rethomics, a framework for high-throughput behaviour analysis in R" />
   
   <meta name="twitter:description" content="This is a tutorial for Rethomics, a framework to analyse high-throuput behavioural data in <code>R</code>." />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Quentin Geissmann">
 
 
-<meta name="date" content="2017-08-30">
+<meta name="date" content="2017-09-04">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -104,21 +104,24 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#a-framework-to-analyse-high-throughput-behaviour-in-r"><i class="fa fa-check"></i>A framework to analyse high throughput behaviour in R</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#background"><i class="fa fa-check"></i>Background</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#if-we-share-a-common-data-structure-we-can-use-a-commmon-set-of-tools"><i class="fa fa-check"></i>If we share a common data structure, we can use a commmon set of tools</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> First Steps</a><ul>
-<li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#getting-r"><i class="fa fa-check"></i><b>2.1</b> Getting <code>R</code></a></li>
-<li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#installing-rethomics-packages"><i class="fa fa-check"></i><b>2.2</b> Installing rethomics packages</a></li>
-<li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#all-rethomics-packages"><i class="fa fa-check"></i><b>2.3</b> All rethomics packages</a></li>
+<li class="chapter" data-level="2" data-path="these-solutions-mostly-generate-their-own-data-format.html"><a href="these-solutions-mostly-generate-their-own-data-format.html"><i class="fa fa-check"></i><b>2</b> These solutions mostly generate their own data format</a></li>
+<li class="chapter" data-level="3" data-path="although-analysis-of-the-data.html"><a href="although-analysis-of-the-data.html"><i class="fa fa-check"></i><b>3</b> Although, analysis of the data</a><ul>
+<li class="chapter" data-level="" data-path="although-analysis-of-the-data.html"><a href="although-analysis-of-the-data.html#background"><i class="fa fa-check"></i>Background</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="behavr.html"><a href="behavr.html"><i class="fa fa-check"></i><b>3</b> Generalities</a><ul>
-<li class="chapter" data-level="3.1" data-path="behavr.html"><a href="behavr.html#workflow"><i class="fa fa-check"></i><b>3.1</b> Workflow</a></li>
-<li class="chapter" data-level="3.2" data-path="behavr.html"><a href="behavr.html#queries"><i class="fa fa-check"></i><b>3.2</b> Queries</a></li>
-<li class="chapter" data-level="3.3" data-path="behavr.html"><a href="behavr.html#variables-and-metavariables"><i class="fa fa-check"></i><b>3.3</b> Variables and metavariables</a></li>
-<li class="chapter" data-level="3.4" data-path="behavr.html"><a href="behavr.html#behavr-tables"><i class="fa fa-check"></i><b>3.4</b> <code>behavr</code> tables</a><ul>
-<li class="chapter" data-level="3.4.1" data-path="behavr.html"><a href="behavr.html#toy-data"><i class="fa fa-check"></i><b>3.4.1</b> Toy data</a></li>
-<li class="chapter" data-level="3.4.2" data-path="behavr.html"><a href="behavr.html#operating-on-behavr-tables"><i class="fa fa-check"></i><b>3.4.2</b> Operating on <code>behavr</code> tables</a></li>
+<li class="chapter" data-level="4" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>4</b> First Steps</a><ul>
+<li class="chapter" data-level="4.1" data-path="intro.html"><a href="intro.html#getting-r"><i class="fa fa-check"></i><b>4.1</b> Getting <code>R</code></a></li>
+<li class="chapter" data-level="4.2" data-path="intro.html"><a href="intro.html#installing-rethomics-packages"><i class="fa fa-check"></i><b>4.2</b> Installing rethomics packages</a></li>
+<li class="chapter" data-level="4.3" data-path="intro.html"><a href="intro.html#all-rethomics-packages"><i class="fa fa-check"></i><b>4.3</b> All rethomics packages</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="behavr.html"><a href="behavr.html"><i class="fa fa-check"></i><b>5</b> Generalities</a><ul>
+<li class="chapter" data-level="5.1" data-path="behavr.html"><a href="behavr.html#workflow"><i class="fa fa-check"></i><b>5.1</b> Workflow</a></li>
+<li class="chapter" data-level="5.2" data-path="behavr.html"><a href="behavr.html#queries"><i class="fa fa-check"></i><b>5.2</b> Queries</a></li>
+<li class="chapter" data-level="5.3" data-path="behavr.html"><a href="behavr.html#variables-and-metavariables"><i class="fa fa-check"></i><b>5.3</b> Variables and metavariables</a></li>
+<li class="chapter" data-level="5.4" data-path="behavr.html"><a href="behavr.html#behavr-tables"><i class="fa fa-check"></i><b>5.4</b> <code>behavr</code> tables</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="behavr.html"><a href="behavr.html#toy-data"><i class="fa fa-check"></i><b>5.4.1</b> Toy data</a></li>
+<li class="chapter" data-level="5.4.2" data-path="behavr.html"><a href="behavr.html#operating-on-behavr-tables"><i class="fa fa-check"></i><b>5.4.2</b> Operating on <code>behavr</code> tables</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -133,7 +136,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Rethomics Tutorial</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Rethomics, a framework for high-throughput behaviour analysis in R</a>
           </h1>
         </div>
 
@@ -142,17 +145,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="behavr" class="section level1">
-<h1><span class="header-section-number">Chapter 3</span> Generalities</h1>
+<h1><span class="header-section-number">Chapter 5</span> Generalities</h1>
 <p>This part is a conceptual section about the workflow and challenges of behavioural data analysis, and how we address them in <code>rethomics</code>.</p>
 <div id="workflow" class="section level2">
-<h2><span class="header-section-number">3.1</span> Workflow</h2>
+<h2><span class="header-section-number">5.1</span> Workflow</h2>
 <div class="figure">
 <img src="" alt="todo figure" />
 <p class="caption">todo figure</p>
 </div>
 </div>
 <div id="queries" class="section level2">
-<h2><span class="header-section-number">3.2</span> Queries</h2>
+<h2><span class="header-section-number">5.2</span> Queries</h2>
 <p>When performing many experiments, with multiple condidions and replicates, it becomes challenging to keep track of each individual and to link it to its actual data. In <code>rethomics</code>, regardless of the tool used to generate data, loading results always involves a query. <strong>A query is a simple CSV file</strong> (basically a spreadsheet) in which <strong>each row defines one unique animal</strong>. The query contains technical information (column) such as “date”, “name of the machine used” and others. They will be used to match an animal to its data. In addition, it records arbitrary biological information describing the experiment. For instance, this is a toy query with only 3 animals:</p>
 <table>
 <thead>
@@ -326,16 +329,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>According to the acquicisition platform (e.g. ethoscopes and DAMS), the queries may be slightly different, and we will show examples of such queries in the next parts of the tutorial. Regardless of the acquisition, though, <strong>queries are a canonical way to both record and load behavioural data</strong>. They are both computer and human friendly. In other words, if you give a query to a colaborator, she/he will be able to tell very quickly what animal underwent which treatment, where and when.</p>
 </div>
 <div id="variables-and-metavariables" class="section level2">
-<h2><span class="header-section-number">3.3</span> Variables and metavariables</h2>
+<h2><span class="header-section-number">5.3</span> Variables and metavariables</h2>
 <p>When performing behavioural experiments, many animals are individually monitored. For each of these individual, we record a set of <strong>variables</strong> (e.g. position, orientation, beam breaking,…). Each variable is recorded at successive intervals, <strong>over long durations</strong>. In addition to these variables, which change over time we also have <strong>metavariables</strong>. Metavariables contain information <strong>about each individual</strong>. This information can be defined (or recorded) before or after the experiment, but in all cases the point is that it <strong>does not change over time</strong> (e.g. treatment, genotype, lifespan). Typically, metavariables are defined as extra <em>columns a the query file</em>, but they can also be computed.</p>
 <p>For example, if we recorded <code>x</code> and <code>y</code> positions over time, for animals of different <code>sex</code> and <code>genotype</code>, <code>x</code> and <code>y</code> would be the variables whilst <code>sex</code> and <code>genotype</code> would be the metavariables.</p>
 <p>Regardless to what device was used to generate our data and how we loaded it, in <code>rethomics</code>, we will always have data and metadata linked together.</p>
 </div>
 <div id="behavr-tables" class="section level2">
-<h2><span class="header-section-number">3.4</span> <code>behavr</code> tables</h2>
+<h2><span class="header-section-number">5.4</span> <code>behavr</code> tables</h2>
 <p>In order to handle efficiently large amounts of data (toghter with metadata), we have designed the <code>behavr</code> package. A <code>behavr</code> table is essentially a <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html">data.table</a> enhanced with metadata. <strong>When we load any behavioural data in <code>rethomics</code>, we get a <code>behavr</code> table as a result.</strong> Therefore, it is important to understand how to manipulate and operate on this data structure.</p>
 <div id="toy-data" class="section level3">
-<h3><span class="header-section-number">3.4.1</span> Toy data</h3>
+<h3><span class="header-section-number">5.4.1</span> Toy data</h3>
 <p>The <code>behavr</code> package has a set of functions to make toy data. In order to have a look at a <code>behavr</code> object, lets create one. First, we make a query:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(behavr)
 query &lt;-<span class="st"> </span><span class="kw">data.frame</span>( <span class="dt">experiment_id =</span> <span class="st">&quot;toy_experiment&quot;</span>,
@@ -393,11 +396,12 @@ dt</code></pre></div>
 ##  10  individuals
 ##  3   metavariables
 ##  2   variables
+##  1.441e+04   measurements
 ##  1   key (id)</code></pre>
 <p>This tells us immediately how many variables and metavariables we have. It also tells us when are the first and last recording for each animal.</p>
 </div>
 <div id="operating-on-behavr-tables" class="section level3">
-<h3><span class="header-section-number">3.4.2</span> Operating on <code>behavr</code> tables</h3>
+<h3><span class="header-section-number">5.4.2</span> Operating on <code>behavr</code> tables</h3>
 <div id="variables" class="section level4 unnumbered">
 <h4>Variables</h4>
 <p>Playing with variables is just like in <code>data.table</code>. Read the <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html">official data.table tutorial</a> for more functionalities. For instance, we can add a new variable, <code>very_active</code> that is <code>TRUE</code> if and only if there was at least two beam crosses in a minute:</p>

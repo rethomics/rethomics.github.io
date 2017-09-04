@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="although-analysis-of-the-data.html">
-<link rel="next" href="behavr.html">
+<link rel="prev" href="index.html">
+<link rel="next" href="although-analysis-of-the-data.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -144,83 +144,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="intro" class="section level1">
-<h1><span class="header-section-number">Chapter 4</span> First Steps</h1>
-<div id="getting-r" class="section level2">
-<h2><span class="header-section-number">4.1</span> Getting <code>R</code></h2>
-<p>If you have never used or heard of <code>R</code> before, I suggest you start by <a href="http://r4ds.had.co.nz/">reading about <code>R</code></a> and <a href="https://www.rstudio.com/products/rstudio/download/#download">installing RStudio</a>. Only once you have done can we continue.</p>
-</div>
-<div id="installing-rethomics-packages" class="section level2">
-<h2><span class="header-section-number">4.2</span> Installing rethomics packages</h2>
-<p>As of today (“2017-09-04”), rethomics packages are not on CRAN, the official R package archive yet. Therefore, we will install the developmental version.</p>
-<p>For that, we have to install (once for all) use <code>devtools</code> and load it:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)
-<span class="kw">library</span>(devtools)</code></pre></div>
-<p>Ensure you have no error messages. Then, we can install some of the rethomics packages. For instance, to install <code>behavr</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install_github</span>(<span class="st">&quot;rethomics/behavr&quot;</span>)</code></pre></div>
-<p>In the same way, you could replace <code>behavr</code> by another package. For instance, you could install <code>ggetho</code> with <code>install_github(&quot;rethomics/ggetho&quot;)</code>.</p>
-</div>
-<div id="all-rethomics-packages" class="section level2">
-<h2><span class="header-section-number">4.3</span> All rethomics packages</h2>
-<p>Below is a list of all the <code>rethomics</code> packages as well as their individual pdf documentation, description and status.</p>
-<table>
-<thead>
-<tr class="header">
-<th align="left">Package</th>
-<th align="left">Doc</th>
-<th align="left">Description</th>
-<th align="left">Travis.CI</th>
-<th align="left">Coverage</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left"><a href="https://github.com/rethomics/behavr">behavr</a></td>
-<td align="left"><a href="https://github.com/rethomics/behavr/raw/master/behavr.pdf"><img src="assets/pdf_icon.png" alt="PDF" /></a></td>
-<td align="left">Canonical Data Structure for Behavioural Data</td>
-<td align="left"><a href="https://travis-ci.org/rethomics/behavr"><img src="https://travis-ci.org/rethomics/behavr.svg?branch=master" alt="behavr Travis-CI Status" /></a></td>
-<td align="left"><a href="https://codecov.io/github/behavr/behavr?branch=master"><img src="https://img.shields.io/codecov/c/github/rethomics/behavr/master.svg" alt="behavr Coverage Status" /></a></td>
-</tr>
-<tr class="even">
-<td align="left"><a href="https://github.com/rethomics/ggetho">ggetho</a></td>
-<td align="left"><a href="https://github.com/rethomics/ggetho/raw/master/ggetho.pdf"><img src="assets/pdf_icon.png" alt="PDF" /></a></td>
-<td align="left">Visualise High-Throughput Behavioural (i.e. Ethomics) Data</td>
-<td align="left"><a href="https://travis-ci.org/rethomics/ggetho"><img src="https://travis-ci.org/rethomics/ggetho.svg?branch=master" alt="ggetho Travis-CI Status" /></a></td>
-<td align="left"><a href="https://codecov.io/github/ggetho/behavr?branch=master"><img src="https://img.shields.io/codecov/c/github/rethomics/ggetho/master.svg" alt="ggetho Coverage Status" /></a></td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="https://github.com/rethomics/damr">damr</a></td>
-<td align="left"><a href="https://github.com/rethomics/damr/raw/master/damr.pdf"><img src="assets/pdf_icon.png" alt="PDF" /></a></td>
-<td align="left">Read Drosophila Activity Monitor Data</td>
-<td align="left"><a href="https://travis-ci.org/rethomics/damr"><img src="https://travis-ci.org/rethomics/damr.svg?branch=master" alt="damr Travis-CI Status" /></a></td>
-<td align="left"><a href="https://codecov.io/github/damr/behavr?branch=master"><img src="https://img.shields.io/codecov/c/github/rethomics/damr/master.svg" alt="damr Coverage Status" /></a></td>
-</tr>
-<tr class="even">
-<td align="left"><a href="https://github.com/rethomics/scopr">scopr</a></td>
-<td align="left"><a href="https://github.com/rethomics/scopr/raw/master/scopr.pdf"><img src="assets/pdf_icon.png" alt="PDF" /></a></td>
-<td align="left">Read Ethoscope Data</td>
-<td align="left"><a href="https://travis-ci.org/rethomics/scopr"><img src="https://travis-ci.org/rethomics/scopr.svg?branch=master" alt="scopr Travis-CI Status" /></a></td>
-<td align="left"><a href="https://codecov.io/github/scopr/behavr?branch=master"><img src="https://img.shields.io/codecov/c/github/rethomics/scopr/master.svg" alt="scopr Coverage Status" /></a></td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="https://github.com/rethomics/sleepr">sleepr</a></td>
-<td align="left"><a href="https://github.com/rethomics/sleepr/raw/master/sleepr.pdf"><img src="assets/pdf_icon.png" alt="PDF" /></a></td>
-<td align="left">Analyse actvity and sleep behaviour</td>
-<td align="left"><a href="https://travis-ci.org/rethomics/sleepr"><img src="https://travis-ci.org/rethomics/sleepr.svg?branch=master" alt="sleepr Travis-CI Status" /></a></td>
-<td align="left"><a href="https://codecov.io/github/sleepr/behavr?branch=master"><img src="https://img.shields.io/codecov/c/github/rethomics/sleepr/master.svg" alt="sleepr Coverage Status" /></a></td>
-</tr>
-</tbody>
-</table>
-
-</div>
+<div id="these-solutions-mostly-generate-their-own-data-format" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> These solutions mostly generate their own data format</h1>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="although-analysis-of-the-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="behavr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="although-analysis-of-the-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -249,7 +182,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rethomics/rethomics.github.io/edit/source/01-intro.Rmd",
+"link": "https://github.com/rethomics/rethomics.github.io/edit/source/index.Rmd",
 "text": "Edit"
 },
 "download": ["bookdown-demo.pdf", "bookdown-demo.epub"],

@@ -41,7 +41,8 @@ packages <- c("behavr",
               "ggetho",
               "damr",
               "scopr",
-              "sleepr"
+              "sleepr",
+              "rhythmr"
               )
 titles <- sapply(packages, 
        function(p){

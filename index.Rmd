@@ -12,10 +12,9 @@ github-repo: rstudio/bookdown-demo
 description: "This is a tutorial for Rethomics, a framework to analyse high-throuput behavioural data in `R`."
 ---
 
-# Introduction
+# Introduction{-}
 
-### If we share a common data structure,  we can use a commmon set of tools{-}
-
+**Only if we share a common data structure  can we  build a commmon set of tools**
 
 ![The rethomics framework unify behaviour analysis over multiple platforms](assets/framework.png)
 

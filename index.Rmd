@@ -16,16 +16,15 @@ description: "This is a tutorial for Rethomics, a framework to analyse high-thro
 
 ### If we share a common data structure,  we can use a commmon set of tools{-}
 
-Rethomics framework unify behaviour analysis:
 
-![Rethomics framework](assets/framework.png)
+![The rethomics framework unify behaviour analysis over multiple platforms](assets/framework.png)
 
 In the last few years, there has been growing interests in *ethomics* -- that is, the analysis of large behavioural data sets.
 Many software and hardware solutions have been proposed to record different behavioural variables
 on several model organisms.
-Although are many similarities between subsequent analysis and visualisation tool,
+Although are many similarities between subsequent analysis and visualisation tools,
 each method tends to provide its own output format and, in practice, its own, restricted, analysis software.
-This results in a lot of replicated work and prohibits extension and collaboration.
+This results in a lot of replicated work,  but also limits extension and collaboration.
 
 Rethomics attempts to unify analysis of behaviour by providing:
 

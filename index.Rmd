@@ -16,44 +16,23 @@ description: "This is a tutorial for Rethomics, a framework to analyse high-thro
 
 ### If we share a common data structure,  we can use a commmon set of tools{-}
 
-![](assets/framework.png)
+Rethomics framework unify behaviour analysis:
 
-In the last few years, there has been growing interests in ethomics -- that is, the analysis of large behavioural data sets.
+![Rethomics framework](assets/framework.png)
+
+In the last few years, there has been growing interests in *ethomics* -- that is, the analysis of large behavioural data sets.
 Many software and hardware solutions have been proposed to record different behavioural variables
 on several model organisms.
-Although are many similarities in the analysis and visualisation that are independent of the acquisition tool,
-each method tends to provide its own output format and, in practice, its own analysis software.
-This results in a lot of replicated work and 
-prohibits interation between methods of analysis.
+Although are many similarities between subsequent analysis and visualisation tool,
+each method tends to provide its own output format and, in practice, its own, restricted, analysis software.
+This results in a lot of replicated work and prohibits extension and collaboration.
 
 Rethomics attempts to unify analysis of behaviour by providing:
+
 * `behavr` tables -- a  flexible and **universal structure** to handle very large behavioural data sets
 * `damr`, `scopr`, ... -- packages to **load data** from [DAMS](http://www.trikinetics.com/), [ethoscopes](gilestrolab.github.io/ethoscope) and others into `behavr` tables
 * `ggetho` -- a package, based on `ggplot2`, to produce high quality visualisation of  behavioural data
-* `sleepr`, `rhythmr`, ... -- packages to analyse behavioural data (sleep analysis, circadian rhythm, ...).
+* `sleepr`, `zeitgebr`, ... -- packages to analyse behavioural data (sleep analysis, circadian rhythm, ...).
 
-
-#These solutions mostly generate their own data format
-#Although, analysis of the data
-
-
-
-
-
-
-
-This document is a tutorial intended for experimenters and data analysts.
-It provides a suite of both **theoretical explanations** and very **concrete examples**.
-
-
-### Background{-}
-
-In the last few years, the ability to acquire **large amount of behavioural data**
-from multiple individual experimental animals has dramatically increased.
-However, there are still very few tools that allow biologists to **read**, **store**, **visualise** and **process** data 
-in a modular and consistent pipeline.
-
-The rethomics framework is a collection of `R` packages that work together in order to provide a **programmatic and efficient environment to analyse behavioural data**.
-Since `R` is a state of the art software for scientific data visualisation and analysis,
-rethomics integrates into a rich ecosystem of high-standard tools.
-
+This document is a tutorial intended for experimenters as well as data analysts.
+It provides a suite of both **conceptual explanations** and very **concrete examples**.

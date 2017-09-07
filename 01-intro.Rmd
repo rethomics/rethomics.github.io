@@ -4,7 +4,7 @@
 ## Getting `R`
 
 If you have never used or heard of `R` before, 
-I suggest you start by [reading about `R`](http://r4ds.had.co.nz/) and [installing RStudio](https://www.rstudio.com/products/rstudio/download/#download).
+I suggest you start by reading about [data science in `R`](http://r4ds.had.co.nz/) and [installing RStudio](https://www.rstudio.com/products/rstudio/download/#download).
 Only once you have done can we continue.
 
 ## Installing rethomics packages
@@ -20,9 +20,9 @@ library(devtools)
 ```
 
 
-Ensure you have no error messages.
-Then, we can install some of the rethomics packages.
-For instance, to install `behavr`.
+Ensure you have *no error messages*.
+Then, we can install some of the `rethomics` packages.
+For instance, lets install `behavr`.
 
 ```{r, eval=FALSE}
 install_github("rethomics/behavr")
@@ -31,9 +31,9 @@ install_github("rethomics/behavr")
 In the same way, you could replace `behavr` by another package. 
 For instance, you could install `ggetho` with `install_github("rethomics/ggetho")`.
 
-## All rethomics packages
+## List of rethomics packages
 
-Below is a list of all the `rethomics` packages as well as their individual pdf documentation, description and status.
+Below is a list of all the `rethomics` packages as well as their individual PDF documentation, description and build status.
 
 
 ```{r kable, echo=FALSE}
@@ -42,7 +42,7 @@ packages <- c("behavr",
               "damr",
               "scopr",
               "sleepr",
-              "rhythmr"
+              "zeitgebr"
               )
 titles <- sapply(packages, 
        function(p){
@@ -59,6 +59,7 @@ travis_ci <- sprintf("[![%s Travis-CI Status](https://travis-ci.org/rethomics/%s
 coverage <- sprintf("[![%s Coverage Status](https://img.shields.io/codecov/c/github/rethomics/%s/master.svg)](https://codecov.io/github/%s/behavr?branch=master)", packages, packages, packages)
 
 # `scopr` [![Travis-CI Build Status](https://travis-ci.org/rethomics/scopr.svg?branch=master)](https://travis-ci.org/rethomics/scopr)[![Coverage Status](https://img.shields.io/codecov/c/github/rethomics/scopr/master.svg)](https://codecov.io/github/scopr/behavr?branch=master)
+
 library(knitr)
 kable(data.frame(
               Package = package_name,

@@ -34,7 +34,7 @@ Rethomics attempts to unify analysis of behaviour by providing several packages:
 
 * `behavr` tables -- a  flexible and **universal structure** to handle very large behavioural data sets
 * `damr`, `scopr`, … -- to **load data** from [DAMS](http://www.trikinetics.com/), [ethoscopes](gilestrolab.github.io/ethoscope) and others into `behavr` tables
-* `ggetho` -- based on `ggplot2`, to produce high-quality visualisation of  behavioural data
+* `ggetho` -- based on `ggplot2`, to produce **high-quality representations**  of behavioural data
 * `sleepr`, `zeitgebr`, … -- to analyse behavioural data (sleep analysis, circadian rhythm, …)
 
 This document is a tutorial intended for experimenters as well as data analysts.

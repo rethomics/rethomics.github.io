@@ -9003,6 +9003,21 @@
          result="blur"
          in="fbSourceGraphic" />
     </filter>
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker25711-26"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path25709-4"
+         style="fill:#005b05;fill-opacity:1;fill-rule:evenodd;stroke:#005b05;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6)"
+         inkscape:connector-curvature="0" />
+    </marker>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -9011,9 +9026,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.41063484"
-     inkscape:cx="1269.6136"
-     inkscape:cy="1051.2733"
+     inkscape:zoom="0.26609433"
+     inkscape:cx="985.45465"
+     inkscape:cy="1387.8466"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -9041,7 +9056,7 @@
        id="guide9933"
        inkscape:locked="false" />
     <sodipodi:guide
-       position="339.3167,271.39347"
+       position="321.31283,272.79951"
        orientation="1,0"
        id="guide10691"
        inkscape:locked="false" />
@@ -9144,7 +9159,7 @@
          y="72.427628"
          x="-111.62912"
          sodipodi:role="line"
-         id="tspan15873">Aquisition Platforms</tspan></text>
+         id="tspan15873">Acquisition Platforms</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:6.61458349px;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -9576,19 +9591,19 @@
          style="font-size:41.22504807px;fill:#333333;fill-opacity:1;stroke-width:0.35952073px"></tspan></text>
     <path
        style="fill:none;fill-rule:evenodd;stroke:#333333;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker6276)"
-       d="m 70.470675,132.37259 98.652895,0.60006 30.28271,15.6913"
+       d="m 70.470675,132.37259 68.771505,-0.10303 26.6922,10.41812"
        id="path6266"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccc" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#333333;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker6276-2)"
-       d="m 70.158475,171.84479 95.343675,0.60006 33.90413,0.0817"
+       d="m 70.158475,171.84479 50.345815,-0.10303 46.83628,-0.26985"
        id="path6266-6"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccc" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#333333;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker6276-4)"
-       d="m 70.158475,212.42984 99.036515,-0.0243 30.21129,-16.15236"
+       d="m 70.158475,212.42984 65.639665,-0.37585 30.56283,-9.82453"
        id="path6266-5"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccc" />
@@ -9600,7 +9615,7 @@
        sodipodi:nodetypes="czc" />
     <g
        id="g31647"
-       transform="translate(0,15.875004)">
+       transform="translate(-38.858277,22.677489)">
       <rect
          y="110.18988"
          x="210.95503"
@@ -10171,5 +10186,11 @@
        id="path2928"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#005b05;stroke-width:2.64583325;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker25711-26)"
+       d="m 217.98703,123.4966 c 0,0 -1.74322,-17.88341 22.01943,-42.579883 23.76265,-24.696469 59.51241,-15.948895 59.51241,-15.948895"
+       id="path11544-1"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="czc" />
   </g>
 </svg>

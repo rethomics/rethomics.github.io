@@ -527,9 +527,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.42375"
-     inkscape:cx="1860.4339"
-     inkscape:cy="890.31342"
+     inkscape:zoom="0.2996365"
+     inkscape:cx="1076.0906"
+     inkscape:cy="966.32822"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -613,7 +613,7 @@
        transform="matrix(1.0313774,0,0,0.53315394,-137.31329,84.077321)"
        style="fill:#06c9d8;fill-opacity:0.71206222;stroke:none">
       <rect
-         style="opacity:0.98999999;fill:#06c9d8;fill-opacity:0.71206222;stroke:none;stroke-width:1.05833328;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:37.79527664;stroke-opacity:0.4007782"
+         style="opacity:0.98999999;fill:#06c9d8;fill-opacity:0.71206222;stroke:#06c9d8;stroke-width:1.07040621;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:37.79527664;stroke-opacity:0.71372551;stroke-linejoin:round"
          id="rect4656-2"
          width="150.69991"
          height="320.03876"
@@ -632,7 +632,9 @@
          id="tspan3726"
          x="147.1601"
          y="29.150436"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.93333244px;font-family:'URW Gothic';-inkscape-font-specification:'URW Gothic';fill:#004200;fill-opacity:1;stroke-width:0.26458332px">Rethomics packages (R)</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.93333244px;font-family:'URW Gothic';-inkscape-font-specification:'URW Gothic';fill:#004200;fill-opacity:1;stroke-width:0.26458332px">Rethomics <tspan
+   style="-inkscape-font-specification:'Ubuntu Mono Bold';font-family:'Ubuntu Mono';font-weight:bold;font-style:normal;font-stretch:normal;font-variant:normal"
+   id="tspan26223">packages</tspan> (R)</tspan></text>
     <text
        id="text3724-3"
        y="28.86257"
@@ -645,7 +647,7 @@
          y="28.86257"
          x="-75.18045"
          sodipodi:role="line"
-         id="tspan15873">Acquisition Platforms</tspan></text>
+         id="tspan15873">Aquisition Platforms</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:6.61458349px;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -756,41 +758,40 @@
    style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Ubuntu mono';-inkscape-font-specification:'Ubuntu mono';fill:#333333;fill-opacity:1"
    id="tspan15694">R</tspan> packages</tspan></text>
     <g
-       id="g15156"
-       transform="translate(7.5056221,-23.841388)">
+       id="g26221">
       <rect
          style="opacity:0.98999999;fill:#d7deb7;fill-opacity:1;stroke:#005b05;stroke-width:1;stroke-linejoin:round;stroke-miterlimit:1;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
          id="rect4640"
          width="87.3125"
          height="80.130959"
-         x="430.82883"
-         y="204.82744" />
+         x="438.33444"
+         y="180.98605" />
       <text
          id="text4644"
-         y="249.24518"
-         x="450.18417"
+         y="222.758"
+         x="457.68979"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:6.61458349px;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;letter-spacing:0px;word-spacing:0px;fill:#676dec;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
            style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16.93333244px;font-family:'Ubuntu Mono';-inkscape-font-specification:'Ubuntu Mono';fill:#676dec;fill-opacity:1;stroke-width:0.26458332px"
-           y="249.24518"
-           x="450.18417"
+           y="222.758"
+           x="457.68979"
            id="tspan4642"
            sodipodi:role="line">ggetho</tspan></text>
       <text
          id="text4650"
-         y="222.31195"
-         x="438.01123"
+         y="198.47057"
+         x="445.51685"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:100%;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.69999981px;line-height:100%;font-family:'URW Gothic';-inkscape-font-specification:'URW Gothic';stroke-width:0.26458332px"
-           y="222.31195"
-           x="438.01123"
+           y="198.47057"
+           x="445.51685"
            sodipodi:role="line"
            id="tspan4648">Visualisation</tspan></text>
       <flowRoot
          inkscape:export-ydpi="62.244698"
          inkscape:export-xdpi="62.244698"
-         transform="matrix(0.26458333,0,0,0.26458333,305.29982,332.00732)"
+         transform="matrix(0.26458333,0,0,0.26458333,310.3079,307.85374)"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:114.66667175px;line-height:25px;font-family:FontAwesome;-inkscape-font-specification:FontAwesome;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          id="flowRoot929"
          xml:space="preserve"><flowRegion
@@ -1192,8 +1193,8 @@
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="czc" />
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#005b05;stroke-width:2.64583333;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker25877)"
-       d="m 478.32456,274.53792 c 0,0 -33.74363,39.66678 -82.31756,39.24247 -48.57393,-0.42432 -76.78416,-20.44066 -84.63422,-45.15776"
+       style="fill:none;fill-rule:evenodd;stroke:#005b05;stroke-width:2.64583325;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker25877)"
+       d="m 482.73963,276.30395 c 0,0 -33.74363,39.66678 -82.31756,39.24247 -48.57393,-0.42432 -76.78416,-20.44066 -84.63422,-45.15776"
        id="path11544-7"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="czc"

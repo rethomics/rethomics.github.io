@@ -107,10 +107,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i>First Steps</a><ul>
 <li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#getting-r"><i class="fa fa-check"></i>Getting R</a></li>
 <li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#installing-rethomics-packages"><i class="fa fa-check"></i>Installing rethomics packages</a></li>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#list-of-rethomics-packages"><i class="fa fa-check"></i>List of rethomics packages</a></li>
+<li><a href="intro.html#list-of-rethomics-packages">List of <code>rethomics</code> packages</a></li>
 </ul></li>
 <li><a href="workflow.html#workflow">The <code>rethomics</code> workflow</a></li>
-<li class="chapter" data-level="" data-path="queries.html"><a href="queries.html"><i class="fa fa-check"></i>Working with queries</a></li>
+<li class="chapter" data-level="" data-path="queries.html"><a href="queries.html"><i class="fa fa-check"></i>Working with queries</a><ul>
+<li class="chapter" data-level="" data-path="queries.html"><a href="queries.html#what-is-a-query"><i class="fa fa-check"></i>What is a query</a></li>
+<li class="chapter" data-level="" data-path="queries.html"><a href="queries.html#make-them-exhaustive"><i class="fa fa-check"></i>Make them exhaustive</a></li>
+<li class="chapter" data-level="" data-path="queries.html"><a href="queries.html#put-replicates-together"><i class="fa fa-check"></i>Put replicates together</a></li>
+</ul></li>
 <li><a href="behavr.html#behavr"><code>behavr</code> tables</a><ul>
 <li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html"><i class="fa fa-check"></i>Variables and metavariables</a></li>
 <li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#toy-data"><i class="fa fa-check"></i>Toy data</a></li>
@@ -144,182 +148,31 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="queries" class="section level1 unnumbered">
 <h1>Working with queries</h1>
+<p><strong>Using and understanding queries makes your analyses more transparent and tracktable</strong></p>
+<hr />
 <div class="figure">
-<img src="" alt="todo figure" />
-<p class="caption">todo figure</p>
+<img src="assets/query.png" alt="Schematic of a query" />
+<p class="caption">Schematic of a query</p>
 </div>
-<p>When performing many experiments, with multiple condidions and replicates, it becomes challenging to keep track of each individual and to link it to its actual data. In <code>rethomics</code>, regardless of the tool used to generate data, loading results always involves a query. <strong>A query is a simple CSV file</strong> (basically a spreadsheet) in which <strong>each row defines one unique animal</strong>. The query contains technical information (column) such as “date”, “name of the machine used” and others. They will be used to match an animal to its data. In addition, it records arbitrary biological information describing the experiment. For instance, this is a toy query with only 3 animals:</p>
-<table>
-<thead>
-<tr class="header">
-<th align="left">date</th>
-<th align="left">machine_name</th>
-<th align="right">region_id</th>
-<th align="left">sex</th>
-<th align="left">genotype</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">2015-02-20</td>
-<td align="left">machine_01</td>
-<td align="right">1</td>
-<td align="left">M</td>
-<td align="left">xxx</td>
-</tr>
-<tr class="even">
-<td align="left">2015-02-20</td>
-<td align="left">machine_03</td>
-<td align="right">2</td>
-<td align="left">F</td>
-<td align="left">xxx</td>
-</tr>
-<tr class="odd">
-<td align="left">2015-02-20</td>
-<td align="left">machine_07</td>
-<td align="right">1</td>
-<td align="left">F</td>
-<td align="left">zzz</td>
-</tr>
-</tbody>
-</table>
-<p>The <code>region_id</code> column define the region of interest in the behavioural arena.</p>
-<p>When performing a replicates of an experiment, it is very simple to expand a pre-existing query:</p>
-<table>
-<thead>
-<tr class="header">
-<th align="left">date</th>
-<th align="left">machine_name</th>
-<th align="right">region_id</th>
-<th align="left">sex</th>
-<th align="left">genotype</th>
-<th align="left">replicate</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">2015-02-20</td>
-<td align="left">machine_01</td>
-<td align="right">1</td>
-<td align="left">M</td>
-<td align="left">xxx</td>
-<td align="left">A</td>
-</tr>
-<tr class="even">
-<td align="left">2015-02-20</td>
-<td align="left">machine_03</td>
-<td align="right">2</td>
-<td align="left">F</td>
-<td align="left">xxx</td>
-<td align="left">A</td>
-</tr>
-<tr class="odd">
-<td align="left">2015-02-20</td>
-<td align="left">machine_07</td>
-<td align="right">1</td>
-<td align="left">F</td>
-<td align="left">zzz</td>
-<td align="left">A</td>
-</tr>
-<tr class="even">
-<td align="left">2015-03-05</td>
-<td align="left">machine_01</td>
-<td align="right">1</td>
-<td align="left">M</td>
-<td align="left">xxx</td>
-<td align="left">B</td>
-</tr>
-<tr class="odd">
-<td align="left">2015-03-05</td>
-<td align="left">machine_03</td>
-<td align="right">2</td>
-<td align="left">F</td>
-<td align="left">xxx</td>
-<td align="left">B</td>
-</tr>
-<tr class="even">
-<td align="left">2015-03-05</td>
-<td align="left">machine_07</td>
-<td align="right">1</td>
-<td align="left">F</td>
-<td align="left">zzz</td>
-<td align="left">B</td>
-</tr>
-</tbody>
-</table>
-<p>It is a good habit to <em>record as much information as possible in our queries</em> – even if it seems redundant. For instance, if we put animals in different incubators, we can simply add an “incubator” column in our query:</p>
-<table>
-<thead>
-<tr class="header">
-<th align="left">date</th>
-<th align="left">machine_name</th>
-<th align="right">region_id</th>
-<th align="left">sex</th>
-<th align="left">genotype</th>
-<th align="left">replicate</th>
-<th align="right">incubator</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">2015-02-20</td>
-<td align="left">machine_01</td>
-<td align="right">1</td>
-<td align="left">M</td>
-<td align="left">xxx</td>
-<td align="left">A</td>
-<td align="right">3</td>
-</tr>
-<tr class="even">
-<td align="left">2015-02-20</td>
-<td align="left">machine_03</td>
-<td align="right">2</td>
-<td align="left">F</td>
-<td align="left">xxx</td>
-<td align="left">A</td>
-<td align="right">4</td>
-</tr>
-<tr class="odd">
-<td align="left">2015-02-20</td>
-<td align="left">machine_07</td>
-<td align="right">1</td>
-<td align="left">F</td>
-<td align="left">zzz</td>
-<td align="left">A</td>
-<td align="right">3</td>
-</tr>
-<tr class="even">
-<td align="left">2015-03-05</td>
-<td align="left">machine_01</td>
-<td align="right">1</td>
-<td align="left">M</td>
-<td align="left">xxx</td>
-<td align="left">B</td>
-<td align="right">3</td>
-</tr>
-<tr class="odd">
-<td align="left">2015-03-05</td>
-<td align="left">machine_03</td>
-<td align="right">2</td>
-<td align="left">F</td>
-<td align="left">xxx</td>
-<td align="left">B</td>
-<td align="right">4</td>
-</tr>
-<tr class="even">
-<td align="left">2015-03-05</td>
-<td align="left">machine_07</td>
-<td align="right">1</td>
-<td align="left">F</td>
-<td align="left">zzz</td>
-<td align="left">B</td>
-<td align="right">3</td>
-</tr>
-</tbody>
-</table>
-<p>This way, we keep all our experimental notes, as much as possible, inside one file. Not only this will help us to “debug” if anything goes wrong in one incubator, but we will also be able to account for incubator as a covariate later on.</p>
-<p>According to the acquicisition platform (e.g. ethoscopes and DAMS), the queries may be slightly different, and we will show examples of such queries in the next parts of the tutorial. Regardless of the acquisition, though, <strong>queries are a canonical way to both record and load behavioural data</strong>. They are both computer and human friendly. In other words, if you give a query to a colaborator, she/he will be able to tell very quickly what animal underwent which treatment, where and when.</p>
+<div id="what-is-a-query" class="section level2 unnumbered">
+<h2>What is a query</h2>
+<p>When performing many experiments, with multiple condidions and replicates, it becomes challenging to keep track of each individual and to link it to its actual data. In <code>rethomics</code>, regardless of the tool used to generate data, loading results always involves a query. <strong>A query is a simple CSV file</strong> (basically a spreadsheet) in which <strong>each row defines one unique animal</strong>.</p>
+<p>As shown in the figure above, queries contain two types of columns:</p>
+<ul>
+<li><strong>Mandatory</strong> techincal columns – for instance <code>date</code>, <code>machine_name</code> and others (depending on the acquisition platform). They will be used to match an animal to its data.</li>
+<li><strong>Optional</strong> experimental columns – in this example, <code>condition</code> and <code>sex</code>. You can use as all the columns you want to characterise your experiments.</li>
+</ul>
+</div>
+<div id="make-them-exhaustive" class="section level2 unnumbered">
+<h2>Make them exhaustive</h2>
+<p>It is a good habit to <strong>record as much information as possible in our queries</strong> – even if it seems redundant. For instance, if we put animals in different incubators, we can simply add an <code>incubator</code> column. This way, we keep all our experimental notes, as much as possible, inside one file. Not only this will help us to “debug” if anything goes wrong in one incubator, but we will also be able to account for incubator as a covariate later on. From a computational perspective, these columns are virtually free.</p>
+</div>
+<div id="put-replicates-together" class="section level2 unnumbered">
+<h2>Put replicates together</h2>
+<p>A common mistake for users is to perform several replicates of the same experiment and to make a new query file each time. Instead, I strongly recommand you to <strong>put all replicates in the same query</strong>. If it helps, you can add a <code>replicate</code> column so you can keep track of which replicate each animal comes from. The whole point of high-througput analysis is that you can load all the data from all replicate, and compare it between before you make a decision to merge them. The bottom line is that, if you start form a single query file, your work will be more tracktable, and you can always decide to analyse only one replicate at a time.</p>
+<p>In conclusion, <strong>queries are a canonical way to both load behavioural data</strong>. They are both computer and human friendly. In other words, if you give a query to a colaborator, she/he will be able to tell very quickly what animal underwent which treatment, where and when.</p>
 
+</div>
 </div>
             </section>
 

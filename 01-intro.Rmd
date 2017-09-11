@@ -31,7 +31,7 @@ install_github("rethomics/behavr")
 In the same way, you could replace `behavr` by another package. 
 For instance, you could install `ggetho` with `install_github("rethomics/ggetho")`.
 
-## List of rethomics packages{-}
+## List of `rethomics` packages{-}
 
 Below is a list of all the `rethomics` packages as well as their individual PDF documentation, description and build status.
 

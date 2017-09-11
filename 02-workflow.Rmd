@@ -1,0 +1,11 @@
+# The `rethomics` workflow{-}  {#workflow}
+
+This part is a conceptual section about the workflow and challenges of behavioural data analysis, and how we address them in `rethomics`.
+
+## Workflow
+
+
+![todo figure]()
+
+
+

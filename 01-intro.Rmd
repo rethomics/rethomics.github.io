@@ -1,7 +1,7 @@
-# First Steps{-} {#intro}
+# First Steps{#intro -}
 
 
-## Getting `R`{-}
+## Getting R{-}
 
 If you have never used or heard of `R` before, 
 I suggest you start by reading about [data science in `R`](http://r4ds.had.co.nz/) and [installing RStudio](https://www.rstudio.com/products/rstudio/download/#download).

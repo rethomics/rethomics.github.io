@@ -1,7 +1,6 @@
-# `behavr` tables{-} {#behavr}
+# `behavr` tables{#behavr -}
 
-
-## Variables and metavariables
+## Variables and metavariables{-}
 
 When performing behavioural experiments, many animals are individually monitored.
 For each of these individual, we record a set of **variables** (e.g. position, orientation, beam breaking,...).

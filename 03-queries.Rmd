@@ -1,6 +1,7 @@
-# Working with queries{-} {#queries}
+# Working with queries{#queries -}
 
-## Queries
+
+![todo figure]()
 
 When performing many experiments, with multiple condidions and replicates,
 it becomes challenging to keep track of each individual and to link it to its actual data.

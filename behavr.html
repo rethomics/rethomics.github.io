@@ -109,16 +109,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#installing-rethomics-packages"><i class="fa fa-check"></i>Installing rethomics packages</a></li>
 <li><a href="intro.html#list-of-rethomics-packages">List of <code>rethomics</code> packages</a></li>
 </ul></li>
-<li><a href="workflow.html#workflow">The <code>rethomics</code> workflow</a><ul>
-<li class="chapter" data-level="" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i>Behavioural experiments in paractice</a></li>
-</ul></li>
+<li><a href="workflow.html#workflow">The <code>rethomics</code> workflow</a></li>
 <li class="chapter" data-level="" data-path="queries.html"><a href="queries.html"><i class="fa fa-check"></i>Working with queries</a><ul>
 <li class="chapter" data-level="" data-path="queries.html"><a href="queries.html#what-is-a-query"><i class="fa fa-check"></i>What is a query?</a></li>
 <li class="chapter" data-level="" data-path="queries.html"><a href="queries.html#make-them-exhaustive"><i class="fa fa-check"></i>Make them exhaustive</a></li>
 <li class="chapter" data-level="" data-path="queries.html"><a href="queries.html#put-replicates-together"><i class="fa fa-check"></i>Put replicates together</a></li>
 </ul></li>
-<li><a href="behavr.html#behavr"><code>behavr</code> tables</a><ul>
-<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html"><i class="fa fa-check"></i>Variables and metavariables</a></li>
+<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html"><i class="fa fa-check"></i>behavr tables</a><ul>
+<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#variables-and-metavariables"><i class="fa fa-check"></i>Variables and metavariables</a></li>
 <li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#toy-data"><i class="fa fa-check"></i>Toy data</a></li>
 <li><a href="behavr.html#operating-on-behavr-tables">Operating on <code>behavr</code> tables</a><ul>
 <li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#variables"><i class="fa fa-check"></i>Variables</a></li>
@@ -149,7 +147,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="behavr" class="section level1 unnumbered">
-<h1><code>behavr</code> tables</h1>
+<h1>behavr tables</h1>
 <div id="variables-and-metavariables" class="section level2 unnumbered">
 <h2>Variables and metavariables</h2>
 <p>When performing behavioural experiments, many animals are individually monitored. For each of these individual, we record a set of <strong>variables</strong> (e.g. position, orientation, beam breaking,…). Each variable is recorded at successive intervals, <strong>over long durations</strong>. In addition to these variables, which change over time we also have <strong>metavariables</strong>. Metavariables contain information <strong>about each individual</strong>. This information can be defined (or recorded) before or after the experiment, but in all cases the point is that it <strong>does not change over time</strong> (e.g. treatment, genotype, lifespan). Typically, metavariables are defined as extra <em>columns a the query file</em>, but they can also be computed.</p>
@@ -160,14 +158,64 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="toy-data" class="section level2 unnumbered">
 <h2>Toy data</h2>
 <p>The <code>behavr</code> package has a set of functions to make toy data. In order to have a look at a <code>behavr</code> object, lets create one. First, we make a query:</p>
-<p><code>r   library(behavr)   query &lt;- data.frame( experiment_id = &quot;toy_experiment&quot;,                      region_id = 1:10,                      condition = c(&quot;A&quot;, &quot;B&quot;) )   query</code></p>
-<p><code>##     experiment_id region_id condition   ## 1  toy_experiment         1         A   ## 2  toy_experiment         2         B   ## 3  toy_experiment         3         A   ## 4  toy_experiment         4         B   ## 5  toy_experiment         5         A   ## 6  toy_experiment         6         B   ## 7  toy_experiment         7         A   ## 8  toy_experiment         8         B   ## 9  toy_experiment         9         A   ## 10 toy_experiment        10         B</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(behavr)
+query &lt;-<span class="st"> </span><span class="kw">data.frame</span>( <span class="dt">experiment_id =</span> <span class="st">&quot;toy_experiment&quot;</span>,
+                     <span class="dt">region_id =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,
+                     <span class="dt">condition =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>) )
+query</code></pre></div>
+<pre><code>##     experiment_id region_id condition
+## 1  toy_experiment         1         A
+## 2  toy_experiment         2         B
+## 3  toy_experiment         3         A
+## 4  toy_experiment         4         B
+## 5  toy_experiment         5         A
+## 6  toy_experiment         6         B
+## 7  toy_experiment         7         A
+## 8  toy_experiment         8         B
+## 9  toy_experiment         9         A
+## 10 toy_experiment        10         B</code></pre>
 <p>Then, we use <code>toy_dam_data()</code> to <strong>simulate</strong> one day of DAMS-like data for these ten animals (and two conditions):</p>
-<p><code>r   dt &lt;- toy_dam_data(query, duration = days(1))   dt</code></p>
-<p><code>##    ##  ==== METADATA ====   ##    ##                    id  experiment_id region_id condition   ##                &lt;fctr&gt;         &lt;fctr&gt;     &lt;int&gt;    &lt;fctr&gt;   ##  1: 01|toy_experiment toy_experiment         1         A   ##  2: 02|toy_experiment toy_experiment         2         B   ##  3: 03|toy_experiment toy_experiment         3         A   ##  4: 04|toy_experiment toy_experiment         4         B   ##  5: 05|toy_experiment toy_experiment         5         A   ##  6: 06|toy_experiment toy_experiment         6         B   ##  7: 07|toy_experiment toy_experiment         7         A   ##  8: 08|toy_experiment toy_experiment         8         B   ##  9: 09|toy_experiment toy_experiment         9         A   ## 10: 10|toy_experiment toy_experiment        10         B   ##    ##  ====== DATA ======   ##    ##                       id     t activity   ##                   &lt;fctr&gt; &lt;num&gt;    &lt;int&gt;   ##     1: 01|toy_experiment     0        0   ##     2: 01|toy_experiment    60        2   ##     3: 01|toy_experiment   120        0   ##     4: 01|toy_experiment   180        1   ##    ---                                    ## 14406: 10|toy_experiment 86160        0   ## 14407: 10|toy_experiment 86220        0   ## 14408: 10|toy_experiment 86280        2   ## 14409: 10|toy_experiment 86340        1   ## 14410: 10|toy_experiment 86400        0</code> As you can see, when we print <code>dt</code>, our <code>behavr</code> table, we have two fields: <code>METADATA</code> and <code>DATA</code>. The former has only one row per animal and looks very much like query, with an extra column named <code>id</code>. The later is the actual data of <strong>all animals</strong>. The special column <code>id</code> is also known as a key. It allows to map data to metadata. In other words, there is a unique id for each individual. In this specific example, <code>t</code> is the time and <code>activity</code> is the number of beam crosses.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt &lt;-<span class="st"> </span><span class="kw">toy_dam_data</span>(query, <span class="dt">duration =</span> <span class="kw">days</span>(<span class="dv">1</span>))
+dt</code></pre></div>
+<pre><code>## 
+##  ==== METADATA ====
+## 
+##                    id  experiment_id region_id condition
+##                &lt;fctr&gt;         &lt;fctr&gt;     &lt;int&gt;    &lt;fctr&gt;
+##  1: 01|toy_experiment toy_experiment         1         A
+##  2: 02|toy_experiment toy_experiment         2         B
+##  3: 03|toy_experiment toy_experiment         3         A
+##  4: 04|toy_experiment toy_experiment         4         B
+##  5: 05|toy_experiment toy_experiment         5         A
+##  6: 06|toy_experiment toy_experiment         6         B
+##  7: 07|toy_experiment toy_experiment         7         A
+##  8: 08|toy_experiment toy_experiment         8         B
+##  9: 09|toy_experiment toy_experiment         9         A
+## 10: 10|toy_experiment toy_experiment        10         B
+## 
+##  ====== DATA ======
+## 
+##                       id     t activity
+##                   &lt;fctr&gt; &lt;num&gt;    &lt;int&gt;
+##     1: 01|toy_experiment     0        0
+##     2: 01|toy_experiment    60        2
+##     3: 01|toy_experiment   120        0
+##     4: 01|toy_experiment   180        1
+##    ---                                 
+## 14406: 10|toy_experiment 86160        0
+## 14407: 10|toy_experiment 86220        0
+## 14408: 10|toy_experiment 86280        2
+## 14409: 10|toy_experiment 86340        1
+## 14410: 10|toy_experiment 86400        0</code></pre>
+<p>As you can see, when we print <code>dt</code>, our <code>behavr</code> table, we have two fields: <code>METADATA</code> and <code>DATA</code>. The former has only one row per animal and looks very much like query, with an extra column named <code>id</code>. The later is the actual data of <strong>all animals</strong>. The special column <code>id</code> is also known as a key. It allows to map data to metadata. In other words, there is a unique id for each individual. In this specific example, <code>t</code> is the time and <code>activity</code> is the number of beam crosses.</p>
 <p>A quick way to retreive general information about a <code>behavr</code> table is to use <code>summary</code>:</p>
-<p><code>r   summary(dt)</code></p>
-<p><code>## behavr table with:   ##  10    individuals   ##  3 metavariables   ##  2 variables   ##  1.441e+04 measurements   ##  1 key (id)</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(dt)</code></pre></div>
+<pre><code>## behavr table with:
+##  10  individuals
+##  3   metavariables
+##  2   variables
+##  1.441e+04   measurements
+##  1   key (id)</code></pre>
 <p>This tells us immediately how many variables and metavariables we have. It also tells us when are the first and last recording for each animal.</p>
 </div>
 <div id="operating-on-behavr-tables" class="section level2 unnumbered">
@@ -175,31 +223,117 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="variables" class="section level3 unnumbered">
 <h3>Variables</h3>
 <p>Playing with variables is just like in <code>data.table</code>. Read the <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html">official data.table tutorial</a> for more functionalities. For instance, we can add a new variable, <code>very_active</code> that is <code>TRUE</code> if and only if there was at least two beam crosses in a minute:</p>
-<p><code>r   dt[, very_active := activity &gt;= 2]</code> One can also filter data. For instance, we want to show only point before three hours:</p>
-<p><code>r   dt[t &lt; hours(3)]</code></p>
-<p><code>##    ##  ==== METADATA ====   ##    ##                    id  experiment_id region_id condition   ##                &lt;fctr&gt;         &lt;fctr&gt;     &lt;int&gt;    &lt;fctr&gt;   ##  1: 01|toy_experiment toy_experiment         1         A   ##  2: 02|toy_experiment toy_experiment         2         B   ##  3: 03|toy_experiment toy_experiment         3         A   ##  4: 04|toy_experiment toy_experiment         4         B   ##  5: 05|toy_experiment toy_experiment         5         A   ##  6: 06|toy_experiment toy_experiment         6         B   ##  7: 07|toy_experiment toy_experiment         7         A   ##  8: 08|toy_experiment toy_experiment         8         B   ##  9: 09|toy_experiment toy_experiment         9         A   ## 10: 10|toy_experiment toy_experiment        10         B   ##    ##  ====== DATA ======   ##    ##                      id     t activity very_active   ##                  &lt;fctr&gt; &lt;num&gt;    &lt;int&gt;      &lt;lgcl&gt;   ##    1: 01|toy_experiment     0        0       FALSE   ##    2: 01|toy_experiment    60        2        TRUE   ##    3: 01|toy_experiment   120        0       FALSE   ##    4: 01|toy_experiment   180        1       FALSE   ##   ---                                                ## 1796: 10|toy_experiment 10500        0       FALSE   ## 1797: 10|toy_experiment 10560        1       FALSE   ## 1798: 10|toy_experiment 10620        0       FALSE   ## 1799: 10|toy_experiment 10680        0       FALSE   ## 1800: 10|toy_experiment 10740        0       FALSE</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt[, very_active <span class="op">:</span><span class="er">=</span><span class="st"> </span>activity <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span>]</code></pre></div>
+<p>One can also filter data. For instance, we want to show only point before three hours:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt[t <span class="op">&lt;</span><span class="st"> </span><span class="kw">hours</span>(<span class="dv">3</span>)]</code></pre></div>
+<pre><code>## 
+##  ==== METADATA ====
+## 
+##                    id  experiment_id region_id condition
+##                &lt;fctr&gt;         &lt;fctr&gt;     &lt;int&gt;    &lt;fctr&gt;
+##  1: 01|toy_experiment toy_experiment         1         A
+##  2: 02|toy_experiment toy_experiment         2         B
+##  3: 03|toy_experiment toy_experiment         3         A
+##  4: 04|toy_experiment toy_experiment         4         B
+##  5: 05|toy_experiment toy_experiment         5         A
+##  6: 06|toy_experiment toy_experiment         6         B
+##  7: 07|toy_experiment toy_experiment         7         A
+##  8: 08|toy_experiment toy_experiment         8         B
+##  9: 09|toy_experiment toy_experiment         9         A
+## 10: 10|toy_experiment toy_experiment        10         B
+## 
+##  ====== DATA ======
+## 
+##                      id     t activity very_active
+##                  &lt;fctr&gt; &lt;num&gt;    &lt;int&gt;      &lt;lgcl&gt;
+##    1: 01|toy_experiment     0        0       FALSE
+##    2: 01|toy_experiment    60        2        TRUE
+##    3: 01|toy_experiment   120        0       FALSE
+##    4: 01|toy_experiment   180        1       FALSE
+##   ---                                             
+## 1796: 10|toy_experiment 10500        0       FALSE
+## 1797: 10|toy_experiment 10560        1       FALSE
+## 1798: 10|toy_experiment 10620        0       FALSE
+## 1799: 10|toy_experiment 10680        0       FALSE
+## 1800: 10|toy_experiment 10740        0       FALSE</code></pre>
 <p>Note that <code>hours(3)</code> just converts 3h in seconds, because time is expressed in seconds in <code>rethomics</code> (there is also a <code>days()</code> and a <code>mins()</code> function).</p>
 </div>
 <div id="expand-metavariables" class="section level3 unnumbered">
 <h3>Expand metavariables</h3>
 <p>Sometimes, you would like to <strong>use metavariables as if they were variables</strong>. Imagine, for instance, that we want to correct activity according to the condition, say we need to multiply activity by two for condition “A”. For this purpoe, we can use the function <code>xmv</code> (eXpand MetaVariable):</p>
-<p><code>r   dt[, activity_corrected := ifelse(xmv(condition) == &quot;A&quot;, activity * 2, activity)]</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt[, activity_corrected <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">xmv</span>(condition) <span class="op">==</span><span class="st"> &quot;A&quot;</span>, activity <span class="op">*</span><span class="st"> </span><span class="dv">2</span>, activity)]</code></pre></div>
 <p>If <code>condition</code> were a variable, we would use <code>ifelse(condition == &quot;A&quot;, activity * 2, activity)</code>. Since it is in metadata, we just replace <code>condition</code> by <code>xmv(condition)</code>.</p>
 </div>
 <div id="metadata" class="section level3 unnumbered">
 <h3>Metadata</h3>
 <p>The Metadata is itself a table. To perform operations on metadata, on can use <code>meta=TRUE</code> inside the <code>[]</code> operator. For intace, only to display the metadata:</p>
-<p><code>r   dt[meta=TRUE]</code></p>
-<p><code>##                    id  experiment_id region_id condition   ##  1: 01|toy_experiment toy_experiment         1         A   ##  2: 02|toy_experiment toy_experiment         2         B   ##  3: 03|toy_experiment toy_experiment         3         A   ##  4: 04|toy_experiment toy_experiment         4         B   ##  5: 05|toy_experiment toy_experiment         5         A   ##  6: 06|toy_experiment toy_experiment         6         B   ##  7: 07|toy_experiment toy_experiment         7         A   ##  8: 08|toy_experiment toy_experiment         8         B   ##  9: 09|toy_experiment toy_experiment         9         A   ## 10: 10|toy_experiment toy_experiment        10         B</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt[meta=<span class="ot">TRUE</span>]</code></pre></div>
+<pre><code>##                    id  experiment_id region_id condition
+##  1: 01|toy_experiment toy_experiment         1         A
+##  2: 02|toy_experiment toy_experiment         2         B
+##  3: 03|toy_experiment toy_experiment         3         A
+##  4: 04|toy_experiment toy_experiment         4         B
+##  5: 05|toy_experiment toy_experiment         5         A
+##  6: 06|toy_experiment toy_experiment         6         B
+##  7: 07|toy_experiment toy_experiment         7         A
+##  8: 08|toy_experiment toy_experiment         8         B
+##  9: 09|toy_experiment toy_experiment         9         A
+## 10: 10|toy_experiment toy_experiment        10         B</code></pre>
 <p>We can use the same principle to add new metavariable:</p>
-<p><code>r   dt[,    my_new_column := interaction(region_id, condition),    meta=TRUE]   dt[meta=TRUE]</code></p>
-<p><code>##                    id  experiment_id region_id condition my_new_column   ##  1: 01|toy_experiment toy_experiment         1         A           1.A   ##  2: 02|toy_experiment toy_experiment         2         B           2.B   ##  3: 03|toy_experiment toy_experiment         3         A           3.A   ##  4: 04|toy_experiment toy_experiment         4         B           4.B   ##  5: 05|toy_experiment toy_experiment         5         A           5.A   ##  6: 06|toy_experiment toy_experiment         6         B           6.B   ##  7: 07|toy_experiment toy_experiment         7         A           7.A   ##  8: 08|toy_experiment toy_experiment         8         B           8.B   ##  9: 09|toy_experiment toy_experiment         9         A           9.A   ## 10: 10|toy_experiment toy_experiment        10         B          10.B</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt[,
+   my_new_column <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">interaction</span>(region_id, condition),
+   meta=<span class="ot">TRUE</span>]
+dt[meta=<span class="ot">TRUE</span>]</code></pre></div>
+<pre><code>##                    id  experiment_id region_id condition my_new_column
+##  1: 01|toy_experiment toy_experiment         1         A           1.A
+##  2: 02|toy_experiment toy_experiment         2         B           2.B
+##  3: 03|toy_experiment toy_experiment         3         A           3.A
+##  4: 04|toy_experiment toy_experiment         4         B           4.B
+##  5: 05|toy_experiment toy_experiment         5         A           5.A
+##  6: 06|toy_experiment toy_experiment         6         B           6.B
+##  7: 07|toy_experiment toy_experiment         7         A           7.A
+##  8: 08|toy_experiment toy_experiment         8         B           8.B
+##  9: 09|toy_experiment toy_experiment         9         A           9.A
+## 10: 10|toy_experiment toy_experiment        10         B          10.B</code></pre>
 </div>
 <div id="summarise-data" class="section level3 unnumbered">
 <h3>Summarise data</h3>
 <p>At some point, we will want to compute one or several summary variables for each animal and, for instance, model these versus metavariable. For instance, we could compute the sum of all activity for each animal. Since each animal is identified by its <code>id</code>, we use <code>by=id</code> for this:</p>
-<p><code>r   summary_dt &lt;- dt[,                  .(sum_activity = sum(activity)),                  by=id]   summary_dt</code></p>
-<p><code>##    ##  ==== METADATA ====   ##    ##                    id  experiment_id region_id condition my_new_column   ##                &lt;fctr&gt;         &lt;fctr&gt;     &lt;int&gt;    &lt;fctr&gt;        &lt;fctr&gt;   ##  1: 01|toy_experiment toy_experiment         1         A           1.A   ##  2: 02|toy_experiment toy_experiment         2         B           2.B   ##  3: 03|toy_experiment toy_experiment         3         A           3.A   ##  4: 04|toy_experiment toy_experiment         4         B           4.B   ##  5: 05|toy_experiment toy_experiment         5         A           5.A   ##  6: 06|toy_experiment toy_experiment         6         B           6.B   ##  7: 07|toy_experiment toy_experiment         7         A           7.A   ##  8: 08|toy_experiment toy_experiment         8         B           8.B   ##  9: 09|toy_experiment toy_experiment         9         A           9.A   ## 10: 10|toy_experiment toy_experiment        10         B          10.B   ##    ##  ====== DATA ======   ##    ##                    id sum_activity   ##                &lt;fctr&gt;        &lt;int&gt;   ##  1: 01|toy_experiment          375   ##  2: 02|toy_experiment          682   ##  3: 03|toy_experiment          737   ##  4: 04|toy_experiment          324   ##  5: 05|toy_experiment          647   ##  6: 06|toy_experiment          741   ##  7: 07|toy_experiment          247   ##  8: 08|toy_experiment          683   ##  9: 09|toy_experiment          263   ## 10: 10|toy_experiment          389</code> Now, the data is only one point per animal, with <code>id</code>, and our new variable. We aggreated the data, so it is quite managable to put the summary data and the metadata in the same table. For that, we use <code>rejoin</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">summary_dt &lt;-<span class="st"> </span>dt[,
+                 .(<span class="dt">sum_activity =</span> <span class="kw">sum</span>(activity)),
+                 by=id]
+summary_dt</code></pre></div>
+<pre><code>## 
+##  ==== METADATA ====
+## 
+##                    id  experiment_id region_id condition my_new_column
+##                &lt;fctr&gt;         &lt;fctr&gt;     &lt;int&gt;    &lt;fctr&gt;        &lt;fctr&gt;
+##  1: 01|toy_experiment toy_experiment         1         A           1.A
+##  2: 02|toy_experiment toy_experiment         2         B           2.B
+##  3: 03|toy_experiment toy_experiment         3         A           3.A
+##  4: 04|toy_experiment toy_experiment         4         B           4.B
+##  5: 05|toy_experiment toy_experiment         5         A           5.A
+##  6: 06|toy_experiment toy_experiment         6         B           6.B
+##  7: 07|toy_experiment toy_experiment         7         A           7.A
+##  8: 08|toy_experiment toy_experiment         8         B           8.B
+##  9: 09|toy_experiment toy_experiment         9         A           9.A
+## 10: 10|toy_experiment toy_experiment        10         B          10.B
+## 
+##  ====== DATA ======
+## 
+##                    id sum_activity
+##                &lt;fctr&gt;        &lt;int&gt;
+##  1: 01|toy_experiment          375
+##  2: 02|toy_experiment          682
+##  3: 03|toy_experiment          737
+##  4: 04|toy_experiment          324
+##  5: 05|toy_experiment          647
+##  6: 06|toy_experiment          741
+##  7: 07|toy_experiment          247
+##  8: 08|toy_experiment          683
+##  9: 09|toy_experiment          263
+## 10: 10|toy_experiment          389</code></pre>
+<p>Now, the data is only one point per animal, with <code>id</code>, and our new variable. We aggreated the data, so it is quite managable to put the summary data and the metadata in the same table. For that, we use <code>rejoin</code>:</p>
 <p><code>r   final_dt &lt;- rejoin(summary_dt)   final_dt</code></p>
 <p><code>##                    id  experiment_id region_id condition my_new_column   ##  1: 01|toy_experiment toy_experiment         1         A           1.A   ##  2: 02|toy_experiment toy_experiment         2         B           2.B   ##  3: 03|toy_experiment toy_experiment         3         A           3.A   ##  4: 04|toy_experiment toy_experiment         4         B           4.B   ##  5: 05|toy_experiment toy_experiment         5         A           5.A   ##  6: 06|toy_experiment toy_experiment         6         B           6.B   ##  7: 07|toy_experiment toy_experiment         7         A           7.A   ##  8: 08|toy_experiment toy_experiment         8         B           8.B   ##  9: 09|toy_experiment toy_experiment         9         A           9.A   ## 10: 10|toy_experiment toy_experiment        10         B          10.B   ##     sum_activity   ##  1:          375   ##  2:          682   ##  3:          737   ##  4:          324   ##  5:          647   ##  6:          741   ##  7:          247   ##  8:          683   ##  9:          263   ## 10:          389</code></p>
 <p>This table is now perfectly suited for further statistical analysis and visualisation!</p>

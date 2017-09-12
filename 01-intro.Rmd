@@ -9,16 +9,15 @@ Only once you have done can we continue.
 
 ## Installing rethomics packages{-}
 
-As of today ("`r Sys.Date()`"), rethomics packages are not on CRAN, the official R package archive yet.
+As of today (`r Sys.Date()`), `rethomics` packages are not on CRAN, the official R package archive yet.
 Therefore, we will install the developmental version.
 
-For that, we have to install (once for all) use `devtools` and load it:
+As a prerequisite, we need to install (once for all) `devtools` and load it:
 
 ```{r, eval=FALSE}
 install.packages("devtools")
 library(devtools)
 ```
-
 
 Ensure you have *no error messages*.
 Then, we can install some of the `rethomics` packages.

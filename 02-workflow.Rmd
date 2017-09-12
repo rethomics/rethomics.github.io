@@ -8,7 +8,6 @@
 
 ![The rethomics workflow](assets/workflow.png)
 
-## Behavioural experiments in paractice{-}
 In rethomics, we envisage behavioural experiments as a workflow:
 
 1. **Design** -- you plan your experiment (I can't really help you with that, but I trust you!).

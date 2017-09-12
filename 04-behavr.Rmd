@@ -1,4 +1,4 @@
-# `behavr` tables{#behavr -}
+# behavr tables{#behavr -}
 
 ## Variables and metavariables{-}
 
@@ -27,7 +27,8 @@ A `behavr` table is essentially a [data.table](https://cran.r-project.org/web/pa
 The `behavr` package has a set of functions to make toy data.
 In order to have a look at a `behavr` object, lets create one.
 First, we make a query:
-  ```{r}
+
+```{r}
 library(behavr)
 query <- data.frame( experiment_id = "toy_experiment",
                      region_id = 1:10,
@@ -37,7 +38,7 @@ query
 
 Then, we use `toy_dam_data()` to **simulate** one day of DAMS-like data for these ten animals (and two conditions):
 
-  ```{r}
+```{r}
 dt <- toy_dam_data(query, duration = days(1))
 dt
 ```
@@ -49,7 +50,7 @@ In this specific example, `t` is the time and  `activity` is the number of beam 
 
 A quick way to retreive general information about a `behavr` table is to use `summary`:
 
-  ```{r}
+```{r}
 summary(dt)
 ```
 
@@ -65,11 +66,11 @@ Read the [official data.table tutorial](https://cran.r-project.org/web/packages/
 For instance, we can add a new variable, `very_active` that is `TRUE` if and only if
 there was at least two beam crosses in a minute:
 
-  ```{r}
+```{r}
 dt[, very_active := activity >= 2]
 ```
 One can also filter data. For instance, we want to show only point before three hours:
-  ```{r}
+```{r}
 dt[t < hours(3)]
 ```
 
@@ -84,7 +85,7 @@ Imagine, for instance, that we want to correct activity according to the conditi
 For this purpoe, we can use the function `xmv` (eXpand MetaVariable):
 
 
-  ```{r}
+```{r}
 dt[, activity_corrected := ifelse(xmv(condition) == "A", activity * 2, activity)]
 ```
 
@@ -98,7 +99,7 @@ The Metadata is itself a table.
 To perform operations on metadata, on can use `meta=TRUE` inside the `[]` operator.
 For intace, only to display the metadata:
 
-  ```{r}
+```{r}
 dt[meta=TRUE]
 ```
 
@@ -106,7 +107,7 @@ dt[meta=TRUE]
 We can use the same principle to add new metavariable:
 
 
-  ```{r}
+```{r}
 dt[,
    my_new_column := interaction(region_id, condition),
    meta=TRUE]
@@ -119,7 +120,7 @@ At some point, we will want to compute one or several summary variables for each
 model these versus metavariable. For instance, we could compute the sum of all activity for each animal.
 Since each animal is identified by its `id`, we use `by=id` for this:
 
-  ```{r}
+```{r}
 summary_dt <- dt[,
                  .(sum_activity = sum(activity)),
                  by=id]
@@ -138,6 +139,7 @@ This table is now perfectly suited for further statistical analysis and visualis
 
 
 ### Stitching{-}
+
 TODO
 
 

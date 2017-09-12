@@ -9,7 +9,7 @@
 ![Schematic of a query](assets/query.png)
 
 
-## What is a query{-}
+## What is a query?{-}
 When performing many experiments, with multiple condidions and replicates,
 it becomes challenging to keep track of each individual and to link it to its actual data.
 In `rethomics`, regardless of the tool used to generate data, loading results always involves a query.

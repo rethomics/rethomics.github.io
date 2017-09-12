@@ -1,6 +1,18 @@
 # The `rethomics` workflow{#workflow -}
 
-![todo figure]()
 
 
+**From hypothesis to results**
 
+---------------------------
+
+![The rethomics workflow](assets/workflow.png)
+
+## Behavioural experiments in paractice{-}
+In rethomics, we envisage behavioural experiments as a workflow:
+
+1. **Design** -- you plan your experiment (I can't really help you with that, but I trust you!).
+2. **Record/track** -- you use your acquisition platfrom to record behavioural variables over time. They define the format of the results.
+3. **Write individual information** -- you make a spreadsheet (CSV file) that details the experimental conditions **for each individual**. We call this a **query file**. It is a crucial concept in rethomics, so we will dedicate it the [next section](#queries). You can often write your query as you plan your experiment, but sometimes, you want to enrich it with varibles that you can only record after your experiment (e.g. lifespan).
+4. **Import** -- you use one of `rethomics`'s package to load **all your data into a single`behavr` table** (see [section on `behavr` tables](#behavr)).
+5. **Tranform & analyse & visualise** -- you take advantage of `rethomics` and `R` analysis and visualisation  tools.

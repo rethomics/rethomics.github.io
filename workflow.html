@@ -109,9 +109,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#installing-rethomics-packages"><i class="fa fa-check"></i>Installing rethomics packages</a></li>
 <li><a href="intro.html#list-of-rethomics-packages">List of <code>rethomics</code> packages</a></li>
 </ul></li>
-<li><a href="workflow.html#workflow">The <code>rethomics</code> workflow</a></li>
+<li><a href="workflow.html#workflow">The <code>rethomics</code> workflow</a><ul>
+<li class="chapter" data-level="" data-path="workflow.html"><a href="workflow.html"><i class="fa fa-check"></i>Behavioural experiments in paractice</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="queries.html"><a href="queries.html"><i class="fa fa-check"></i>Working with queries</a><ul>
-<li class="chapter" data-level="" data-path="queries.html"><a href="queries.html#what-is-a-query"><i class="fa fa-check"></i>What is a query</a></li>
+<li class="chapter" data-level="" data-path="queries.html"><a href="queries.html#what-is-a-query"><i class="fa fa-check"></i>What is a query?</a></li>
 <li class="chapter" data-level="" data-path="queries.html"><a href="queries.html#make-them-exhaustive"><i class="fa fa-check"></i>Make them exhaustive</a></li>
 <li class="chapter" data-level="" data-path="queries.html"><a href="queries.html#put-replicates-together"><i class="fa fa-check"></i>Put replicates together</a></li>
 </ul></li>
@@ -148,11 +150,24 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="workflow" class="section level1 unnumbered">
 <h1>The <code>rethomics</code> workflow</h1>
+<p><strong>From hypothesis to results</strong></p>
+<hr />
 <div class="figure">
-<img src="" alt="todo figure" />
-<p class="caption">todo figure</p>
+<img src="assets/workflow.png" alt="The rethomics workflow" />
+<p class="caption">The rethomics workflow</p>
 </div>
+<div id="behavioural-experiments-in-paractice" class="section level2 unnumbered">
+<h2>Behavioural experiments in paractice</h2>
+<p>In rethomics, we envisage behavioural experiments as a workflow:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Design</strong> – you plan your experiment (I can’t really help you with that, but I trust you!).</li>
+<li><strong>Record/track</strong> – you use your acquisition platfrom to record behavioural variables over time. They define the format of the results.</li>
+<li><strong>Write individual information</strong> – you make a spreadsheet (CSV file) that details the experimental conditions <strong>for each individual</strong>. We call this a <strong>query file</strong>. It is a crucial concept in rethomics, so we will dedicate it the <a href="queries.html#queries">next section</a>. You can often write your query as you plan your experiment, but sometimes, you want to enrich it with varibles that you can only record after your experiment (e.g. lifespan).</li>
+<li><strong>Import</strong> – you use one of <code>rethomics</code>’s package to load <strong>all your data into a single<code>behavr</code> table</strong> (see <a href="behavr.html#behavr">section on <code>behavr</code> tables</a>).</li>
+<li><strong>Tranform &amp; analyse &amp; visualise</strong> – you take advantage of <code>rethomics</code> and <code>R</code> analysis and visualisation tools.</li>
+</ol>
 
+</div>
 </div>
             </section>
 

@@ -22,6 +22,21 @@
   <defs
      id="defs2">
     <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker3136"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path3134"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
        inkscape:isstock="true"
        style="overflow:visible"
        id="marker10512"
@@ -411,9 +426,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.211875"
-     inkscape:cx="900.30126"
-     inkscape:cy="426.91158"
+     inkscape:zoom="0.2996365"
+     inkscape:cx="1587.0839"
+     inkscape:cy="957.37734"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -435,7 +450,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -538,16 +553,21 @@
        inkscape:export-xdpi="62.244698"
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:6.61458349px;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="618.88519"
+       x="617.7912"
        y="47.996742"
        id="text1564"><tspan
          id="tspan1562"
          sodipodi:role="line"
-         x="618.88519"
+         x="617.7912"
          y="47.996742"
          style="font-weight:bold;font-size:16.93333244px;line-height:100%;stroke-width:0.26458332px"><tspan
    style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:19.75555611px;font-family:'Ubuntu Mono';-inkscape-font-specification:'Ubuntu Mono Bold';fill:#0000ff"
-   id="tspan3147">behavr</tspan> table</tspan></text>
+   id="tspan3147">behavr</tspan> table</tspan><tspan
+         sodipodi:role="line"
+         x="617.7912"
+         y="64.930077"
+         style="font-weight:bold;font-size:16.93333244px;line-height:100%;stroke-width:0.26458332px"
+         id="tspan3272">(data &amp; meta)</tspan></text>
     <g
        id="g3099"
        transform="translate(-10.583333,-486.83358)">
@@ -587,7 +607,7 @@
        id="g3129"
        transform="translate(242.35848,-486.83358)">
       <path
-         style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker1628)"
+         style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker3136)"
          d="m -54.023309,528.24555 c 0,0 139.53962,0 139.53962,0"
          id="path3119"
          inkscape:connector-curvature="0"
@@ -600,9 +620,9 @@
          id="g3127">
         <rect
            y="511.57996"
-           x="-30.245388"
-           height="33.331188"
-           width="87.3125"
+           x="-34.39748"
+           height="33.331177"
+           width="93.052101"
            id="rect3121"
            style="opacity:0.98999999;fill:#d7deb7;fill-opacity:1;stroke:#000000;stroke-width:1.05833328;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:37.79527664;stroke-opacity:1" />
         <text
@@ -620,11 +640,11 @@
     </g>
     <path
        style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker9198)"
-       d="m 530.93612,126.39087 c 0,0 0,-68.015446 0,-68.015446"
+       d="m 529.12145,126.39087 c 0,0 0,-68.015446 0,-68.015446"
        id="path9192"
        inkscape:connector-curvature="0"
        inkscape:path-effect="#path-effect9194"
-       inkscape:original-d="M 530.93612,126.39087 V 58.375424"
+       inkscape:original-d="M 529.12145,126.39087 V 58.375424"
        sodipodi:nodetypes="cc"
        inkscape:export-xdpi="62.244698"
        inkscape:export-ydpi="62.244698" />
@@ -644,60 +664,56 @@
       <rect
          style="opacity:0.98999999;fill:#d7deb7;fill-opacity:1;stroke:#000000;stroke-width:1.05833328;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:37.79527664;stroke-opacity:1"
          id="rect3135"
-         width="87.3125"
-         height="33.331188"
-         x="-47.178738"
+         width="86.429512"
+         height="33.331177"
+         x="-48.551914"
          y="511.57996" />
       <text
          id="text3139"
          y="532.3053"
-         x="-26.986647"
+         x="-41.038296"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:100%;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
            id="tspan3137"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.8166666px;line-height:100%;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;stroke-width:0.26458332px"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.8166666px;line-height:100%;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;letter-spacing:-0.26458332px;stroke-width:0.26458332px"
            y="532.3053"
-           x="-26.986647"
-           sodipodi:role="line">Import</tspan></text>
+           x="-41.038296"
+           sodipodi:role="line">Link &amp; Load</tspan></text>
     </g>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker1628-5)"
+       d="m -19.41206,59.73548 c 0,0 0,81.79155 0,81.79155 0,0 472.94774,0 472.94774,0"
+       id="path1622-6"
+       inkscape:connector-curvature="0"
+       inkscape:path-effect="#path-effect1624-6"
+       inkscape:original-d="m -19.41206,59.73548 v 81.79155 h 472.94774"
+       sodipodi:nodetypes="ccc"
+       inkscape:export-xdpi="62.244698"
+       inkscape:export-ydpi="62.244698" />
     <g
-       id="g3099-5"
-       transform="translate(110.24543,-386.71852)">
-      <path
-         inkscape:export-ydpi="62.244698"
-         inkscape:export-xdpi="62.244698"
-         sodipodi:nodetypes="ccc"
-         inkscape:original-d="m -129.65749,446.454 v 81.79155 h 472.94774"
-         inkscape:path-effect="#path-effect1624-6"
-         inkscape:connector-curvature="0"
-         id="path1622-6"
-         d="m -129.65749,446.454 c 0,0 0,81.79155 0,81.79155 0,0 472.94774,0 472.94774,0"
-         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker1628-5)" />
+       transform="translate(107.99848,-386.71852)"
+       id="g1606-3">
       <g
-         id="g1606-3"
-         transform="translate(-2.2469528)">
-        <g
-           id="g11201"
-           transform="translate(-41.793172)">
-          <rect
-             y="511.57996"
-             x="-23.928867"
-             height="33.331177"
-             width="353.98279"
-             id="rect3790-7-0"
-             style="opacity:0.98999999;fill:#d7deb7;fill-opacity:1;stroke:#000000;stroke-width:1.05833328;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:37.79527664;stroke-opacity:1" />
-          <text
-             xml:space="preserve"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:100%;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-             x="-10.87788"
+         transform="translate(-41.793172)"
+         id="g11201">
+        <rect
+           style="opacity:0.98999999;fill:#d7deb7;fill-opacity:1;stroke:#000000;stroke-width:1.05833328;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:37.79527664;stroke-opacity:1"
+           id="rect3790-7-0"
+           width="353.98279"
+           height="33.331177"
+           x="-23.928867"
+           y="511.57996" />
+        <text
+           id="text3786-7-0-2"
+           y="532.3053"
+           x="-10.87788"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:100%;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           xml:space="preserve"><tspan
+             id="tspan1618-6-0"
+             style="font-size:14.8166666px;line-height:100%;letter-spacing:-0.26458332px;stroke-width:0.26458332px"
              y="532.3053"
-             id="text3786-7-0-2"><tspan
-               sodipodi:role="line"
-               x="-10.87788"
-               y="532.3053"
-               style="font-size:14.8166666px;line-height:100%;letter-spacing:-0.26458332px;stroke-width:0.26458332px"
-               id="tspan1618-6-0">Write &amp; record per-individual information (by hand)</tspan></text>
-        </g>
+             x="-10.87788"
+             sodipodi:role="line">Write &amp; record per-individual information (by hand)</tspan></text>
       </g>
     </g>
     <text
@@ -705,18 +721,21 @@
        inkscape:export-xdpi="62.244698"
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:6.61458349px;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="465.59995"
-       y="148.53841"
+       x="489.75317"
+       y="138.06416"
        id="text4284"><tspan
          id="tspan4282"
          sodipodi:role="line"
-         x="465.59995"
-         y="148.53841"
+         x="489.75317"
+         y="138.06416"
          style="font-weight:bold;font-size:16.93333244px;line-height:100%;stroke-width:0.26458332px"><tspan
-   style="font-style:italic"
-   id="tspan11196"><tspan
-   style="fill:#0000ff"
-   id="tspan11219">Query</tspan> </tspan>file (CSV)</tspan></text>
+   style="font-style:italic;fill:#0000ff"
+   id="tspan11196">Metadata</tspan></tspan><tspan
+         sodipodi:role="line"
+         x="489.75317"
+         y="154.9975"
+         style="font-weight:bold;font-size:16.93333244px;line-height:100%;stroke-width:0.26458332px"
+         id="tspan3234">file (CSV)</tspan></text>
     <path
        style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker10512)"
        d="m 671.78812,78.326088 c 0,0 0,124.722932 0,124.722932"

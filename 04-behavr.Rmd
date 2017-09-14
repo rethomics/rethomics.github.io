@@ -8,7 +8,7 @@ Each variable is recorded at successive intervals, **over long durations**.
 In addition to these variables, which change over time we also have **metavariables**.
 Metavariables contain information **about each individual**.
 This information can be defined (or recorded) before or after the experiment, but in all cases the point is that it **does not change over time** (e.g. treatment, genotype, lifespan).
-Typically, metavariables are defined as extra *columns a the query file*, but they can also be computed.
+Typically, metavariables are defined as extra *columns a the metadata file*, but they can also be computed.
 
 For example, if we recorded `x` and `y` positions over time, for animals of different `sex` and `genotype`,
 `x` and `y` would be the variables whilst `sex` and `genotype` would be the metavariables.
@@ -26,24 +26,24 @@ A `behavr` table is essentially a [data.table](https://cran.r-project.org/web/pa
 
 The `behavr` package has a set of functions to make toy data.
 In order to have a look at a `behavr` object, lets create one.
-First, we make a query:
+First, we make the metadata:
 
 ```{r}
 library(behavr)
-query <- data.frame( experiment_id = "toy_experiment",
+metadata <- data.frame( experiment_id = "toy_experiment",
                      region_id = 1:10,
                      condition = c("A", "B") )
-query
+metadata
 ```
 
 Then, we use `toy_dam_data()` to **simulate** one day of DAMS-like data for these ten animals (and two conditions):
 
 ```{r}
-dt <- toy_dam_data(query, duration = days(1))
+dt <- toy_dam_data(metadata, duration = days(1))
 dt
 ```
 As you can see, when we print `dt`, our `behavr` table, we have two fields: `METADATA` and `DATA`.
-The former has only one row per animal and looks very much like query, with an extra column named `id`.
+The former has only one row per animal and looks very much like metadata, with an extra column named `id`.
 The later is the actual data of **all animals**. The special column `id` is also known as a key. It allows to map data to metadata.
 In other words, there is a unique id for each individual.
 In this specific example, `t` is the time and  `activity` is the number of beam crosses.

@@ -1,19 +1,19 @@
-# Working with queries{#queries -}
+# Working with metadata files{#metadata -}
 
 
 
-**Using and understanding queries makes your analyses more transparent and tracktable**
+**Using and understanding metadata files makes your analyses more transparent and tracktable**
 
 ---------------------------
 
-![Schematic of a query](assets/query.png)
+![Schematic of a metadata file](assets/metadata.png)
 
 
-## What is a query?{-}
+## What are metadata?{-}
 When performing many experiments, with multiple condidions and replicates,
 it becomes challenging to keep track of each individual and to link it to its actual data.
-In `rethomics`, regardless of the tool used to generate data, loading results always involves a query.
-**A query is a simple CSV file** (basically a spreadsheet) in which **each row defines one unique animal**.
+In `rethomics`, regardless of the tool used to generate data, loading results always involves a **metadata file**.
+It is in fact **a simple CSV file** (basically a spreadsheet) in which **each row defines one unique individual**.
 
 As shown in the figure above, queries contain two types of columns:
 
@@ -22,7 +22,7 @@ As shown in the figure above, queries contain two types of columns:
 
 
 ## Make them exhaustive{-}
-It is a good habit to **record as much information as possible in our queries** -- even if it seems redundant.
+It is a good habit to **record as much information as possible in our metadata** -- even if it seems redundant.
 For instance, if we put animals in different incubators, we can simply add an `incubator` column.
 This way, we keep all our experimental notes, as much as possible, inside one file.
 Not only this will help us to "debug" if anything goes wrong in one incubator, but we will also be able to account for incubator as a covariate later on. From a computational perspective, these columns are virtually free.
@@ -30,9 +30,9 @@ Not only this will help us to "debug" if anything goes wrong in one incubator, b
 
 ## Put replicates together{-}
 
-A common mistake for users is to perform several replicates of the same experiment and to make a new query file each time. Instead, I strongly recommand you to **put all replicates in the same query**. If it helps,
+A common mistake for users is to perform several replicates of the same experiment and to make a new metadata file each time. Instead, I strongly recommand you to **put all replicates in the same file**. If it helps,
 you can add a `replicate` column so you can keep track of which replicate each animal comes from.
-The whole point of high-througput analysis is that you can load all the data from all replicate, and compare it between before you make a decision to merge them. The bottom line is that, if you start form a single query file, your work will be more tracktable, and you can always decide to analyse only one replicate at a time.
+The whole point of high-througput analysis is that you can load all the data from all replicate, and compare it between before you make a decision to merge them. The bottom line is that, if you start form a single metadata file, your work will be more tracktable, and you can always decide to analyse only one replicate at a time.
 
 
 In conclusion, **queries are a canonical way to both load behavioural data**.

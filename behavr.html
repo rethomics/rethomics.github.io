@@ -25,14 +25,14 @@
 <meta name="author" content="Quentin Geissmann">
 
 
-<meta name="date" content="2017-09-13">
+<meta name="date" content="2017-09-14">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="queries.html">
+<link rel="prev" href="metadata.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -110,10 +110,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="intro.html#list-of-rethomics-packages">List of <code>rethomics</code> packages</a></li>
 </ul></li>
 <li><a href="workflow.html#workflow">The <code>rethomics</code> workflow</a></li>
-<li class="chapter" data-level="" data-path="queries.html"><a href="queries.html"><i class="fa fa-check"></i>Working with queries</a><ul>
-<li class="chapter" data-level="" data-path="queries.html"><a href="queries.html#what-is-a-query"><i class="fa fa-check"></i>What is a query?</a></li>
-<li class="chapter" data-level="" data-path="queries.html"><a href="queries.html#make-them-exhaustive"><i class="fa fa-check"></i>Make them exhaustive</a></li>
-<li class="chapter" data-level="" data-path="queries.html"><a href="queries.html#put-replicates-together"><i class="fa fa-check"></i>Put replicates together</a></li>
+<li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html"><i class="fa fa-check"></i>Working with metadata files</a><ul>
+<li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html#what-are-metadata"><i class="fa fa-check"></i>What are metadata?</a></li>
+<li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html#make-them-exhaustive"><i class="fa fa-check"></i>Make them exhaustive</a></li>
+<li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html#put-replicates-together"><i class="fa fa-check"></i>Put replicates together</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html"><i class="fa fa-check"></i>behavr tables</a><ul>
 <li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#variables-and-metavariables"><i class="fa fa-check"></i>Variables and metavariables</a></li>
@@ -121,7 +121,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="behavr.html#operating-on-behavr-tables">Operating on <code>behavr</code> tables</a><ul>
 <li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#variables"><i class="fa fa-check"></i>Variables</a></li>
 <li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#expand-metavariables"><i class="fa fa-check"></i>Expand metavariables</a></li>
-<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#metadata"><i class="fa fa-check"></i>Metadata</a></li>
+<li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html#metadata"><i class="fa fa-check"></i>Metadata</a></li>
 <li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#summarise-data"><i class="fa fa-check"></i>Summarise data</a></li>
 <li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#stitching"><i class="fa fa-check"></i>Stitching</a></li>
 </ul></li>
@@ -150,19 +150,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1>behavr tables</h1>
 <div id="variables-and-metavariables" class="section level2 unnumbered">
 <h2>Variables and metavariables</h2>
-<p>When performing behavioural experiments, many animals are individually monitored. For each of these individual, we record a set of <strong>variables</strong> (e.g. position, orientation, beam breaking,…). Each variable is recorded at successive intervals, <strong>over long durations</strong>. In addition to these variables, which change over time we also have <strong>metavariables</strong>. Metavariables contain information <strong>about each individual</strong>. This information can be defined (or recorded) before or after the experiment, but in all cases the point is that it <strong>does not change over time</strong> (e.g. treatment, genotype, lifespan). Typically, metavariables are defined as extra <em>columns a the query file</em>, but they can also be computed.</p>
+<p>When performing behavioural experiments, many animals are individually monitored. For each of these individual, we record a set of <strong>variables</strong> (e.g. position, orientation, beam breaking,…). Each variable is recorded at successive intervals, <strong>over long durations</strong>. In addition to these variables, which change over time we also have <strong>metavariables</strong>. Metavariables contain information <strong>about each individual</strong>. This information can be defined (or recorded) before or after the experiment, but in all cases the point is that it <strong>does not change over time</strong> (e.g. treatment, genotype, lifespan). Typically, metavariables are defined as extra <em>columns a the metadata file</em>, but they can also be computed.</p>
 <p>For example, if we recorded <code>x</code> and <code>y</code> positions over time, for animals of different <code>sex</code> and <code>genotype</code>, <code>x</code> and <code>y</code> would be the variables whilst <code>sex</code> and <code>genotype</code> would be the metavariables.</p>
 <p>Regardless to what device was used to generate our data and how we loaded it, in <code>rethomics</code>, we will always have data and metadata linked together.</p>
 <p>In order to handle efficiently large amounts of data (toghter with metadata), we have designed the <code>behavr</code> package. A <code>behavr</code> table is essentially a <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html">data.table</a> enhanced with metadata. <strong>When we load any behavioural data in <code>rethomics</code>, we get a <code>behavr</code> table as a result.</strong> Therefore, it is important to understand how to manipulate and operate on this data structure.</p>
 </div>
 <div id="toy-data" class="section level2 unnumbered">
 <h2>Toy data</h2>
-<p>The <code>behavr</code> package has a set of functions to make toy data. In order to have a look at a <code>behavr</code> object, lets create one. First, we make a query:</p>
+<p>The <code>behavr</code> package has a set of functions to make toy data. In order to have a look at a <code>behavr</code> object, lets create one. First, we make the metadata:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(behavr)
-query &lt;-<span class="st"> </span><span class="kw">data.frame</span>( <span class="dt">experiment_id =</span> <span class="st">&quot;toy_experiment&quot;</span>,
+metadata &lt;-<span class="st"> </span><span class="kw">data.frame</span>( <span class="dt">experiment_id =</span> <span class="st">&quot;toy_experiment&quot;</span>,
                      <span class="dt">region_id =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,
                      <span class="dt">condition =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>) )
-query</code></pre></div>
+metadata</code></pre></div>
 <pre><code>##     experiment_id region_id condition
 ## 1  toy_experiment         1         A
 ## 2  toy_experiment         2         B
@@ -175,7 +175,7 @@ query</code></pre></div>
 ## 9  toy_experiment         9         A
 ## 10 toy_experiment        10         B</code></pre>
 <p>Then, we use <code>toy_dam_data()</code> to <strong>simulate</strong> one day of DAMS-like data for these ten animals (and two conditions):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt &lt;-<span class="st"> </span><span class="kw">toy_dam_data</span>(query, <span class="dt">duration =</span> <span class="kw">days</span>(<span class="dv">1</span>))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt &lt;-<span class="st"> </span><span class="kw">toy_dam_data</span>(metadata, <span class="dt">duration =</span> <span class="kw">days</span>(<span class="dv">1</span>))
 dt</code></pre></div>
 <pre><code>## 
 ##  ==== METADATA ====
@@ -207,7 +207,7 @@ dt</code></pre></div>
 ## 14408: 10|toy_experiment 86280        2
 ## 14409: 10|toy_experiment 86340        1
 ## 14410: 10|toy_experiment 86400        0</code></pre>
-<p>As you can see, when we print <code>dt</code>, our <code>behavr</code> table, we have two fields: <code>METADATA</code> and <code>DATA</code>. The former has only one row per animal and looks very much like query, with an extra column named <code>id</code>. The later is the actual data of <strong>all animals</strong>. The special column <code>id</code> is also known as a key. It allows to map data to metadata. In other words, there is a unique id for each individual. In this specific example, <code>t</code> is the time and <code>activity</code> is the number of beam crosses.</p>
+<p>As you can see, when we print <code>dt</code>, our <code>behavr</code> table, we have two fields: <code>METADATA</code> and <code>DATA</code>. The former has only one row per animal and looks very much like metadata, with an extra column named <code>id</code>. The later is the actual data of <strong>all animals</strong>. The special column <code>id</code> is also known as a key. It allows to map data to metadata. In other words, there is a unique id for each individual. In this specific example, <code>t</code> is the time and <code>activity</code> is the number of beam crosses.</p>
 <p>A quick way to retreive general information about a <code>behavr</code> table is to use <code>summary</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(dt)</code></pre></div>
 <pre><code>## behavr table with:
@@ -350,7 +350,7 @@ summary_dt</code></pre></div>
           </div>
         </div>
       </div>
-<a href="queries.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="metadata.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>

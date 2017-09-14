@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="index.html">
-<link rel="next" href="workflow.html">
+<link rel="prev" href="workflow.html">
+<link rel="next" href="behavr.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -146,80 +146,31 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="intro" class="section level1 unnumbered">
-<h1>First Steps</h1>
-<div id="getting-r" class="section level2 unnumbered">
-<h2>Getting R</h2>
-<p>If you have never used or heard of <code>R</code> before, I suggest you start by reading about <a href="http://r4ds.had.co.nz/">data science in <code>R</code></a> and <a href="https://www.rstudio.com/products/rstudio/download/#download">installing RStudio</a>. Only once you have done can we continue.</p>
+<div id="metadata" class="section level1 unnumbered">
+<h1>Working with metadata files</h1>
+<p><strong>Using and understanding metadata files makes your analyses more transparent and tracktable</strong></p>
+<hr />
+<div class="figure">
+<img src="assets/metadata.png" alt="Schematic of a metadata file" />
+<p class="caption">Schematic of a metadata file</p>
 </div>
-<div id="installing-rethomics-packages" class="section level2 unnumbered">
-<h2>Installing rethomics packages</h2>
-<p>As of today (2017-09-14), <code>rethomics</code> packages are not on CRAN, the official R package archive yet. Therefore, we will install the developmental version.</p>
-<p>As a prerequisite, we need to install (once for all) <code>devtools</code> and load it:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)
-<span class="kw">library</span>(devtools)</code></pre></div>
-<p>Ensure you have <em>no error messages</em>. Then, we can install some of the <code>rethomics</code> packages. For instance, lets install <code>behavr</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install_github</span>(<span class="st">&quot;rethomics/behavr&quot;</span>)</code></pre></div>
-<p>In the same way, you could replace <code>behavr</code> by another package. For instance, you could install <code>ggetho</code> with <code>install_github(&quot;rethomics/ggetho&quot;)</code>.</p>
+<div id="what-are-metadata" class="section level2 unnumbered">
+<h2>What are metadata?</h2>
+<p>When performing many experiments, with multiple condidions and replicates, it becomes challenging to keep track of each individual and to link it to its actual data. In <code>rethomics</code>, regardless of the tool used to generate data, loading results always involves a <strong>metadata file</strong>. It is in fact <strong>a simple CSV file</strong> (basically a spreadsheet) in which <strong>each row defines one unique individual</strong>.</p>
+<p>As shown in the figure above, queries contain two types of columns:</p>
+<ul>
+<li><strong>Mandatory</strong> techincal columns – for instance <code>date</code>, <code>machine_name</code> and others (depending on the acquisition platform). They will be used to match an animal to its data.</li>
+<li><strong>Optional</strong> experimental columns – in this example, <code>condition</code> and <code>sex</code>. You can use as all the columns you want to characterise your experiments.</li>
+</ul>
 </div>
-<div id="list-of-rethomics-packages" class="section level2 unnumbered">
-<h2>List of <code>rethomics</code> packages</h2>
-<p>Below is a list of all the <code>rethomics</code> packages as well as their individual PDF documentation, description and build status.</p>
-<table>
-<thead>
-<tr class="header">
-<th align="left">Package</th>
-<th align="left">Doc</th>
-<th align="left">Description</th>
-<th align="left">Travis.CI</th>
-<th align="left">Coverage</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left"><a href="https://github.com/rethomics/behavr">behavr</a></td>
-<td align="left"><a href="https://github.com/rethomics/behavr/raw/master/behavr.pdf"><img src="assets/pdf_icon.png" alt="PDF" /></a></td>
-<td align="left">Canonical Data Structure for Behavioural Data</td>
-<td align="left"><a href="https://travis-ci.org/rethomics/behavr"><img src="https://travis-ci.org/rethomics/behavr.svg?branch=master" alt="behavr Travis-CI Status" /></a></td>
-<td align="left"><a href="https://codecov.io/github/behavr/behavr?branch=master"><img src="https://img.shields.io/codecov/c/github/rethomics/behavr/master.svg" alt="behavr Coverage Status" /></a></td>
-</tr>
-<tr class="even">
-<td align="left"><a href="https://github.com/rethomics/ggetho">ggetho</a></td>
-<td align="left"><a href="https://github.com/rethomics/ggetho/raw/master/ggetho.pdf"><img src="assets/pdf_icon.png" alt="PDF" /></a></td>
-<td align="left">Visualise High-Throughput Behavioural (i.e. Ethomics) Data</td>
-<td align="left"><a href="https://travis-ci.org/rethomics/ggetho"><img src="https://travis-ci.org/rethomics/ggetho.svg?branch=master" alt="ggetho Travis-CI Status" /></a></td>
-<td align="left"><a href="https://codecov.io/github/ggetho/behavr?branch=master"><img src="https://img.shields.io/codecov/c/github/rethomics/ggetho/master.svg" alt="ggetho Coverage Status" /></a></td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="https://github.com/rethomics/damr">damr</a></td>
-<td align="left"><a href="https://github.com/rethomics/damr/raw/master/damr.pdf"><img src="assets/pdf_icon.png" alt="PDF" /></a></td>
-<td align="left">Read Drosophila Activity Monitor Data</td>
-<td align="left"><a href="https://travis-ci.org/rethomics/damr"><img src="https://travis-ci.org/rethomics/damr.svg?branch=master" alt="damr Travis-CI Status" /></a></td>
-<td align="left"><a href="https://codecov.io/github/damr/behavr?branch=master"><img src="https://img.shields.io/codecov/c/github/rethomics/damr/master.svg" alt="damr Coverage Status" /></a></td>
-</tr>
-<tr class="even">
-<td align="left"><a href="https://github.com/rethomics/scopr">scopr</a></td>
-<td align="left"><a href="https://github.com/rethomics/scopr/raw/master/scopr.pdf"><img src="assets/pdf_icon.png" alt="PDF" /></a></td>
-<td align="left">Read Ethoscope Data</td>
-<td align="left"><a href="https://travis-ci.org/rethomics/scopr"><img src="https://travis-ci.org/rethomics/scopr.svg?branch=master" alt="scopr Travis-CI Status" /></a></td>
-<td align="left"><a href="https://codecov.io/github/scopr/behavr?branch=master"><img src="https://img.shields.io/codecov/c/github/rethomics/scopr/master.svg" alt="scopr Coverage Status" /></a></td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="https://github.com/rethomics/sleepr">sleepr</a></td>
-<td align="left"><a href="https://github.com/rethomics/sleepr/raw/master/sleepr.pdf"><img src="assets/pdf_icon.png" alt="PDF" /></a></td>
-<td align="left">Analyse Activity and Sleep Behaviour</td>
-<td align="left"><a href="https://travis-ci.org/rethomics/sleepr"><img src="https://travis-ci.org/rethomics/sleepr.svg?branch=master" alt="sleepr Travis-CI Status" /></a></td>
-<td align="left"><a href="https://codecov.io/github/sleepr/behavr?branch=master"><img src="https://img.shields.io/codecov/c/github/rethomics/sleepr/master.svg" alt="sleepr Coverage Status" /></a></td>
-</tr>
-<tr class="even">
-<td align="left"><a href="https://github.com/rethomics/zeitgebr">zeitgebr</a></td>
-<td align="left"><a href="https://github.com/rethomics/zeitgebr/raw/master/zeitgebr.pdf"><img src="assets/pdf_icon.png" alt="PDF" /></a></td>
-<td align="left">Analyse and Visualise Circadian Behaviours</td>
-<td align="left"><a href="https://travis-ci.org/rethomics/zeitgebr"><img src="https://travis-ci.org/rethomics/zeitgebr.svg?branch=master" alt="zeitgebr Travis-CI Status" /></a></td>
-<td align="left"><a href="https://codecov.io/github/zeitgebr/behavr?branch=master"><img src="https://img.shields.io/codecov/c/github/rethomics/zeitgebr/master.svg" alt="zeitgebr Coverage Status" /></a></td>
-</tr>
-</tbody>
-</table>
+<div id="make-them-exhaustive" class="section level2 unnumbered">
+<h2>Make them exhaustive</h2>
+<p>It is a good habit to <strong>record as much information as possible in our metadata</strong> – even if it seems redundant. For instance, if we put animals in different incubators, we can simply add an <code>incubator</code> column. This way, we keep all our experimental notes, as much as possible, inside one file. Not only this will help us to “debug” if anything goes wrong in one incubator, but we will also be able to account for incubator as a covariate later on. From a computational perspective, these columns are virtually free.</p>
+</div>
+<div id="put-replicates-together" class="section level2 unnumbered">
+<h2>Put replicates together</h2>
+<p>A common mistake for users is to perform several replicates of the same experiment and to make a new metadata file each time. Instead, I strongly recommand you to <strong>put all replicates in the same file</strong>. If it helps, you can add a <code>replicate</code> column so you can keep track of which replicate each animal comes from. The whole point of high-througput analysis is that you can load all the data from all replicate, and compare it between before you make a decision to merge them. The bottom line is that, if you start form a single metadata file, your work will be more tracktable, and you can always decide to analyse only one replicate at a time.</p>
+<p>In conclusion, <strong>queries are a canonical way to both load behavioural data</strong>. They are both computer and human friendly. In other words, if you give a query to a colaborator, she/he will be able to tell very quickly what animal underwent which treatment, where and when.</p>
 
 </div>
 </div>
@@ -228,8 +179,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="workflow.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="workflow.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="behavr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -258,7 +209,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rethomics/rethomics.github.io/edit/source/01-intro.Rmd",
+"link": "https://github.com/rethomics/rethomics.github.io/edit/source/03-metadata.Rmd",
 "text": "Edit"
 },
 "download": ["bookdown-demo.pdf", "bookdown-demo.epub"],

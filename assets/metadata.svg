@@ -16,7 +16,7 @@
    id="svg10014"
    inkscape:version="0.92.2 5c3e80d, 2017-08-06"
    sodipodi:docname="metadata.svg"
-   inkscape:export-filename="/home/quentin/comput/rethomics/rethomics.github.io/assets/query.png"
+   inkscape:export-filename="/home/quentin/comput/rethomics/rethomics.github.io/assets/metadata.png"
    inkscape:export-xdpi="314.68585"
    inkscape:export-ydpi="314.68585">
   <defs
@@ -29,10 +29,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4142136"
-     inkscape:cx="156.18834"
-     inkscape:cy="129.25541"
+     inkscape:cx="145.80303"
+     inkscape:cy="-13.555818"
      inkscape:document-units="mm"
-     inkscape:current-layer="g11741"
+     inkscape:current-layer="g9884"
      showgrid="false"
      fit-margin-top="0"
      fit-margin-left="0"
@@ -1064,8 +1064,8 @@
         <path
            inkscape:connector-curvature="0"
            id="path6467"
-           style="fill:#efefef;fill-opacity:1;fill-rule:nonzero;stroke:none"
-           d="m 47.893,748.144 h 66.501 V 762.59 H 47.893 Z"
+           style="fill:#efefef;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1.25108504"
+           d="M 10.305728,748.144 H 114.394 V 762.59 H 10.305728 Z"
            sodipodi:nodetypes="ccccc" />
         <text
            transform="scale(1,-1)"
@@ -1550,7 +1550,7 @@
          inkscape:connector-curvature="0" />
       <path
          sodipodi:nodetypes="cc"
-         d="M 42.710464,64.180061 H 197.68095"
+         d="M 60.808369,64.180061 H 197.68095"
          style="fill:none;stroke:#000000;stroke-width:0.14040555;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none;stroke-opacity:1"
          id="path18-92"
          inkscape:connector-curvature="0" />

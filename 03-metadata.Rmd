@@ -13,7 +13,7 @@
 When performing many experiments, with multiple condidions and replicates,
 it becomes challenging to keep track of each individual and to link it to its actual data.
 In `rethomics`, regardless of the tool used to generate data, loading results always involves a **metadata file**.
-It is in fact **a simple CSV file** (basically a spreadsheet) in which **each row defines one unique individual**.
+It is, in fact, **a simple CSV file** (basically a spreadsheet) in which **each row defines one unique individual**.
 
 As shown in the figure above, queries contain two types of columns:
 
@@ -23,7 +23,7 @@ As shown in the figure above, queries contain two types of columns:
 
 ## Make them exhaustive{-}
 It is a good habit to **record as much information as possible in our metadata** -- even if it seems redundant.
-For instance, if we put animals in different incubators, we can simply add an `incubator` column.
+For instance, if we put animal in different incubators, we can simply add an `incubator` column.
 This way, we keep all our experimental notes, as much as possible, inside one file.
 Not only this will help us to "debug" if anything goes wrong in one incubator, but we will also be able to account for incubator as a covariate later on. From a computational perspective, these columns are virtually free.
 
@@ -32,8 +32,21 @@ Not only this will help us to "debug" if anything goes wrong in one incubator, b
 
 A common mistake for users is to perform several replicates of the same experiment and to make a new metadata file each time. Instead, I strongly recommand you to **put all replicates in the same file**. If it helps,
 you can add a `replicate` column so you can keep track of which replicate each animal comes from.
-The whole point of high-througput analysis is that you can load all the data from all replicate, and compare it between before you make a decision to merge them. The bottom line is that, if you start form a single metadata file, your work will be more tracktable, and you can always decide to analyse only one replicate at a time.
+The whole point of high-througput analysis is that you can load all the data from all replicates and compare it (and maybe merge it). The bottom line is that, if you start form a single metadata file, your work will be more tracktable, and you can always decide to analyse only one replicate at a time.
 
 
-In conclusion, **queries are a canonical way to both load behavioural data**.
+## Linking metadata{-}
+
+![Linking adds technical columns](assets/metadata_linking.png)
+
+Once your metadata is ready, it can be used as a query to **import the matching data**.
+Regardless of which acquisition tool you used, the first step when importing data in `R` will be "metadata linking".
+In short, linking means at least:
+
+* Adding an `id` column to the metadata. This will be a unique identifier for each indididual (it generally contains datetime, machine name an region id)
+* Adding a column that tracks "how to find the data for each individual"
+
+
+## Take home message{-}
+In conclusion, **metadatafiles are a canonical way to both define experimental condition and load behavioural data**.
 They are both computer and human friendly. In other words, if you give a query to a colaborator, she/he will be able to tell very quickly what animal underwent which treatment, where and when.

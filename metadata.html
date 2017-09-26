@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Rethomics, a framework for high-throughput behaviour analysis in R</title>
   <meta name="description" content="This is a tutorial for Rethomics, a framework to analyse high-throuput behavioural data in <code>R</code>.">
-  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5.2 and GitBook 2.6.7">
 
   <meta property="og:title" content="Rethomics, a framework for high-throughput behaviour analysis in R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Quentin Geissmann">
 
 
-<meta name="date" content="2017-09-15">
+<meta name="date" content="2017-09-26">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -119,12 +119,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html"><i class="fa fa-check"></i>behavr tables</a><ul>
 <li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#variables-and-metavariables"><i class="fa fa-check"></i>Variables and metavariables</a></li>
-<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#toy-data"><i class="fa fa-check"></i>Toy data</a></li>
-<li><a href="behavr.html#operating-on-behavr-tables">Operating on <code>behavr</code> tables</a><ul>
-<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#variables"><i class="fa fa-check"></i>Variables</a></li>
-<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#expand-metavariables"><i class="fa fa-check"></i>Expand metavariables</a></li>
+<li><a href="behavr.html#operating-on-behavr-tables">Operating on <code>behavr</code> tables</a></li>
+<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#playing-with-toy-data"><i class="fa fa-check"></i>Playing with toy data</a></li>
+<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#generalities"><i class="fa fa-check"></i>Generalities</a><ul>
+<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#data"><i class="fa fa-check"></i>Data</a></li>
 <li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html#metadata"><i class="fa fa-check"></i>Metadata</a></li>
-<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#summarise-data"><i class="fa fa-check"></i>Summarise data</a></li>
+<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#data-metadata"><i class="fa fa-check"></i>Data &amp; Metadata</a></li>
+<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#summerise-data"><i class="fa fa-check"></i>Summerise data</a></li>
 <li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#stitching"><i class="fa fa-check"></i>Stitching</a></li>
 </ul></li>
 </ul></li>
@@ -159,7 +160,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="what-are-metadata" class="section level2 unnumbered">
 <h2>What are metadata?</h2>
 <p>When performing many experiments, with multiple condidions and replicates, it becomes challenging to keep track of each individual and to link it to its actual data. In <code>rethomics</code>, regardless of the tool used to generate data, loading results always involves a <strong>metadata file</strong>. It is, in fact, <strong>a simple CSV file</strong> (basically a spreadsheet) in which <strong>each row defines one unique individual</strong>.</p>
-<p>As shown in the figure above, queries contain two types of columns:</p>
+<p>As shown in the figure above, metadata is classified in two types of columns:</p>
 <ul>
 <li><strong>Mandatory</strong> techincal columns – for instance <code>date</code>, <code>machine_name</code> and others (depending on the acquisition platform). They will be used to match an animal to its data.</li>
 <li><strong>Optional</strong> experimental columns – in this example, <code>condition</code> and <code>sex</code>. You can use as all the columns you want to characterise your experiments.</li>
@@ -167,7 +168,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="make-them-exhaustive" class="section level2 unnumbered">
 <h2>Make them exhaustive</h2>
-<p>It is a good habit to <strong>record as much information as possible in our metadata</strong> – even if it seems redundant. For instance, if we put animal in different incubators, we can simply add an <code>incubator</code> column. This way, we keep all our experimental notes, as much as possible, inside one file. Not only this will help us to “debug” if anything goes wrong in one incubator, but we will also be able to account for incubator as a covariate later on. From a computational perspective, these columns are virtually free.</p>
+<p>It is a good habit to <strong>record as much information as possible in our metadata</strong> – even if it seems redundant. For instance, if we put animals in different incubators, we can simply add an <code>incubator</code> column. This way, we keep all our experimental notes, as much as possible, inside one file. Not only this will help us to “debug” if anything goes wrong in one incubator, but we will also be able to account for incubator as a covariate later on. From a computational perspective, these columns are virtually free.</p>
 </div>
 <div id="put-replicates-together" class="section level2 unnumbered">
 <h2>Put replicates together</h2>
@@ -179,10 +180,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <img src="assets/metadata_linking.png" alt="Linking adds technical columns" />
 <p class="caption">Linking adds technical columns</p>
 </div>
-<p>Once your metadata is ready, it can be used as a query to <strong>import the matching data</strong>. Regardless of which acquisition tool you used, the first step when importing data in <code>R</code> will be “metadata linking”. In short, linking means at least:</p>
+<p>Once your metadata is ready, it can be used to create a query to <strong>import the matching data</strong>. Regardless of which acquisition tool you used, the first step when importing data in <code>R</code> will be “metadata linking”. This step will automatically complete the metadata file in a way that can be used for <code>R</code> to retrieve the right amount of data from experiment files. We call it linking, since it links the manually introduced metadata with the right experiment data file, something that is tedious to do manually. In short, linking means at least:</p>
 <ul>
-<li>Adding an <code>id</code> column to the metadata. This will be a unique identifier for each indididual (it generally contains datetime, machine name an region id)</li>
-<li>Adding a column that tracks “how to find the data for each individual”</li>
+<li>Adding an <code>id</code> column to the metadata. This will be a unique identifier for each indididual (it generally contains datetime, machine name an region id). This will diferenciate animals with the same conditions in the metadata.</li>
+<li>Adding a column that tracks “how to find the data for each individual”.</li>
 </ul>
 </div>
 <div id="take-home-message" class="section level2 unnumbered">

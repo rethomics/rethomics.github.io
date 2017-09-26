@@ -1,28 +1,91 @@
 # behavr tables{#behavr -}
 
+
+**A single data structure to store data and metadata**
+
+---------------------------
+
+![a behavr table](assets/behavr.png)
+
 ## Variables and metavariables{-}
 
-When performing behavioural experiments, many animals are individually monitored.
-For each of these individual, we record a set of **variables** (e.g. position, orientation, beam breaking,...).
-Each variable is recorded at successive intervals, **over long durations**.
-In addition to these variables, which change over time we also have **metavariables**.
-Metavariables contain information **about each individual**.
-This information can be defined (or recorded) before or after the experiment, but in all cases the point is that it **does not change over time** (e.g. treatment, genotype, lifespan).
-Typically, metavariables are defined as extra *columns a the metadata file*, but they can also be computed.
-
-For example, if we recorded `x` and `y` positions over time, for animals of different `sex` and `genotype`,
-`x` and `y` would be the variables whilst `sex` and `genotype` would be the metavariables.
-
-
-Regardless to what device was used to generate our data and how we loaded it, in `rethomics`, we will always have data and metadata linked together.
-
-
-In order to handle efficiently large amounts of data (toghter with metadata), we have designed the `behavr` package.
-A `behavr` table is essentially a [data.table](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html) enhanced with metadata.
+As we have seen in the [previous section](metadata.html), metadata are crucial for proper statistical analysis of behavioural data.
+The point of an experiment, is however to acquire **data**.
+That is, a long time series of recorded **variables** such as position, orientation and number of beam crosses, for each individual.
+**Variables** are different form **metavariables** in so far as the latter are made of only one value per animal.
+It is easier (and less error prone) to always keep the data and metadata together.
+In rethomics, in order to handle large amounts of data (together with metadata), we have designed the `behavr` package.
+`behavr` tables are based on the very powerful package `data.table`, but enhanced with metadata.
+For most purposes, you can use a `behavr` table just like a `data.table`.
+Therefore, have a look at the [introduction to `data.table`](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html) further detail!
 **When we load any behavioural data in `rethomics`, we get a `behavr` table as a result.**
-  Therefore, it is important to understand how to manipulate and operate on this data structure.
+In this section, we will discuss the usual operations that you can perform on `behavr` tables.
 
-## Toy data{-}
+
+
+## Operating on `behavr` tables{-}
+
+Now that we have all our data at the same place, we want to be able to manipulate it.
+In the next part of this tutorial, we will create some toy data and learn how to manipulate it.
+This table is a short overview:
+
+```{r, echo = FALSE}
+
+section <- c("Generalities","Pure data", "","", "Pure metadata", "", "Meta & data", "", "Summarise", "", "Advanced")
+ops = c("Summarise `behavr` table",
+        "**Create**/alter a variable",
+        "**Remove** a variable",
+        "**Select** data rows",
+        "Access metadata table",
+        "**Create**/alter metavariable",
+        "Use **metavariable as variable**",
+        "**Remove individuals** according to metavariable",
+        "Compute **indidisual statistics**",
+        "**Rejoin** metadata to data",
+        "**Stitch** experiments"
+        )
+
+expr = c("`summary(DT)`",
+         "`DT[, new_column := some_value]`",
+        "`DT[, column_to_delete := NULL]`",
+        "`DT[criteria]`",
+        "`DT[meta = TRUE]`",
+        "`DT[, new_meta := some_value, meta=TRUE]`",
+        "`xmv(metavariable)`",
+        "`DT[criteria]`",
+        "`DT[, .( statistics = some_math()), by='id']`",
+        "`rejoin(DT)`",
+        "`stitch_on(DT, metavariable)`"
+        )
+
+expl = c(
+        "How many individuals, variables, metavariables, etc? -- `summary(dt)`",
+        "When are aninimals 'very active'? -- `dt[, very_active := activity >= 2]`",
+        "Lets remove a variable we don't need? --  `dt[, very_active := NULL]`",
+        "Exclude data before the first hour -- `small_dt <- dt[t > hours(1)]`",
+        "Show metadata as table -- `dt[meta = TRUE]`",
+        "Define a new factor that is a comibiation of 'sex x condition' -- `dt[, treatment := paste(sex, condition, sep='|'), meta=T]`",
+        "Add 10s to all time, only for animals in condition `'A'` -- `dt[, t := ifelse(xmv(condition) == 'A', t + 10, t)]`",
+        "Remove all males (from data, and metadata) -- `dt_males <- dt[xmv(sex) == 'females']`",
+        "Compute the average activity, per animal -- `stat_dt <- dt[, .(mean_acti = mean(active)), by='id']`",
+        "Merge metadata and summary statistics -- `stat_dt <- rejoin(stat_dt)`",
+        "TODO -- TODO"
+        )
+
+
+
+library(knitr)
+kable(data.frame(
+              Section = section,
+              Operation = ops,
+              #Schematic = fig, 
+              Expression = expr,
+              Example = expl),
+      row.names = FALSE)
+```
+
+
+## Playing with toy data{-}
 
 The `behavr` package has a set of functions to make toy data.
 In order to have a look at a `behavr` object, lets create one.
@@ -30,112 +93,135 @@ First, we make the metadata:
 
 ```{r}
 library(behavr)
-metadata <- data.frame( experiment_id = "toy_experiment",
-                     region_id = 1:10,
-                     condition = c("A", "B") )
+metadata <- data.table( id = paste("toy_experiment", 1:10, sep = "|"),
+                      sex = rep(c("male", "female"), each = 5),
+                      condition = c("A", "B") )
 metadata
 ```
 
-Then, we use `toy_dam_data()` to **simulate** one day of DAMS-like data for these ten animals (and two conditions):
+Then, we use `toy_dam_data()` to **simulate** (instead of linking/loading) one day of DAMS-like data for these ten animals (and two conditions):
 
 ```{r}
 dt <- toy_dam_data(metadata, duration = days(1))
 dt
 ```
 As you can see, when we print `dt`, our `behavr` table, we have two fields: `METADATA` and `DATA`.
-The former has only one row per animal and looks very much like metadata, with an extra column named `id`.
-The later is the actual data of **all animals**. The special column `id` is also known as a key. It allows to map data to metadata.
-In other words, there is a unique id for each individual.
-In this specific example, `t` is the time and  `activity` is the number of beam crosses.
+The former is actually just the metadata we created whilst the latter stores the data (i.e. the variables) for **all animals**. 
+The special column `id` is also known as a key, and is shared between both data and metadata. 
+It inernally allows us to map them to one another.
+In other words, it is a unique id for each individual.
+In this specific example, the variables `t` and  `activity` are the time and the number of beam crosses, respectively.
 
+## Generalities{-}
 A quick way to retreive general information about a `behavr` table is to use `summary`:
 
 ```{r}
 summary(dt)
 ```
+This tells us immediately how many variables, metavariables and data points, we have.
 
-This tells us immediately how many variables and metavariables we have.
-It also tells us when are the first and last recording for each animal.
+One can also print a detailed summary (i.e. one per animal):
 
-
-## Operating on `behavr` tables{-}
-
-###  Variables{-}
+```{r}
+summary(dt, detailed = TRUE)
+```
+### Data{-}
 Playing with variables is just like in `data.table`.
 Read the [official data.table tutorial](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html) for more functionalities.
-For instance, we can add a new variable, `very_active` that is `TRUE` if and only if
-there was at least two beam crosses in a minute:
+
+For instance, we can add a **new variable**, `very_active`, that is `TRUE` if and only if
+there was at least two beam crosses in a minute, for a given individual:
 
 ```{r}
 dt[, very_active := activity >= 2]
 ```
-One can also filter data. For instance, we want to show only point before three hours:
-```{r}
-dt[t < hours(3)]
-```
 
-Note that `hours(3)` just converts 3h in seconds, because time is expressed in seconds in `rethomics` (there is also a `days()` and a `mins()` function).
-
-
-
-###  Expand metavariables{-}
-
-Sometimes, you would like to **use metavariables as if they were variables**.
-Imagine, for instance, that we want to correct activity according to the condition, say we need to multiply activity by two for condition "A".
-For this purpoe, we can use the function `xmv` (eXpand MetaVariable):
+If we decide we don't need this variable anymore, we can **remove it**:
 
 
 ```{r}
-dt[, activity_corrected := ifelse(xmv(condition) == "A", activity * 2, activity)]
+dt[, very_active := NULL]
 ```
 
-If `condition` were a variable, we would use ` ifelse(condition == "A", activity * 2, activity)`.
-Since it is in metadata, we just replace `condition` by `xmv(condition)`.
 
-
-###  Metadata{-}
-
-The Metadata is itself a table.
-To perform operations on metadata, on can use `meta=TRUE` inside the `[]` operator.
-For intace, only to display the metadata:
+Sometimes, we would like to **filter the data**. That is, we select rows according to one or several criteria.
+Often we would lile to exclude thew very start of the experiment. For example, we can keep data after one hour:
 
 ```{r}
-dt[meta=TRUE]
+dt <- dt[ t > hours(1)]
+```
+
+Note that that using `dt <-` mean we make a new table that overwrite the old one (since it has the same name).
+
+### Metadata{-}
+
+In order to access the metadata, we can add `meta = TRUE` inside the `[]`:
+
+```{r}
+dt[meta = TRUE]
+```
+
+This way, we can also **create new metavariables**.
+For instance, say you want to collapse `sex` and `condition` which both have two levels into one `treatment`, with four levels:
+
+```{r}
+dt[, treatment := paste(sex, condition, sep='|'), meta=T]
+# just to show the result:
+dt[meta = TRUE]
 ```
 
 
-We can use the same principle to add new metavariable:
+### Data & Metadata {-}
+
+The strength of `behavr` tables is their ability to seamlessly **use metavariables as though they were variables**.
+For the sake of the example, lets say you would like to alter the variable `t` (time) so that we add ten seconds, *only to individuals that have condition `'A'`*.
+
+```
+dt[, t := ifelse(xmv(condition) == 'A', t + 10, t)]
+```
+
+The key here is the use of `xmv` (eXpand MetaVariable), which maps `condition` back in the data.
+
+We can also use this mechanism to **remove individual according to the value of a metavariable**.
+For instance, lets get rid of the males!
+```{r}
+dt <- dt[xmv(sex) == 'female']
+summary(dt)
+```
+When individuals are removed, metadata is automatically updated. In effect, we removed males from both data and metadata.
+
+### Summerise data{-}
+
+Thanks to data table `by` operations, it is simple and efficient to **compute statistics per individual**.
+For instance, we may want to compute the average activity for each animal:
 
 
 ```{r}
-dt[,
-   my_new_column := interaction(region_id, condition),
-   meta=TRUE]
-dt[meta=TRUE]
+stat_dt <- dt[,
+   .(mean_acti = mean(activity)),
+   by='id']
+stat_dt
+```
+You can actually compute many variables in one go this way:
+```{r}
+stat_dt <- dt[,
+   .(mean_acti = mean(activity),
+     max_acti = max(activity)
+     ),
+   by='id']
+stat_dt
 ```
 
-### Summarise data{-}
-
-At some point, we will want to compute one or several summary variables for each animal and, for instance,
-model these versus metavariable. For instance, we could compute the sum of all activity for each animal.
-Since each animal is identified by its `id`, we use `by=id` for this:
+Now, in order to perform statistics, we would lke to merge our summaries to the metadata.
+That is we want to **rejoin** them:
 
 ```{r}
-summary_dt <- dt[,
-                 .(sum_activity = sum(activity)),
-                 by=id]
-summary_dt
-```
-Now, the data is only one point per animal, with `id`, and our new variable.
-We aggreated the data, so it is quite managable to put the summary data and the metadata in the same table.
-For that, we use `rejoin`:
-
-  ```{r}
-final_dt <- rejoin(summary_dt)
+final_dt <- rejoin(stat_dt)
 final_dt
 ```
 
-This table is now perfectly suited for further statistical analysis and visualisation!
+
+This table is exactly what you need for statistcis and vidualisation in `R`!
 
 
 ### Stitching{-}

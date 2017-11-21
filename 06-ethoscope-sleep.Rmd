@@ -1,3 +1,3 @@
-# Sleep analysis with ethoscope data{#etho-sleep -}
+# Sleep analysis with ethoscope {#etho-sleep -}
 
 ---------------------

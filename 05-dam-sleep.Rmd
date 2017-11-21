@@ -1,4 +1,4 @@
-#Sleep with DAM data{#dam_sleep -}
+# Sleep analysis with DAM data{#dam_sleep -}
 
 **Step-by-step example of analysis of sleep and circadian rhythm from DAM2 data**
 

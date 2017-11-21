@@ -1,0 +1,31 @@
+#Sleep with DAM data{#dam_sleep -}
+
+**Step-by-step example of analysis of sleep and circadian rhythm from DAM2 data**
+
+---------------------------
+
+![A Drosophila Activity Monitor](assets/dam.jpg)
+
+## Background{-}
+[Drosophila Activity Monitors](http://www.trikinetics.com/) (DAMs) are a wildely used tool to monitor activity of fruit flies over several days.
+I am assuming that, if you are reading this tutorial, you are already familiar with the system, but I will make a few point clear before we start something more hands-on:
+
+* This tutorial is about single beam **DAM2**
+* We work with the raw data (the data from each monitor is in one signe file, and all the monitor files are in the same folder)
+
+
+## Downloading tutorial data{-}
+
+First of all, lets get the data I put together for this tutorial.
+
+What the data is...:
+
+* Experiments
+
+Unzip the data
+
+
+## Metadata{-}
+
+As we discussed in the [previous sesion](metadata.html)
+

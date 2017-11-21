@@ -1,16 +1,16 @@
-#Visualisation with `ggetho` {#ggetho -}
+# Visualisation with ggetho{#ggetho -}
 
 **Make the most of ggetho**
 
 ---------------------------
 
-![Some sort of slide show?](assets/ethoscope.jpg)
+<!-- ![Some sort of slide show?](assets/ethoscope.jpg) -->
 
 ## Lessons from ggplot{-}
 In the previous tutorials, we have used `ggetho` to visualise out behavioural data.
 This section will explain furhter how this packakescan be used to produce flexible plots and how it integrates with `ggplot2`.
 
-[ggplot2](http://ggplot2.org/) is one of the most popular visualisation tool, and an unavoidable `R` package. 
+[ggplot2](http://ggplot2.org/) is one of the most popular visualisation tool, and an unavoidable `R` package.
 It implements the powerful concepts of the "Grammar of graphics".
 The package `ggetho`, which we discuss here, extends `ggplot` for the specific case of behavioural analysis.
 At this stage, you really want to have some familiarity with `ggplot2` so you understand its logic.
@@ -79,7 +79,7 @@ pl <- ggetho(dt, aes(x=t, y=id, z=moving)) + stat_tile_etho()
 pl
 ```
 
-By defaut, each pixel is the *mean* (`summary_FUN = mean`, in `ggetho()`), over 30min (`summary_time_window = mins(30)`, in `ggetho()`). 
+By defaut, each pixel is the *mean* (`summary_FUN = mean`, in `ggetho()`), over 30min (`summary_time_window = mins(30)`, in `ggetho()`).
 Also, note that the default is `x=t` and `y=id`, so we could just obtain exactly the same with
 `ggetho(dt, aes(z=moving)) + stat_tile_etho()`.
 
@@ -166,11 +166,11 @@ pl
 ##Wrapping data{-}
 When behaviours are periodic, we sometimes want to average our variable at the same time over consecutive days.
 In ggetho, we call that time *wrapping*.
-It can be done simply with the `time_wrap` argument. 
+It can be done simply with the `time_wrap` argument.
 It will work the same for population or tile plots:
 
 ```{r}
-pl <- ggetho(dt, aes(x=t, y=moving), time_wrap = hours(24)) + stat_pop_etho() 
+pl <- ggetho(dt, aes(x=t, y=moving), time_wrap = hours(24)) + stat_pop_etho()
 pl
 ```
 
@@ -227,9 +227,9 @@ pl + coord_cartesian(xlim=c(days(1), days(2)))
 Sometimes, it makes sense to use **polar coordinates** to show data around the clock:
 
 ```{r}
-pl <- ggetho(dt, aes(x=t, y=moving, colour=sex), time_wrap = days(1)) + 
-  stat_ld_annotations(height=.5, alpha=.2, x_limits = c(0, days(1)), outline = NA) +  
-  stat_pop_etho(geom = "polygon", fill=NA)  
+pl <- ggetho(dt, aes(x=t, y=moving, colour=sex), time_wrap = days(1)) +
+  stat_ld_annotations(height=.5, alpha=.2, x_limits = c(0, days(1)), outline = NA) +
+  stat_pop_etho(geom = "polygon", fill=NA)
 
 pl + coord_polar()
 ```

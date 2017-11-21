@@ -25,7 +25,7 @@
 <meta name="author" content="Quentin Geissmann">
 
 
-<meta name="date" content="2017-11-15">
+<meta name="date" content="2017-11-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="metadata.html">
-
+<link rel="next" href="dam-sleep.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -128,6 +128,38 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#summerise-data"><i class="fa fa-check"></i>Summerise data</a></li>
 <li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#stitching"><i class="fa fa-check"></i>Stitching</a></li>
 </ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="dam-sleep.html"><a href="dam-sleep.html"><i class="fa fa-check"></i>Sleep analysis with DAM data</a><ul>
+<li class="chapter" data-level="" data-path="dam-sleep.html"><a href="dam-sleep.html#background"><i class="fa fa-check"></i>Background</a></li>
+<li class="chapter" data-level="" data-path="dam-sleep.html"><a href="dam-sleep.html#downloading-tutorial-data"><i class="fa fa-check"></i>Downloading tutorial data</a></li>
+<li class="chapter" data-level="" data-path="dam-sleep.html"><a href="dam-sleep.html#metadata-1"><i class="fa fa-check"></i>Metadata</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="etho-sleep.html"><a href="etho-sleep.html"><i class="fa fa-check"></i>Sleep analysis with ethoscope</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html"><i class="fa fa-check"></i>Visualisation with ggetho</a><ul>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#lessons-from-ggplot"><i class="fa fa-check"></i>Lessons from ggplot</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#some-behavioural-data"><i class="fa fa-check"></i>Some behavioural data</a></li>
+<li><a href="ggetho.html#the-ggetho-function">The <code>ggetho()</code> function</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#tile-plots"><i class="fa fa-check"></i>Tile plots</a><ul>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#per-individual"><i class="fa fa-check"></i>Per individual</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#sorted-individual"><i class="fa fa-check"></i>Sorted individual</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#group-averages"><i class="fa fa-check"></i>Group averages</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#population-plots"><i class="fa fa-check"></i>Population plots</a><ul>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#one-population"><i class="fa fa-check"></i>One population</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#several-populations"><i class="fa fa-check"></i>Several populations</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#wrapping-data"><i class="fa fa-check"></i>Wrapping data</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#ld-annotations"><i class="fa fa-check"></i>LD annotations</a><ul>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#basics"><i class="fa fa-check"></i>Basics</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#changing-ld-colours"><i class="fa fa-check"></i>Changing LD colours</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#ld-in-the-background"><i class="fa fa-check"></i>LD in the background</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#coordinate-and-scales"><i class="fa fa-check"></i>Coordinate and scales</a><ul>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#plot-limits"><i class="fa fa-check"></i>Plot limits</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#time-scale-units"><i class="fa fa-check"></i>Time scale units</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#coordinate-systems"><i class="fa fa-check"></i>Coordinate systems</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#miscelaneous"><i class="fa fa-check"></i>Miscelaneous</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org/yihui/bookdown/" target="blank">Published with bookdown</a></li>
@@ -459,8 +491,8 @@ final_dt</code></pre></div>
           </div>
         </div>
       </div>
-<a href="metadata.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="metadata.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="dam-sleep.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

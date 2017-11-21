@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="intro.html">
+<link rel="prev" href="behavr.html">
+<link rel="next" href="etho-sleep.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -181,37 +181,44 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Rethomics, a framework for high-throughput behaviour analysis in R</h1>
-<h4 class="author"><em>Quentin Geissmann</em></h4>
-<h4 class="date"><em>2017-11-21</em></h4>
-</div>
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
-<p><strong>Only if we share a common data structure can we use a common set of tools</strong></p>
+<div id="dam_sleep" class="section level1 unnumbered">
+<h1>Sleep analysis with DAM data</h1>
+<p><strong>Step-by-step example of analysis of sleep and circadian rhythm from DAM2 data</strong></p>
 <hr />
 <div class="figure">
-<img src="assets/framework.png" alt="The rethomics framework unify behaviour analysis over multiple platforms" />
-<p class="caption">The rethomics framework unify behaviour analysis over multiple platforms</p>
+<img src="assets/dam.jpg" alt="A Drosophila Activity Monitor" />
+<p class="caption">A Drosophila Activity Monitor</p>
 </div>
-<p>In the last few years, there has been growing interests in <em>ethomics</em> – that is, the analysis of large behavioural data sets. Many software and hardware solutions have been proposed to record different behavioural variables on several model organisms. Although subsequent analysis and visualisation share many similarities, each method tends to provide its own output format and, in practice, its own restricted analysis software. This results in a lot of replicated work but also limits extension and collaboration.</p>
-<p>Rethomics attempts to unify analysis of behaviour by providing several packages:</p>
+<div id="background" class="section level2 unnumbered">
+<h2>Background</h2>
+<p><a href="http://www.trikinetics.com/">Drosophila Activity Monitors</a> (DAMs) are a wildely used tool to monitor activity of fruit flies over several days. I am assuming that, if you are reading this tutorial, you are already familiar with the system, but I will make a few point clear before we start something more hands-on:</p>
 <ul>
-<li><code>behavr</code> tables – a flexible and <strong>universal structure</strong> to handle very large behavioural data sets</li>
-<li><code>damr</code>, <code>scopr</code>, … – to <strong>load data</strong> from <a href="http://www.trikinetics.com/">DAMS</a>, <a href="gilestrolab.github.io/ethoscope">ethoscopes</a> and others into <code>behavr</code> tables</li>
-<li><code>ggetho</code> – based on <code>ggplot2</code>, to produce <strong>high-quality representations</strong> of behavioural data</li>
-<li><code>sleepr</code>, <code>zeitgebr</code>, … – to <strong>analyse behavioural data</strong> (sleep analysis, circadian rhythm, …)</li>
+<li>This tutorial is about single beam <strong>DAM2</strong></li>
+<li>We work with the raw data (the data from each monitor is in one signe file, and all the monitor files are in the same folder)</li>
 </ul>
-<p>This document is a tutorial intended for experimenters as well as data analysts. It provides a suite of both <strong>conceptual explanations</strong> and very <strong>concrete examples</strong>.</p>
+</div>
+<div id="downloading-tutorial-data" class="section level2 unnumbered">
+<h2>Downloading tutorial data</h2>
+<p>First of all, lets get the data I put together for this tutorial.</p>
+<p>What the data is…:</p>
+<ul>
+<li>Experiments</li>
+</ul>
+<p>Unzip the data</p>
+</div>
+<div id="metadata-1" class="section level2 unnumbered">
+<h2>Metadata</h2>
+<p>As we discussed in the <a href="metadata.html">previous sesion</a></p>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="behavr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="etho-sleep.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -240,7 +247,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rethomics/rethomics.github.io/edit/source/index.Rmd",
+"link": "https://github.com/rethomics/rethomics.github.io/edit/source/05-dam-sleep.Rmd",
 "text": "Edit"
 },
 "download": ["bookdown-demo.pdf", "bookdown-demo.epub"],

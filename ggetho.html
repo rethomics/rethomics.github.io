@@ -25,7 +25,7 @@
 <meta name="author" content="Quentin Geissmann">
 
 
-<meta name="date" content="2017-11-21">
+<meta name="date" content="2017-11-22">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -153,6 +153,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#basics"><i class="fa fa-check"></i>Basics</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#changing-ld-colours"><i class="fa fa-check"></i>Changing LD colours</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#ld-in-the-background"><i class="fa fa-check"></i>LD in the background</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#phase-and-period"><i class="fa fa-check"></i>Phase and period</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#regime-change"><i class="fa fa-check"></i>Regime change</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#coordinate-and-scales"><i class="fa fa-check"></i>Coordinate and scales</a><ul>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#plot-limits"><i class="fa fa-check"></i>Plot limits</a></li>
@@ -188,12 +190,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <!-- ![Some sort of slide show?](assets/ethoscope.jpg) -->
 <div id="lessons-from-ggplot" class="section level2 unnumbered">
 <h2>Lessons from ggplot</h2>
-<p>In the previous tutorials, we have used <code>ggetho</code> to visualise out behavioural data. This section will explain furhter how this packakescan be used to produce flexible plots and how it integrates with <code>ggplot2</code>.</p>
-<p><a href="http://ggplot2.org/">ggplot2</a> is one of the most popular visualisation tool, and an unavoidable <code>R</code> package. It implements the powerful concepts of the “Grammar of graphics”. The package <code>ggetho</code>, which we discuss here, extends <code>ggplot</code> for the specific case of behavioural analysis. At this stage, you really want to have some familiarity with <code>ggplot2</code> so you understand its logic. You will find a fair numbers of <a href="https://www.youtube.com/watch?v=TaxJwC_MP9Q">videos</a> and <a href="http://ggplot2.org/book/">books</a> online.</p>
+<p>In the previous tutorials, we have used <code>ggetho</code> to visualise out behavioural data. This section will explain further how this package can be used to produce flexible plots and how it integrates with <code>ggplot2</code>.</p>
+<p><a href="http://ggplot2.org/">ggplot2</a> is one of the most popular visualisation tool and an unavoidable <code>R</code> package. It implements the powerful concepts of the <a href="https://www.cs.uic.edu/~wilkinson/TheGrammarOfGraphics/GOG.html">“Grammar of graphics”</a>. The package <code>ggetho</code>, which we discuss here, extends <code>ggplot</code> for the specific case of behavioural analysis. At this stage, you really want to have some familiarity with <code>ggplot2</code> so you understand its logic. You will find a fair numbers of <a href="https://www.youtube.com/watch?v=TaxJwC_MP9Q">videos</a> and <a href="http://ggplot2.org/book/">books</a> online.</p>
 </div>
 <div id="some-behavioural-data" class="section level2 unnumbered">
 <h2>Some behavioural data</h2>
-<p>In this section, we will <strong>simulate toy behavioural data</strong>. For that, we start by making some arbitrary metadata. Here, we have 40 animals, condition A vs B, and sex, male (“M”) or female (“F”).</p>
+<p>In this section, we will <strong>simulate toy behavioural data</strong>. For that, we start by making some arbitrary metadata. Here, we have 40 animals, condition “A” vs “B”, and sex, male (“M”) or female (“F”).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggetho)</code></pre></div>
 <pre><code>## Loading required package: ggplot2</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metadata &lt;-<span class="st"> </span><span class="kw">data.table</span>(<span class="dt">id=</span><span class="kw">sprintf</span>(<span class="st">&quot;toy_experiment|%02d&quot;</span> , <span class="dv">1</span><span class="op">:</span><span class="dv">40</span>), <span class="dt">region_id=</span><span class="dv">1</span><span class="op">:</span><span class="dv">40</span>,
@@ -207,7 +209,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## 4: toy_experiment|04         4         B   F
 ## 5: toy_experiment|05         5         A   M
 ## 6: toy_experiment|06         6         B   M</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt &lt;-<span class="st"> </span><span class="kw">toy_activity_data</span>(metadata, <span class="dt">seed=</span><span class="dv">3</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt &lt;-<span class="st"> </span><span class="kw">toy_activity_data</span>(metadata, <span class="dt">seed=</span><span class="dv">107</span>)</code></pre></div>
 <p>Now, we have a <a href="behavr.html">behavr</a> object, <code>dt</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(dt)</code></pre></div>
 <pre><code>## behavr table with:
@@ -220,7 +222,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="the-ggetho-function" class="section level2 unnumbered">
 <h2>The <code>ggetho()</code> function</h2>
-<p><code>ggetho()</code> is the core function. It expresses the <strong>relationship between variables</strong>. In this respect, it works very much like <code>ggplot()</code>, but it also preprocesses the data.</p>
+<p><code>ggetho()</code> is the core function. It expresses the <strong>relationship between variables</strong>. In this respect, it works very much like <code>ggplot()</code>, but it also pre-processes the data.</p>
 <p>For example if we would like:</p>
 <ul>
 <li>The proportion of time spent <strong>moving, on the y axis</strong></li>
@@ -232,7 +234,7 @@ pl</code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <p>This generates an <strong>empty plot</strong> this is normal because we have, so far, <strong>no layer</strong>. We will see some layers very soon!</p>
 <p>The role of ggetho is to express a relationship between variables and to <strong>compute a summary</strong>, over a certain time window, of a variable of interest <strong>for each individual</strong>.</p>
-<p>Importantly, you decide which variable you want to plot. For instance, you could be interested in things like the number (sum) of beam crosses, or the average position</p>
+<p>Importantly, <strong>you decide which variable you want to plot</strong>. For instance, you could be interested in things like the number (sum) of beam crosses or the average position.</p>
 </div>
 <div id="tile-plots" class="section level2 unnumbered">
 <h2>Tile plots</h2>
@@ -242,13 +244,13 @@ pl</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>id, <span class="dt">z=</span>moving)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_tile_etho</span>()
 pl</code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
-<p>By defaut, each pixel is the <em>mean</em> (<code>summary_FUN = mean</code>, in <code>ggetho</code>), over 30 min (<code>summary_time_window = mins(30)</code>, in <code>ggetho()</code>). Also, note that the default is <code>x=t</code> and <code>y=id</code>, so we could just obtain exactly the same with <code>ggetho(dt, aes(z=moving)) + stat_tile_etho()</code>.</p>
+<p>By defaut, each pixel is the <strong>mean</strong> (<code>summary_FUN = mean</code>, in <code>ggetho</code>), over 30 min (<code>summary_time_window = mins(30)</code>, in <code>ggetho()</code>). Also, note that the default is <code>x=t</code> and <code>y=id</code>, so we could just obtain exactly the same with <code>ggetho(dt, aes(z=moving)) + stat_tile_etho()</code>.</p>
 </div>
 <div id="sorted-individual" class="section level3 unnumbered">
 <h3>Sorted individual</h3>
-<p>Sometimes, we want to sort individuals based on a metavariable (discrete or continuous). For instance let us compute the overall average fraction of time spent moving to then sort individuals from low to high movers:</p>
+<p>Sometimes, we want to sort individuals based on a metavariable (discrete or continuous). For instance let us compute the overall average fraction of time spent moving, <strong>add it to the metadata</strong>, to then sort individuals from low to high movers:</p>
 <p>First, we add a new metavariable (<code>mean_moving</code>):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the average time spent moving per 1000</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the average time spent moving per 1000 (rounded)</span>
 mean_mov_dt &lt;-<span class="st"> </span>dt[, .(<span class="dt">mean_moving =</span> <span class="kw">round</span>(<span class="kw">mean</span>(moving) <span class="op">*</span><span class="st"> </span><span class="dv">1000</span>)), by=id]
 <span class="co"># join curent meta and the summary table</span>
 new_meta &lt;-<span class="st"> </span>dt[mean_mov_dt, meta=T]
@@ -256,28 +258,29 @@ new_meta &lt;-<span class="st"> </span>dt[mean_mov_dt, meta=T]
 <span class="kw">setmeta</span>(dt, new_meta)
 <span class="kw">head</span>(dt[<span class="dt">meta=</span>T])</code></pre></div>
 <pre><code>##                   id region_id condition sex mean_moving
-## 1: toy_experiment|01         1         A   M          73
-## 2: toy_experiment|02         2         B   M         231
-## 3: toy_experiment|03         3         A   F          48
-## 4: toy_experiment|04         4         B   F         107
-## 5: toy_experiment|05         5         A   M         200
-## 6: toy_experiment|06         6         B   M          65</code></pre>
+## 1: toy_experiment|01         1         A   M         138
+## 2: toy_experiment|02         2         B   M         195
+## 3: toy_experiment|03         3         A   F          90
+## 4: toy_experiment|04         4         B   F         118
+## 5: toy_experiment|05         5         A   M         123
+## 6: toy_experiment|06         6         B   M         203</code></pre>
 <p>Now, we can express a new relationship where we show the <em>interaction</em> between our custom variable and id, on the y axis:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span><span class="kw">interaction</span>(id, mean_moving, <span class="dt">sep =</span> <span class="st">&quot; : &quot;</span>), <span class="dt">z=</span>moving)) <span class="op">+</span><span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span><span class="kw">interaction</span>(id, mean_moving, <span class="dt">sep =</span> <span class="st">&quot; : &quot;</span>), <span class="dt">z=</span>moving)) <span class="op">+</span>
 <span class="st">              </span><span class="kw">stat_tile_etho</span>()
 pl</code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-22-1.png" width="672" /> Since we use <code>&quot; : &quot;</code> as a separator, we have, on the y axis, names as <code>&lt;id&gt; : &lt;mean_sleep&gt;</code>. You can extend this concept to sort also by <em>males vs females</em>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span><span class="kw">interaction</span>(id, mean_moving, sex, <span class="dt">sep =</span> <span class="st">&quot; : &quot;</span>), <span class="dt">z=</span>moving)) <span class="op">+</span><span class="st"> </span>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p>Since we use <code>&quot; : &quot;</code> as a separator, we have, on the y axis, names as <code>&lt;id&gt; : &lt;mean_sleep&gt;</code>. You can extend this concept to sort also by <em>males vs females</em>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span><span class="kw">interaction</span>(id, mean_moving, sex, <span class="dt">sep =</span> <span class="st">&quot; : &quot;</span>), <span class="dt">z=</span>moving)) <span class="op">+</span>
 <span class="st">              </span><span class="kw">stat_tile_etho</span>()
 pl</code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 </div>
 <div id="group-averages" class="section level3 unnumbered">
 <h3>Group averages</h3>
-<p>Sometimes, we also want to aggregate inviduals per group. For instance, males <strong>average</strong> vs females <strong>average</strong>:</p>
+<p>Sometimes, we also want to aggregate individuals per group. For instance, males <strong>average</strong> vs females <strong>average</strong>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>sex, <span class="dt">z=</span>moving)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_tile_etho</span>()
 pl</code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-24-1.png" width="672" /> In this context, every row is not an individual anymore, but a group. The <code>method</code> argument of <code>stat_tile_etho()</code> allows you to use other aggregates (median, max, min, …).</p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-24-1.png" width="672" /> In this context, every row is not an individual any more, but a group. The <code>method</code> argument of <code>stat_tile_etho()</code> allows you to use other aggregates (median, max, min, …).</p>
 </div>
 </div>
 <div id="population-plots" class="section level2 unnumbered">
@@ -297,14 +300,14 @@ pl</code></pre></div>
 pl</code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 <p>Another way, is to use <code>ggplot</code>’s faceting system:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_pop_etho</span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">            </span><span class="kw">facet_grid</span>(. <span class="op">~</span><span class="st"> </span>sex)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_pop_etho</span>() <span class="op">+</span>
+<span class="st">            </span><span class="kw">facet_grid</span>(sex <span class="op">~</span><span class="st"> </span>.)
 pl</code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 <p>Of course, you can combine both when you have more than one relevant metavariable:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving, <span class="dt">colour =</span> sex)) <span class="op">+</span><span class="st"> </span>
-<span class="st">              </span><span class="kw">stat_pop_etho</span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">              </span><span class="kw">facet_grid</span>(. <span class="op">~</span><span class="st"> </span>condition)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving, <span class="dt">colour =</span> sex)) <span class="op">+</span>
+<span class="st">              </span><span class="kw">stat_pop_etho</span>() <span class="op">+</span>
+<span class="st">              </span><span class="kw">facet_grid</span>( condition <span class="op">~</span><span class="st"> </span>.)
 pl</code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 </div>
@@ -337,12 +340,41 @@ pl</code></pre></div>
 <div id="ld-in-the-background" class="section level3 unnumbered">
 <h3>LD in the background</h3>
 <p>To put the annotation in the background, we can invert the order of the layers, set the heigh of the annotation to 1 (100%) and add some transparency (<code>alpha = 0.3</code>). We also remove the outline of the boxes:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving)) <span class="op">+</span><span class="st"> </span>
-<span class="st">            </span><span class="kw">stat_ld_annotations</span>(<span class="dt">height=</span><span class="dv">1</span>, <span class="dt">alpha=</span><span class="fl">0.3</span>, <span class="dt">outline =</span> <span class="ot">NA</span>) <span class="op">+</span><span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving)) <span class="op">+</span>
+<span class="st">            </span><span class="kw">stat_ld_annotations</span>(<span class="dt">height=</span><span class="dv">1</span>, <span class="dt">alpha=</span><span class="fl">0.3</span>, <span class="dt">outline =</span> <span class="ot">NA</span>) <span class="op">+</span>
 <span class="st">            </span><span class="kw">stat_pop_etho</span>()
 pl</code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
-<p>You can also play with the phase and periods of the annotations (see the documentation).</p>
+</div>
+<div id="phase-and-period" class="section level3 unnumbered">
+<h3>Phase and period</h3>
+<p>Sometimes you want to show annotations with different phases and periods. For instance, here, we shift the LD annotations 1h forward:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving)) <span class="op">+</span>
+<span class="st">            </span><span class="kw">stat_ld_annotations</span>(<span class="dt">phase =</span> <span class="kw">hours</span>(<span class="dv">1</span>)) <span class="op">+</span>
+<span class="st">            </span><span class="kw">stat_pop_etho</span>()
+pl</code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p>One can also plot over a period different from 24h, say 20h days:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving)) <span class="op">+</span>
+<span class="st">            </span><span class="kw">stat_ld_annotations</span>(<span class="dt">period =</span> <span class="kw">hours</span>(<span class="dv">20</span>)) <span class="op">+</span>
+<span class="st">            </span><span class="kw">stat_pop_etho</span>()
+pl</code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+</div>
+<div id="regime-change" class="section level3 unnumbered">
+<h3>Regime change</h3>
+<p>When, you want to indicate a change in regime, say from LD to DD. A simple way is to use multiple layers with explicit start and end points:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving)) <span class="op">+</span>
+<span class="st">            </span><span class="co"># the default annotation layer</span>
+<span class="st">            </span><span class="kw">stat_ld_annotations</span>() <span class="op">+</span>
+<span class="st">            </span><span class="co"># on top of it, a second layer that</span>
+<span class="st">            </span><span class="co"># starts at day 2 thoughout day 5,</span>
+<span class="st">            </span><span class="co"># and where L colour is grey</span>
+<span class="st">            </span><span class="kw">stat_ld_annotations</span>(<span class="dt">x_limits =</span> <span class="kw">days</span>(<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">5</span>)),
+                                <span class="dt">ld_colours =</span> <span class="kw">c</span>(<span class="st">&quot;grey&quot;</span>, <span class="st">&quot;black&quot;</span> )) <span class="op">+</span>
+<span class="st">            </span><span class="kw">stat_pop_etho</span>()
+pl</code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 </div>
 </div>
 <div id="coordinate-and-scales" class="section level2 unnumbered">
@@ -350,14 +382,15 @@ pl</code></pre></div>
 <div id="plot-limits" class="section level3 unnumbered">
 <h3>Plot limits</h3>
 <p>As <code>ggetho</code> creates regular ggplot objects, which we can extend. For instance, we can change the scales. For instance, put the y scale as a percentage between 0 and 100:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_pop_etho</span>() <span class="op">+</span><span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_pop_etho</span>() <span class="op">+</span>
 <span class="st">        </span><span class="kw">stat_ld_annotations</span>()
-pl &lt;-<span class="st"> </span>pl <span class="op">+</span><span class="st"> </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="dt">labels =</span> scales<span class="op">::</span>percent)
+pl &lt;-<span class="st"> </span>pl <span class="op">+</span><span class="st"> </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),
+                              <span class="dt">labels =</span> scales<span class="op">::</span>percent)
 pl</code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
 <p>We can also use the same principle to zoom in a finished plot. E.g. between day one and day two:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl <span class="op">+</span><span class="st"> </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim=</span><span class="kw">c</span>(<span class="kw">days</span>(<span class="dv">1</span>), <span class="kw">days</span>(<span class="dv">2</span>)))</code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
 </div>
 <div id="time-scale-units" class="section level3 unnumbered">
 <h3>Time scale units</h3>
@@ -365,17 +398,21 @@ pl</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl <span class="op">+</span><span class="st"> </span>ggetho<span class="op">::</span><span class="kw">scale_x_hours</span>()</code></pre></div>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which
 ## will replace the existing scale.</code></pre>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-35-1.png" width="672" /> It actually warns you that you are replacing the scale. Which is fine (as it is precesely what we wanted)!</p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<p><code>R</code> actually warns you since you are replacing the scale. Which is fine (as it is precisely what we wanted)!</p>
 </div>
 <div id="coordinate-systems" class="section level3 unnumbered">
 <h3>Coordinate systems</h3>
 <p>Sometimes, it makes sense to use <strong>polar coordinates</strong> to show data around the clock:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving, <span class="dt">colour=</span>sex), <span class="dt">time_wrap =</span> <span class="kw">days</span>(<span class="dv">1</span>)) <span class="op">+</span>
-<span class="st">          </span><span class="kw">stat_ld_annotations</span>(<span class="dt">height=</span>.<span class="dv">5</span>, <span class="dt">alpha=</span>.<span class="dv">2</span>, <span class="dt">x_limits =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">days</span>(<span class="dv">1</span>)), <span class="dt">outline =</span> <span class="ot">NA</span>) <span class="op">+</span>
+<span class="st">          </span><span class="kw">stat_ld_annotations</span>(<span class="dt">height=</span>.<span class="dv">5</span>,
+                              <span class="dt">alpha=</span>.<span class="dv">2</span>,
+                              <span class="dt">x_limits =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">days</span>(<span class="dv">1</span>)),
+                              <span class="dt">outline =</span> <span class="ot">NA</span>) <span class="op">+</span>
 <span class="st">          </span><span class="kw">stat_pop_etho</span>(<span class="dt">geom =</span> <span class="st">&quot;polygon&quot;</span>, <span class="dt">fill=</span><span class="ot">NA</span>)
 
 pl <span class="op">+</span><span class="st"> </span><span class="kw">coord_polar</span>()</code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 </div>
 </div>
 <div id="miscelaneous" class="section level2 unnumbered">
@@ -385,10 +422,11 @@ pl <span class="op">+</span><span class="st"> </span><span class="kw">coord_pola
 <li>Use other geom</li>
 <li>annotate</li>
 <li>change title</li>
-<li>Axis names <!--  
-title
- --></li>
+<li>Axis names</li>
 </ul>
+<!-- 
+title
+ -->
 
 </div>
 </div>

@@ -8,19 +8,20 @@
 
 ## Lessons from ggplot{-}
 In the previous tutorials, we have used `ggetho` to visualise out behavioural data.
-This section will explain furhter how this packakescan be used to produce flexible plots and how it integrates with `ggplot2`.
+This section will explain further how this package can be used to produce flexible plots and how it integrates with `ggplot2`.
 
-[ggplot2](http://ggplot2.org/) is one of the most popular visualisation tool, and an unavoidable `R` package.
-It implements the powerful concepts of the "Grammar of graphics".
+[ggplot2](http://ggplot2.org/) is one of the most popular visualisation tool and an unavoidable `R` package.
+It implements the powerful concepts of the ["Grammar of graphics"](https://www.cs.uic.edu/~wilkinson/TheGrammarOfGraphics/GOG.html).
 The package `ggetho`, which we discuss here, extends `ggplot` for the specific case of behavioural analysis.
 At this stage, you really want to have some familiarity with `ggplot2` so you understand its logic.
 You will find a fair numbers of [videos](https://www.youtube.com/watch?v=TaxJwC_MP9Q) and [books](http://ggplot2.org/book/) online.
 
 
 ## Some behavioural data{-}
+
 In this section, we will **simulate toy behavioural data**.
 For that, we start by making some arbitrary metadata.
-Here, we have 40 animals, condition A vs B, and sex, male ("M") or female ("F").
+Here, we have 40 animals, condition "A" vs "B", and sex, male ("M") or female ("F").
 
 ```{r}
 library(ggetho)
@@ -30,7 +31,7 @@ metadata <- data.table(id=sprintf("toy_experiment|%02d" , 1:40), region_id=1:40,
                    sex=c("M","M", "F", "F"))
 head(metadata)
 
-dt <- toy_activity_data(metadata, seed=3)
+dt <- toy_activity_data(metadata, seed=107)
 ```
 Now, we have a [behavr](behavr.html) object, `dt`:
 
@@ -42,12 +43,11 @@ summary(dt)
 This data is stored in a [behavr table](behavr.html).
 It has a column `moving` that that tells us whether an the animal `id` is moving at a time `t`.
 
-
 ## The `ggetho()` function{-}
 
 `ggetho()` is the core function.
 It expresses the **relationship between variables**.
-In this respect, it works very much like `ggplot()`, but it also preprocesses the data.
+In this respect, it works very much like `ggplot()`, but it also pre-processes the data.
 
 For example if we would like:
 
@@ -66,12 +66,13 @@ We will see some layers very soon!
 
 The role of ggetho is to express a relationship between variables and to **compute a summary**, over a certain time window, of a variable of interest **for each individual**.
 
-Importantly, you decide which variable you want to plot. 
-For instance, you could be interested in things like the number (sum) of beam crosses, or the average position
-
+Importantly, **you decide which variable you want to plot**.
+For instance, you could be interested in things like the number (sum) of beam crosses or the average position.
 
 ## Tile plots{-}
+
 ### Per individual{-}
+
 One of the most interesting layer is `stat_tile_etho`.
 It shows the **variable of interest in the (colour) z axis**.
 The y axis is discrete (generally the id), and the x axis is time.
@@ -83,8 +84,7 @@ pl <- ggetho(dt, aes(x=t, y=id, z=moving)) + stat_tile_etho()
 pl
 ```
 
-
-By defaut, each pixel is the *mean* (`summary_FUN = mean`, in `ggetho`), over 30 min (`summary_time_window = mins(30)`, in `ggetho()`).
+By defaut, each pixel is the **mean** (`summary_FUN = mean`, in `ggetho`), over 30 min (`summary_time_window = mins(30)`, in `ggetho()`).
 Also, note that the default is `x=t` and `y=id`, so we could just obtain exactly the same with
 `ggetho(dt, aes(z=moving)) + stat_tile_etho()`.
 
@@ -92,11 +92,12 @@ Also, note that the default is `x=t` and `y=id`, so we could just obtain exactly
 ### Sorted individual{-}
 
 Sometimes, we want to sort individuals based on a metavariable (discrete or continuous).
-For instance let us compute the overall average fraction of time spent moving to then sort individuals from low to high movers:
+For instance let us compute the overall average fraction of time spent moving,
+**add it to the metadata**, to then sort individuals from low to high movers:
 
 First, we add a new metavariable (`mean_moving`):
 ```{r}
-# the average time spent moving per 1000
+# the average time spent moving per 1000 (rounded)
 mean_mov_dt <- dt[, .(mean_moving = round(mean(moving) * 1000)), by=id]
 # join curent meta and the summary table
 new_meta <- dt[mean_mov_dt, meta=T]
@@ -108,28 +109,29 @@ head(dt[meta=T])
 Now, we can express a new relationship where we show the *interaction* between our custom variable and id, on the y axis:
 
 ```{r}
-pl <- ggetho(dt, aes(x=t, y=interaction(id, mean_moving, sep = " : "), z=moving)) + 
+pl <- ggetho(dt, aes(x=t, y=interaction(id, mean_moving, sep = " : "), z=moving)) +
               stat_tile_etho()
 pl
 ```
+
 Since we use `" : "` as a separator, we have, on the y axis, names as `<id> : <mean_sleep>`.
 You can extend this concept to sort also by *males vs females*:
 
 ```{r}
-pl <- ggetho(dt, aes(x=t, y=interaction(id, mean_moving, sex, sep = " : "), z=moving)) + 
+pl <- ggetho(dt, aes(x=t, y=interaction(id, mean_moving, sex, sep = " : "), z=moving)) +
               stat_tile_etho()
 pl
 ```
 
 ### Group averages{-}
 
-Sometimes, we also want to aggregate inviduals per group.
+Sometimes, we also want to aggregate individuals per group.
 For instance, males **average** vs females **average**:
 ```{r}
 pl <- ggetho(dt, aes(x=t, y=sex, z=moving)) + stat_tile_etho()
 pl
 ```
-In this context, every row is not an individual anymore, but a group.
+In this context, every row is not an individual any more, but a group.
 The `method` argument of `stat_tile_etho()` allows you to use other aggregates (median, max, min, ...).
 
 
@@ -161,17 +163,17 @@ pl
 Another way, is to use `ggplot`'s faceting system:
 
 ```{r}
-pl <- ggetho(dt, aes(x=t, y=moving)) + stat_pop_etho() + 
-            facet_grid(. ~ sex)
+pl <- ggetho(dt, aes(x=t, y=moving)) + stat_pop_etho() +
+            facet_grid(sex ~ .)
 pl
 ```
 
 Of course, you can combine both when you have more than one relevant metavariable:
 
 ```{r}
-pl <- ggetho(dt, aes(x=t, y=moving, colour = sex)) + 
-              stat_pop_etho() + 
-              facet_grid(. ~ condition)
+pl <- ggetho(dt, aes(x=t, y=moving, colour = sex)) +
+              stat_pop_etho() +
+              facet_grid( condition ~ .)
 pl
 ```
 
@@ -216,14 +218,49 @@ pl
 To put the annotation in the background, we can invert the order of the layers, set the heigh of the annotation to 1 (100%) and add some transparency (`alpha = 0.3`). We also remove the outline of the boxes:
 
 ```{r}
-pl <- ggetho(dt, aes(x=t, y=moving)) + 
-            stat_ld_annotations(height=1, alpha=0.3, outline = NA) + 
+pl <- ggetho(dt, aes(x=t, y=moving)) +
+            stat_ld_annotations(height=1, alpha=0.3, outline = NA) +
             stat_pop_etho()
 pl
 ```
 
-You can also play with the phase and periods of the annotations (see the documentation).
+### Phase and period{-}
 
+Sometimes you want to show annotations with different phases and periods.
+For instance, here, we shift the LD annotations 1h forward:
+```{r}
+pl <- ggetho(dt, aes(x=t, y=moving)) +
+            stat_ld_annotations(phase = hours(1)) +
+            stat_pop_etho()
+pl
+```
+
+One can also plot over a period different from 24h, say 20h days:
+
+```{r}
+pl <- ggetho(dt, aes(x=t, y=moving)) +
+            stat_ld_annotations(period = hours(20)) +
+            stat_pop_etho()
+pl
+```
+
+### Regime change{-}
+
+When, you want to indicate a change in regime, say from LD to DD.
+A simple way is to use multiple layers with explicit start and end points:
+
+```{r}
+pl <- ggetho(dt, aes(x=t, y=moving)) +
+            # the default annotation layer
+            stat_ld_annotations() +
+            # on top of it, a second layer that
+            # starts at day 2 thoughout day 5,
+            # and where L colour is grey
+            stat_ld_annotations(x_limits = days(c(2,5)),
+                                ld_colours = c("grey", "black" )) +
+            stat_pop_etho()
+pl
+```
 
 ## Coordinate and scales{-}
 
@@ -232,9 +269,10 @@ As `ggetho` creates regular ggplot objects, which we can extend. For instance, w
 For instance, put the y scale as a percentage between 0 and 100:
 
 ```{r}
-pl <- ggetho(dt, aes(x=t, y=moving)) + stat_pop_etho() + 
+pl <- ggetho(dt, aes(x=t, y=moving)) + stat_pop_etho() +
         stat_ld_annotations()
-pl <- pl + scale_y_continuous(limits = c(0,1), labels = scales::percent)
+pl <- pl + scale_y_continuous(limits = c(0,1),
+                              labels = scales::percent)
 pl
 ```
 
@@ -254,7 +292,9 @@ Using the plot above, we can add a scale:
 ```{r}
 pl + ggetho::scale_x_hours()
 ```
-It actually warns you that you are replacing the scale. Which is fine (as it is precesely what we wanted)!
+
+`R` actually warns you since you are replacing the scale.
+Which is fine (as it is precisely what we wanted)!
 
 ### Coordinate systems{-}
 
@@ -262,7 +302,10 @@ Sometimes, it makes sense to use **polar coordinates** to show data around the c
 
 ```{r}
 pl <- ggetho(dt, aes(x=t, y=moving, colour=sex), time_wrap = days(1)) +
-          stat_ld_annotations(height=.5, alpha=.2, x_limits = c(0, days(1)), outline = NA) +
+          stat_ld_annotations(height=.5,
+                              alpha=.2,
+                              x_limits = c(0, days(1)),
+                              outline = NA) +
           stat_pop_etho(geom = "polygon", fill=NA)
 
 pl + coord_polar()
@@ -274,12 +317,14 @@ pl + coord_polar()
 
 TODO, list ggplot possibilities:
 
-* Use other geom 
+* Use other geom
 * annotate
 * change title
 * Axis names
-<!--  
+
+<!-- 
 title
  -->
+
 
 

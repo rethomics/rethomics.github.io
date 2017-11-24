@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Rethomics, a framework for high-throughput behaviour analysis in R</title>
+  <meta name="description" content="This is a tutorial for Rethomics, a framework to analyse high-throuput behavioural data in <code>R</code>.">
+  <meta name="generator" content="bookdown 0.5.10 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Rethomics, a framework for high-throughput behaviour analysis in R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a tutorial for Rethomics, a framework to analyse high-throuput behavioural data in <code>R</code>." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Rethomics, a framework for high-throughput behaviour analysis in R" />
+  
+  <meta name="twitter:description" content="This is a tutorial for Rethomics, a framework to analyse high-throuput behavioural data in <code>R</code>." />
+  
+
+<meta name="author" content="Quentin Geissmann">
+
+
+<meta name="date" content="2017-11-24">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="behavr.html">
+<link rel="next" href="etho-sleep.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Rethomics Tutorial</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i>First Steps</a><ul>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#getting-r"><i class="fa fa-check"></i>Getting R</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#installing-rethomics-packages"><i class="fa fa-check"></i>Installing rethomics packages</a></li>
+<li><a href="intro.html#list-of-rethomics-packages">List of <code>rethomics</code> packages</a></li>
+</ul></li>
+<li><a href="workflow.html#workflow">The <code>rethomics</code> workflow</a></li>
+<li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html"><i class="fa fa-check"></i>Working with metadata files</a><ul>
+<li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html#what-are-metadata"><i class="fa fa-check"></i>What are metadata?</a></li>
+<li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html#make-them-exhaustive"><i class="fa fa-check"></i>Make them exhaustive</a></li>
+<li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html#put-replicates-together"><i class="fa fa-check"></i>Put replicates together</a></li>
+<li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html#linking-metadata"><i class="fa fa-check"></i>Linking metadata</a></li>
+<li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html#take-home-message"><i class="fa fa-check"></i>Take home message</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html"><i class="fa fa-check"></i>behavr tables</a><ul>
+<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#variables-and-metavariables"><i class="fa fa-check"></i>Variables and metavariables</a></li>
+<li><a href="behavr.html#operating-on-behavr-tables">Operating on <code>behavr</code> tables</a></li>
+<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#playing-with-toy-data"><i class="fa fa-check"></i>Playing with toy data</a></li>
+<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#generalities"><i class="fa fa-check"></i>Generalities</a><ul>
+<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#data"><i class="fa fa-check"></i>Data</a></li>
+<li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html#metadata"><i class="fa fa-check"></i>Metadata</a></li>
+<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#data-metadata"><i class="fa fa-check"></i>Data &amp; Metadata</a></li>
+<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#summerise-data"><i class="fa fa-check"></i>Summerise data</a></li>
+<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#stitching"><i class="fa fa-check"></i>Stitching</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html"><i class="fa fa-check"></i>DAM2 data, in practice</a><ul>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#aims"><i class="fa fa-check"></i>Aims</a></li>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#prerequisites"><i class="fa fa-check"></i>Prerequisites</a></li>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#background"><i class="fa fa-check"></i>Background</a></li>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#getting-the-data"><i class="fa fa-check"></i>Getting the data</a></li>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#experiment-design-to-standard-metadata"><i class="fa fa-check"></i>Experiment design to standard metadata</a><ul>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#our-toy-experiment"><i class="fa fa-check"></i>Our toy experiment</a></li>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#metadata-1"><i class="fa fa-check"></i>Metadata</a></li>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#linking"><i class="fa fa-check"></i>Linking</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#loading"><i class="fa fa-check"></i>Loading</a></li>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#note-on-zt0"><i class="fa fa-check"></i>Note on ZT0</a></li>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#quality-control"><i class="fa fa-check"></i>Quality control</a><ul>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#detecting-anomalies"><i class="fa fa-check"></i>Detecting anomalies</a></li>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#how-to-exclude-animals"><i class="fa fa-check"></i>How to exclude animals?</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#apply-functions-when-loading"><i class="fa fa-check"></i>Apply functions when loading</a></li>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#next-steps"><i class="fa fa-check"></i>Next steps</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="etho-sleep.html"><a href="etho-sleep.html"><i class="fa fa-check"></i>Sleep analysis with ethoscope</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html"><i class="fa fa-check"></i>Visualisation with ggetho</a><ul>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#aims-1"><i class="fa fa-check"></i>Aims</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#prerequisites-1"><i class="fa fa-check"></i>Prerequisites</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#lessons-from-ggplot"><i class="fa fa-check"></i>Lessons from ggplot</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#some-behavioural-data"><i class="fa fa-check"></i>Some behavioural data</a></li>
+<li><a href="ggetho.html#the-ggetho-function">The <code>ggetho()</code> function</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#tile-plots"><i class="fa fa-check"></i>Tile plots</a><ul>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#per-individual"><i class="fa fa-check"></i>Per individual</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#sorted-individual"><i class="fa fa-check"></i>Sorted individual</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#group-averages"><i class="fa fa-check"></i>Group averages</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#population-plots"><i class="fa fa-check"></i>Population plots</a><ul>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#one-population"><i class="fa fa-check"></i>One population</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#several-populations"><i class="fa fa-check"></i>Several populations</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#wrapping-data"><i class="fa fa-check"></i>Wrapping data</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#ld-annotations"><i class="fa fa-check"></i>LD annotations</a><ul>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#basics"><i class="fa fa-check"></i>Basics</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#changing-ld-colours"><i class="fa fa-check"></i>Changing LD colours</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#ld-in-the-background"><i class="fa fa-check"></i>LD in the background</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#phase-and-period"><i class="fa fa-check"></i>Phase and period</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#regime-change"><i class="fa fa-check"></i>Regime change</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#coordinate-and-scales"><i class="fa fa-check"></i>Coordinate and scales</a><ul>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#plot-limits"><i class="fa fa-check"></i>Plot limits</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#time-scale-units"><i class="fa fa-check"></i>Time scale units</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#coordinate-systems"><i class="fa fa-check"></i>Coordinate systems</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#periodograms"><i class="fa fa-check"></i>Periodograms</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#miscelaneous"><i class="fa fa-check"></i>Miscelaneous</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#next-steps-1"><i class="fa fa-check"></i>Next steps</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org/yihui/bookdown/" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Rethomics, a framework for high-throughput behaviour analysis in R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="damr" class="section level1 unnumbered">
+<h1>DAM2 data, in practice</h1>
+<p><strong>A matter of metadata</strong></p>
+<hr />
+<div class="figure">
+<img src="assets/dam_experiment.png" alt="A DAM experiment. Two replicates, 10 days apart; three genotypes; two sexes, males and females" />
+<p class="caption">A DAM experiment. Two replicates, 10 days apart; three genotypes; two sexes, males and females</p>
+</div>
+<div id="aims" class="section level2 unnumbered">
+<h2>Aims</h2>
+<p>In this practical chapter, we will use a real experiment to learn how to:</p>
+<ul>
+<li>Translate your experiment design into a metadata file</li>
+<li>Use this metadata file to load some data</li>
+<li>Set the circadian reference (ZT0)</li>
+<li>Assess graphically the quality of the data</li>
+<li>Use good practices to exclude individuals from our experiments</li>
+</ul>
+</div>
+<div id="prerequisites" class="section level2 unnumbered">
+<h2>Prerequisites</h2>
+<ul>
+<li>You are familiar with the <a href="(http://www.trikinetics.com/)">TriKineticks DAM2 system</a></li>
+<li>Ensure you have read about the <a href="workflow.html">rethomics workflow</a> and <a href="metadata.html">metadata</a></li>
+<li>Ensure you have <a href="intro.html#installing-rethomics-packages">installed</a> <code>behavr</code>, <code>damr</code> and <code>ggetho</code> packages:</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
+<span class="kw">install_github</span>(<span class="st">&quot;rethmics/behavr&quot;</span>)
+<span class="kw">install_github</span>(<span class="st">&quot;rethmics/damr&quot;</span>)
+<span class="kw">install_github</span>(<span class="st">&quot;rethmics/ggetho&quot;</span>)</code></pre></div>
+</div>
+<div id="background" class="section level2 unnumbered">
+<h2>Background</h2>
+<p><a href="http://www.trikinetics.com/">Drosophila Activity Monitors</a> (DAMs) are a wildely used tool to monitor activity of fruit flies over several days. I am assuming that, if you are reading this tutorial, you are already familiar with the system, but I will make a couple of points clear before we start something more hands-on:</p>
+<ul>
+<li>This tutorial is about single beam <strong>DAM2</strong></li>
+<li>We work with the raw data (the data from each monitor is in one single file, and all the monitor files are in the same folder)</li>
+</ul>
+</div>
+<div id="getting-the-data" class="section level2 unnumbered">
+<h2>Getting the data</h2>
+<p>For this tutorial, you need to <a href="https://github.com/rethomics/rethomics.github.io/raw/source/material/damr_tutorial.zip">download some DAM2 data</a> that we have made available. This is just a zip archive containng four files. Download and extract the files from the zip into a folder of your choice. <strong>Store the path in a variable</strong>. For instance, <strong>adapt</strong> something like:</p>
+<pre class="r{eval=f}"><code>DATA_DIR &lt;- &quot;C://Where/My/Zip/Has/been/extracted</code></pre>
+<p>Check that all the files live there:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list.files</span>(DATA_DIR)</code></pre></div>
+<pre><code>## [1] &quot;damr_tutorial.zip&quot; &quot;metadata.csv&quot;      &quot;Monitor11.txt&quot;    
+## [4] &quot;Monitor14.txt&quot;     &quot;Monitor64.txt&quot;</code></pre>
+<p>For this exercise, we will work with the data and metadata in the same place. In practice, I recommand to:</p>
+<ul>
+<li>Have <strong>all raw data from your acquisition platform in the same place</strong> (possibly shared with other or a network drive)</li>
+<li>Have <strong>one folder per “experiment”</strong>. That is a folder that contains one metadata file, your R scripts, your figures regarding a set of consistent experiment.</li>
+</ul>
+<p>For now, we can just <a href="https://support.rstudio.com/hc/en-us/articles/200711843-Working-Directories-and-Workspaces">set our working directory</a> to <code>DATA_DIR</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(DATA_DIR)</code></pre></div>
+</div>
+<div id="experiment-design-to-standard-metadata" class="section level2 unnumbered">
+<h2>Experiment design to standard metadata</h2>
+<div id="our-toy-experiment" class="section level3 unnumbered">
+<h3>Our toy experiment</h3>
+<div class="figure">
+<img src="assets/dam_experiment.png" alt="A DAM experiment. Two replicates, 10 days apart; three genotypes; two sexes, males and females" />
+<p class="caption">A DAM experiment. Two replicates, 10 days apart; three genotypes; two sexes, males and females</p>
+</div>
+<p>In this example data, we were interested in comparing the behaviour of populations of fruit flies, according to their sex and genotype. We designed the experiment as shown is the figure above. In summary, we have:</p>
+<ul>
+<li><strong>three genotypes</strong> (A, B and C)</li>
+<li><strong>two sexes</strong> (male and female)</li>
+<li><strong>two replicates</strong> (<code>2017-07-01 -&gt; 2017-07-04</code> and <code>2017-07-11 -&gt; 2017-07-14</code>)</li>
+<li>Altogether, <strong>192 individuals</strong></li>
+</ul>
+</div>
+<div id="metadata-1" class="section level3 unnumbered">
+<h3>Metadata</h3>
+<p><strong>It is crucial that you have read <a href="metadata.html">metadata chapter</a></strong> to understand this part. Our goal is to encode our whole experiment in a single file in which:</p>
+<ul>
+<li>each row is an individual</li>
+<li>each column is a metavariable</li>
+</ul>
+<p>Luckily for you, I have already put this file together for you as <code>metadata.csv</code>! Lets have a look at it (you can use R, excel or whatever you want).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(damr)
+metadata &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;metadata.csv&quot;</span>)
+metadata</code></pre></div>
+<pre><code>##               file      start_datetime stop_datetime region_id sex
+##   1: Monitor11.txt 2017-07-01 08:00:00    2017-07-04         1   M
+##   2: Monitor11.txt 2017-07-01 08:00:00    2017-07-04         2   M
+##   3: Monitor11.txt 2017-07-01 08:00:00    2017-07-04         3   M
+##   4: Monitor11.txt 2017-07-01 08:00:00    2017-07-04         4   M
+##   5: Monitor11.txt 2017-07-01 08:00:00    2017-07-04         5   M
+##  ---                                                              
+## 188: Monitor64.txt 2017-07-11 08:00:00    2017-07-14        28   F
+## 189: Monitor64.txt 2017-07-11 08:00:00    2017-07-14        29   F
+## 190: Monitor64.txt 2017-07-11 08:00:00    2017-07-14        30   F
+## 191: Monitor64.txt 2017-07-11 08:00:00    2017-07-14        31   F
+## 192: Monitor64.txt 2017-07-11 08:00:00    2017-07-14        32   F
+##      genotype replicate
+##   1:        A         1
+##   2:        A         1
+##   3:        A         1
+##   4:        A         1
+##   5:        A         1
+##  ---                   
+## 188:        C         2
+## 189:        C         2
+## 190:        C         2
+## 191:        C         2
+## 192:        C         2</code></pre>
+<p>Each of the 192 animals (rows) is defined by a set of mandatory columns (metavariables):</p>
+<ul>
+<li><code>file</code> – the data file (monitor) that it has been recorded in</li>
+<li><code>start_datetime</code> – the date and time (<code>YYYY-MM-DD HH-MM-SS</code>) of the start of the experiment</li>
+<li><code>stop_datetime</code> – the last time point of the experiment (time is optional)</li>
+<li><code>region_id</code> – the channel ([1, 32])</li>
+</ul>
+<p>For <strong>our experiment</strong>, we also defined custom columns:</p>
+<ul>
+<li><code>sex</code> – M and F for male and female, respectively</li>
+<li><code>genotype</code> – A, B or C (I just made up the names for the sake of simplicity)</li>
+<li><code>replicate</code> – so we can analyse how replicates differ from one another</li>
+</ul>
+<p>Note that this format is very flexible and explicit. For instance, if we decided to do a third replicate, we would just need to add new rows. We could also add any condition we want as a new column (e.g. treatment, temperature, matting status and so on)</p>
+</div>
+<div id="linking" class="section level3 unnumbered">
+<h3>Linking</h3>
+<p><a href="metadata.html#linking-metadata">Linking</a> is the one necessary step before loading the data. It allocates a unique identifier to each animal.</p>
+<p>It is very simple to link metadata:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metadata &lt;-<span class="st"> </span><span class="kw">link_dam2_metadata</span>(metadata, <span class="dt">result_dir =</span> DATA_DIR)
+metadata</code></pre></div>
+<p>As <code>result_dir</code>, we just use the directory where the data lives, which you decided when you extracted your data (<code>DATA_DIR</code>).</p>
+<p><strong>Importantly, you do not need to cut the relevant parts of your DAM files</strong> (this is an error-prone step that should be avoided). In other words, no need to use the <code>DAMFileScan</code> utility.</p>
+<p>You can keep all the data in one file per monitor. <code>rethomics</code> will use start and stop datetime to find the appropriate part directly from your metadata.</p>
+</div>
+</div>
+<div id="loading" class="section level2 unnumbered">
+<h2>Loading</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt &lt;-<span class="st"> </span><span class="kw">load_dam2</span>(metadata)
+<span class="kw">summary</span>(dt)</code></pre></div>
+<pre><code>## behavr table with:
+##  192 individuals
+##  8   metavariables
+##  2   variables
+##  7.37472e+05 measurements
+##  1   key (id)</code></pre>
+<p>That is it, <strong>all</strong> our data is loaded in dt.</p>
+</div>
+<div id="note-on-zt0" class="section level2 unnumbered">
+<h2>Note on ZT0</h2>
+<p>In the circadian and sleep field, we need to align our data to a reference time of the day. Typically, when the light (would) turn on (ZT0). In <code>damr</code>, the <strong>time part of the start_datetime is used as a circadian reference</strong>. For instance, if you specify, in your metadata file <code>2017-01-01 09:00:00</code>, you imply that ZT0 is at <code>09:00:00</code>. The time is looked-up in the DAM file, so it will be at <em>on same time zone settings as the computer that recorded the data</em>.</p>
+</div>
+<div id="quality-control" class="section level2 unnumbered">
+<h2>Quality control</h2>
+<div id="detecting-anomalies" class="section level3 unnumbered">
+<h3>Detecting anomalies</h3>
+<p>Immediatly after loading your data, you want to have a visualise data to check for anomalies. We can use <code>ggetho</code> for that:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggetho)</code></pre></div>
+<pre><code>## Loading required package: ggplot2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># I only show firt replicate</span>
+<span class="kw">ggetho</span>(dt[<span class="kw">xmv</span>(replicate) <span class="op">==</span><span class="st"> </span><span class="dv">1</span> ], <span class="kw">aes</span>(<span class="dt">z=</span>activity)) <span class="op">+</span><span class="st"> </span>
+<span class="st">      </span><span class="kw">stat_tile_etho</span>() <span class="op">+</span>
+<span class="st">      </span><span class="kw">stat_ld_annotations</span>()</code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-24-1.png" width="864" /></p>
+<p>Here, instead of ploting everything, I show how you can subset data according to metadata in order to display only replicate one (<code>dt[xmv(replicate) == 1]</code>). In practice, you could also plot everything. You can do a lot more with <code>ggetho</code> (see the <a href="ggetho.html">visualisation chapter</a>)</p>
+<p>What does this tile plot tell us? Each row is an animal (and is labelled with its corresponding id). Each column is a 30min window. The colour intensity indicates the activity.</p>
+<p>There are two things that we can imediatly notice:</p>
+<ul>
+<li>For most animals, the activity is rythmic and synchronised with the light phase transisitions.</li>
+<li>Some animals are dead or missing. For instance take a look at <code>channel 26</code> in <code>Monitor64.txt</code>.</li>
+</ul>
+<p>In other chapters, we will learn how to group individuals, visualise and compute statistics.</p>
+</div>
+<div id="how-to-exclude-animals" class="section level3 unnumbered">
+<h3>How to exclude animals?</h3>
+<p>The best way to exclude animals <em>a priori</em> (e.g. because they died) is to record them as dead <strong>in the metadata</strong>. For instance, you can add a column <code>status</code> in your metadata file and put a default value such as <code>&quot;OK&quot;</code>. If an animal is to be removed, you can replace <code>&quot;OK&quot;</code> by <strong>a reason</strong> (e.g. <code>&quot;dead&quot;</code>, <code>&quot;escaped&quot;</code>, …). Then, you can load your data without those animals <code>load_dam2_data(metadata[status == &quot;OK&quot;], ...)</code>. This practice has the advantage of making it <strong>very transparent</strong>, why some individuals where excluded. Also, it can also easily be reversed.</p>
+</div>
+</div>
+<div id="apply-functions-when-loading" class="section level2 unnumbered">
+<h2>Apply functions when loading</h2>
+<p>Finaly, we may want to apply function on the data as it it loaded, in order to preprocess it. As an example, we can perform a sleep (bouts of immobility of 5 min or more), from our <code>sleepr</code> package (which you will have installed, or course).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sleepr)
+<span class="co"># todo</span>
+<span class="co">#dt &lt;- load_dam2(metadata, FUN = sleepr::sleep_dam_annotation)</span>
+dt</code></pre></div>
+<pre><code>## 
+##  ==== METADATA ====
+## 
+##                                        id file_info region_id
+##                                    &lt;fctr&gt;    &lt;list&gt;     &lt;int&gt;
+##   1: 2017-07-01 08:00:00|Monitor11.txt|01    &lt;list&gt;         1
+##   2: 2017-07-01 08:00:00|Monitor11.txt|02    &lt;list&gt;         2
+##   3: 2017-07-01 08:00:00|Monitor11.txt|03    &lt;list&gt;         3
+##   4: 2017-07-01 08:00:00|Monitor11.txt|04    &lt;list&gt;         4
+##  ---                                                         
+## 188: 2017-07-11 08:00:00|Monitor64.txt|28    &lt;list&gt;        28
+## 189: 2017-07-11 08:00:00|Monitor64.txt|29    &lt;list&gt;        29
+## 190: 2017-07-11 08:00:00|Monitor64.txt|30    &lt;list&gt;        30
+## 191: 2017-07-11 08:00:00|Monitor64.txt|31    &lt;list&gt;        31
+## 192: 2017-07-11 08:00:00|Monitor64.txt|32    &lt;list&gt;        32
+##                          experiment_id      start_datetime stop_datetime
+##                                 &lt;char&gt;              &lt;POSc&gt;        &lt;char&gt;
+##   1: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
+##   2: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
+##   3: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
+##   4: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
+##  ---                                                                    
+## 188: 2017-07-11 08:00:00|Monitor64.txt 2017-07-11 08:00:00    2017-07-14
+## 189: 2017-07-11 08:00:00|Monitor64.txt 2017-07-11 08:00:00    2017-07-14
+## 190: 2017-07-11 08:00:00|Monitor64.txt 2017-07-11 08:00:00    2017-07-14
+## 191: 2017-07-11 08:00:00|Monitor64.txt 2017-07-11 08:00:00    2017-07-14
+## 192: 2017-07-11 08:00:00|Monitor64.txt 2017-07-11 08:00:00    2017-07-14
+##         sex genotype replicate
+##      &lt;char&gt;   &lt;char&gt;     &lt;int&gt;
+##   1:      M        A         1
+##   2:      M        A         1
+##   3:      M        A         1
+##   4:      M        A         1
+##  ---                          
+## 188:      F        C         2
+## 189:      F        C         2
+## 190:      F        C         2
+## 191:      F        C         2
+## 192:      F        C         2
+## 
+##  ====== DATA ======
+## 
+##                                           id      t activity
+##                                       &lt;fctr&gt;  &lt;num&gt;    &lt;int&gt;
+##      1: 2017-07-01 08:00:00|Monitor11.txt|01      0        0
+##      2: 2017-07-01 08:00:00|Monitor11.txt|01     60        0
+##      3: 2017-07-01 08:00:00|Monitor11.txt|01    120        0
+##      4: 2017-07-01 08:00:00|Monitor11.txt|01    180        0
+##     ---                                                     
+## 737468: 2017-07-11 08:00:00|Monitor64.txt|32 230160        0
+## 737469: 2017-07-11 08:00:00|Monitor64.txt|32 230220        0
+## 737470: 2017-07-11 08:00:00|Monitor64.txt|32 230280        0
+## 737471: 2017-07-11 08:00:00|Monitor64.txt|32 230340        0
+## 737472: 2017-07-11 08:00:00|Monitor64.txt|32 230400        0</code></pre>
+<p>As you can see, we now have additional columns in the data.</p>
+</div>
+<div id="next-steps" class="section level2 unnumbered">
+<h2>Next steps</h2>
+<ul>
+<li><a href="ggetho.html">Visualise data with <code>ggetho</code></a></li>
+<li><a href="sleepr.html">Sleep analysis with <code>sleepr</code></a></li>
+<li><a href="zeitgebr.html">Circadian analysis with <code>zeitgebr</code></a></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="behavr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="etho-sleep.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rethomics/rethomics.github.io/edit/source/05-dam-sleep.Rmd",
+"text": "Edit"
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

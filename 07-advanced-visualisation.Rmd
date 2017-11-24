@@ -5,6 +5,34 @@
 ---------------------------
 
 <!-- ![Some sort of slide show?](assets/ethoscope.jpg) -->
+**TODO, a demo of some plots** 
+
+
+## Aims {-}
+In this practical chapter, we will generate toy data to learn how to:
+
+* Express a question as a relationship beween variables
+* Use tile plots to show individual data
+* Make population plots
+* Wrap data around circadian time
+* Annotate plot with light and dark phases
+* Use ggplot tools (facets, scales) to enhance plots
+* Plot average and individual periodograms
+
+## Prerequisites {-}
+
+* Some familiarity with [ggplot](http://ggplot2.org/)
+* Ensure you have [installed](intro.html#installing-rethomics-packages)
+`behavr`and `ggetho` packages:
+
+
+```{r, eval=FALSE}
+library(devtools)
+install_github("rethmics/behavr")
+install_github("rethmics/ggetho")
+```
+
+
 
 ## Lessons from ggplot{-}
 In the previous tutorials, we have used `ggetho` to visualise out behavioural data.
@@ -75,7 +103,8 @@ For instance, you could be interested in things like the number (sum) of beam cr
 
 One of the most interesting layer is `stat_tile_etho`.
 It shows the **variable of interest in the (colour) z axis**.
-The y axis is discrete (generally the id), and the x axis is time.
+The y axis is discrete (generally the id), taht is **one row per individual**.
+The x axis is time (by default, summerised, by `ggetho`, over 30 minutes).
 So, if we want to show the proportion of time spent moving over time for each individual (id):
 
 
@@ -312,6 +341,23 @@ pl + coord_polar()
 ```
 
 
+## Periodograms {-}
+
+**TODO**
+
+```{r}
+library(zeitgebr)
+dt[, t := ifelse(xmv(condition) == "A", t, t * 1.01)]
+per_dt <- periodogram(moving, dt, FUN = chi_sq_periodogram)
+per_dt
+```
+
+```{r}
+ggplot(rejoin(per_dt), aes(period, power, colour=condition)) + 
+        geom_line(mapping = aes(group = id), alpha=.1) + 
+        scale_x_hours() + stat_summary(geom="smooth", fun.data =  mean_se)
+```
+
 ## Miscelaneous{-}
 
 
@@ -326,5 +372,20 @@ TODO, list ggplot possibilities:
 title
  -->
 
+## Next steps {-}
+
+* TODO
 
 
+<!-- library(ggetho) -->
+<!-- metadata <- data.table(id=sprintf("toy_experiment|%02d" , 1:40), region_id=1:40, -->
+<!--                    condition=c("A","B"), -->
+<!--                    sex=c("M","M", "F", "F")) -->
+<!-- head(metadata) -->
+
+<!-- dt <- toy_activity_data(metadata, seed=107) -->
+
+<!-- pl <- ggetho(dt, aes(x=t, y=moving)) + -->
+<!--             stat_ld_annotations(phase = hours(-1)) + -->
+<!--             stat_pop_etho() -->
+<!-- pl -->

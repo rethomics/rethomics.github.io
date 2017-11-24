@@ -1,31 +1,234 @@
-# Sleep analysis with DAM data{#dam_sleep -}
+# DAM2 data, in practice {#damr -}
 
-**Step-by-step example of analysis of sleep and circadian rhythm from DAM2 data**
+**A matter of metadata**
 
 ---------------------------
 
-![A Drosophila Activity Monitor](assets/dam.jpg)
+![A DAM experiment. Two replicates, 10 days apart; three genotypes; two sexes, males and females](assets/dam_experiment.png)
+
+## Aims {-}
+In this practical chapter, we will use a real experiment to learn how to:
+
+* Translate your experiment design into a metadata file
+* Use this metadata file to load some data
+* Set the circadian reference (ZT0)
+* Assess graphically the quality of the data
+* Use good practices to exclude individuals from our experiments
+
+## Prerequisites {-}
+
+* You are familiar with the [TriKineticks DAM2 system]((http://www.trikinetics.com/))
+* Ensure you have read about the [rethomics workflow](workflow.html) and [metadata](metadata.html)
+* Ensure you have [installed](intro.html#installing-rethomics-packages)
+`behavr`, `damr` and `ggetho` packages:
+
+
+```{r, eval=FALSE}
+library(devtools)
+install_github("rethmics/behavr")
+install_github("rethmics/damr")
+install_github("rethmics/ggetho")
+```
+
+
+
+
+```{r, echo=FALSE}
+URL <- "https://github.com/rethomics/rethomics.github.io/raw/source/material/damr_tutorial.zip"
+DATA_DIR <- paste(tempdir(), "damr_tutorial", sep="/")
+dir.create(DATA_DIR)
+knitr::opts_knit$set(root.dir = DATA_DIR)
+
+dst <- paste(DATA_DIR, "damr_tutorial.zip", sep="/")
+download.file(URL, dst)
+unzip(dst, exdir= DATA_DIR)
+```
 
 ## Background{-}
-[Drosophila Activity Monitors](http://www.trikinetics.com/) (DAMs) are a wildely used tool to monitor activity of fruit flies over several days.
-I am assuming that, if you are reading this tutorial, you are already familiar with the system, but I will make a few point clear before we start something more hands-on:
+
+[Drosophila Activity Monitors](http://www.trikinetics.com/) (DAMs) are a wildely used tool to monitor activity of fruit flies over several days. I am assuming that, if you are reading this tutorial, you are already familiar with the system, but I will make a couple of points clear before we start something more hands-on:
 
 * This tutorial is about single beam **DAM2**
-* We work with the raw data (the data from each monitor is in one signe file, and all the monitor files are in the same folder)
+* We work with the raw data (the data from each monitor is in one single file, and all the monitor files are in the same folder)
+
+## Getting the data{-}
+
+For this tutorial, you need to [download some DAM2 data](https://github.com/rethomics/rethomics.github.io/raw/source/material/damr_tutorial.zip)
+that we have made available.
+This is just a zip archive containng four files. 
+Download and extract the files from the zip into a folder of your choice.
+**Store the path in a variable**.
+For instance, **adapt** something like:
+
+```r{eval=F}
+DATA_DIR <- "C://Where/My/Zip/Has/been/extracted
+```
+
+Check that all the files live there:
+
+```{r}
+list.files(DATA_DIR)
+```
+
+For this exercise, we will work with the data and metadata in the same place.
+In practice, I recommand to:
+
+* Have **all raw data from your acquisition platform in the same place** (possibly shared with other or a network drive)
+*  Have **one folder per "experiment"**. That is a folder that contains one metadata file, your R scripts, your figures regarding a set of consistent experiment. 
+
+For now, we can just [set our working directory](https://support.rstudio.com/hc/en-us/articles/200711843-Working-Directories-and-Workspaces) to `DATA_DIR`:
+
+```{r, eval=FALSE}
+setwd(DATA_DIR)
+```
+
+## Experiment design to standard metadata{-}
+
+### Our toy experiment{-}
 
 
-## Downloading tutorial data{-}
+![A DAM experiment. Two replicates, 10 days apart; three genotypes; two sexes, males and females](assets/dam_experiment.png)
 
-First of all, lets get the data I put together for this tutorial.
+In this example data, we were interested in comparing the behaviour of populations of fruit flies,
+according to their sex and genotype.
+We designed the experiment as shown is the figure above. In summary, we have:
 
-What the data is...:
+* **three genotypes** (A, B and C)
+* **two sexes** (male and female)
+* **two replicates** (`2017-07-01 -> 2017-07-04` and `2017-07-11 -> 2017-07-14`)
+* Altogether, **192 individuals**
 
-* Experiments
 
-Unzip the data
+### Metadata {-}
+**It is crucial that you have read [metadata chapter](metadata.html)** to understand this part.
+Our goal is to encode our whole experiment in a single file in which:
+
+* each row is an individual
+* each column is a metavariable
+
+Luckily for you, I have already put this file together for you as `metadata.csv`!
+Lets have a look at it (you can use R, excel or whatever you want).
+
+```{r}
+library(damr)
+metadata <- fread("metadata.csv")
+metadata
+```
+
+Each of the 192 animals (rows) is defined by a set of mandatory columns (metavariables):
+
+* `file` -- the data file (monitor) that it has been recorded in
+* `start_datetime` -- the date and time (`YYYY-MM-DD HH-MM-SS`) of the start of the experiment
+* `stop_datetime` -- the last time point of the experiment (time is optional) 
+* `region_id` -- the channel ([1, 32])
+
+For **our experiment**, we also defined custom columns:
+
+* `sex` -- M and F for male and female, respectively
+* `genotype` -- A, B or C (I just made up the names for the sake of simplicity)
+* `replicate` -- so we can analyse how replicates differ from one another
+
+Note that this format is very flexible and explicit.
+For instance, if we decided to do a third replicate, we would just need to add new rows. 
+We could also add any condition we want as a new column (e.g. treatment, temperature, matting status and so on)
+
+### Linking{-}
+
+[Linking](metadata.html#linking-metadata) is the one necessary step before loading the data.
+It allocates a unique identifier to each animal.
+
+It is very simple to link metadata:
+
+```{r}
+metadata <- link_dam2_metadata(metadata, result_dir = DATA_DIR)
+metadata
+```
+
+As `result_dir`, we just use the directory where the data lives, which you decided when you extracted your data (`DATA_DIR`).
+
+**Importantly, you do not need to cut the relevant parts of your DAM files** (this is an error-prone step that should be avoided). In other words, no need to use the `DAMFileScan` utility.
+
+You can keep all the data in one file per monitor. `rethomics` will use start and stop datetime to find the appropriate part directly from your metadata.
+
+## Loading {-}
+
+```{r}
+dt <- load_dam2(metadata)
+summary(dt)
+```
+
+That is it, **all** our data is loaded in dt.
+
+## Note on ZT0 {-}
+
+In the circadian and sleep field, we need to align our data to a reference time of the day. Typically, when the light (would) turn on (ZT0). 
+In `damr`, the **time part of the start_datetime is used as a circadian reference**.
+For instance, if you specify, in your metadata file `2017-01-01 09:00:00`, you imply that ZT0 is at `09:00:00`.
+The time is looked-up in the DAM file, so it will be at *on same time zone settings as the computer that recorded the data*.
+
+## Quality control {-}
+### Detecting anomalies {-}
+Immediatly after loading your data, you want to have a visualise data to check for anomalies.
+We can use `ggetho` for that:
+
+```{r, fig.width = 9, fig.height=16}
+library(ggetho)
+# I only show firt replicate
+ggetho(dt[xmv(replicate) == 1 ], aes(z=activity)) + 
+      stat_tile_etho() +
+      stat_ld_annotations()
+```
 
 
-## Metadata{-}
+Here, instead of ploting everything, I show how you can subset data according to metadata in order to display only replicate one (`dt[xmv(replicate) == 1]`). In practice, you could also plot everything.
+You can do a lot more with `ggetho` (see the [visualisation chapter](ggetho.html))
 
-As we discussed in the [previous sesion](metadata.html)
+What does this tile plot tell us?
+Each row is an animal (and is labelled with its corresponding id).
+Each column is a 30min window.
+The colour intensity indicates the activity.
+
+There are two things that we can imediatly notice:
+
+* For most animals, the activity is rythmic and synchronised with the light phase transisitions.
+* Some animals are dead or missing. For instance take a look at `channel 26` in `Monitor64.txt`.
+
+In other chapters, we will learn how to group individuals, visualise and compute statistics.
+
+### How to exclude animals? {-}
+
+The best way to exclude animals *a priori* (e.g. because they died) is to record them as dead **in the metadata**.
+For instance, you can add a column `status` in your metadata file and put a default value such as `"OK"`.
+If an animal is to be removed, you can replace `"OK"` by **a reason** (e.g. `"dead"`, `"escaped"`, ...).
+Then, you can load your data without those animals `load_dam2_data(metadata[status == "OK"], ...)`.
+This practice has the advantage of making it **very transparent**, why some individuals where excluded.
+Also, it can also easily be reversed.
+
+
+
+## Apply functions when loading {-}
+
+Finaly, we may want to apply function on the data as it it loaded, in order to preprocess it.
+As an example, we can perform a sleep (bouts of immobility of 5 min or more), from our `sleepr` package (which you will have installed, or course).
+
+```{r}
+library(sleepr)
+# todo
+#dt <- load_dam2(metadata, FUN = sleepr::sleep_dam_annotation)
+dt
+```
+
+As you can  see, we now have additional columns in the data.
+
+
+## Next steps {-}
+
+* [Visualise data with `ggetho`](ggetho.html)
+* [Sleep analysis with `sleepr`](sleepr.html)
+* [Circadian analysis with `zeitgebr`](zeitgebr.html)
+
+
+
+
+
 

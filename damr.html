@@ -25,7 +25,7 @@
 <meta name="author" content="Quentin Geissmann">
 
 
-<meta name="date" content="2017-11-24">
+<meta name="date" content="2017-11-27">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -228,9 +228,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Ensure you have <a href="intro.html#installing-rethomics-packages">installed</a> <code>behavr</code>, <code>damr</code> and <code>ggetho</code> packages:</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
-<span class="kw">install_github</span>(<span class="st">&quot;rethmics/behavr&quot;</span>)
-<span class="kw">install_github</span>(<span class="st">&quot;rethmics/damr&quot;</span>)
-<span class="kw">install_github</span>(<span class="st">&quot;rethmics/ggetho&quot;</span>)</code></pre></div>
+<span class="kw">install_github</span>(<span class="st">&quot;rethomics/behavr&quot;</span>)
+<span class="kw">install_github</span>(<span class="st">&quot;rethomics/damr&quot;</span>)
+<span class="kw">install_github</span>(<span class="st">&quot;rethomics/ggetho&quot;</span>)</code></pre></div>
 </div>
 <div id="background" class="section level2 unnumbered">
 <h2>Background</h2>
@@ -357,7 +357,7 @@ metadata</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggetho)</code></pre></div>
 <pre><code>## Loading required package: ggplot2</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># I only show firt replicate</span>
-<span class="kw">ggetho</span>(dt[<span class="kw">xmv</span>(replicate) <span class="op">==</span><span class="st"> </span><span class="dv">1</span> ], <span class="kw">aes</span>(<span class="dt">z=</span>activity)) <span class="op">+</span><span class="st"> </span>
+<span class="kw">ggetho</span>(dt[<span class="kw">xmv</span>(replicate) <span class="op">==</span><span class="st"> </span><span class="dv">1</span> ], <span class="kw">aes</span>(<span class="dt">z=</span>activity)) <span class="op">+</span>
 <span class="st">      </span><span class="kw">stat_tile_etho</span>() <span class="op">+</span>
 <span class="st">      </span><span class="kw">stat_ld_annotations</span>()</code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-24-1.png" width="864" /></p>

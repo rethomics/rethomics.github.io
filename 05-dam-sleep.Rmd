@@ -118,7 +118,7 @@ metadata
 Each of the 192 animals (rows) is defined by a set of mandatory columns (metavariables):
 
 * `file` -- the data file (monitor) that it has been recorded in
-* `start_datetime` -- the date and time (`YYYY-MM-DD HH:MM:SS`) of the start of the experiment
+* `start_datetime` -- the date and time (`YYYY-MM-DD HH:MM:SS`) of the start of the experiment. Time will be considered ZT0, see [note](dam-sleep.html#note-on-zt0)
 * `stop_datetime` -- the last time point of the experiment (time is optional)
 * `region_id` -- the channel ([1, 32])
 
@@ -146,11 +146,13 @@ metadata
 
 As `result_dir`, we just use the directory where the data lives, which you decided when you extracted your data (`DATA_DIR`).
 
-**Importantly, you do not need to cut the relevant parts of your DAM files** (this is an error-prone step that should be avoided). In other words, no need to use the `DAMFileScan` utility.
+**Importantly, you do not need to cut the relevant parts of your DAM files** (this is an error-prone step that should be avoided). In other words, no need to use the `DAMFileScan` utility or manipulate in any way the original data.
 
 You can keep all the data in one file per monitor. `rethomics` will use start and stop datetime to find the appropriate part directly from your metadata.
 
 ## Loading {-}
+
+In order to work with the data the last step is to load it into a [behavr](behavr.html) structure. To do that simply use `load_dam2` function (as shown below). This function will store all data in dt (or the any other given name)
 
 ```{r}
 dt <- load_dam2(metadata)
@@ -182,8 +184,8 @@ For instance, `start_date = 2017-01-01` and `stop_date = 2017-01-01` retrieves a
 
 ## Quality control {-}
 ### Detecting anomalies {-}
-Immediatly after loading your data, you want to have a visualise data to check for anomalies.
-We can use `ggetho` for that:
+Immediatly after loading your data, it is a good idea to visualise it, in order to detect anomalies or at least to be sure that everything looks ok.
+We can use `ggetho` for that, for example the following code will create an activity tile plot, useful to detect dead animals.
 
 ```{r, fig.width = 9, fig.height=16}
 library(ggetho)
@@ -211,19 +213,18 @@ In other chapters, we will learn how to group individuals, visualise and compute
 
 ### How to exclude animals? {-}
 
-The best way to exclude animals *a priori* (e.g. because they died) is to record them as dead **in the metadata**.
+We suggest to exclude animals *a priori* (e.g. because they died) by recording them as dead **in the metadata**. This way data is not modified or omited and can easily be recovered if needed.
 For instance, you can add a column `status` in your metadata file and put a default value such as `"OK"`.
 If an animal is to be removed, you can replace `"OK"` by **a reason** (e.g. `"dead"`, `"escaped"`, ...).
 Then, you can load your data without those animals `load_dam2_data(metadata[status == "OK"], ...)`.
 This practice has the advantage of making it **very transparent**, why some individuals where excluded.
-Also, it can also easily be reversed.
+Also, as stipulated before, it can easily be reversed.
 
 
 
 ## Apply functions when loading {-}
 
-Finaly, we may want to apply function on the data as it it loaded, in order to preprocess it.
-As an example, we can perform a sleep (bouts of immobility of 5 min or more), from our `sleepr` package (which you will have installed, or course).
+Finaly, we may want to apply function on the data as it is loaded, in order to preprocess it, saving time. This pre-processing will annotate the data, i.e create new information (new columns) based on the original data. As an example, we can perform a sleep (bouts of immobility of 5 min or more), from our `sleepr` package (which you will have installed, or course).
 
 ```{r}
 library(sleepr)

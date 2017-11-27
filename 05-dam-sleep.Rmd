@@ -159,12 +159,26 @@ summary(dt)
 
 That is it, **all** our data is loaded in dt.
 
-## Note on ZT0 {-}
+## Note on datetime {-}
 
+### ZT0
 In the circadian and sleep field, we need to align our data to a reference time of the day. Typically, when the light (would) turn on (ZT0).
 In `damr`, the **time part of the start_datetime is used as a circadian reference**.
 For instance, if you specify, in your metadata file `2017-01-01 09:00:00`, you imply that ZT0 is at `09:00:00`.
 The time is looked-up in the DAM file, so it will be at *on same time zone settings as the computer that recorded the data*.
+
+### Start and stop time
+
+When fetching some data, date and time are **always inclusive**.
+When only the date is specified:
+
+* start time will be at `00:00:00`
+* stop time will be at `23:59:59`
+
+For instance, `start_date = 2017-01-01` and `stop_date = 2017-01-01` retrieves all the data from the first of January 2017.
+
+
+
 
 ## Quality control {-}
 ### Detecting anomalies {-}

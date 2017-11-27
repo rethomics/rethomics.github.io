@@ -310,7 +310,7 @@ metadata</code></pre></div>
 <p>Each of the 192 animals (rows) is defined by a set of mandatory columns (metavariables):</p>
 <ul>
 <li><code>file</code> – the data file (monitor) that it has been recorded in</li>
-<li><code>start_datetime</code> – the date and time (<code>YYYY-MM-DD HH:MM:SS</code>) of the start of the experiment</li>
+<li><code>start_datetime</code> – the date and time (<code>YYYY-MM-DD HH:MM:SS</code>) of the start of the experiment. Time will be considered ZT0, see note <a href="dam-sleep.html#Note-on-ZT0">Linking</a></li>
 <li><code>stop_datetime</code> – the last time point of the experiment (time is optional)</li>
 <li><code>region_id</code> – the channel ([1, 32])</li>
 </ul>
@@ -329,12 +329,13 @@ metadata</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metadata &lt;-<span class="st"> </span><span class="kw">link_dam2_metadata</span>(metadata, <span class="dt">result_dir =</span> DATA_DIR)
 metadata</code></pre></div>
 <p>As <code>result_dir</code>, we just use the directory where the data lives, which you decided when you extracted your data (<code>DATA_DIR</code>).</p>
-<p><strong>Importantly, you do not need to cut the relevant parts of your DAM files</strong> (this is an error-prone step that should be avoided). In other words, no need to use the <code>DAMFileScan</code> utility.</p>
+<p><strong>Importantly, you do not need to cut the relevant parts of your DAM files</strong> (this is an error-prone step that should be avoided). In other words, no need to use the <code>DAMFileScan</code> utility or manipulate in any way the original data.</p>
 <p>You can keep all the data in one file per monitor. <code>rethomics</code> will use start and stop datetime to find the appropriate part directly from your metadata.</p>
 </div>
 </div>
 <div id="loading" class="section level2 unnumbered">
 <h2>Loading</h2>
+<p>In order to work with the data the last step is to load it into a <a href="behavr.html">Linking</a> behavr structure. To do that simply use <code>load_dam2</code> function (as shown below). This function will store all data in dt (or the any other given name)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt &lt;-<span class="st"> </span><span class="kw">load_dam2</span>(metadata)
 <span class="kw">summary</span>(dt)</code></pre></div>
 <pre><code>## behavr table with:
@@ -353,7 +354,7 @@ metadata</code></pre></div>
 <h2>Quality control</h2>
 <div id="detecting-anomalies" class="section level3 unnumbered">
 <h3>Detecting anomalies</h3>
-<p>Immediatly after loading your data, you want to have a visualise data to check for anomalies. We can use <code>ggetho</code> for that:</p>
+<p>Immediatly after loading your data, it is a good idea to visualise it, in order to detect anomalies or at least to be sure that everything looks ok. We can use <code>ggetho</code> for that, for example the following code will create an activity tile plot, useful to detect dead animals.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggetho)</code></pre></div>
 <pre><code>## Loading required package: ggplot2</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># I only show firt replicate</span>
@@ -372,12 +373,12 @@ metadata</code></pre></div>
 </div>
 <div id="how-to-exclude-animals" class="section level3 unnumbered">
 <h3>How to exclude animals?</h3>
-<p>The best way to exclude animals <em>a priori</em> (e.g. because they died) is to record them as dead <strong>in the metadata</strong>. For instance, you can add a column <code>status</code> in your metadata file and put a default value such as <code>&quot;OK&quot;</code>. If an animal is to be removed, you can replace <code>&quot;OK&quot;</code> by <strong>a reason</strong> (e.g. <code>&quot;dead&quot;</code>, <code>&quot;escaped&quot;</code>, …). Then, you can load your data without those animals <code>load_dam2_data(metadata[status == &quot;OK&quot;], ...)</code>. This practice has the advantage of making it <strong>very transparent</strong>, why some individuals where excluded. Also, it can also easily be reversed.</p>
+<p>We suggest to exclude animals <em>a priori</em> (e.g. because they died) by recording them as dead <strong>in the metadata</strong>. This way data is not modified or omited and can easily be recovered if needed. For instance, you can add a column <code>status</code> in your metadata file and put a default value such as <code>&quot;OK&quot;</code>. If an animal is to be removed, you can replace <code>&quot;OK&quot;</code> by <strong>a reason</strong> (e.g. <code>&quot;dead&quot;</code>, <code>&quot;escaped&quot;</code>, …). Then, you can load your data without those animals <code>load_dam2_data(metadata[status == &quot;OK&quot;], ...)</code>. This practice has the advantage of making it <strong>very transparent</strong>, why some individuals where excluded. Also, as stipulated before, it can easily be reversed.</p>
 </div>
 </div>
 <div id="apply-functions-when-loading" class="section level2 unnumbered">
 <h2>Apply functions when loading</h2>
-<p>Finaly, we may want to apply function on the data as it it loaded, in order to preprocess it. As an example, we can perform a sleep (bouts of immobility of 5 min or more), from our <code>sleepr</code> package (which you will have installed, or course).</p>
+<p>Finaly, we may want to apply function on the data as it is loaded, in order to preprocess it, saving time. This pre-processing will annotate the data, i.e create new information (new columns) based on the original data. As an example, we can perform a sleep (bouts of immobility of 5 min or more), from our <code>sleepr</code> package (which you will have installed, or course).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sleepr)
 <span class="co"># todo</span>
 <span class="co">#dt &lt;- load_dam2(metadata, FUN = sleepr::sleep_dam_annotation)</span>

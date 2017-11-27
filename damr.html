@@ -310,7 +310,7 @@ metadata</code></pre></div>
 <p>Each of the 192 animals (rows) is defined by a set of mandatory columns (metavariables):</p>
 <ul>
 <li><code>file</code> – the data file (monitor) that it has been recorded in</li>
-<li><code>start_datetime</code> – the date and time (<code>YYYY-MM-DD HH:MM:SS</code>) of the start of the experiment. Time will be considered ZT0, see note <a href="dam-sleep.html#Note-on-ZT0">Linking</a></li>
+<li><code>start_datetime</code> – the date and time (<code>YYYY-MM-DD HH:MM:SS</code>) of the start of the experiment. Time will be considered ZT0, see <a href="dam-sleep.html#note-on-zt0">note</a></li>
 <li><code>stop_datetime</code> – the last time point of the experiment (time is optional)</li>
 <li><code>region_id</code> – the channel ([1, 32])</li>
 </ul>
@@ -335,7 +335,7 @@ metadata</code></pre></div>
 </div>
 <div id="loading" class="section level2 unnumbered">
 <h2>Loading</h2>
-<p>In order to work with the data the last step is to load it into a <a href="behavr.html">Linking</a> behavr structure. To do that simply use <code>load_dam2</code> function (as shown below). This function will store all data in dt (or the any other given name)</p>
+<p>In order to work with the data the last step is to load it into a <a href="behavr.html">behavr</a> structure. To do that simply use <code>load_dam2</code> function (as shown below). This function will store all data in dt (or the any other given name)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt &lt;-<span class="st"> </span><span class="kw">load_dam2</span>(metadata)
 <span class="kw">summary</span>(dt)</code></pre></div>
 <pre><code>## behavr table with:

@@ -242,15 +242,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="getting-the-data" class="section level2 unnumbered">
 <h2>Getting the data</h2>
-<p>For this tutorial, you need to <a href="https://github.com/rethomics/rethomics.github.io/raw/source/material/damr_tutorial.zip">download some DAM2 data</a> that we have made available. This is just a zip archive containng four files. Download and extract the files from the zip into a folder of your choice. <strong>Store the path in a variable</strong>. For instance, <strong>adapt</strong> something like:</p>
+<p>For this tutorial, you need to <a href="https://github.com/rethomics/rethomics.github.io/raw/source/material/damr_tutorial.zip">download some DAM2 data</a> that we have made available. This is just a zip archive containng five files. Download and extract the files from the zip into a folder of your choice. <strong>Store the path in a variable</strong>. For instance, <strong>adapt</strong> something like:</p>
 <pre class="r{eval=f}"><code>DATA_DIR &lt;- &quot;C://Where/My/Zip/Has/been/extracted</code></pre>
 <p>Check that all the files live there:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list.files</span>(DATA_DIR)</code></pre></div>
 <pre><code>## [1] &quot;damr_tutorial.zip&quot; &quot;metadata.csv&quot;      &quot;Monitor11.txt&quot;    
 ## [4] &quot;Monitor14.txt&quot;     &quot;Monitor64.txt&quot;</code></pre>
-<p>For this exercise, we will work with the data and metadata in the same place. In practice, I recommand to:</p>
+<p>For this exercise, we will work with the data and metadata in the same place. However, in practice, I recommend to:</p>
 <ul>
-<li>Have <strong>all raw data from your acquisition platform in the same place</strong> (possibly shared with other or a network drive)</li>
+<li>Have <strong>all raw data from your acquisition platform in the same place</strong> (possibly shared with others or a network drive)</li>
 <li>Have <strong>one folder per “experiment”</strong>. That is a folder that contains one metadata file, your R scripts, your figures regarding a set of consistent experiment.</li>
 </ul>
 <p>For now, we can just <a href="https://support.rstudio.com/hc/en-us/articles/200711843-Working-Directories-and-Workspaces">set our working directory</a> to <code>DATA_DIR</code>:</p>
@@ -279,7 +279,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>each row is an individual</li>
 <li>each column is a metavariable</li>
 </ul>
-<p>Luckily for you, I have already put this file together for you as <code>metadata.csv</code>! Lets have a look at it (you can use R, excel or whatever you want).</p>
+<p>Luckily for you, I have already put this file together for you as <code>metadata.csv</code>! Lets have a look at it (you can use R, excel or whatever you want). If you are using R, type this commands:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(damr)
 metadata &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;metadata.csv&quot;</span>)
 metadata</code></pre></div>
@@ -310,7 +310,7 @@ metadata</code></pre></div>
 <p>Each of the 192 animals (rows) is defined by a set of mandatory columns (metavariables):</p>
 <ul>
 <li><code>file</code> – the data file (monitor) that it has been recorded in</li>
-<li><code>start_datetime</code> – the date and time (<code>YYYY-MM-DD HH-MM-SS</code>) of the start of the experiment</li>
+<li><code>start_datetime</code> – the date and time (<code>YYYY-MM-DD HH:MM:SS</code>) of the start of the experiment</li>
 <li><code>stop_datetime</code> – the last time point of the experiment (time is optional)</li>
 <li><code>region_id</code> – the channel ([1, 32])</li>
 </ul>

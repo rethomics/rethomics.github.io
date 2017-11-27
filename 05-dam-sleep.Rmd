@@ -118,7 +118,7 @@ metadata
 Each of the 192 animals (rows) is defined by a set of mandatory columns (metavariables):
 
 * `file` -- the data file (monitor) that it has been recorded in
-* `start_datetime` -- the date and time (`YYYY-MM-DD HH:MM:SS`) of the start of the experiment. Time will be considered ZT0, see note [Linking](dam-sleep.html#Note-on-ZT0)
+* `start_datetime` -- the date and time (`YYYY-MM-DD HH:MM:SS`) of the start of the experiment. Time will be considered ZT0, see [note](dam-sleep.html#note-on-zt0)
 * `stop_datetime` -- the last time point of the experiment (time is optional)
 * `region_id` -- the channel ([1, 32])
 
@@ -152,7 +152,7 @@ You can keep all the data in one file per monitor. `rethomics` will use start an
 
 ## Loading {-}
 
-In order to work with the data the last step is to load it into a [Linking](behavr.html) behavr structure. To do that simply use `load_dam2` function (as shown below). This function will store all data in dt (or the any other given name)
+In order to work with the data the last step is to load it into a [behavr](behavr.html) structure. To do that simply use `load_dam2` function (as shown below). This function will store all data in dt (or the any other given name)
 
 ```{r}
 dt <- load_dam2(metadata)

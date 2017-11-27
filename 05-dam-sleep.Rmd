@@ -55,7 +55,7 @@ unzip(dst, exdir= DATA_DIR)
 
 For this tutorial, you need to [download some DAM2 data](https://github.com/rethomics/rethomics.github.io/raw/source/material/damr_tutorial.zip)
 that we have made available.
-This is just a zip archive containng four files.
+This is just a zip archive containng five files.
 Download and extract the files from the zip into a folder of your choice.
 **Store the path in a variable**.
 For instance, **adapt** something like:
@@ -71,9 +71,9 @@ list.files(DATA_DIR)
 ```
 
 For this exercise, we will work with the data and metadata in the same place.
-In practice, I recommand to:
+However, in practice, I recommend to:
 
-* Have **all raw data from your acquisition platform in the same place** (possibly shared with other or a network drive)
+* Have **all raw data from your acquisition platform in the same place** (possibly shared with others or a network drive)
 *  Have **one folder per "experiment"**. That is a folder that contains one metadata file, your R scripts, your figures regarding a set of consistent experiment.
 
 For now, we can just [set our working directory](https://support.rstudio.com/hc/en-us/articles/200711843-Working-Directories-and-Workspaces) to `DATA_DIR`:
@@ -107,7 +107,7 @@ Our goal is to encode our whole experiment in a single file in which:
 * each column is a metavariable
 
 Luckily for you, I have already put this file together for you as `metadata.csv`!
-Lets have a look at it (you can use R, excel or whatever you want).
+Lets have a look at it (you can use R, excel or whatever you want). If  you are using R, type this commands:
 
 ```{r}
 library(damr)
@@ -118,7 +118,7 @@ metadata
 Each of the 192 animals (rows) is defined by a set of mandatory columns (metavariables):
 
 * `file` -- the data file (monitor) that it has been recorded in
-* `start_datetime` -- the date and time (`YYYY-MM-DD HH-MM-SS`) of the start of the experiment
+* `start_datetime` -- the date and time (`YYYY-MM-DD HH:MM:SS`) of the start of the experiment
 * `stop_datetime` -- the last time point of the experiment (time is optional)
 * `region_id` -- the channel ([1, 32])
 

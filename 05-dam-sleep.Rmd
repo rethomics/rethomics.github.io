@@ -25,9 +25,9 @@ In this practical chapter, we will use a real experiment to learn how to:
 
 ```{r, eval=FALSE}
 library(devtools)
-install_github("rethmics/behavr")
-install_github("rethmics/damr")
-install_github("rethmics/ggetho")
+install_github("rethomics/behavr")
+install_github("rethomics/damr")
+install_github("rethomics/ggetho")
 ```
 
 
@@ -55,7 +55,7 @@ unzip(dst, exdir= DATA_DIR)
 
 For this tutorial, you need to [download some DAM2 data](https://github.com/rethomics/rethomics.github.io/raw/source/material/damr_tutorial.zip)
 that we have made available.
-This is just a zip archive containng four files. 
+This is just a zip archive containng four files.
 Download and extract the files from the zip into a folder of your choice.
 **Store the path in a variable**.
 For instance, **adapt** something like:
@@ -74,7 +74,7 @@ For this exercise, we will work with the data and metadata in the same place.
 In practice, I recommand to:
 
 * Have **all raw data from your acquisition platform in the same place** (possibly shared with other or a network drive)
-*  Have **one folder per "experiment"**. That is a folder that contains one metadata file, your R scripts, your figures regarding a set of consistent experiment. 
+*  Have **one folder per "experiment"**. That is a folder that contains one metadata file, your R scripts, your figures regarding a set of consistent experiment.
 
 For now, we can just [set our working directory](https://support.rstudio.com/hc/en-us/articles/200711843-Working-Directories-and-Workspaces) to `DATA_DIR`:
 
@@ -119,7 +119,7 @@ Each of the 192 animals (rows) is defined by a set of mandatory columns (metavar
 
 * `file` -- the data file (monitor) that it has been recorded in
 * `start_datetime` -- the date and time (`YYYY-MM-DD HH-MM-SS`) of the start of the experiment
-* `stop_datetime` -- the last time point of the experiment (time is optional) 
+* `stop_datetime` -- the last time point of the experiment (time is optional)
 * `region_id` -- the channel ([1, 32])
 
 For **our experiment**, we also defined custom columns:
@@ -129,7 +129,7 @@ For **our experiment**, we also defined custom columns:
 * `replicate` -- so we can analyse how replicates differ from one another
 
 Note that this format is very flexible and explicit.
-For instance, if we decided to do a third replicate, we would just need to add new rows. 
+For instance, if we decided to do a third replicate, we would just need to add new rows.
 We could also add any condition we want as a new column (e.g. treatment, temperature, matting status and so on)
 
 ### Linking{-}
@@ -161,7 +161,7 @@ That is it, **all** our data is loaded in dt.
 
 ## Note on ZT0 {-}
 
-In the circadian and sleep field, we need to align our data to a reference time of the day. Typically, when the light (would) turn on (ZT0). 
+In the circadian and sleep field, we need to align our data to a reference time of the day. Typically, when the light (would) turn on (ZT0).
 In `damr`, the **time part of the start_datetime is used as a circadian reference**.
 For instance, if you specify, in your metadata file `2017-01-01 09:00:00`, you imply that ZT0 is at `09:00:00`.
 The time is looked-up in the DAM file, so it will be at *on same time zone settings as the computer that recorded the data*.
@@ -174,7 +174,7 @@ We can use `ggetho` for that:
 ```{r, fig.width = 9, fig.height=16}
 library(ggetho)
 # I only show firt replicate
-ggetho(dt[xmv(replicate) == 1 ], aes(z=activity)) + 
+ggetho(dt[xmv(replicate) == 1 ], aes(z=activity)) +
       stat_tile_etho() +
       stat_ld_annotations()
 ```
@@ -226,9 +226,3 @@ As you can  see, we now have additional columns in the data.
 * [Visualise data with `ggetho`](ggetho.html)
 * [Sleep analysis with `sleepr`](sleepr.html)
 * [Circadian analysis with `zeitgebr`](zeitgebr.html)
-
-
-
-
-
-

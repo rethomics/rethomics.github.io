@@ -55,7 +55,7 @@ unzip(dst, exdir= DATA_DIR)
 
 For this tutorial, you need to [download some DAM2 data](https://github.com/rethomics/rethomics.github.io/raw/source/material/damr_tutorial.zip)
 that we have made available.
-This is just a zip archive containng five files.
+This is just a zip archive containing four files.
 Download and extract the files from the zip into a folder of your choice.
 **Store the path in a variable**.
 For instance, **adapt** something like:

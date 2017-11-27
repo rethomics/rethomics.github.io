@@ -141,8 +141,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#loading"><i class="fa fa-check"></i>Loading</a></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#note-on-datetime"><i class="fa fa-check"></i>Note on datetime</a><ul>
-<li class="chapter" data-level="0.0.1" data-path="damr.html"><a href="damr.html#zt0"><i class="fa fa-check"></i><b>0.0.1</b> ZT0</a></li>
-<li class="chapter" data-level="0.0.2" data-path="damr.html"><a href="damr.html#start-and-stop-time"><i class="fa fa-check"></i><b>0.0.2</b> Start and stop time</a></li>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#zt0"><i class="fa fa-check"></i>ZT0</a></li>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#start-and-stop-time"><i class="fa fa-check"></i>Start and stop time</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#quality-control"><i class="fa fa-check"></i>Quality control</a><ul>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#detecting-anomalies"><i class="fa fa-check"></i>Detecting anomalies</a></li>
@@ -351,12 +351,12 @@ metadata</code></pre></div>
 </div>
 <div id="note-on-datetime" class="section level2 unnumbered">
 <h2>Note on datetime</h2>
-<div id="zt0" class="section level3">
-<h3><span class="header-section-number">0.0.1</span> ZT0</h3>
+<div id="zt0" class="section level3 unnumbered">
+<h3>ZT0</h3>
 <p>In the circadian and sleep field, we need to align our data to a reference time of the day. Typically, when the light (would) turn on (ZT0). In <code>damr</code>, the <strong>time part of the start_datetime is used as a circadian reference</strong>. For instance, if you specify, in your metadata file <code>2017-01-01 09:00:00</code>, you imply that ZT0 is at <code>09:00:00</code>. The time is looked-up in the DAM file, so it will be at <em>on same time zone settings as the computer that recorded the data</em>.</p>
 </div>
-<div id="start-and-stop-time" class="section level3">
-<h3><span class="header-section-number">0.0.2</span> Start and stop time</h3>
+<div id="start-and-stop-time" class="section level3 unnumbered">
+<h3>Start and stop time</h3>
 <p>When fetching some data, date and time are <strong>always inclusive</strong>. When only the date is specified:</p>
 <ul>
 <li>start time will be at <code>00:00:00</code></li>

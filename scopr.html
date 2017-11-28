@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="behavr.html">
-<link rel="next" href="scopr.html">
+<link rel="prev" href="damr.html">
+<link rel="next" href="ggetho.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -230,15 +230,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="damr" class="section level1 unnumbered">
-<h1>DAM2 data, in practice</h1>
-<p><strong>A matter of metadata</strong></p>
+<div id="scopr" class="section level1 unnumbered">
+<h1>Ethoscope data, in practice</h1>
+<p><strong>TODO</strong></p>
 <hr />
 <div class="figure">
-<img src="assets/dam_experiment.png" alt="A DAM experiment. Two replicates, 10 days apart; three genotypes; two sexes, males and females" />
-<p class="caption">A DAM experiment. Two replicates, 10 days apart; three genotypes; two sexes, males and females</p>
+<img src="assets/ethoscope_experiment.png" alt="An ethoscope experiment. todo" />
+<p class="caption">An ethoscope experiment. todo</p>
 </div>
-<div id="aims" class="section level2 unnumbered">
+<div id="aims-1" class="section level2 unnumbered">
 <h2>Aims</h2>
 <p>In this practical chapter, we will use a real experiment to learn how to:</p>
 <ul>
@@ -246,62 +246,77 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Use this metadata file to load some data</li>
 <li>Set the circadian reference (ZT0)</li>
 <li>Assess graphically the quality of the data</li>
+<li>Optimise your code to save time and RAM</li>
 <li>Use good practices to exclude individuals from our experiments</li>
 </ul>
 </div>
-<div id="prerequisites" class="section level2 unnumbered">
+<div id="prerequisites-1" class="section level2 unnumbered">
 <h2>Prerequisites</h2>
 <ul>
-<li>You are familiar with the <a href="(http://www.trikinetics.com/)">TriKineticks DAM2 system</a></li>
+<li>You are familiar with the <a href="http://gilestrolab.github.io/ethoscope/">Ethoscope Platform</a></li>
 <li>Ensure you have read about the <a href="workflow.html">rethomics workflow</a> and <a href="metadata.html">metadata</a></li>
-<li>Ensure you have <a href="intro.html#installing-rethomics-packages">installed</a> <code>behavr</code>, <code>damr</code> and <code>ggetho</code> packages:</li>
+<li>Ensure you have <a href="intro.html#installing-rethomics-packages">installed</a> <code>behavr</code>, <code>scopr</code> and <code>ggetho</code> packages:</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
 <span class="kw">install_github</span>(<span class="st">&quot;rethomics/behavr&quot;</span>)
-<span class="kw">install_github</span>(<span class="st">&quot;rethomics/damr&quot;</span>)
+<span class="kw">install_github</span>(<span class="st">&quot;rethomics/scopr&quot;</span>)
 <span class="kw">install_github</span>(<span class="st">&quot;rethomics/ggetho&quot;</span>)</code></pre></div>
 </div>
-<div id="background" class="section level2 unnumbered">
+<div id="background-1" class="section level2 unnumbered">
 <h2>Background</h2>
-<p><a href="http://www.trikinetics.com/">Drosophila Activity Monitors</a> (DAMs) are a wildely used tool to monitor activity of fruit flies over several days. I am assuming that, if you are reading this tutorial, you are already familiar with the system, but I will make a couple of points clear before we start something more hands-on:</p>
-<ul>
-<li>This tutorial is about single beam <strong>DAM2</strong></li>
-<li>We work with the raw data (the data from each monitor is in one single file, and all the monitor files are in the same folder)</li>
-</ul>
+<p><a href="http://gilestrolab.github.io/ethoscope/">The Ethoscope Platform</a> is a versatile and modular behavioural system to sudy behaviour of small animals. You can read more about it in our <a href="http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.2003026">PLOS Biology publication</a>. Although you can do much more with them, ethoscope are primarily designed to study sleep and circadian rhythms in Drosophila. Therefore, we will work in this context for this tutorial.</p>
+<p>Ethoscopes typically generate hundreads of megabytes per machine per week. The platform is designed so that many devices run n parallel, and the resulting data is eventually centralised for all users. Metadata tables are the best way to both keep track of your expriments and fetch the relevant data.</p>
 </div>
-<div id="getting-the-data" class="section level2 unnumbered">
+<div id="getting-the-data-1" class="section level2 unnumbered">
 <h2>Getting the data</h2>
-<p>For this tutorial, you need to <a href="https://github.com/rethomics/rethomics.github.io/raw/source/material/damr_tutorial.zip">download some DAM2 data</a> that we have made available. This is just a zip archive containing four files. Download and extract the files from the zip into a folder of your choice. <strong>Store the path in a variable</strong>. For instance, <strong>adapt</strong> something like:</p>
+<div id="extract-the-zipped-data" class="section level3 unnumbered">
+<h3>Extract the zipped data</h3>
+<p>Since ethoscopes generate <strong>large amount of data</strong>, compared to DAM, we will work only with a few animals. A zip containing data for this tutorial is available on <a href="todo.html">zenodo</a> Since will download the data.</p>
+<p>Start by downloading and extracting the zip somewhere in your computer.</p>
+<p>Store this location as a variable:</p>
 <pre class="r{eval=f}"><code>DATA_DIR &lt;- &quot;C://Where/My/Zip/Has/been/extracted</code></pre>
 <p>Check that all the files live there:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list.files</span>(DATA_DIR)</code></pre></div>
-<pre><code>## [1] &quot;damr_tutorial.zip&quot; &quot;metadata.csv&quot;      &quot;Monitor11.txt&quot;    
-## [4] &quot;Monitor14.txt&quot;     &quot;Monitor64.txt&quot;</code></pre>
-<p>For this exercise, we will work with the data and metadata in the same place. However, in practice, I recommend to:</p>
-<ul>
-<li>Have <strong>all raw data from your acquisition platform in the same place</strong> (possibly shared with others or a network drive)</li>
-<li>Have <strong>one folder per “experiment”</strong>. That is a folder that contains one metadata file, your R scripts, your figures regarding a set of consistent experiment.</li>
-</ul>
-<p>For now, we can just <a href="https://support.rstudio.com/hc/en-us/articles/200711843-Working-Directories-and-Workspaces">set our working directory</a> to <code>DATA_DIR</code>:</p>
+<pre><code>## [1] &quot;ethoscope_results&quot;      &quot;ethoscope_tutorial.zip&quot;
+## [3] &quot;metadata.csv&quot;</code></pre>
+<p>We have: * The metadata file that I have prepared for you * An <code>ethoscope_results</code> directory</p>
+</div>
+<div id="note-on-the-data-structure" class="section level3 unnumbered">
+<h3>Note on the data structure</h3>
+<p>It is informative to take a look at the latter. Files are organised as <machine_id>/<machine_name>/<datetime>/<file>:</p>
+<pre><code>ethoscope_results
+├── 008d6ba04e534be486069c3db7b10827
+│   └── ETHOSCOPE_008
+│       └── 2016-07-29_14-57-35
+│           └── 2016-07-29_14-57-35_008d6ba04e534be486069c3db7b10827.db
+├── 009d6ba04e534be486069c3db7b10827
+│   └── ETHOSCOPE_009
+│       └── 2016-07-22_16-43-29
+│           └── 2016-07-22_16-43-29_009d6ba04e534be486069c3db7b10827.db
+└── 011d6ba04e534be486069c3db7b10827
+    └── ETHOSCOPE_011
+        ├── 2016-07-22_16-41-21
+        │   └── 2016-07-22_16-41-21_011d6ba04e534be486069c3db7b10827.db
+        └── 2016-07-29_14-59-49
+            └── 2016-07-29_14-59-49_011d6ba04e534be486069c3db7b10827.db</code></pre>
+<p>Tracking data are saved in <code>.db</code> files. Everytime an ethoscope is started, one <code>.db</code> new file is created. All animals presents in the same machine at the same time will have their data saved in the same time.</p>
+</div>
+<div id="set-your-working-directory" class="section level3 unnumbered">
+<h3>Set your working directory</h3>
+<p>For this tutorial, we can just <a href="https://support.rstudio.com/hc/en-us/articles/200711843-Working-Directories-and-Workspaces">set our working directory</a> to <code>DATA_DIR</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(DATA_DIR)</code></pre></div>
 </div>
-<div id="experiment-design-to-standard-metadata" class="section level2 unnumbered">
+</div>
+<div id="experiment-design-to-standard-metadata-1" class="section level2 unnumbered">
 <h2>Experiment design to standard metadata</h2>
-<div id="our-toy-experiment" class="section level3 unnumbered">
+<div id="our-toy-experiment-1" class="section level3 unnumbered">
 <h3>Our toy experiment</h3>
 <div class="figure">
-<img src="assets/dam_experiment.png" alt="A DAM experiment. Two replicates, 10 days apart; three genotypes; two sexes, males and females" />
+<img src="assets/ethoscope_experiment.png" alt="A DAM experiment. Two replicates, 10 days apart; three genotypes; two sexes, males and females" />
 <p class="caption">A DAM experiment. Two replicates, 10 days apart; three genotypes; two sexes, males and females</p>
 </div>
-<p>In this example data, we were interested in comparing the behaviour of populations of fruit flies, according to their sex and genotype. We designed the experiment as shown is the figure above. In summary, we have:</p>
-<ul>
-<li><strong>three genotypes</strong> (A, B and C)</li>
-<li><strong>two sexes</strong> (male and female)</li>
-<li><strong>two replicates</strong> (<code>2017-07-01 -&gt; 2017-07-04</code> and <code>2017-07-11 -&gt; 2017-07-14</code>)</li>
-<li>Altogether, <strong>192 individuals</strong></li>
-</ul>
 </div>
-<div id="metadata-1" class="section level3 unnumbered">
+<div id="metadata-2" class="section level3 unnumbered">
 <h3>Metadata</h3>
 <p><strong>It is crucial that you have read <a href="metadata.html">metadata chapter</a></strong> to understand this part. Our goal is to encode our whole experiment in a single file in which:</p>
 <ul>
@@ -309,179 +324,147 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>each column is a metavariable</li>
 </ul>
 <p>Luckily for you, I have already put this file together for you as <code>metadata.csv</code>! Lets have a look at it (you can use <code>R</code>, excel or whatever you want). If you are using <code>R</code>, type this commands:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(damr)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(scopr)
 metadata &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;metadata.csv&quot;</span>)
 metadata</code></pre></div>
-<pre><code>##               file      start_datetime stop_datetime region_id sex
-##   1: Monitor11.txt 2017-07-01 08:00:00    2017-07-04         1   M
-##   2: Monitor11.txt 2017-07-01 08:00:00    2017-07-04         2   M
-##   3: Monitor11.txt 2017-07-01 08:00:00    2017-07-04         3   M
-##   4: Monitor11.txt 2017-07-01 08:00:00    2017-07-04         4   M
-##   5: Monitor11.txt 2017-07-01 08:00:00    2017-07-04         5   M
-##  ---                                                              
-## 188: Monitor64.txt 2017-07-11 08:00:00    2017-07-14        28   F
-## 189: Monitor64.txt 2017-07-11 08:00:00    2017-07-14        29   F
-## 190: Monitor64.txt 2017-07-11 08:00:00    2017-07-14        30   F
-## 191: Monitor64.txt 2017-07-11 08:00:00    2017-07-14        31   F
-## 192: Monitor64.txt 2017-07-11 08:00:00    2017-07-14        32   F
-##      genotype replicate
-##   1:        A         1
-##   2:        A         1
-##   3:        A         1
-##   4:        A         1
-##   5:        A         1
-##  ---                   
-## 188:        C         2
-## 189:        C         2
-## 190:        C         2
-## 191:        C         2
-## 192:        C         2</code></pre>
-<p>Each of the 192 animals (rows) is defined by a set of mandatory columns (metavariables):</p>
+<pre><code>##      machine_name       date region_id treatment
+##  1: ETHOSCOPE_011 2016-07-22         1         B
+##  2: ETHOSCOPE_011 2016-07-22         2         A
+##  3: ETHOSCOPE_011 2016-07-22         3         B
+##  4: ETHOSCOPE_011 2016-07-22         4         B
+##  5: ETHOSCOPE_011 2016-07-22         5         B
+##  6: ETHOSCOPE_011 2016-07-22         6         A
+##  7: ETHOSCOPE_011 2016-07-22         7         B
+##  8: ETHOSCOPE_011 2016-07-22         8         A
+##  9: ETHOSCOPE_011 2016-07-22         9         A
+## 10: ETHOSCOPE_011 2016-07-22        10         B
+## 11: ETHOSCOPE_011 2016-07-22        11         A
+## 12: ETHOSCOPE_011 2016-07-22        12         B
+## 13: ETHOSCOPE_011 2016-07-22        13         B
+## 14: ETHOSCOPE_011 2016-07-22        14         A
+## 15: ETHOSCOPE_011 2016-07-22        15         A
+## 16: ETHOSCOPE_011 2016-07-22        16         B
+## 17: ETHOSCOPE_011 2016-07-22        17         B
+## 18: ETHOSCOPE_011 2016-07-22        18         B
+## 19: ETHOSCOPE_011 2016-07-22        19         A
+## 20: ETHOSCOPE_011 2016-07-22        20         B
+## 21: ETHOSCOPE_009 2016-07-22         1         B
+## 22: ETHOSCOPE_009 2016-07-22         2         B
+## 23: ETHOSCOPE_009 2016-07-22         3         B
+## 24: ETHOSCOPE_009 2016-07-22         4         B
+## 25: ETHOSCOPE_009 2016-07-22         5         B
+## 26: ETHOSCOPE_009 2016-07-22         6         B
+## 27: ETHOSCOPE_009 2016-07-22         7         B
+## 28: ETHOSCOPE_009 2016-07-22         8         A
+## 29: ETHOSCOPE_009 2016-07-22         9         B
+## 30: ETHOSCOPE_009 2016-07-22        10         B
+## 31: ETHOSCOPE_009 2016-07-22        11         B
+## 32: ETHOSCOPE_009 2016-07-22        12         B
+## 33: ETHOSCOPE_009 2016-07-22        13         B
+## 34: ETHOSCOPE_009 2016-07-22        14         B
+## 35: ETHOSCOPE_009 2016-07-22        15         B
+## 36: ETHOSCOPE_009 2016-07-22        16         A
+## 37: ETHOSCOPE_009 2016-07-22        17         A
+## 38: ETHOSCOPE_009 2016-07-22        18         B
+## 39: ETHOSCOPE_009 2016-07-22        19         B
+## 40: ETHOSCOPE_009 2016-07-22        20         A
+## 41: ETHOSCOPE_008 2016-07-29         1         A
+## 42: ETHOSCOPE_008 2016-07-29         2         A
+## 43: ETHOSCOPE_008 2016-07-29         3         B
+## 44: ETHOSCOPE_008 2016-07-29         4         A
+## 45: ETHOSCOPE_008 2016-07-29         5         B
+## 46: ETHOSCOPE_008 2016-07-29         6         A
+## 47: ETHOSCOPE_008 2016-07-29         7         A
+## 48: ETHOSCOPE_008 2016-07-29         8         A
+## 49: ETHOSCOPE_008 2016-07-29         9         A
+## 50: ETHOSCOPE_008 2016-07-29        10         B
+## 51: ETHOSCOPE_008 2016-07-29        11         A
+## 52: ETHOSCOPE_008 2016-07-29        12         B
+## 53: ETHOSCOPE_008 2016-07-29        13         A
+## 54: ETHOSCOPE_008 2016-07-29        14         A
+## 55: ETHOSCOPE_008 2016-07-29        15         B
+## 56: ETHOSCOPE_008 2016-07-29        16         A
+## 57: ETHOSCOPE_008 2016-07-29        17         A
+## 58: ETHOSCOPE_008 2016-07-29        18         A
+## 59: ETHOSCOPE_008 2016-07-29        19         A
+## 60: ETHOSCOPE_008 2016-07-29        20         A
+## 61: ETHOSCOPE_011 2016-07-29         1         B
+## 62: ETHOSCOPE_011 2016-07-29         2         A
+## 63: ETHOSCOPE_011 2016-07-29         3         A
+## 64: ETHOSCOPE_011 2016-07-29         4         A
+## 65: ETHOSCOPE_011 2016-07-29         5         B
+## 66: ETHOSCOPE_011 2016-07-29         6         B
+## 67: ETHOSCOPE_011 2016-07-29         7         B
+## 68: ETHOSCOPE_011 2016-07-29         8         A
+## 69: ETHOSCOPE_011 2016-07-29         9         B
+## 70: ETHOSCOPE_011 2016-07-29        10         A
+## 71: ETHOSCOPE_011 2016-07-29        11         A
+## 72: ETHOSCOPE_011 2016-07-29        12         A
+## 73: ETHOSCOPE_011 2016-07-29        13         A
+## 74: ETHOSCOPE_011 2016-07-29        14         A
+## 75: ETHOSCOPE_011 2016-07-29        15         A
+## 76: ETHOSCOPE_011 2016-07-29        16         B
+## 77: ETHOSCOPE_011 2016-07-29        17         A
+## 78: ETHOSCOPE_011 2016-07-29        18         A
+## 79: ETHOSCOPE_011 2016-07-29        19         A
+## 80: ETHOSCOPE_011 2016-07-29        20         B
+##      machine_name       date region_id treatment</code></pre>
+<p>Each of the 80 animals (rows) is defined by two mandatory columns (metavariables):</p>
 <ul>
-<li><code>file</code> – the data file (monitor) that it has been recorded in</li>
-<li><code>start_datetime</code> – the date and time (<code>YYYY-MM-DD HH:MM:SS</code>) of the start of the experiment. Time will be considered ZT0, see <a href="dam-sleep.html#note-on-zt0">note</a></li>
-<li><code>stop_datetime</code> – the last time point of the experiment (time is optional)</li>
-<li><code>region_id</code> – the channel ([1, 32])</li>
+<li><code>machine_name</code> – the name of the device used (e.g. <code>&quot;ETHOSCOPE_001&quot;</code>)</li>
+<li><code>date</code> – the date and time (<code>YYYY-MM-DD</code>) of the start of the experiment.</li>
 </ul>
-<p>For <strong>our experiment</strong>, we also defined custom columns:</p>
+<p>In this experiment, we have only one condition, for simplicity. We define it as a custom column in the metadata (note that you could define many, with arbitrary names):</p>
 <ul>
-<li><code>sex</code> – M and F for male and female, respectively</li>
-<li><code>genotype</code> – A, B or C (I just made up the names for the sake of simplicity)</li>
-<li><code>replicate</code> – so we can analyse how replicates differ from one another</li>
+<li><code>treatment</code> – A or B</li>
 </ul>
-<p>Note that this format is very flexible and explicit. For instance, if we decided to do a third replicate, we would just need to add new rows. We could also add any condition we want as a new column (e.g. treatment, temperature, matting status and so on)</p>
 </div>
 </div>
-<div id="linking" class="section level2 unnumbered">
+<div id="linking-1" class="section level2 unnumbered">
 <h2>Linking</h2>
 <p><a href="metadata.html#linking-metadata">Linking</a> is the one necessary step before loading the data. It allocates a unique identifier to each animal.</p>
-<p>It is very simple to link metadata:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metadata &lt;-<span class="st"> </span><span class="kw">link_dam2_metadata</span>(metadata, <span class="dt">result_dir =</span> DATA_DIR)
+<div id="local-data" class="section level3 unnumbered">
+<h3>Local data</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metadata &lt;-<span class="st"> </span><span class="kw">link_ethoscope_metadata</span>(metadata, 
+                                    <span class="dt">result_dir =</span> <span class="st">&quot;ethoscope_results&quot;</span>)
 metadata</code></pre></div>
-<p>As <code>result_dir</code>, we just use the directory where the data lives, which you decided when you extracted your data (<code>DATA_DIR</code>).</p>
-<p><strong>Importantly, you do not need to cut the relevant parts of your DAM files</strong> (this is an error-prone step that should be avoided). In other words, no need to use the <code>DAMFileScan</code> utility or manipulate in any way the original data.</p>
-<p>You can keep all the data in one file per monitor. <code>rethomics</code> will use start and stop datetime to find the appropriate part directly from your metadata.</p>
+<p>```</p>
 </div>
-<div id="loading" class="section level2 unnumbered">
+<div id="remote-data" class="section level3 unnumbered">
+<h3>Remote Data</h3>
+</div>
+<div id="warnings-and-errors" class="section level3 unnumbered">
+<h3>Warnings and errors</h3>
+</div>
+</div>
+<div id="loading-1" class="section level2 unnumbered">
 <h2>Loading</h2>
-<p>In order to work with the data the last step is to load it into a <a href="behavr.html">behavr</a> structure. To do that simply use <code>load_dam2</code> function (as shown below). This function will store all data in dt (or the any other given name)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt &lt;-<span class="st"> </span><span class="kw">load_dam2</span>(metadata)
+<div id="default" class="section level3 unnumbered">
+<h3>Default</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metadata_subset &lt;-<span class="st"> </span>metadata[region_id <span class="op">==</span><span class="st"> </span><span class="dv">1</span>]
+dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata_subset, <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 <span class="kw">summary</span>(dt)</code></pre></div>
 <pre><code>## behavr table with:
-##  192 individuals
-##  8   metavariables
-##  2   variables
-##  7.37472e+05 measurements
+##  4   individuals
+##  6   metavariables
+##  8   variables
+##  3.004648e+06    measurements
 ##  1   key (id)</code></pre>
-<p>That is it, <strong>all</strong> our data is loaded in dt.</p>
 </div>
-<div id="note-on-datetime" class="section level2 unnumbered">
-<h2>Note on datetime</h2>
-<div id="zt0" class="section level3 unnumbered">
+<div id="preprocessing" class="section level3 unnumbered">
+<h3>Preprocessing</h3>
+</div>
+<div id="zt0-1" class="section level3 unnumbered">
 <h3>ZT0</h3>
-<p>In the circadian and sleep field, we need to align our data to a reference time of the day. Typically, when the light (would) turn on (ZT0). In <code>damr</code>, the <strong>time part of the start_datetime is used as a circadian reference</strong>. For instance, if you specify, in your metadata file <code>2017-01-01 09:00:00</code>, you imply that ZT0 is at <code>09:00:00</code>. The time is looked-up in the DAM file, so it will be at <em>on same time zone settings as the computer that recorded the data</em>.</p>
 </div>
-<div id="start-and-stop-time" class="section level3 unnumbered">
-<h3>Start and stop time</h3>
-<p>When fetching some data, date and time are <strong>always inclusive</strong>.</p>
-<p>When only the date is specified:</p>
-<ul>
-<li>start time will be at <code>00:00:00</code></li>
-<li>stop time will be at <code>23:59:59</code></li>
-</ul>
-<p>For instance, <code>start_date = 2017-01-01</code> and <code>stop_date = 2017-01-01</code> retrieves all the data from the first of January 2017.</p>
+<div id="cache-directory" class="section level3 unnumbered">
+<h3>Cache directory</h3>
+</div>
+<div id="warnings-and-errors-1" class="section level3 unnumbered">
+<h3>Warnings and errors</h3>
 </div>
 </div>
-<div id="quality-control" class="section level2 unnumbered">
-<h2>Quality control</h2>
-<div id="detecting-anomalies" class="section level3 unnumbered">
-<h3>Detecting anomalies</h3>
-<p>Immediatly after loading your data, it is a good idea to visualise it, in order to detect anomalies or at least to be sure that everything looks ok. We can use <code>ggetho</code> for that, for example the following code will create an activity tile plot, useful to detect dead animals.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggetho)</code></pre></div>
-<pre><code>## Loading required package: ggplot2</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># I only show firt replicate</span>
-<span class="kw">ggetho</span>(dt[<span class="kw">xmv</span>(replicate) <span class="op">==</span><span class="st"> </span><span class="dv">1</span> ], <span class="kw">aes</span>(<span class="dt">z=</span>activity)) <span class="op">+</span>
-<span class="st">      </span><span class="kw">stat_tile_etho</span>() <span class="op">+</span>
-<span class="st">      </span><span class="kw">stat_ld_annotations</span>()</code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-24-1.png" width="864" /></p>
-<p>Here, instead of ploting everything, I show how you can subset data according to metadata in order to display only replicate one (<code>dt[xmv(replicate) == 1]</code>). In practice, you could also plot everything. You can do a lot more with <code>ggetho</code> (see the <a href="ggetho.html">visualisation chapter</a>)</p>
-<p>What does this tile plot tell us? Each row is an animal (and is labelled with its corresponding id). Each column is a 30min window. The colour intensity indicates the activity.</p>
-<p>There are two things that we can imediatly notice:</p>
-<ul>
-<li>For most animals, the activity is rythmic and synchronised with the light phase transisitions.</li>
-<li>Some animals are dead or missing. For instance take a look at <code>channel 26</code> in <code>Monitor64.txt</code>.</li>
-</ul>
-<p>In other chapters, we will learn how to group individuals, visualise and compute statistics.</p>
-</div>
-<div id="how-to-exclude-animals" class="section level3 unnumbered">
-<h3>How to exclude animals?</h3>
-<p>We suggest to exclude animals <em>a priori</em> (e.g. because they died) by recording them as dead <strong>in the metadata</strong>. This way data is not modified or omited and can easily be recovered if needed. For instance, you can add a column <code>status</code> in your metadata file and put a default value such as <code>&quot;OK&quot;</code>. If an animal is to be removed, you can replace <code>&quot;OK&quot;</code> by <strong>a reason</strong> (e.g. <code>&quot;dead&quot;</code>, <code>&quot;escaped&quot;</code>, …). Then, you can load your data without those animals <code>load_dam2_data(metadata[status == &quot;OK&quot;], ...)</code>. This practice has the advantage of making it <strong>very transparent</strong>, why some individuals where excluded. Also, as stipulated before, it can easily be reversed.</p>
-</div>
-</div>
-<div id="apply-functions-when-loading" class="section level2 unnumbered">
-<h2>Apply functions when loading</h2>
-<p>Finaly, we may want to apply function on the data as it is loaded, in order to preprocess it, saving time. This pre-processing will annotate the data, i.e create new information (new columns) based on the original data. As an example, we can perform a sleep (bouts of immobility of 5 min or more), from our <code>sleepr</code> package (which you will have installed, or course).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sleepr)
-<span class="co"># todo</span>
-<span class="co">#dt &lt;- load_dam2(metadata, FUN = sleepr::sleep_dam_annotation)</span>
-dt</code></pre></div>
-<pre><code>## 
-##  ==== METADATA ====
-## 
-##                                        id file_info region_id
-##                                    &lt;fctr&gt;    &lt;list&gt;     &lt;int&gt;
-##   1: 2017-07-01 08:00:00|Monitor11.txt|01    &lt;list&gt;         1
-##   2: 2017-07-01 08:00:00|Monitor11.txt|02    &lt;list&gt;         2
-##   3: 2017-07-01 08:00:00|Monitor11.txt|03    &lt;list&gt;         3
-##   4: 2017-07-01 08:00:00|Monitor11.txt|04    &lt;list&gt;         4
-##  ---                                                         
-## 188: 2017-07-11 08:00:00|Monitor64.txt|28    &lt;list&gt;        28
-## 189: 2017-07-11 08:00:00|Monitor64.txt|29    &lt;list&gt;        29
-## 190: 2017-07-11 08:00:00|Monitor64.txt|30    &lt;list&gt;        30
-## 191: 2017-07-11 08:00:00|Monitor64.txt|31    &lt;list&gt;        31
-## 192: 2017-07-11 08:00:00|Monitor64.txt|32    &lt;list&gt;        32
-##                          experiment_id      start_datetime stop_datetime
-##                                 &lt;char&gt;              &lt;POSc&gt;        &lt;char&gt;
-##   1: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
-##   2: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
-##   3: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
-##   4: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
-##  ---                                                                    
-## 188: 2017-07-11 08:00:00|Monitor64.txt 2017-07-11 08:00:00    2017-07-14
-## 189: 2017-07-11 08:00:00|Monitor64.txt 2017-07-11 08:00:00    2017-07-14
-## 190: 2017-07-11 08:00:00|Monitor64.txt 2017-07-11 08:00:00    2017-07-14
-## 191: 2017-07-11 08:00:00|Monitor64.txt 2017-07-11 08:00:00    2017-07-14
-## 192: 2017-07-11 08:00:00|Monitor64.txt 2017-07-11 08:00:00    2017-07-14
-##         sex genotype replicate
-##      &lt;char&gt;   &lt;char&gt;     &lt;int&gt;
-##   1:      M        A         1
-##   2:      M        A         1
-##   3:      M        A         1
-##   4:      M        A         1
-##  ---                          
-## 188:      F        C         2
-## 189:      F        C         2
-## 190:      F        C         2
-## 191:      F        C         2
-## 192:      F        C         2
-## 
-##  ====== DATA ======
-## 
-##                                           id      t activity
-##                                       &lt;fctr&gt;  &lt;num&gt;    &lt;int&gt;
-##      1: 2017-07-01 08:00:00|Monitor11.txt|01      0        0
-##      2: 2017-07-01 08:00:00|Monitor11.txt|01     60        0
-##      3: 2017-07-01 08:00:00|Monitor11.txt|01    120        0
-##      4: 2017-07-01 08:00:00|Monitor11.txt|01    180        0
-##     ---                                                     
-## 737468: 2017-07-11 08:00:00|Monitor64.txt|32 230160        0
-## 737469: 2017-07-11 08:00:00|Monitor64.txt|32 230220        0
-## 737470: 2017-07-11 08:00:00|Monitor64.txt|32 230280        0
-## 737471: 2017-07-11 08:00:00|Monitor64.txt|32 230340        0
-## 737472: 2017-07-11 08:00:00|Monitor64.txt|32 230400        0</code></pre>
-<p>As you can see, we now have additional columns in the data.</p>
-</div>
-<div id="next-steps" class="section level2 unnumbered">
+<div id="next-steps-1" class="section level2 unnumbered">
 <h2>Next steps</h2>
 <ul>
 <li><a href="ggetho.html">Visualise data with <code>ggetho</code></a></li>
@@ -496,8 +479,8 @@ dt</code></pre></div>
           </div>
         </div>
       </div>
-<a href="behavr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="scopr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="damr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ggetho.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -526,7 +509,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rethomics/rethomics.github.io/edit/source/05-damr.Rmd",
+"link": "https://github.com/rethomics/rethomics.github.io/edit/source/06-scopr.Rmd",
 "text": "Edit"
 },
 "download": ["bookdown-demo.pdf", "bookdown-demo.epub"],

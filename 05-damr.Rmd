@@ -107,7 +107,8 @@ Our goal is to encode our whole experiment in a single file in which:
 * each column is a metavariable
 
 Luckily for you, I have already put this file together for you as `metadata.csv`!
-Lets have a look at it (you can use R, excel or whatever you want). If  you are using R, type this commands:
+Lets have a look at it (you can use `R`, excel or whatever you want). 
+If you are using `R`, type this commands:
 
 ```{r}
 library(damr)
@@ -132,7 +133,7 @@ Note that this format is very flexible and explicit.
 For instance, if we decided to do a third replicate, we would just need to add new rows.
 We could also add any condition we want as a new column (e.g. treatment, temperature, matting status and so on)
 
-### Linking{-}
+## Linking{-}
 
 [Linking](metadata.html#linking-metadata) is the one necessary step before loading the data.
 It allocates a unique identifier to each animal.

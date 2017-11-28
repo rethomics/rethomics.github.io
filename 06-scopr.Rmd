@@ -1,0 +1,197 @@
+# Ethoscope data, in practice {#scopr -}
+
+**TODO**
+
+---------------------------
+
+![An ethoscope experiment. todo](assets/ethoscope_experiment.png)
+
+## Aims {-}
+In this practical chapter, we will use a real experiment to learn how to:
+
+* Translate your experiment design into a metadata file
+* Use this metadata file to load some data
+* Set the circadian reference (ZT0)
+* Assess graphically the quality of the data
+* Optimise your code to save time and RAM
+* Use good practices to exclude individuals from our experiments
+
+
+## Prerequisites {-}
+
+* You are familiar with the [Ethoscope Platform](http://gilestrolab.github.io/ethoscope/)
+* Ensure you have read about the [rethomics workflow](workflow.html) and [metadata](metadata.html)
+* Ensure you have [installed](intro.html#installing-rethomics-packages)
+`behavr`, `scopr` and `ggetho` packages:
+
+
+```{r, eval=FALSE}
+library(devtools)
+install_github("rethomics/behavr")
+install_github("rethomics/scopr")
+install_github("rethomics/ggetho")
+```
+
+```{r, echo=FALSE}
+URL <- "https://zenodo.org/record/1067775/files/ethoscope_results.zip"
+DATA_DIR <- paste(tempdir(), "ethoscope_tutorial", sep="/")
+dir.create(DATA_DIR)
+knitr::opts_knit$set(root.dir = DATA_DIR)
+
+dst <- paste(DATA_DIR, "ethoscope_tutorial.zip", sep="/")
+download.file(URL, dst)
+
+unzip(dst, exdir= DATA_DIR)
+```
+
+
+## Background {-}
+
+[The Ethoscope Platform](http://gilestrolab.github.io/ethoscope/) is a versatile and modular behavioural system to sudy behaviour of small animals. You can read more about it in our [PLOS Biology publication](http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.2003026).
+Although you can do much more with them, ethoscope are primarily designed to study sleep and circadian rhythms in Drosophila. 
+Therefore, we will work in this context for this tutorial.
+
+Ethoscopes typically generate hundreads of megabytes per machine per week.
+The platform is designed so that many devices run n parallel, and the resulting data is eventually centralised for all users. 
+Metadata tables are the best way to both keep track of your expriments and fetch the relevant data.
+
+
+## Getting the data {-}
+### Extract the zipped data {-}
+
+Since ethoscopes generate **large amount of data**, compared to DAM, we will work only with a few animals.
+A zip containing data for this tutorial is available on [zenodo](todo.html)
+Since will download the data. 
+
+Start by downloading and extracting the zip somewhere in your computer.
+
+Store this location as a variable:
+
+```r{eval=F}
+DATA_DIR <- "C://Where/My/Zip/Has/been/extracted
+```
+
+Check that all the files live there:
+
+```{r}
+list.files(DATA_DIR)
+```
+
+We have:
+ * The metadata file that I have prepared for you
+ * An `ethoscope_results` directory
+ 
+### Note on the data structure {-}
+It is informative to take a look at the latter.
+Files are organised as <machine_id>/<machine_name>/<datetime>/<file>:
+
+
+```
+ethoscope_results
+├── 008d6ba04e534be486069c3db7b10827
+│   └── ETHOSCOPE_008
+│       └── 2016-07-29_14-57-35
+│           └── 2016-07-29_14-57-35_008d6ba04e534be486069c3db7b10827.db
+├── 009d6ba04e534be486069c3db7b10827
+│   └── ETHOSCOPE_009
+│       └── 2016-07-22_16-43-29
+│           └── 2016-07-22_16-43-29_009d6ba04e534be486069c3db7b10827.db
+└── 011d6ba04e534be486069c3db7b10827
+    └── ETHOSCOPE_011
+        ├── 2016-07-22_16-41-21
+        │   └── 2016-07-22_16-41-21_011d6ba04e534be486069c3db7b10827.db
+        └── 2016-07-29_14-59-49
+            └── 2016-07-29_14-59-49_011d6ba04e534be486069c3db7b10827.db
+```
+
+Tracking data are saved in `.db` files. Everytime an ethoscope is started, one `.db` new file is created.
+All animals presents in the same machine at the same time will have their data saved in the same time.
+
+### Set your working directory {-}
+For this tutorial, we can just [set our working directory](https://support.rstudio.com/hc/en-us/articles/200711843-Working-Directories-and-Workspaces) to `DATA_DIR`:
+
+```{r, eval=FALSE}
+setwd(DATA_DIR)
+```
+
+
+
+## Experiment design to standard metadata{-}
+
+### Our toy experiment{-}
+
+
+![A DAM experiment. Two replicates, 10 days apart; three genotypes; two sexes, males and females](assets/ethoscope_experiment.png)
+
+
+### Metadata {-}
+
+**It is crucial that you have read [metadata chapter](metadata.html)** to understand this part.
+Our goal is to encode our whole experiment in a single file in which:
+
+* each row is an individual
+* each column is a metavariable
+
+Luckily for you, I have already put this file together for you as `metadata.csv`!
+Lets have a look at it (you can use `R`, excel or whatever you want). 
+If you are using `R`, type this commands:
+
+```{r}
+library(scopr)
+metadata <- fread("metadata.csv")
+metadata
+```
+
+Each of the 80 animals (rows) is defined by two mandatory columns (metavariables):
+
+* `machine_name` -- the name of the device used (e.g. `"ETHOSCOPE_001"`)
+* `date` -- the date and time (`YYYY-MM-DD`) of the start of the experiment.
+
+
+In this experiment, we have only one condition, for simplicity.
+We define it as a custom column in the metadata (note that you could define many, with arbitrary names):
+
+* `treatment` -- A or B 
+
+## Linking{-}
+
+[Linking](metadata.html#linking-metadata) is the one necessary step before loading the data.
+It allocates a unique identifier to each animal.
+
+###  Local data {-}
+
+```{r}
+metadata <- link_ethoscope_metadata(metadata, 
+                                    result_dir = "ethoscope_results")
+metadata
+```
+```
+
+
+### Remote Data {-}
+
+
+### Warnings and errors {-}
+
+## Loading{-}
+
+### Default {-}
+
+```{r}
+metadata_subset <- metadata[region_id == 1]
+dt <- load_ethoscope(metadata_subset, verbose=FALSE)
+summary(dt)
+```
+
+### Preprocessing {-}
+### ZT0 {-}
+### Cache directory {-}
+### Warnings and errors {-}
+
+
+
+## Next steps {-}
+
+* [Visualise data with `ggetho`](ggetho.html)
+* [Sleep analysis with `sleepr`](sleepr.html)
+* [Circadian analysis with `zeitgebr`](zeitgebr.html)

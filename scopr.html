@@ -134,7 +134,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#prerequisites"><i class="fa fa-check"></i>Prerequisites</a></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#background"><i class="fa fa-check"></i>Background</a></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#getting-the-data"><i class="fa fa-check"></i>Getting the data</a></li>
-<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#experiment-design-to-standard-metadata"><i class="fa fa-check"></i>Experiment design to standard metadata</a><ul>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#from-experiment-design-to-metadata"><i class="fa fa-check"></i>From experiment design to metadata</a><ul>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#our-toy-experiment"><i class="fa fa-check"></i>Our toy experiment</a></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#metadata-1"><i class="fa fa-check"></i>Metadata</a></li>
 </ul></li>
@@ -160,21 +160,24 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#note-on-the-data-structure"><i class="fa fa-check"></i>Note on the data structure</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#set-your-working-directory"><i class="fa fa-check"></i>Set your working directory</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#experiment-design-to-standard-metadata-1"><i class="fa fa-check"></i>Experiment design to standard metadata</a><ul>
+<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#from-experiment-design-to-metadata-1"><i class="fa fa-check"></i>From experiment design to metadata</a><ul>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#our-toy-experiment-1"><i class="fa fa-check"></i>Our toy experiment</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#metadata-2"><i class="fa fa-check"></i>Metadata</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#linking-1"><i class="fa fa-check"></i>Linking</a><ul>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#local-data"><i class="fa fa-check"></i>Local data</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#remote-data"><i class="fa fa-check"></i>Remote Data</a></li>
-<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#warnings-and-errors"><i class="fa fa-check"></i>Warnings and errors</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#loading-1"><i class="fa fa-check"></i>Loading</a><ul>
-<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#default"><i class="fa fa-check"></i>Default</a></li>
+<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#default-raw-data"><i class="fa fa-check"></i>Default: raw data</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#preprocessing"><i class="fa fa-check"></i>Preprocessing</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#zt0-1"><i class="fa fa-check"></i>ZT0</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#cache-directory"><i class="fa fa-check"></i>Cache directory</a></li>
-<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#warnings-and-errors-1"><i class="fa fa-check"></i>Warnings and errors</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#quality-control-1"><i class="fa fa-check"></i>Quality control</a></li>
+<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#and-then"><i class="fa fa-check"></i>And then?</a><ul>
+<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#sleep-amount-vs-treatment"><i class="fa fa-check"></i>Sleep amount vs treatment</a></li>
+<li class="chapter" data-level="0.0.1" data-path="scopr.html"><a href="scopr.html#total-sleep-vs-expression-level"><i class="fa fa-check"></i><b>0.0.1</b> Total sleep vs expression level</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#next-steps-1"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
@@ -232,7 +235,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="scopr" class="section level1 unnumbered">
 <h1>Ethoscope data, in practice</h1>
-<p><strong>TODO</strong></p>
+<p><strong>Large data</strong></p>
 <hr />
 <div class="figure">
 <img src="assets/ethoscope_experiment.png" alt="An ethoscope experiment. todo" />
@@ -271,7 +274,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2>Getting the data</h2>
 <div id="extract-the-zipped-data" class="section level3 unnumbered">
 <h3>Extract the zipped data</h3>
-<p>Since ethoscopes generate <strong>large amount of data</strong>, compared to DAM, we will work only with a few animals. A zip containing data for this tutorial is available on <a href="todo.html">zenodo</a> Since will download the data.</p>
+<p>Since ethoscopes generate <strong>large amount of data</strong>, compared to DAM, we will work only with a few animals. A zip containing data for this tutorial is available on <a href="https://zenodo.org/record/826874">zenodo</a> Since will download the data.</p>
 <p>Start by downloading and extracting the zip somewhere in your computer.</p>
 <p>Store this location as a variable:</p>
 <pre class="r{eval=f}"><code>DATA_DIR &lt;- &quot;C://Where/My/Zip/Has/been/extracted</code></pre>
@@ -283,7 +286,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="note-on-the-data-structure" class="section level3 unnumbered">
 <h3>Note on the data structure</h3>
-<p>It is informative to take a look at the latter. Files are organised as <machine_id>/<machine_name>/<datetime>/<file>:</p>
+<p>It is informative to take a look at the latter. Files are organised as <code>&lt;machine_id&gt;/&lt;machine_name&gt;/&lt;datetime&gt;/&lt;file&gt;</code>:</p>
 <pre><code>ethoscope_results
 ├── 008d6ba04e534be486069c3db7b10827
 │   └── ETHOSCOPE_008
@@ -299,21 +302,32 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         │   └── 2016-07-22_16-41-21_011d6ba04e534be486069c3db7b10827.db
         └── 2016-07-29_14-59-49
             └── 2016-07-29_14-59-49_011d6ba04e534be486069c3db7b10827.db</code></pre>
-<p>Tracking data are saved in <code>.db</code> files. Everytime an ethoscope is started, one <code>.db</code> new file is created. All animals presents in the same machine at the same time will have their data saved in the same time.</p>
+<p>Tracking data are saved in <code>.db</code> files. Everytime an ethoscope is started, one <code>.db</code> new file is created. All animals presents in the same machine at the same time will have their data saved in the same <code>.db</code> file.</p>
 </div>
 <div id="set-your-working-directory" class="section level3 unnumbered">
 <h3>Set your working directory</h3>
-<p>For this tutorial, we can just <a href="https://support.rstudio.com/hc/en-us/articles/200711843-Working-Directories-and-Workspaces">set our working directory</a> to <code>DATA_DIR</code>:</p>
+<p>For this tutorial, we will just <a href="https://support.rstudio.com/hc/en-us/articles/200711843-Working-Directories-and-Workspaces">set our working directory</a> to <code>DATA_DIR</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(DATA_DIR)</code></pre></div>
 </div>
 </div>
-<div id="experiment-design-to-standard-metadata-1" class="section level2 unnumbered">
-<h2>Experiment design to standard metadata</h2>
+<div id="from-experiment-design-to-metadata-1" class="section level2 unnumbered">
+<h2>From experiment design to metadata</h2>
 <div id="our-toy-experiment-1" class="section level3 unnumbered">
 <h3>Our toy experiment</h3>
+<p>The data I gave you is from a real experiment, but for the sake of the tutorial, I have made up a story around it. It goes like that:</p>
+<ul>
+<li>We are interested in <strong>the effect of a drug</strong>, let’s call it the “mystery drug”, on <strong>sleep and activity</strong> in fruit flies</li>
+<li>We supect this drug acts indirectly by <strong>inhibiting the expression of a (mystery) gene</strong>.</li>
+</ul>
+<p>To address these two questions, we have delivered a <strong>drug</strong> (yes or no) to fruit flies, and <strong>randomised</strong> their position in <strong>two ethoscopes</strong>. We then acquiered individual data (e.g. position and activity) about <strong>twice a second for several days</strong>. We performed <strong>two replicates</strong>, one week appart. In addition, in the end of the experiment, we also collected flies and <strong>measured a the relative expression of our candidate gene</strong>.</p>
+<p>Ultimatly, we would like to:</p>
+<ul>
+<li>Analyse the effect of the drug on activity</li>
+<li>Study the correlations between the activity (or the drug) and the level of transcript <!-- * Account for the replication design (aka [random effect](https://en.wikipedia.org/wiki/Random_effects_model)) --></li>
+</ul>
 <div class="figure">
-<img src="assets/ethoscope_experiment.png" alt="A DAM experiment. Two replicates, 10 days apart; three genotypes; two sexes, males and females" />
-<p class="caption">A DAM experiment. Two replicates, 10 days apart; three genotypes; two sexes, males and females</p>
+<img src="assets/ethoscope_experiment.png" alt="An Ethoscope experiment. Todo" />
+<p class="caption">An Ethoscope experiment. Todo</p>
 </div>
 </div>
 <div id="metadata-2" class="section level3 unnumbered">
@@ -327,97 +341,182 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(scopr)
 metadata &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;metadata.csv&quot;</span>)
 metadata</code></pre></div>
-<pre><code>##      machine_name       date region_id treatment
-##  1: ETHOSCOPE_011 2016-07-22         1         B
-##  2: ETHOSCOPE_011 2016-07-22         2         A
-##  3: ETHOSCOPE_011 2016-07-22         3         B
-##  4: ETHOSCOPE_011 2016-07-22         4         B
-##  5: ETHOSCOPE_011 2016-07-22         5         B
-##  6: ETHOSCOPE_011 2016-07-22         6         A
-##  7: ETHOSCOPE_011 2016-07-22         7         B
-##  8: ETHOSCOPE_011 2016-07-22         8         A
-##  9: ETHOSCOPE_011 2016-07-22         9         A
-## 10: ETHOSCOPE_011 2016-07-22        10         B
-## 11: ETHOSCOPE_011 2016-07-22        11         A
-## 12: ETHOSCOPE_011 2016-07-22        12         B
-## 13: ETHOSCOPE_011 2016-07-22        13         B
-## 14: ETHOSCOPE_011 2016-07-22        14         A
-## 15: ETHOSCOPE_011 2016-07-22        15         A
-## 16: ETHOSCOPE_011 2016-07-22        16         B
-## 17: ETHOSCOPE_011 2016-07-22        17         B
-## 18: ETHOSCOPE_011 2016-07-22        18         B
-## 19: ETHOSCOPE_011 2016-07-22        19         A
-## 20: ETHOSCOPE_011 2016-07-22        20         B
-## 21: ETHOSCOPE_009 2016-07-22         1         B
-## 22: ETHOSCOPE_009 2016-07-22         2         B
-## 23: ETHOSCOPE_009 2016-07-22         3         B
-## 24: ETHOSCOPE_009 2016-07-22         4         B
-## 25: ETHOSCOPE_009 2016-07-22         5         B
-## 26: ETHOSCOPE_009 2016-07-22         6         B
-## 27: ETHOSCOPE_009 2016-07-22         7         B
-## 28: ETHOSCOPE_009 2016-07-22         8         A
-## 29: ETHOSCOPE_009 2016-07-22         9         B
-## 30: ETHOSCOPE_009 2016-07-22        10         B
-## 31: ETHOSCOPE_009 2016-07-22        11         B
-## 32: ETHOSCOPE_009 2016-07-22        12         B
-## 33: ETHOSCOPE_009 2016-07-22        13         B
-## 34: ETHOSCOPE_009 2016-07-22        14         B
-## 35: ETHOSCOPE_009 2016-07-22        15         B
-## 36: ETHOSCOPE_009 2016-07-22        16         A
-## 37: ETHOSCOPE_009 2016-07-22        17         A
-## 38: ETHOSCOPE_009 2016-07-22        18         B
-## 39: ETHOSCOPE_009 2016-07-22        19         B
-## 40: ETHOSCOPE_009 2016-07-22        20         A
-## 41: ETHOSCOPE_008 2016-07-29         1         A
-## 42: ETHOSCOPE_008 2016-07-29         2         A
-## 43: ETHOSCOPE_008 2016-07-29         3         B
-## 44: ETHOSCOPE_008 2016-07-29         4         A
-## 45: ETHOSCOPE_008 2016-07-29         5         B
-## 46: ETHOSCOPE_008 2016-07-29         6         A
-## 47: ETHOSCOPE_008 2016-07-29         7         A
-## 48: ETHOSCOPE_008 2016-07-29         8         A
-## 49: ETHOSCOPE_008 2016-07-29         9         A
-## 50: ETHOSCOPE_008 2016-07-29        10         B
-## 51: ETHOSCOPE_008 2016-07-29        11         A
-## 52: ETHOSCOPE_008 2016-07-29        12         B
-## 53: ETHOSCOPE_008 2016-07-29        13         A
-## 54: ETHOSCOPE_008 2016-07-29        14         A
-## 55: ETHOSCOPE_008 2016-07-29        15         B
-## 56: ETHOSCOPE_008 2016-07-29        16         A
-## 57: ETHOSCOPE_008 2016-07-29        17         A
-## 58: ETHOSCOPE_008 2016-07-29        18         A
-## 59: ETHOSCOPE_008 2016-07-29        19         A
-## 60: ETHOSCOPE_008 2016-07-29        20         A
-## 61: ETHOSCOPE_011 2016-07-29         1         B
-## 62: ETHOSCOPE_011 2016-07-29         2         A
-## 63: ETHOSCOPE_011 2016-07-29         3         A
-## 64: ETHOSCOPE_011 2016-07-29         4         A
-## 65: ETHOSCOPE_011 2016-07-29         5         B
-## 66: ETHOSCOPE_011 2016-07-29         6         B
-## 67: ETHOSCOPE_011 2016-07-29         7         B
-## 68: ETHOSCOPE_011 2016-07-29         8         A
-## 69: ETHOSCOPE_011 2016-07-29         9         B
-## 70: ETHOSCOPE_011 2016-07-29        10         A
-## 71: ETHOSCOPE_011 2016-07-29        11         A
-## 72: ETHOSCOPE_011 2016-07-29        12         A
-## 73: ETHOSCOPE_011 2016-07-29        13         A
-## 74: ETHOSCOPE_011 2016-07-29        14         A
-## 75: ETHOSCOPE_011 2016-07-29        15         A
-## 76: ETHOSCOPE_011 2016-07-29        16         B
-## 77: ETHOSCOPE_011 2016-07-29        17         A
-## 78: ETHOSCOPE_011 2016-07-29        18         A
-## 79: ETHOSCOPE_011 2016-07-29        19         A
-## 80: ETHOSCOPE_011 2016-07-29        20         B
-##      machine_name       date region_id treatment</code></pre>
+<pre><code>##      machine_name       date region_id treatment replicate
+##  1: ETHOSCOPE_011 2016-07-22         1       yes         1
+##  2: ETHOSCOPE_011 2016-07-22         2        no         1
+##  3: ETHOSCOPE_011 2016-07-22         3       yes         1
+##  4: ETHOSCOPE_011 2016-07-22         4       yes         1
+##  5: ETHOSCOPE_011 2016-07-22         5       yes         1
+##  6: ETHOSCOPE_011 2016-07-22         6        no         1
+##  7: ETHOSCOPE_011 2016-07-22         7       yes         1
+##  8: ETHOSCOPE_011 2016-07-22         8       yes         1
+##  9: ETHOSCOPE_011 2016-07-22         9        no         1
+## 10: ETHOSCOPE_011 2016-07-22        10       yes         1
+## 11: ETHOSCOPE_011 2016-07-22        11        no         1
+## 12: ETHOSCOPE_011 2016-07-22        12       yes         1
+## 13: ETHOSCOPE_011 2016-07-22        13       yes         1
+## 14: ETHOSCOPE_011 2016-07-22        14        no         1
+## 15: ETHOSCOPE_011 2016-07-22        15        no         1
+## 16: ETHOSCOPE_011 2016-07-22        16       yes         1
+## 17: ETHOSCOPE_011 2016-07-22        17       yes         1
+## 18: ETHOSCOPE_011 2016-07-22        18       yes         1
+## 19: ETHOSCOPE_011 2016-07-22        19        no         1
+## 20: ETHOSCOPE_011 2016-07-22        20       yes         1
+## 21: ETHOSCOPE_009 2016-07-22         1       yes         1
+## 22: ETHOSCOPE_009 2016-07-22         2       yes         1
+## 23: ETHOSCOPE_009 2016-07-22         3        no         1
+## 24: ETHOSCOPE_009 2016-07-22         4       yes         1
+## 25: ETHOSCOPE_009 2016-07-22         5       yes         1
+## 26: ETHOSCOPE_009 2016-07-22         6        no         1
+## 27: ETHOSCOPE_009 2016-07-22         7       yes         1
+## 28: ETHOSCOPE_009 2016-07-22         8        no         1
+## 29: ETHOSCOPE_009 2016-07-22         9       yes         1
+## 30: ETHOSCOPE_009 2016-07-22        10       yes         1
+## 31: ETHOSCOPE_009 2016-07-22        11       yes         1
+## 32: ETHOSCOPE_009 2016-07-22        12       yes         1
+## 33: ETHOSCOPE_009 2016-07-22        13        no         1
+## 34: ETHOSCOPE_009 2016-07-22        14       yes         1
+## 35: ETHOSCOPE_009 2016-07-22        15       yes         1
+## 36: ETHOSCOPE_009 2016-07-22        16        no         1
+## 37: ETHOSCOPE_009 2016-07-22        17        no         1
+## 38: ETHOSCOPE_009 2016-07-22        18       yes         1
+## 39: ETHOSCOPE_009 2016-07-22        19       yes         1
+## 40: ETHOSCOPE_009 2016-07-22        20        no         1
+## 41: ETHOSCOPE_008 2016-07-29         1        no         2
+## 42: ETHOSCOPE_008 2016-07-29         2        no         2
+## 43: ETHOSCOPE_008 2016-07-29         3       yes         2
+## 44: ETHOSCOPE_008 2016-07-29         4        no         2
+## 45: ETHOSCOPE_008 2016-07-29         5       yes         2
+## 46: ETHOSCOPE_008 2016-07-29         6        no         2
+## 47: ETHOSCOPE_008 2016-07-29         7        no         2
+## 48: ETHOSCOPE_008 2016-07-29         8        no         2
+## 49: ETHOSCOPE_008 2016-07-29         9        no         2
+## 50: ETHOSCOPE_008 2016-07-29        10       yes         2
+## 51: ETHOSCOPE_008 2016-07-29        11        no         2
+## 52: ETHOSCOPE_008 2016-07-29        12       yes         2
+## 53: ETHOSCOPE_008 2016-07-29        13        no         2
+## 54: ETHOSCOPE_008 2016-07-29        14        no         2
+## 55: ETHOSCOPE_008 2016-07-29        15       yes         2
+## 56: ETHOSCOPE_008 2016-07-29        16        no         2
+## 57: ETHOSCOPE_008 2016-07-29        17        no         2
+## 58: ETHOSCOPE_008 2016-07-29        18       yes         2
+## 59: ETHOSCOPE_008 2016-07-29        19        no         2
+## 60: ETHOSCOPE_008 2016-07-29        20        no         2
+## 61: ETHOSCOPE_011 2016-07-29         1       yes         2
+## 62: ETHOSCOPE_011 2016-07-29         2        no         2
+## 63: ETHOSCOPE_011 2016-07-29         3       yes         2
+## 64: ETHOSCOPE_011 2016-07-29         4        no         2
+## 65: ETHOSCOPE_011 2016-07-29         5       yes         2
+## 66: ETHOSCOPE_011 2016-07-29         6       yes         2
+## 67: ETHOSCOPE_011 2016-07-29         7        no         2
+## 68: ETHOSCOPE_011 2016-07-29         8        no         2
+## 69: ETHOSCOPE_011 2016-07-29         9       yes         2
+## 70: ETHOSCOPE_011 2016-07-29        10        no         2
+## 71: ETHOSCOPE_011 2016-07-29        11        no         2
+## 72: ETHOSCOPE_011 2016-07-29        12        no         2
+## 73: ETHOSCOPE_011 2016-07-29        13       yes         2
+## 74: ETHOSCOPE_011 2016-07-29        14        no         2
+## 75: ETHOSCOPE_011 2016-07-29        15        no         2
+## 76: ETHOSCOPE_011 2016-07-29        16       yes         2
+## 77: ETHOSCOPE_011 2016-07-29        17        no         2
+## 78: ETHOSCOPE_011 2016-07-29        18        no         2
+## 79: ETHOSCOPE_011 2016-07-29        19        no         2
+## 80: ETHOSCOPE_011 2016-07-29        20       yes         2
+##      machine_name       date region_id treatment replicate
+##     expression_level
+##  1:             3.28
+##  2:             2.16
+##  3:             2.11
+##  4:             3.54
+##  5:             3.98
+##  6:             3.68
+##  7:             3.00
+##  8:             4.74
+##  9:             3.99
+## 10:             1.01
+## 11:             3.44
+## 12:             4.19
+## 13:             4.48
+## 14:             3.82
+## 15:             1.14
+## 16:             3.74
+## 17:             4.54
+## 18:             3.46
+## 19:             4.32
+## 20:             2.17
+## 21:             4.28
+## 22:             4.61
+## 23:             2.39
+## 24:             5.09
+## 25:             4.03
+## 26:             3.69
+## 27:             3.90
+## 28:             3.90
+## 29:             3.41
+## 30:             4.60
+## 31:             3.85
+## 32:             4.11
+## 33:             5.09
+## 34:             4.09
+## 35:             5.38
+## 36:             5.60
+## 37:             2.99
+## 38:             5.54
+## 39:             5.07
+## 40:             1.15
+## 41:             2.52
+## 42:             2.39
+## 43:             2.84
+## 44:             3.50
+## 45:             4.64
+## 46:             4.09
+## 47:             2.43
+## 48:             2.60
+## 49:             1.99
+## 50:             5.94
+## 51:             3.61
+## 52:             3.42
+## 53:             2.43
+## 54:             1.59
+## 55:             4.76
+## 56:             3.71
+## 57:             2.90
+## 58:             4.60
+## 59:             2.32
+## 60:             2.48
+## 61:             6.04
+## 62:             2.62
+## 63:             3.41
+## 64:             3.38
+## 65:             3.22
+## 66:             4.46
+## 67:             1.53
+## 68:             3.04
+## 69:             3.32
+## 70:             3.65
+## 71:             2.52
+## 72:             2.77
+## 73:             3.10
+## 74:             4.01
+## 75:             2.91
+## 76:             4.76
+## 77:             2.66
+## 78:             4.35
+## 79:             1.06
+## 80:             5.21
+##     expression_level</code></pre>
 <p>Each of the 80 animals (rows) is defined by two mandatory columns (metavariables):</p>
 <ul>
 <li><code>machine_name</code> – the name of the device used (e.g. <code>&quot;ETHOSCOPE_001&quot;</code>)</li>
 <li><code>date</code> – the date and time (<code>YYYY-MM-DD</code>) of the start of the experiment.</li>
 </ul>
-<p>In this experiment, we have only one condition, for simplicity. We define it as a custom column in the metadata (note that you could define many, with arbitrary names):</p>
+<p>We defined also custom columns – i.e. metavariable (note that you could define many, with arbitrary names):</p>
 <ul>
-<li><code>treatment</code> – A or B</li>
+<li><code>treatment</code> – “yes” or “no”, whether the drug was administered</li>
+<li><code>expression_level</code> – a continuous number [0, +Inf], how much a candidate gene is transcribed</li>
+<li><code>replicate</code> – 1 or 2, firth or second replicate</li>
 </ul>
+<p><strong>Importantly, you should be able to understand the experiment</strong>, and describe each animal, <strong>from the metadata file</strong>.</p>
 </div>
 </div>
 <div id="linking-1" class="section level2 unnumbered">
@@ -425,43 +524,731 @@ metadata</code></pre></div>
 <p><a href="metadata.html#linking-metadata">Linking</a> is the one necessary step before loading the data. It allocates a unique identifier to each animal.</p>
 <div id="local-data" class="section level3 unnumbered">
 <h3>Local data</h3>
+<p>If your data is already in your computer (as it is now sice you have downloaded it manually), you can simply link it like:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metadata &lt;-<span class="st"> </span><span class="kw">link_ethoscope_metadata</span>(metadata, 
                                     <span class="dt">result_dir =</span> <span class="st">&quot;ethoscope_results&quot;</span>)
 metadata</code></pre></div>
-<p>```</p>
 </div>
 <div id="remote-data" class="section level3 unnumbered">
 <h3>Remote Data</h3>
-</div>
-<div id="warnings-and-errors" class="section level3 unnumbered">
-<h3>Warnings and errors</h3>
+<p>In real life situations, when several experimenters are working in parallel, Users should not:</p>
+<ul>
+<li>Have to download all the data from all users at all time (very ineficient)</li>
+<li>Download data by hand from a server (error prone and time consuming)</li>
+</ul>
+<p>Instead, it will be more common that all the data is stored on an <strong>FTP</strong> server (i.e. a network drive). <code>scopr</code> allows us to look up in the metadata and download, incrementally, only the files needed. For more information about how to set up network backups check the <a href="https://qgeissmann.gitbooks.io/ethoscope-manual/administration-and-maintenance/backing-up-data.html">ethocope documentation</a>.</p>
+<p>In this context, we will be using <code>link_ethoscope_metadata_remote</code>. It works almost exactly like <code>link_ethoscope_metadata</code>, but takes a <code>remote_dir</code> argument. <code>remote_dir</code> is generally the address to an FTP directory.</p>
+<p>This is just an example that you will have to <strong>adapt to your own situation</strong>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">REMOTE_DIR &lt;-<span class="st"> &quot;ftp://my-share-drive.com/where/the-data/lives&quot;</span>
+RESULT_DIR &lt;-<span class="st"> &quot;/where/to/save/the/data&quot;</span> 
+
+metadata &lt;-<span class="st"> </span><span class="kw">link_ethoscope_metadata_remote</span>(metadata,
+                                      <span class="dt">remote_dir =</span>  REMOTE_DIR,
+                                      <span class="dt">result_dir =</span> RESULT_DIR,
+                                      <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>Note that, as long as you have an internet connection, you can use this function to link your metadata. It will not download datafile everytime (unless new data is available upstream).</p>
 </div>
 </div>
 <div id="loading-1" class="section level2 unnumbered">
 <h2>Loading</h2>
-<div id="default" class="section level3 unnumbered">
-<h3>Default</h3>
+<p>The core fucntion of <code>scopr</code> is <code>load_ethoscope()</code>. It is quite flexible and we will show here just a few examples of how to use it. <strong>Do have a look at the documentation</strong> (e.g. by running <code>?load_ethoscope</code>), if you want to know more.</p>
+<div id="default-raw-data" class="section level3 unnumbered">
+<h3>Default: raw data</h3>
+<p>The simplest thing one can do is to load <strong>all tracking data</strong>. However, this has sevral caveats:</p>
+<ul>
+<li>A lot (gigabytes) of data will be needed</li>
+<li>You will probably have to process the data immediatly after in order to extract biological meaning</li>
+</ul>
+<p>Here, we will just load data from animals in region 1 (metadata[region_id == 1]). As it is could otherwise be too much data:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metadata_subset &lt;-<span class="st"> </span>metadata[region_id <span class="op">==</span><span class="st"> </span><span class="dv">1</span>]
 dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata_subset, <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 <span class="kw">summary</span>(dt)</code></pre></div>
 <pre><code>## behavr table with:
 ##  4   individuals
-##  6   metavariables
+##  8   metavariables
 ##  8   variables
 ##  3.004648e+06    measurements
 ##  1   key (id)</code></pre>
+<p>Note that I set <code>verbose</code> to <code>FALSE</code>. This is to avoid printing progress. You may want to set it to <code>TRUE</code> (the default), so you can check how fast data loading is happening.</p>
+<p>It is also good practice to print your resutling behavr table (<code>dt</code> in this case):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(dt)</code></pre></div>
+<pre><code>## 
+##  ==== METADATA ====
+## 
+##                               id file_info  machine_name
+##                           &lt;fctr&gt;    &lt;list&gt;        &lt;char&gt;
+## 1: 2016-07-22_16-41-21_011d6b|01    &lt;list&gt; ETHOSCOPE_011
+## 2: 2016-07-22_16-43-29_009d6b|01    &lt;list&gt; ETHOSCOPE_009
+## 3: 2016-07-29_14-57-35_008d6b|01    &lt;list&gt; ETHOSCOPE_008
+## 4: 2016-07-29_14-59-49_011d6b|01    &lt;list&gt; ETHOSCOPE_011
+##                          machine_id            datetime region_id
+##                              &lt;char&gt;              &lt;POSc&gt;     &lt;int&gt;
+## 1: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         1
+## 2: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29         1
+## 3: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35         1
+## 4: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49         1
+##    treatment replicate expression_level
+##       &lt;char&gt;     &lt;int&gt;            &lt;num&gt;
+## 1:       yes         1             3.28
+## 2:       yes         1             4.28
+## 3:        no         2             2.52
+## 4:       yes         2             6.04
+## 
+##  ====== DATA ======
+## 
+##                                     id          t         x          y
+##                                 &lt;fctr&gt;      &lt;num&gt;     &lt;num&gt;      &lt;num&gt;
+##       1: 2016-07-22_16-41-21_011d6b|01     37.561 0.4003591 0.05565530
+##       2: 2016-07-22_16-41-21_011d6b|01     38.170 0.4021544 0.05565530
+##       3: 2016-07-22_16-41-21_011d6b|01     38.760 0.4021544 0.05565530
+##       4: 2016-07-22_16-41-21_011d6b|01     39.316 0.4039497 0.05385996
+##      ---                                                              
+## 3004644: 2016-07-29_14-59-49_011d6b|01 583498.570 0.8432432 0.04684685
+## 3004645: 2016-07-29_14-59-49_011d6b|01 583499.395 0.8306306 0.05585586
+## 3004646: 2016-07-29_14-59-49_011d6b|01 583500.285 0.8270270 0.04684685
+## 3004647: 2016-07-29_14-59-49_011d6b|01 583501.175 0.8432432 0.04504505
+## 3004648: 2016-07-29_14-59-49_011d6b|01 583502.037 0.8396396 0.05045045
+##                   w          h   phi xy_dist_log10x1000 has_interacted
+##               &lt;num&gt;      &lt;num&gt; &lt;int&gt;              &lt;int&gt;          &lt;int&gt;
+##       1: 0.05206463 0.02154399   152               -392              0
+##       2: 0.04308797 0.01615799   159              -2453              0
+##       3: 0.04129264 0.01795332   162              -2633              0
+##       4: 0.03949731 0.01615799   153              -2513              0
+##      ---                                                              
+## 3004644: 0.03783784 0.02522523     0              -2045              0
+## 3004645: 0.03963964 0.02342342   172              -1756              0
+## 3004646: 0.04324324 0.02522523    10              -1959              0
+## 3004647: 0.03963964 0.02522523   164              -1785              0
+## 3004648: 0.03783784 0.02702703   169              -2097              0</code></pre>
+<p>It shows us the metadata, and the firt and last few lines of actual data. In the data, there are columns such as “x” and “y” that record position, but also others that may not make immediate sense to you. In practice, loading raw data is rare for long experiments, and I would recommend doing it only for prototyping and such.</p>
 </div>
 <div id="preprocessing" class="section level3 unnumbered">
 <h3>Preprocessing</h3>
+<p>As dissussed before, it is inneficient and not always possible to load all raw data for hundreads of animals. Instead, we can <strong>preprocess data on the go</strong>. In the context of activity and sleep analysis, we can describe movement in windows of 10s (<a href="http://journals.plos.org/plosbiology/article/file?type=supplementary&amp;id=info:doi/10.1371/journal.pbio.2003026.s005">techinical details here</a>). This is implemented in the function <code>sleep_annotation</code> of our <code>sleepr</code> package. Ensure you have installed <code>sleepr</code> as well (<code>devtools::install_github(&quot;rethomics/sleepr&quot;)</code>).</p>
+<p>When running this function:</p>
+<ul>
+<li>The activity in each 10s of data will be scored</li>
+<li>The position will be kept</li>
+<li>Sleep will be scored according to the five minute rule</li>
+</ul>
+<p>to apply a function to <strong>all individual data, as they are loaded</strong>, we can use the <code>FUN</code> argument:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata,
+                       <span class="dt">FUN =</span> sleepr<span class="op">::</span>sleep_annotation, 
+                       <span class="dt">verbose=</span><span class="ot">FALSE</span>)
+<span class="kw">summary</span>(dt)</code></pre></div>
+<pre><code>## behavr table with:
+##  80  individuals
+##  8   metavariables
+##  8   variables
+##  4.641275e+06    measurements
+##  1   key (id)</code></pre>
+<p>Again, we have a look at the resulting table:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(dt)</code></pre></div>
+<pre><code>## 
+##  ==== METADATA ====
+## 
+##                                id file_info  machine_name
+##                            &lt;fctr&gt;    &lt;list&gt;        &lt;char&gt;
+##  1: 2016-07-22_16-41-21_011d6b|01    &lt;list&gt; ETHOSCOPE_011
+##  2: 2016-07-22_16-41-21_011d6b|02    &lt;list&gt; ETHOSCOPE_011
+##  3: 2016-07-22_16-41-21_011d6b|03    &lt;list&gt; ETHOSCOPE_011
+##  4: 2016-07-22_16-41-21_011d6b|04    &lt;list&gt; ETHOSCOPE_011
+##  5: 2016-07-22_16-41-21_011d6b|05    &lt;list&gt; ETHOSCOPE_011
+##  6: 2016-07-22_16-41-21_011d6b|06    &lt;list&gt; ETHOSCOPE_011
+##  7: 2016-07-22_16-41-21_011d6b|07    &lt;list&gt; ETHOSCOPE_011
+##  8: 2016-07-22_16-41-21_011d6b|08    &lt;list&gt; ETHOSCOPE_011
+##  9: 2016-07-22_16-41-21_011d6b|09    &lt;list&gt; ETHOSCOPE_011
+## 10: 2016-07-22_16-41-21_011d6b|10    &lt;list&gt; ETHOSCOPE_011
+## 11: 2016-07-22_16-41-21_011d6b|11    &lt;list&gt; ETHOSCOPE_011
+## 12: 2016-07-22_16-41-21_011d6b|12    &lt;list&gt; ETHOSCOPE_011
+## 13: 2016-07-22_16-41-21_011d6b|13    &lt;list&gt; ETHOSCOPE_011
+## 14: 2016-07-22_16-41-21_011d6b|14    &lt;list&gt; ETHOSCOPE_011
+## 15: 2016-07-22_16-41-21_011d6b|15    &lt;list&gt; ETHOSCOPE_011
+## 16: 2016-07-22_16-41-21_011d6b|16    &lt;list&gt; ETHOSCOPE_011
+## 17: 2016-07-22_16-41-21_011d6b|17    &lt;list&gt; ETHOSCOPE_011
+## 18: 2016-07-22_16-41-21_011d6b|18    &lt;list&gt; ETHOSCOPE_011
+## 19: 2016-07-22_16-41-21_011d6b|19    &lt;list&gt; ETHOSCOPE_011
+## 20: 2016-07-22_16-41-21_011d6b|20    &lt;list&gt; ETHOSCOPE_011
+## 21: 2016-07-22_16-43-29_009d6b|01    &lt;list&gt; ETHOSCOPE_009
+## 22: 2016-07-22_16-43-29_009d6b|02    &lt;list&gt; ETHOSCOPE_009
+## 23: 2016-07-22_16-43-29_009d6b|03    &lt;list&gt; ETHOSCOPE_009
+## 24: 2016-07-22_16-43-29_009d6b|04    &lt;list&gt; ETHOSCOPE_009
+## 25: 2016-07-22_16-43-29_009d6b|05    &lt;list&gt; ETHOSCOPE_009
+## 26: 2016-07-22_16-43-29_009d6b|06    &lt;list&gt; ETHOSCOPE_009
+## 27: 2016-07-22_16-43-29_009d6b|07    &lt;list&gt; ETHOSCOPE_009
+## 28: 2016-07-22_16-43-29_009d6b|08    &lt;list&gt; ETHOSCOPE_009
+## 29: 2016-07-22_16-43-29_009d6b|09    &lt;list&gt; ETHOSCOPE_009
+## 30: 2016-07-22_16-43-29_009d6b|10    &lt;list&gt; ETHOSCOPE_009
+## 31: 2016-07-22_16-43-29_009d6b|11    &lt;list&gt; ETHOSCOPE_009
+## 32: 2016-07-22_16-43-29_009d6b|12    &lt;list&gt; ETHOSCOPE_009
+## 33: 2016-07-22_16-43-29_009d6b|13    &lt;list&gt; ETHOSCOPE_009
+## 34: 2016-07-22_16-43-29_009d6b|14    &lt;list&gt; ETHOSCOPE_009
+## 35: 2016-07-22_16-43-29_009d6b|15    &lt;list&gt; ETHOSCOPE_009
+## 36: 2016-07-22_16-43-29_009d6b|16    &lt;list&gt; ETHOSCOPE_009
+## 37: 2016-07-22_16-43-29_009d6b|17    &lt;list&gt; ETHOSCOPE_009
+## 38: 2016-07-22_16-43-29_009d6b|18    &lt;list&gt; ETHOSCOPE_009
+## 39: 2016-07-22_16-43-29_009d6b|19    &lt;list&gt; ETHOSCOPE_009
+## 40: 2016-07-22_16-43-29_009d6b|20    &lt;list&gt; ETHOSCOPE_009
+## 41: 2016-07-29_14-57-35_008d6b|01    &lt;list&gt; ETHOSCOPE_008
+## 42: 2016-07-29_14-57-35_008d6b|02    &lt;list&gt; ETHOSCOPE_008
+## 43: 2016-07-29_14-57-35_008d6b|03    &lt;list&gt; ETHOSCOPE_008
+## 44: 2016-07-29_14-57-35_008d6b|04    &lt;list&gt; ETHOSCOPE_008
+## 45: 2016-07-29_14-57-35_008d6b|05    &lt;list&gt; ETHOSCOPE_008
+## 46: 2016-07-29_14-57-35_008d6b|06    &lt;list&gt; ETHOSCOPE_008
+## 47: 2016-07-29_14-57-35_008d6b|07    &lt;list&gt; ETHOSCOPE_008
+## 48: 2016-07-29_14-57-35_008d6b|08    &lt;list&gt; ETHOSCOPE_008
+## 49: 2016-07-29_14-57-35_008d6b|09    &lt;list&gt; ETHOSCOPE_008
+## 50: 2016-07-29_14-57-35_008d6b|10    &lt;list&gt; ETHOSCOPE_008
+## 51: 2016-07-29_14-57-35_008d6b|11    &lt;list&gt; ETHOSCOPE_008
+## 52: 2016-07-29_14-57-35_008d6b|12    &lt;list&gt; ETHOSCOPE_008
+## 53: 2016-07-29_14-57-35_008d6b|13    &lt;list&gt; ETHOSCOPE_008
+## 54: 2016-07-29_14-57-35_008d6b|14    &lt;list&gt; ETHOSCOPE_008
+## 55: 2016-07-29_14-57-35_008d6b|15    &lt;list&gt; ETHOSCOPE_008
+## 56: 2016-07-29_14-57-35_008d6b|16    &lt;list&gt; ETHOSCOPE_008
+## 57: 2016-07-29_14-57-35_008d6b|17    &lt;list&gt; ETHOSCOPE_008
+## 58: 2016-07-29_14-57-35_008d6b|18    &lt;list&gt; ETHOSCOPE_008
+## 59: 2016-07-29_14-57-35_008d6b|19    &lt;list&gt; ETHOSCOPE_008
+## 60: 2016-07-29_14-57-35_008d6b|20    &lt;list&gt; ETHOSCOPE_008
+## 61: 2016-07-29_14-59-49_011d6b|01    &lt;list&gt; ETHOSCOPE_011
+## 62: 2016-07-29_14-59-49_011d6b|02    &lt;list&gt; ETHOSCOPE_011
+## 63: 2016-07-29_14-59-49_011d6b|03    &lt;list&gt; ETHOSCOPE_011
+## 64: 2016-07-29_14-59-49_011d6b|04    &lt;list&gt; ETHOSCOPE_011
+## 65: 2016-07-29_14-59-49_011d6b|05    &lt;list&gt; ETHOSCOPE_011
+## 66: 2016-07-29_14-59-49_011d6b|06    &lt;list&gt; ETHOSCOPE_011
+## 67: 2016-07-29_14-59-49_011d6b|07    &lt;list&gt; ETHOSCOPE_011
+## 68: 2016-07-29_14-59-49_011d6b|08    &lt;list&gt; ETHOSCOPE_011
+## 69: 2016-07-29_14-59-49_011d6b|09    &lt;list&gt; ETHOSCOPE_011
+## 70: 2016-07-29_14-59-49_011d6b|10    &lt;list&gt; ETHOSCOPE_011
+## 71: 2016-07-29_14-59-49_011d6b|11    &lt;list&gt; ETHOSCOPE_011
+## 72: 2016-07-29_14-59-49_011d6b|12    &lt;list&gt; ETHOSCOPE_011
+## 73: 2016-07-29_14-59-49_011d6b|13    &lt;list&gt; ETHOSCOPE_011
+## 74: 2016-07-29_14-59-49_011d6b|14    &lt;list&gt; ETHOSCOPE_011
+## 75: 2016-07-29_14-59-49_011d6b|15    &lt;list&gt; ETHOSCOPE_011
+## 76: 2016-07-29_14-59-49_011d6b|16    &lt;list&gt; ETHOSCOPE_011
+## 77: 2016-07-29_14-59-49_011d6b|17    &lt;list&gt; ETHOSCOPE_011
+## 78: 2016-07-29_14-59-49_011d6b|18    &lt;list&gt; ETHOSCOPE_011
+## 79: 2016-07-29_14-59-49_011d6b|19    &lt;list&gt; ETHOSCOPE_011
+## 80: 2016-07-29_14-59-49_011d6b|20    &lt;list&gt; ETHOSCOPE_011
+##                                id file_info  machine_name
+##                           machine_id            datetime region_id
+##                               &lt;char&gt;              &lt;POSc&gt;     &lt;int&gt;
+##  1: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         1
+##  2: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         2
+##  3: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         3
+##  4: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         4
+##  5: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         5
+##  6: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         6
+##  7: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         7
+##  8: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         8
+##  9: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         9
+## 10: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21        10
+## 11: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21        11
+## 12: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21        12
+## 13: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21        13
+## 14: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21        14
+## 15: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21        15
+## 16: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21        16
+## 17: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21        17
+## 18: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21        18
+## 19: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21        19
+## 20: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21        20
+## 21: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29         1
+## 22: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29         2
+## 23: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29         3
+## 24: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29         4
+## 25: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29         5
+## 26: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29         6
+## 27: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29         7
+## 28: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29         8
+## 29: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29         9
+## 30: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29        10
+## 31: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29        11
+## 32: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29        12
+## 33: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29        13
+## 34: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29        14
+## 35: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29        15
+## 36: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29        16
+## 37: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29        17
+## 38: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29        18
+## 39: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29        19
+## 40: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29        20
+## 41: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35         1
+## 42: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35         2
+## 43: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35         3
+## 44: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35         4
+## 45: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35         5
+## 46: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35         6
+## 47: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35         7
+## 48: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35         8
+## 49: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35         9
+## 50: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35        10
+## 51: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35        11
+## 52: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35        12
+## 53: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35        13
+## 54: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35        14
+## 55: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35        15
+## 56: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35        16
+## 57: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35        17
+## 58: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35        18
+## 59: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35        19
+## 60: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35        20
+## 61: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49         1
+## 62: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49         2
+## 63: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49         3
+## 64: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49         4
+## 65: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49         5
+## 66: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49         6
+## 67: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49         7
+## 68: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49         8
+## 69: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49         9
+## 70: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        10
+## 71: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        11
+## 72: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        12
+## 73: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        13
+## 74: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        14
+## 75: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        15
+## 76: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        16
+## 77: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        17
+## 78: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        18
+## 79: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        19
+## 80: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        20
+##                           machine_id            datetime region_id
+##     treatment replicate expression_level
+##        &lt;char&gt;     &lt;int&gt;            &lt;num&gt;
+##  1:       yes         1             3.28
+##  2:        no         1             2.16
+##  3:       yes         1             2.11
+##  4:       yes         1             3.54
+##  5:       yes         1             3.98
+##  6:        no         1             3.68
+##  7:       yes         1             3.00
+##  8:       yes         1             4.74
+##  9:        no         1             3.99
+## 10:       yes         1             1.01
+## 11:        no         1             3.44
+## 12:       yes         1             4.19
+## 13:       yes         1             4.48
+## 14:        no         1             3.82
+## 15:        no         1             1.14
+## 16:       yes         1             3.74
+## 17:       yes         1             4.54
+## 18:       yes         1             3.46
+## 19:        no         1             4.32
+## 20:       yes         1             2.17
+## 21:       yes         1             4.28
+## 22:       yes         1             4.61
+## 23:        no         1             2.39
+## 24:       yes         1             5.09
+## 25:       yes         1             4.03
+## 26:        no         1             3.69
+## 27:       yes         1             3.90
+## 28:        no         1             3.90
+## 29:       yes         1             3.41
+## 30:       yes         1             4.60
+## 31:       yes         1             3.85
+## 32:       yes         1             4.11
+## 33:        no         1             5.09
+## 34:       yes         1             4.09
+## 35:       yes         1             5.38
+## 36:        no         1             5.60
+## 37:        no         1             2.99
+## 38:       yes         1             5.54
+## 39:       yes         1             5.07
+## 40:        no         1             1.15
+## 41:        no         2             2.52
+## 42:        no         2             2.39
+## 43:       yes         2             2.84
+## 44:        no         2             3.50
+## 45:       yes         2             4.64
+## 46:        no         2             4.09
+## 47:        no         2             2.43
+## 48:        no         2             2.60
+## 49:        no         2             1.99
+## 50:       yes         2             5.94
+## 51:        no         2             3.61
+## 52:       yes         2             3.42
+## 53:        no         2             2.43
+## 54:        no         2             1.59
+## 55:       yes         2             4.76
+## 56:        no         2             3.71
+## 57:        no         2             2.90
+## 58:       yes         2             4.60
+## 59:        no         2             2.32
+## 60:        no         2             2.48
+## 61:       yes         2             6.04
+## 62:        no         2             2.62
+## 63:       yes         2             3.41
+## 64:        no         2             3.38
+## 65:       yes         2             3.22
+## 66:       yes         2             4.46
+## 67:        no         2             1.53
+## 68:        no         2             3.04
+## 69:       yes         2             3.32
+## 70:        no         2             3.65
+## 71:        no         2             2.52
+## 72:        no         2             2.77
+## 73:       yes         2             3.10
+## 74:        no         2             4.01
+## 75:        no         2             2.91
+## 76:       yes         2             4.76
+## 77:        no         2             2.66
+## 78:        no         2             4.35
+## 79:        no         2             1.06
+## 80:       yes         2             5.21
+##     treatment replicate expression_level
+## 
+##  ====== DATA ======
+## 
+##                                     id      t         x max_velocity
+##                                 &lt;fctr&gt;  &lt;num&gt;     &lt;num&gt;        &lt;num&gt;
+##       1: 2016-07-22_16-41-21_011d6b|01     40 0.4021544   17.4533479
+##       2: 2016-07-22_16-41-21_011d6b|01     50 0.6014363   13.0280299
+##       3: 2016-07-22_16-41-21_011d6b|01     60 0.7612208    4.7849648
+##       4: 2016-07-22_16-41-21_011d6b|01     70 0.7737882    0.8627376
+##      ---                                                            
+## 4641271: 2016-07-29_14-59-49_011d6b|20 583450 0.4440433    6.8529687
+## 4641272: 2016-07-29_14-59-49_011d6b|20 583460 0.3989170   19.8097386
+## 4641273: 2016-07-29_14-59-49_011d6b|20 583470 0.1480144    3.8714954
+## 4641274: 2016-07-29_14-59-49_011d6b|20 583480 0.1660650   23.0610324
+## 4641275: 2016-07-29_14-59-49_011d6b|20 583490 0.4151625   29.4359967
+##          interactions beam_crosses moving asleep is_interpolated
+##                 &lt;int&gt;        &lt;int&gt; &lt;lgcl&gt; &lt;lgcl&gt;          &lt;lgcl&gt;
+##       1:            0            1   TRUE  FALSE           FALSE
+##       2:            0            0   TRUE  FALSE           FALSE
+##       3:            0            0   TRUE  FALSE           FALSE
+##       4:            0            0  FALSE  FALSE           FALSE
+##      ---                                                        
+## 4641271:            0            0   TRUE  FALSE           FALSE
+## 4641272:            0            0   TRUE  FALSE           FALSE
+## 4641273:            0            0   TRUE  FALSE           FALSE
+## 4641274:            0            0   TRUE  FALSE           FALSE
+## 4641275:            0            1   TRUE  FALSE           FALSE</code></pre>
+<p>We have several variable. the important ones are:</p>
+<ul>
+<li><code>t</code> – the time, in s, sample eveyr 10s</li>
+<li><code>x</code> – the position in the tube (0 = left, 1=right)</li>
+<li><code>beam_cross</code> – how many times the midline was crossed within the 10s window</li>
+<li><code>moving</code> – whether any movement was detected in this time window</li>
+<li><code>asleep</code> – whether the animal is asleep during this 10s (5min rule)</li>
+</ul>
+<p>Note that you can use other functions than <code>sleep_annotation</code> (this is just an example) and even define your own!</p>
 </div>
 <div id="zt0-1" class="section level3 unnumbered">
 <h3>ZT0</h3>
+<p>By default, <strong>the time is expressed relative to the onset of the experiment</strong>. In other words, t0 is when you click on the “start tracking” button. In the context of sleep, we care more about time <strong>within a day</strong>. Therefore, we express time relative to ZT0 (i.e the hour of the day when the L phase starts). In our lab, it is at <strong>09:00:00, GMT</strong>. In <code>load_ethoscope</code>, we translate that by using the argument <code>reference_hour=9.0</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata,
+             <span class="dt">reference_hour=</span><span class="fl">9.0</span>, 
+                       <span class="dt">FUN =</span> sleepr<span class="op">::</span>sleep_annotation, 
+                       <span class="dt">verbose=</span><span class="ot">FALSE</span>)</code></pre></div>
 </div>
 <div id="cache-directory" class="section level3 unnumbered">
 <h3>Cache directory</h3>
+<p>One issue with loading ethoscope data is thta it is <strong>relativelly slow</strong>. For instance, according to our computer, you may take half an hour to load data from 500 animals x 1 week. In your daily life, you will often need to close R and open it again to analyse things differently, or simply change simple things on some figures. You really don’t want to wait too long in this sort of situations.</p>
+<p>To address this issue, <code>load_ethoscope</code> uses <a href="https://en.wikipedia.org/wiki/Cache_(computing)">caching</a>. In other words, whenever you load any data, it stores a snapshot on the disk. then, the <em>next time</em> you load the data, it takes directly the snapshot. This way you will go one or two orders of magnitudes faster!</p>
+<p>The first time, everything will take long:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(
+  dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata,
+             <span class="dt">reference_hour=</span><span class="fl">9.0</span>, 
+                       <span class="dt">FUN =</span> sleepr<span class="op">::</span>sleep_annotation, 
+             <span class="dt">cache =</span> <span class="st">&quot;ethoscope_cache&quot;</span>, 
+                       <span class="dt">verbose=</span><span class="ot">FALSE</span>)
+)</code></pre></div>
+<pre><code>##    user  system elapsed 
+## 141.288   1.976 143.070</code></pre>
+<p>However, the next time, we do the same thing way faster:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(
+  dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata,
+             <span class="dt">reference_hour=</span><span class="fl">9.0</span>, 
+                       <span class="dt">FUN =</span> sleepr<span class="op">::</span>sleep_annotation, 
+             <span class="dt">cache =</span> <span class="st">&quot;ethoscope_cache&quot;</span>, 
+                       <span class="dt">verbose=</span><span class="ot">FALSE</span>)
+)</code></pre></div>
+<pre><code>##    user  system elapsed 
+##   1.828   0.036   1.824</code></pre>
 </div>
-<div id="warnings-and-errors-1" class="section level3 unnumbered">
-<h3>Warnings and errors</h3>
+</div>
+<div id="quality-control-1" class="section level2 unnumbered">
+<h2>Quality control</h2>
+<p>One way to check everything is in order with our data is to visualise it with a tile plot. For instance, here, the variable <code>asleep</code>, for each animal (rows in the plot) over time (columns):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggetho)
+<span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">z=</span>asleep)) <span class="op">+</span>
+<span class="st">      </span><span class="kw">stat_tile_etho</span>() <span class="op">+</span>
+<span class="st">      </span><span class="kw">stat_ld_annotations</span>()</code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-40-1.png" width="864" /></p>
+<p>This allows us to spot possible outliers/missing data/artefact and try to understand what to do whith them. More about tiles plots in the <a href="ggetho.html">visualisation chapter</a>.</p>
+</div>
+<div id="and-then" class="section level2 unnumbered">
+<h2>And then?</h2>
+<p>Just a teaser to show you how we can already work on our biological question at this stage,</p>
+<div id="sleep-amount-vs-treatment" class="section level3 unnumbered">
+<h3>Sleep amount vs treatment</h3>
+<p>We can start to see that <em>treatment increases sleep</em>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggetho)
+<span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">y=</span>asleep, <span class="dt">colour=</span>treatment), <span class="dt">time_wrap =</span> <span class="kw">hours</span>(<span class="dv">24</span>)) <span class="op">+</span>
+<span class="st">      </span><span class="kw">stat_pop_etho</span>() <span class="op">+</span>
+<span class="st">      </span><span class="kw">stat_ld_annotations</span>()</code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
+</div>
+<div id="total-sleep-vs-expression-level" class="section level3">
+<h3><span class="header-section-number">0.0.1</span> Total sleep vs expression level</h3>
+<p>First we <a href="behavr.html#summerise-data">summarise</a> the total proportion of time spent sleeping for each animal (i.e. by id).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">summary_dt &lt;-<span class="st"> </span>dt[, .(<span class="dt">sleep_fraction =</span> <span class="kw">mean</span>(asleep)), by=id]</code></pre></div>
+<p>Then we rejoin this summary to metadata:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">summary_dt &lt;-<span class="st"> </span><span class="kw">rejoin</span>(summary_dt)
+summary_dt</code></pre></div>
+<pre><code>##                                id file_info  machine_name
+##  1: 2016-07-22_16-41-21_011d6b|01    &lt;list&gt; ETHOSCOPE_011
+##  2: 2016-07-22_16-41-21_011d6b|02    &lt;list&gt; ETHOSCOPE_011
+##  3: 2016-07-22_16-41-21_011d6b|03    &lt;list&gt; ETHOSCOPE_011
+##  4: 2016-07-22_16-41-21_011d6b|04    &lt;list&gt; ETHOSCOPE_011
+##  5: 2016-07-22_16-41-21_011d6b|05    &lt;list&gt; ETHOSCOPE_011
+##  6: 2016-07-22_16-41-21_011d6b|06    &lt;list&gt; ETHOSCOPE_011
+##  7: 2016-07-22_16-41-21_011d6b|07    &lt;list&gt; ETHOSCOPE_011
+##  8: 2016-07-22_16-41-21_011d6b|08    &lt;list&gt; ETHOSCOPE_011
+##  9: 2016-07-22_16-41-21_011d6b|09    &lt;list&gt; ETHOSCOPE_011
+## 10: 2016-07-22_16-41-21_011d6b|10    &lt;list&gt; ETHOSCOPE_011
+## 11: 2016-07-22_16-41-21_011d6b|11    &lt;list&gt; ETHOSCOPE_011
+## 12: 2016-07-22_16-41-21_011d6b|12    &lt;list&gt; ETHOSCOPE_011
+## 13: 2016-07-22_16-41-21_011d6b|13    &lt;list&gt; ETHOSCOPE_011
+## 14: 2016-07-22_16-41-21_011d6b|14    &lt;list&gt; ETHOSCOPE_011
+## 15: 2016-07-22_16-41-21_011d6b|15    &lt;list&gt; ETHOSCOPE_011
+## 16: 2016-07-22_16-41-21_011d6b|16    &lt;list&gt; ETHOSCOPE_011
+## 17: 2016-07-22_16-41-21_011d6b|17    &lt;list&gt; ETHOSCOPE_011
+## 18: 2016-07-22_16-41-21_011d6b|18    &lt;list&gt; ETHOSCOPE_011
+## 19: 2016-07-22_16-41-21_011d6b|19    &lt;list&gt; ETHOSCOPE_011
+## 20: 2016-07-22_16-41-21_011d6b|20    &lt;list&gt; ETHOSCOPE_011
+## 21: 2016-07-22_16-43-29_009d6b|01    &lt;list&gt; ETHOSCOPE_009
+## 22: 2016-07-22_16-43-29_009d6b|02    &lt;list&gt; ETHOSCOPE_009
+## 23: 2016-07-22_16-43-29_009d6b|03    &lt;list&gt; ETHOSCOPE_009
+## 24: 2016-07-22_16-43-29_009d6b|04    &lt;list&gt; ETHOSCOPE_009
+## 25: 2016-07-22_16-43-29_009d6b|05    &lt;list&gt; ETHOSCOPE_009
+## 26: 2016-07-22_16-43-29_009d6b|06    &lt;list&gt; ETHOSCOPE_009
+## 27: 2016-07-22_16-43-29_009d6b|07    &lt;list&gt; ETHOSCOPE_009
+## 28: 2016-07-22_16-43-29_009d6b|08    &lt;list&gt; ETHOSCOPE_009
+## 29: 2016-07-22_16-43-29_009d6b|09    &lt;list&gt; ETHOSCOPE_009
+## 30: 2016-07-22_16-43-29_009d6b|10    &lt;list&gt; ETHOSCOPE_009
+## 31: 2016-07-22_16-43-29_009d6b|11    &lt;list&gt; ETHOSCOPE_009
+## 32: 2016-07-22_16-43-29_009d6b|12    &lt;list&gt; ETHOSCOPE_009
+## 33: 2016-07-22_16-43-29_009d6b|13    &lt;list&gt; ETHOSCOPE_009
+## 34: 2016-07-22_16-43-29_009d6b|14    &lt;list&gt; ETHOSCOPE_009
+## 35: 2016-07-22_16-43-29_009d6b|15    &lt;list&gt; ETHOSCOPE_009
+## 36: 2016-07-22_16-43-29_009d6b|16    &lt;list&gt; ETHOSCOPE_009
+## 37: 2016-07-22_16-43-29_009d6b|17    &lt;list&gt; ETHOSCOPE_009
+## 38: 2016-07-22_16-43-29_009d6b|18    &lt;list&gt; ETHOSCOPE_009
+## 39: 2016-07-22_16-43-29_009d6b|19    &lt;list&gt; ETHOSCOPE_009
+## 40: 2016-07-22_16-43-29_009d6b|20    &lt;list&gt; ETHOSCOPE_009
+## 41: 2016-07-29_14-57-35_008d6b|01    &lt;list&gt; ETHOSCOPE_008
+## 42: 2016-07-29_14-57-35_008d6b|02    &lt;list&gt; ETHOSCOPE_008
+## 43: 2016-07-29_14-57-35_008d6b|03    &lt;list&gt; ETHOSCOPE_008
+## 44: 2016-07-29_14-57-35_008d6b|04    &lt;list&gt; ETHOSCOPE_008
+## 45: 2016-07-29_14-57-35_008d6b|05    &lt;list&gt; ETHOSCOPE_008
+## 46: 2016-07-29_14-57-35_008d6b|06    &lt;list&gt; ETHOSCOPE_008
+## 47: 2016-07-29_14-57-35_008d6b|07    &lt;list&gt; ETHOSCOPE_008
+## 48: 2016-07-29_14-57-35_008d6b|08    &lt;list&gt; ETHOSCOPE_008
+## 49: 2016-07-29_14-57-35_008d6b|09    &lt;list&gt; ETHOSCOPE_008
+## 50: 2016-07-29_14-57-35_008d6b|10    &lt;list&gt; ETHOSCOPE_008
+## 51: 2016-07-29_14-57-35_008d6b|11    &lt;list&gt; ETHOSCOPE_008
+## 52: 2016-07-29_14-57-35_008d6b|12    &lt;list&gt; ETHOSCOPE_008
+## 53: 2016-07-29_14-57-35_008d6b|13    &lt;list&gt; ETHOSCOPE_008
+## 54: 2016-07-29_14-57-35_008d6b|14    &lt;list&gt; ETHOSCOPE_008
+## 55: 2016-07-29_14-57-35_008d6b|15    &lt;list&gt; ETHOSCOPE_008
+## 56: 2016-07-29_14-57-35_008d6b|16    &lt;list&gt; ETHOSCOPE_008
+## 57: 2016-07-29_14-57-35_008d6b|17    &lt;list&gt; ETHOSCOPE_008
+## 58: 2016-07-29_14-57-35_008d6b|18    &lt;list&gt; ETHOSCOPE_008
+## 59: 2016-07-29_14-57-35_008d6b|19    &lt;list&gt; ETHOSCOPE_008
+## 60: 2016-07-29_14-57-35_008d6b|20    &lt;list&gt; ETHOSCOPE_008
+## 61: 2016-07-29_14-59-49_011d6b|01    &lt;list&gt; ETHOSCOPE_011
+## 62: 2016-07-29_14-59-49_011d6b|02    &lt;list&gt; ETHOSCOPE_011
+## 63: 2016-07-29_14-59-49_011d6b|03    &lt;list&gt; ETHOSCOPE_011
+## 64: 2016-07-29_14-59-49_011d6b|04    &lt;list&gt; ETHOSCOPE_011
+## 65: 2016-07-29_14-59-49_011d6b|05    &lt;list&gt; ETHOSCOPE_011
+## 66: 2016-07-29_14-59-49_011d6b|06    &lt;list&gt; ETHOSCOPE_011
+## 67: 2016-07-29_14-59-49_011d6b|07    &lt;list&gt; ETHOSCOPE_011
+## 68: 2016-07-29_14-59-49_011d6b|08    &lt;list&gt; ETHOSCOPE_011
+## 69: 2016-07-29_14-59-49_011d6b|09    &lt;list&gt; ETHOSCOPE_011
+## 70: 2016-07-29_14-59-49_011d6b|10    &lt;list&gt; ETHOSCOPE_011
+## 71: 2016-07-29_14-59-49_011d6b|11    &lt;list&gt; ETHOSCOPE_011
+## 72: 2016-07-29_14-59-49_011d6b|12    &lt;list&gt; ETHOSCOPE_011
+## 73: 2016-07-29_14-59-49_011d6b|13    &lt;list&gt; ETHOSCOPE_011
+## 74: 2016-07-29_14-59-49_011d6b|14    &lt;list&gt; ETHOSCOPE_011
+## 75: 2016-07-29_14-59-49_011d6b|15    &lt;list&gt; ETHOSCOPE_011
+## 76: 2016-07-29_14-59-49_011d6b|16    &lt;list&gt; ETHOSCOPE_011
+## 77: 2016-07-29_14-59-49_011d6b|17    &lt;list&gt; ETHOSCOPE_011
+## 78: 2016-07-29_14-59-49_011d6b|18    &lt;list&gt; ETHOSCOPE_011
+## 79: 2016-07-29_14-59-49_011d6b|19    &lt;list&gt; ETHOSCOPE_011
+## 80: 2016-07-29_14-59-49_011d6b|20    &lt;list&gt; ETHOSCOPE_011
+##                                id file_info  machine_name
+##                           machine_id            datetime region_id
+##  1: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         1
+##  2: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         2
+##  3: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         3
+##  4: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         4
+##  5: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         5
+##  6: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         6
+##  7: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         7
+##  8: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         8
+##  9: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         9
+## 10: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21        10
+## 11: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21        11
+## 12: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21        12
+## 13: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21        13
+## 14: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21        14
+## 15: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21        15
+## 16: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21        16
+## 17: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21        17
+## 18: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21        18
+## 19: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21        19
+## 20: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21        20
+## 21: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29         1
+## 22: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29         2
+## 23: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29         3
+## 24: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29         4
+## 25: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29         5
+## 26: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29         6
+## 27: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29         7
+## 28: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29         8
+## 29: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29         9
+## 30: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29        10
+## 31: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29        11
+## 32: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29        12
+## 33: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29        13
+## 34: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29        14
+## 35: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29        15
+## 36: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29        16
+## 37: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29        17
+## 38: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29        18
+## 39: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29        19
+## 40: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29        20
+## 41: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35         1
+## 42: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35         2
+## 43: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35         3
+## 44: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35         4
+## 45: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35         5
+## 46: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35         6
+## 47: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35         7
+## 48: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35         8
+## 49: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35         9
+## 50: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35        10
+## 51: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35        11
+## 52: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35        12
+## 53: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35        13
+## 54: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35        14
+## 55: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35        15
+## 56: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35        16
+## 57: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35        17
+## 58: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35        18
+## 59: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35        19
+## 60: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35        20
+## 61: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49         1
+## 62: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49         2
+## 63: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49         3
+## 64: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49         4
+## 65: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49         5
+## 66: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49         6
+## 67: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49         7
+## 68: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49         8
+## 69: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49         9
+## 70: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        10
+## 71: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        11
+## 72: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        12
+## 73: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        13
+## 74: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        14
+## 75: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        15
+## 76: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        16
+## 77: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        17
+## 78: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        18
+## 79: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        19
+## 80: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        20
+##                           machine_id            datetime region_id
+##     treatment replicate expression_level sleep_fraction
+##  1:       yes         1             3.28      0.5716289
+##  2:        no         1             2.16      0.3962078
+##  3:       yes         1             2.11      0.5480788
+##  4:       yes         1             3.54      0.5802635
+##  5:       yes         1             3.98      0.5451192
+##  6:        no         1             3.68      0.3968795
+##  7:       yes         1             3.00      0.5176886
+##  8:       yes         1             4.74      0.3551403
+##  9:        no         1             3.99      0.4430033
+## 10:       yes         1             1.01      0.4234258
+## 11:        no         1             3.44      0.4087068
+## 12:       yes         1             4.19      0.5278543
+## 13:       yes         1             4.48      0.5471531
+## 14:        no         1             3.82      0.2558361
+## 15:        no         1             1.14      0.3939866
+## 16:       yes         1             3.74      0.4609936
+## 17:       yes         1             4.54      0.4561686
+## 18:       yes         1             3.46      0.4323440
+## 19:        no         1             4.32      0.3899770
+## 20:       yes         1             2.17      0.5682991
+## 21:       yes         1             4.28      0.3582056
+## 22:       yes         1             4.61      0.5332323
+## 23:        no         1             2.39      0.5093013
+## 24:       yes         1             5.09      0.4959903
+## 25:       yes         1             4.03      0.5526111
+## 26:        no         1             3.69      0.4884781
+## 27:       yes         1             3.90      0.5646759
+## 28:        no         1             3.90      0.2808494
+## 29:       yes         1             3.41      0.4224201
+## 30:       yes         1             4.60      0.5702481
+## 31:       yes         1             3.85      0.5921969
+## 32:       yes         1             4.11      0.6040115
+## 33:        no         1             5.09      0.3830779
+## 34:       yes         1             4.09      0.5166794
+## 35:       yes         1             5.38      0.5032563
+## 36:        no         1             5.60      0.3657983
+## 37:        no         1             2.99      0.4834396
+## 38:       yes         1             5.54      0.5198233
+## 39:       yes         1             5.07      0.4692729
+## 40:        no         1             1.15      0.4441673
+## 41:        no         2             2.52      0.3000411
+## 42:        no         2             2.39      0.3102574
+## 43:       yes         2             2.84      0.4559323
+## 44:        no         2             3.50      0.2249773
+## 45:       yes         2             4.64      0.5016193
+## 46:        no         2             4.09      0.3669700
+## 47:        no         2             2.43      0.3240228
+## 48:        no         2             2.60      0.4433915
+## 49:        no         2             1.99      0.4457902
+## 50:       yes         2             5.94      0.4991261
+## 51:        no         2             3.61      0.4566689
+## 52:       yes         2             3.42      0.6061484
+## 53:        no         2             2.43      0.4144413
+## 54:        no         2             1.59      0.4486009
+## 55:       yes         2             4.76      0.3802541
+## 56:        no         2             3.71      0.3537354
+## 57:        no         2             2.90      0.4610652
+## 58:       yes         2             4.60      0.3162937
+## 59:        no         2             2.32      0.2829969
+## 60:        no         2             2.48      0.3913088
+## 61:       yes         2             6.04      0.4849856
+## 62:        no         2             2.62      0.3887632
+## 63:       yes         2             3.41      0.4255206
+## 64:        no         2             3.38      0.4808467
+## 65:       yes         2             3.22      0.4974377
+## 66:       yes         2             4.46      0.5109351
+## 67:        no         2             1.53      0.5465172
+## 68:        no         2             3.04      0.4266934
+## 69:       yes         2             3.32      0.5141486
+## 70:        no         2             3.65      0.3663210
+## 71:        no         2             2.52      0.3771124
+## 72:        no         2             2.77      0.3638221
+## 73:       yes         2             3.10      0.3809410
+## 74:        no         2             4.01      0.2477418
+## 75:        no         2             2.91      0.4056153
+## 76:       yes         2             4.76      0.4489939
+## 77:        no         2             2.66      0.4063041
+## 78:        no         2             4.35      0.2806088
+## 79:        no         2             1.06      0.3703443
+## 80:       yes         2             5.21      0.3803006
+##     treatment replicate expression_level sleep_fraction</code></pre>
+<p>This is a standard data.table (data.frame), so we can use it for some regular <code>R</code> magic. We can show the how <strong>sleep fraction and expression level are decorelated</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(summary_dt, <span class="kw">aes</span>(<span class="dt">x=</span>expression_level,
+                       <span class="dt">y=</span>sleep_fraction,
+                       <span class="dt">colour =</span> treatment)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>)</code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
 </div>
 </div>
 <div id="next-steps-1" class="section level2 unnumbered">

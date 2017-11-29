@@ -134,7 +134,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#prerequisites"><i class="fa fa-check"></i>Prerequisites</a></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#background"><i class="fa fa-check"></i>Background</a></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#getting-the-data"><i class="fa fa-check"></i>Getting the data</a></li>
-<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#experiment-design-to-standard-metadata"><i class="fa fa-check"></i>Experiment design to standard metadata</a><ul>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#from-experiment-design-to-metadata"><i class="fa fa-check"></i>From experiment design to metadata</a><ul>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#our-toy-experiment"><i class="fa fa-check"></i>Our toy experiment</a></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#metadata-1"><i class="fa fa-check"></i>Metadata</a></li>
 </ul></li>
@@ -160,21 +160,24 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#note-on-the-data-structure"><i class="fa fa-check"></i>Note on the data structure</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#set-your-working-directory"><i class="fa fa-check"></i>Set your working directory</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#experiment-design-to-standard-metadata-1"><i class="fa fa-check"></i>Experiment design to standard metadata</a><ul>
+<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#from-experiment-design-to-metadata-1"><i class="fa fa-check"></i>From experiment design to metadata</a><ul>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#our-toy-experiment-1"><i class="fa fa-check"></i>Our toy experiment</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#metadata-2"><i class="fa fa-check"></i>Metadata</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#linking-1"><i class="fa fa-check"></i>Linking</a><ul>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#local-data"><i class="fa fa-check"></i>Local data</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#remote-data"><i class="fa fa-check"></i>Remote Data</a></li>
-<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#warnings-and-errors"><i class="fa fa-check"></i>Warnings and errors</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#loading-1"><i class="fa fa-check"></i>Loading</a><ul>
-<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#default"><i class="fa fa-check"></i>Default</a></li>
+<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#default-raw-data"><i class="fa fa-check"></i>Default: raw data</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#preprocessing"><i class="fa fa-check"></i>Preprocessing</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#zt0-1"><i class="fa fa-check"></i>ZT0</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#cache-directory"><i class="fa fa-check"></i>Cache directory</a></li>
-<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#warnings-and-errors-1"><i class="fa fa-check"></i>Warnings and errors</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#quality-control-1"><i class="fa fa-check"></i>Quality control</a></li>
+<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#and-then"><i class="fa fa-check"></i>And then?</a><ul>
+<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#sleep-amount-vs-treatment"><i class="fa fa-check"></i>Sleep amount vs treatment</a></li>
+<li class="chapter" data-level="0.0.1" data-path="scopr.html"><a href="scopr.html#total-sleep-vs-expression-level"><i class="fa fa-check"></i><b>0.0.1</b> Total sleep vs expression level</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#next-steps-1"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
@@ -285,8 +288,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>For now, we can just <a href="https://support.rstudio.com/hc/en-us/articles/200711843-Working-Directories-and-Workspaces">set our working directory</a> to <code>DATA_DIR</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(DATA_DIR)</code></pre></div>
 </div>
-<div id="experiment-design-to-standard-metadata" class="section level2 unnumbered">
-<h2>Experiment design to standard metadata</h2>
+<div id="from-experiment-design-to-metadata" class="section level2 unnumbered">
+<h2>From experiment design to metadata</h2>
 <div id="our-toy-experiment" class="section level3 unnumbered">
 <h3>Our toy experiment</h3>
 <div class="figure">

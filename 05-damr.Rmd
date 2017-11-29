@@ -82,7 +82,7 @@ For now, we can just [set our working directory](https://support.rstudio.com/hc/
 setwd(DATA_DIR)
 ```
 
-## Experiment design to standard metadata{-}
+## From experiment design to metadata{-}
 
 ### Our toy experiment{-}
 

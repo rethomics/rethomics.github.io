@@ -5,7 +5,7 @@
 
 ---------------------------
 
-![An ethoscope experiment. todo](assets/ethoscope_experiment.png)
+![Example of an ethoscope experiment. Twenty flies per ethoscope are either treated or not. Positions are randomised. Two machines are used in parallel, and two replicates are performed at another time. In total, 80 animals were present in this experiment. Tracked animals are also subsequently scored for another phenotype (gene expression level)](assets/ethoscope_experiment.png)
 
 ## Aims {-}
 In this practical chapter, we will use a real experiment to learn how to:
@@ -138,7 +138,7 @@ Ultimatly, we would like to:
 
 
 
-![An Ethoscope experiment. Todo](assets/ethoscope_experiment.png)
+![Our experimental design](assets/ethoscope_experiment.png)
 
 
 ### Metadata {-}
@@ -286,7 +286,8 @@ Again, we have a look at the resulting table:
 print(dt)
 ```
 
-We have several variable. the important ones are:
+We have several variables (see in the  `===DATA===` section of the output).
+The important ones are:
 
 * `t` -- the time, in s, sample eveyr 10s
 * `x` -- the position in the tube (0 = left, 1=right)

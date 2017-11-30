@@ -14,7 +14,7 @@
   
   
   <meta property="og:description" content="This is a tutorial for Rethomics, a framework to analyse high-throuput behavioural data in <code>R</code>." />
-  <meta name="github-repo" content="rstudio/bookdown-demo" />
+  <meta name="github-repo" content="rethomics/rethomics.github.io" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Rethomics, a framework for high-throughput behaviour analysis in R" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Quentin Geissmann">
 
 
-<meta name="date" content="2017-11-29">
+<meta name="date" content="2017-11-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -169,7 +169,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#remote-data"><i class="fa fa-check"></i>Remote Data</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#loading-1"><i class="fa fa-check"></i>Loading</a><ul>
-<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#default-raw-data"><i class="fa fa-check"></i>Default: raw data</a></li>
+<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#raw-data-default"><i class="fa fa-check"></i>Raw data (default)</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#preprocessing"><i class="fa fa-check"></i>Preprocessing</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#zt0-1"><i class="fa fa-check"></i>ZT0</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#cache-directory"><i class="fa fa-check"></i>Cache directory</a></li>
@@ -177,7 +177,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#quality-control-1"><i class="fa fa-check"></i>Quality control</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#and-then"><i class="fa fa-check"></i>And then?</a><ul>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#sleep-amount-vs-treatment"><i class="fa fa-check"></i>Sleep amount vs treatment</a></li>
-<li class="chapter" data-level="0.0.1" data-path="scopr.html"><a href="scopr.html#total-sleep-vs-expression-level"><i class="fa fa-check"></i><b>0.0.1</b> Total sleep vs expression level</a></li>
+<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#total-sleep-vs-expression-level"><i class="fa fa-check"></i>Total sleep vs expression level</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#next-steps-1"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
@@ -576,7 +576,7 @@ gitbook.start({
 "link": "https://github.com/rethomics/rethomics.github.io/edit/source/04-behavr.Rmd",
 "text": "Edit"
 },
-"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"download": ["rethomics.pdf", "rethomics.epub"],
 "toc": {
 "collapse": "section"
 }
@@ -584,6 +584,19 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

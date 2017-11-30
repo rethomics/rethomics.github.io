@@ -1,5 +1,6 @@
 # Ethoscope data, in practice {#scopr -}
 
+
 **Large data**
 
 ---------------------------
@@ -12,9 +13,8 @@ In this practical chapter, we will use a real experiment to learn how to:
 * Translate your experiment design into a metadata file
 * Use this metadata file to load some data
 * Set the circadian reference (ZT0)
-* Assess graphically the quality of the data
 * Optimise your code to save time and RAM
-* Use good practices to exclude individuals from our experiments
+* Assess graphically the quality of the data
 
 
 ## Prerequisites {-}
@@ -49,23 +49,21 @@ unzip(dst, exdir= DATA_DIR)
 
 [The Ethoscope Platform](http://gilestrolab.github.io/ethoscope/) is a versatile and modular behavioural system to sudy behaviour of small animals. You can read more about it in our [PLOS Biology publication](http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.2003026).
 Although you can do much more with them, ethoscope are primarily designed to study sleep and circadian rhythms in Drosophila. 
-Therefore, we will work in this context for this tutorial.
+Therefore, this tutorial targets mainly users in this context.
 
 Ethoscopes typically generate hundreads of megabytes per machine per week.
-The platform is designed so that many devices run n parallel, and the resulting data is eventually centralised for all users. 
-Metadata tables are the best way to both keep track of your expriments and fetch the relevant data.
+The platform is designed so that many devices run an parallel, and the resulting data is eventually centralised for all users. 
+**Metadata tables are the best way to both keep track of your expriments and fetch the relevant data.**
 
 
 ## Getting the data {-}
 ### Extract the zipped data {-}
 
 Since ethoscopes generate **large amount of data**, compared to DAM, we will work only with a few animals.
-A zip containing data for this tutorial is available on [zenodo](https://zenodo.org/record/826874)
-Since will download the data. 
+A zip containing data for this tutorial is available on [zenodo](https://zenodo.org/record/826874).
 
 Start by downloading and extracting the zip somewhere in your computer.
-
-Store this location as a variable:
+Then, store this location as a variable. For example, **adapt** the path here:
 
 ```r{eval=F}
 DATA_DIR <- "C://Where/My/Zip/Has/been/extracted
@@ -78,8 +76,9 @@ list.files(DATA_DIR)
 ```
 
 We have:
- * The metadata file that I have prepared for you
- * An `ethoscope_results` directory
+
+* The metadata file that I have prepared for you
+* An `ethoscope_results` directory
  
 ### Note on the data structure {-}
 It is informative to take a look at the latter.
@@ -105,7 +104,7 @@ ethoscope_results
 ```
 
 Tracking data are saved in `.db` files. 
-Everytime an ethoscope is started, one `.db` new file is created.
+Everytime an ethoscope is started, one new `.db` file is created.
 All animals presents in the same machine at the same time will have their data saved in the same `.db` file.
  
 ### Set your working directory {-}
@@ -124,16 +123,16 @@ setwd(DATA_DIR)
 The data I gave you is from a real experiment, but for the sake of the tutorial, I have made up a story around it. It goes like that:
 
 * We are interested in **the effect of a drug**, let's call it the "mystery drug", on **sleep and activity** in fruit flies
-* We supect this drug acts indirectly by **inhibiting the expression of a (mystery) gene**.
+* We supect this drug acts indirectly by **inhibiting the expression of a (mystery) gene**
 
 To address these two questions, we have delivered a **drug** (yes or no) to fruit flies, and **randomised** their position in **two ethoscopes**. 
 We then acquiered individual data (e.g. position and activity) about **twice a second for several days**.
 We performed **two replicates**, one week appart.
-In addition, in the end of the experiment, we also collected flies and **measured a the relative expression of our candidate gene**.
+In addition, in the end of the experiment, we also collected flies and **measured the relative expression of our candidate gene**.
 
 Ultimatly, we would like to:
 
-* Analyse the effect of the drug on activity
+* Analyse the effect of the drug on sleep
 * Study the correlations between the activity (or the drug) and the level of transcript
 <!-- * Account for the replication design (aka [random effect](https://en.wikipedia.org/wiki/Random_effects_model)) -->
 
@@ -163,14 +162,16 @@ metadata
 Each of the 80 animals (rows) is defined by two mandatory columns (metavariables):
 
 * `machine_name` -- the name of the device used (e.g. `"ETHOSCOPE_001"`)
-* `date` -- the date and time (`YYYY-MM-DD`) of the start of the experiment.
+* `date` -- the date and time (`YYYY-MM-DD`) of the start of the experiment
+* `region_id` -- The tube (region of interest) in which an animal was tracked ([1,20])
 
 
-We defined also custom columns -- i.e. metavariable  (note that you could define many, with arbitrary names):
+We defined also custom columns (i.e. metavariables). Note that you could define many, with arbitrary names:
 
 * `treatment` -- "yes" or "no", whether the drug was administered
-* `expression_level` -- a continuous number [0, +Inf], how much a candidate gene is transcribed
 * `replicate` -- 1 or 2, firth or second replicate
+* `expression_level` -- a continuous number [0, +Inf], how much a candidate gene is transcribed
+
 
 **Importantly, you should be able to understand the experiment**, and describe each animal, **from the metadata file**.
 
@@ -178,7 +179,7 @@ We defined also custom columns -- i.e. metavariable  (note that you could define
 ## Linking{-}
 
 [Linking](metadata.html#linking-metadata) is the one necessary step before loading the data.
-It allocates a unique identifier to each animal.
+It **allocates a unique identifier to each animal**. In addition, it finds the file needed to load its data.
 
 ###  Local data {-}
 
@@ -188,7 +189,7 @@ you can simply link it like:
 ```{r}
 metadata <- link_ethoscope_metadata(metadata, 
                                     result_dir = "ethoscope_results")
-metadata
+print(metadata)
 ```
 
 
@@ -197,7 +198,7 @@ metadata
 In real life situations, when several experimenters are working in parallel,
 Users should not:
 
-* Have to download all the data from all users at all time (very ineficient)
+* Have to download all the data from all users at all time (very inefficient)
 * Download data by hand from a server (error prone and time consuming)
 
 Instead, it will be more common that all the data is stored on an **FTP** server (i.e. a network drive).
@@ -221,7 +222,7 @@ metadata <- link_ethoscope_metadata_remote(metadata,
 ```
 
 Note that, as long as you have an internet connection, you can use this function to link your metadata.
-It will not download datafile everytime (unless new data is available upstream).
+It will not download data files everytime (unless new data is available upstream).
 
 ## Loading{-}
 The core fucntion of `scopr` is `load_ethoscope()`.
@@ -229,10 +230,10 @@ It is quite flexible and we will show here just a few examples of how to use it.
 **Do have a look at the documentation** (e.g. by running `?load_ethoscope`), if you want to know more.
 
 
-### Default: raw data {-}
+### Raw data (default) {-}
 
 The simplest thing one can do is to load **all tracking data**.
-However, this has sevral caveats:
+However, this comes with several caveats:
 
 * A lot (gigabytes) of data will be needed
 * You will probably have to process the data immediatly after in order to extract biological meaning
@@ -240,7 +241,7 @@ However, this has sevral caveats:
 Here, we will just load data from animals in region 1 (metadata[region_id == 1]).
 As it is could otherwise be too much data:
 
-```{r}
+```{r, cache=TRUE}
 metadata_subset <- metadata[region_id == 1]
 dt <- load_ethoscope(metadata_subset, verbose=FALSE)
 summary(dt)
@@ -253,14 +254,14 @@ It is also good practice to print your resutling behavr table (`dt` in this case
 print(dt)
 ```
 
-It shows us the metadata, and  the firt and last few lines of actual data.
-In the data, there are columns such as "x" and "y" that record position, but also others that may not make immediate sense to you.
-In practice, loading raw data is rare for long experiments, and I would recommend doing it only for prototyping and such.
+It shows us the metadata as well as the first few and last few lines of actual data.
+In the data, there are columns such as `x` and `y` that record position, but also others that may not make immediate sense to you.
+**In practice, loading raw data is rare** for long experiments, and I would recommend doing it **only for prototyping** and such.
  
 ### Preprocessing {-}
 As dissussed before, it is inneficient and not always possible to load all raw data for hundreads of animals.
 Instead, we can **preprocess data on the go**.
-In the context of activity and sleep analysis, we can describe movement in windows of 10s ([techinical details here](http://journals.plos.org/plosbiology/article/file?type=supplementary&id=info:doi/10.1371/journal.pbio.2003026.s005)).
+In the context of activity and sleep analysis, we can quantified activity in windows of 10s ([techinical details here](http://journals.plos.org/plosbiology/article/file?type=supplementary&id=info:doi/10.1371/journal.pbio.2003026.s005)).
 This is implemented in the function `sleep_annotation` of our `sleepr` package.
 Ensure you have installed `sleepr` as well (`devtools::install_github("rethomics/sleepr")`).
 
@@ -268,11 +269,11 @@ When running this function:
 
 * The activity in each 10s of data will be scored
 * The position will be kept
-* Sleep will be scored according to the five minute rule
+* Sleep will be scored according to the "five minute rule"
 
-to apply a function to **all individual data, as they are loaded**, we can use the `FUN` argument:
+To apply a function to **all individual data, as they are loaded**, we can use the `FUN` argument:
 
-```{r}
+```{r, cache=TRUE}
 dt <- load_ethoscope(metadata,
 					   FUN = sleepr::sleep_annotation, 
 					   verbose=FALSE)
@@ -298,7 +299,7 @@ Note that you can use other functions than `sleep_annotation` (this is just an e
 ### ZT0 {-}
 
 By default, **the time is expressed relative to the onset of the experiment**.
-In other words, t0 is when you click on the "start tracking" button.
+In other words, $t_0$ is when you click on the "start tracking" button.
 In the context of sleep, we care more about time **within a day**.
 Therefore, we express time relative to ZT0 (i.e the hour of the day when the L phase starts).
 In our lab, it is at **09:00:00, GMT**.
@@ -315,15 +316,18 @@ dt <- load_ethoscope(metadata,
 ### Cache directory {-}
 
 One issue with loading ethoscope data is thta it is **relativelly slow**.
-For instance, according to our computer, you may take half an hour to load data from 500 animals x 1 week.
-In your daily life, you will often need to close R and open it again to analyse things differently, or simply change simple things on some figures. You really don't want to wait too long in this sort of situations.
+For instance, according to our computer, you may take half an hour to load data from 500 animals $times$ 1 week.
+In your daily life, you will often need to close `R` and open it again later to analyse things differently, or simply change simple parameters on some figures. 
+You really don't want to spend too long reloading data this sort of situation.
 
-To address this issue, `load_ethoscope` uses [caching](https://en.wikipedia.org/wiki/Cache_(computing)).
-In other words, whenever you load any data, it stores a snapshot on the disk. then, the *next time* you load the data, it takes directly the snapshot. This way you will go one or two orders of magnitudes faster!
+To address this issue, `load_ethoscope` comes with a [caching](https://en.wikipedia.org/wiki/Cache_(computing)) option.
+When turned on, whenever you load any data, it stores a snapshot on the disk (in a directory you pick). 
+Then, the *next time* you load the data, loading happends directly from the snapshot.
+This way you will load data one or two orders of magnitudes faster!
 
-The first time, everything will take long:
+The first time, everything will take as long:
 
-```{r}
+```{r, cache=TRUE}
 system.time(
   dt <- load_ethoscope(metadata,
              reference_hour=9.0, 
@@ -335,7 +339,7 @@ system.time(
 
 However, the next time, we do the same thing way faster:
 
-```{r}
+```{r, cache=TRUE}
 system.time(
   dt <- load_ethoscope(metadata,
              reference_hour=9.0, 
@@ -345,9 +349,13 @@ system.time(
 )
 ```
 
+Here, we set `cache` to `"ethoscope_cache"`.
+This creates a new directory called `"ethoscope_cache"` (you can pick the name and location you want).
+If you to do a bit of tidying up, you can remove it without risk (it will just take time next time you load your data). 
+
 ## Quality control {-}
 
-One way to check everything is in order with our data is to visualise it with a tile plot.
+One way to check everything is in order with our data is to visualise it with a **tile plot**.
 For instance, here, the variable `asleep`, for each animal (rows in the plot) over time (columns):
 
 ```{r, fig.width = 9, fig.height=16}
@@ -357,7 +365,7 @@ ggetho(dt, aes(z=asleep)) +
       stat_ld_annotations()
 ```
 
-This allows us to spot possible outliers/missing data/artefact and try to understand what to do whith them.
+This allows us to spot possible outliers/missing data/artefacts and try to understand what to do whith them.
 More about tiles plots in the [visualisation chapter](ggetho.html).
 
 ## And then? {-}
@@ -375,7 +383,7 @@ ggetho(dt, aes(y=asleep, colour=treatment), time_wrap = hours(24)) +
 ```
 
 
-### Total sleep vs expression level
+### Total sleep vs expression level {-}
 
 First we [summarise](behavr.html#summerise-data) the total proportion of time spent sleeping for each animal (i.e. by id).
 ```{r}
@@ -390,7 +398,7 @@ summary_dt
 
 
 This is a standard data.table (data.frame), so we can use it for some regular `R` magic.
-We can show the how **sleep fraction and expression level are decorelated**
+We can show the how **sleep fraction and expression level are decorrelated**
 
 ```{r}
 ggplot(summary_dt, aes(x=expression_level,

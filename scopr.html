@@ -209,6 +209,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#time-scale-units"><i class="fa fa-check"></i>Time scale units</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#coordinate-systems"><i class="fa fa-check"></i>Coordinate systems</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#facet-by-id"><i class="fa fa-check"></i>Facet by ID</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#periodograms"><i class="fa fa-check"></i>Periodograms</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#miscelaneous"><i class="fa fa-check"></i>Miscelaneous</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#next-steps-2"><i class="fa fa-check"></i>Next steps</a></li>
@@ -238,8 +239,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><strong>Large data</strong></p>
 <hr />
 <div class="figure">
-<img src="assets/ethoscope_experiment.png" alt="An ethoscope experiment. todo" />
-<p class="caption">An ethoscope experiment. todo</p>
+<img src="assets/ethoscope_experiment.png" alt="Example of an ethoscope experiment. Twenty flies per ethoscope are either treated or not. Positions are randomised. Two machines are used in parallel, and two replicates are performed at another time. In total, 80 animals were present in this experiment. Tracked animals are also subsequently scored for another phenotype (gene expression level)" />
+<p class="caption">Example of an ethoscope experiment. Twenty flies per ethoscope are either treated or not. Positions are randomised. Two machines are used in parallel, and two replicates are performed at another time. In total, 80 animals were present in this experiment. Tracked animals are also subsequently scored for another phenotype (gene expression level)</p>
 </div>
 <div id="aims-1" class="section level2 unnumbered">
 <h2>Aims</h2>
@@ -328,8 +329,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Study the correlations between the activity (or the drug) and the level of transcript <!-- * Account for the replication design (aka [random effect](https://en.wikipedia.org/wiki/Random_effects_model)) --></li>
 </ul>
 <div class="figure">
-<img src="assets/ethoscope_experiment.png" alt="An Ethoscope experiment. Todo" />
-<p class="caption">An Ethoscope experiment. Todo</p>
+<img src="assets/ethoscope_experiment.png" alt="Our experimental design" />
+<p class="caption">Our experimental design</p>
 </div>
 </div>
 <div id="metadata-2" class="section level3 unnumbered">
@@ -609,7 +610,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
 ## 4641273:            0            0   TRUE  FALSE           FALSE
 ## 4641274:            0            0   TRUE  FALSE           FALSE
 ## 4641275:            0            1   TRUE  FALSE           FALSE</code></pre>
-<p>We have several variable. the important ones are:</p>
+<p>We have several variables (see in the <code>===DATA===</code> section of the output). The important ones are:</p>
 <ul>
 <li><code>t</code> – the time, in s, sample eveyr 10s</li>
 <li><code>x</code> – the position in the tube (0 = left, 1=right)</li>
@@ -640,7 +641,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-## 146.480   2.748 149.953</code></pre>
+## 153.456   3.436 157.960</code></pre>
 <p>However, the next time, we do the same thing way faster:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(
   dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata,
@@ -650,7 +651,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-##   1.976   0.040   2.016</code></pre>
+##   1.972   0.024   1.960</code></pre>
 <p>Here, we set <code>cache</code> to <code>&quot;ethoscope_cache&quot;</code>. This creates a new directory called <code>&quot;ethoscope_cache&quot;</code> (you can pick the name and location you want). If you to do a bit of tidying up, you can remove it without risk (it will just take time next time you load your data).</p>
 </div>
 </div>

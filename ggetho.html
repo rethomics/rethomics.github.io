@@ -25,7 +25,7 @@
 <meta name="author" content="Quentin Geissmann">
 
 
-<meta name="date" content="2017-11-30">
+<meta name="date" content="2017-12-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -191,12 +191,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#per-individual"><i class="fa fa-check"></i>Per individual</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#sorted-individual"><i class="fa fa-check"></i>Sorted individual</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#group-averages"><i class="fa fa-check"></i>Group averages</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#bar-tiles"><i class="fa fa-check"></i>Bar tiles</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#population-plots"><i class="fa fa-check"></i>Population plots</a><ul>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#one-population"><i class="fa fa-check"></i>One population</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#several-populations"><i class="fa fa-check"></i>Several populations</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#wrapping-data"><i class="fa fa-check"></i>Wrapping data</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#double-plotted-actograms"><i class="fa fa-check"></i>Double-plotted actograms</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#faceting-by-id"><i class="fa fa-check"></i>Faceting by ID</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#ld-annotations"><i class="fa fa-check"></i>LD annotations</a><ul>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#basics"><i class="fa fa-check"></i>Basics</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#changing-ld-colours"><i class="fa fa-check"></i>Changing LD colours</a></li>
@@ -209,7 +212,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#time-scale-units"><i class="fa fa-check"></i>Time scale units</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#coordinate-systems"><i class="fa fa-check"></i>Coordinate systems</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#facet-by-id"><i class="fa fa-check"></i>Facet by ID</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#periodograms"><i class="fa fa-check"></i>Periodograms</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#miscelaneous"><i class="fa fa-check"></i>Miscelaneous</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#next-steps-2"><i class="fa fa-check"></i>Next steps</a></li>
@@ -248,6 +250,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Use tile plots to show individual data</li>
 <li>Make population plots</li>
 <li>Wrap data around circadian time</li>
+<li>Make double-plotted actograms</li>
 <li>Annotate plot with light and dark phases</li>
 <li>Use ggplot tools (facets, scales) to enhance plots</li>
 <li>Plot average and individual periodograms</li>
@@ -357,6 +360,13 @@ pl</code></pre></div>
 pl</code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-62-1.png" width="672" /> In this context, every row is not an individual any more, but a group. The <code>method</code> argument of <code>stat_tile_etho()</code> allows you to use other aggregates (median, max, min, …).</p>
 </div>
+<div id="bar-tiles" class="section level3 unnumbered">
+<h3>Bar tiles</h3>
+<p>The bar_tile is a variant of our tile plot. Instead of colour intensity, <strong>it shows our z variable by the height of the tiles</strong>. You can use it just by replacing <code>stat_tile_etho</code> by <code>stat_bar_tile_etho</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">z=</span>moving)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_bar_tile_etho</span>()
+pl</code></pre></div>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-63-1.png" width="672" /></p>
+</div>
 </div>
 <div id="population-plots" class="section level2 unnumbered">
 <h2>Population plots</h2>
@@ -365,7 +375,7 @@ pl</code></pre></div>
 <p>The problem with representing a variable on a colour axis is that it is not perceptually comparable, and we cannot make error bars. When the number of groups is not too high, it makes sense to show <strong>the variable of interest on the y axis</strong>, and then draw lines between consecutive points. For this, we can use the <code>stat_pop_etho()</code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_pop_etho</span>()
 pl</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-63-1.png" width="672" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
 <p>By defaut, the local average and error bars are computed from the mean an standard errors (<code>method = mean_se</code>). You can compute other types of error bars e.g. bootstrap (<code>method = mean_cl_boot</code>).</p>
 </div>
 <div id="several-populations" class="section level3 unnumbered">
@@ -373,18 +383,18 @@ pl</code></pre></div>
 <p>Often, we want to compare population with respect to a variable. There are different way to split populations. We can, for instance, <strong>use a different colour line for different groups</strong>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving, <span class="dt">colour=</span>sex)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_pop_etho</span>()
 pl</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
 <p>Another way, is to use <code>ggplot</code>’s faceting system:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_pop_etho</span>() <span class="op">+</span>
 <span class="st">            </span><span class="kw">facet_grid</span>(sex <span class="op">~</span><span class="st"> </span>.)
 pl</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
 <p>Of course, you can combine both when you have more than one relevant metavariable:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving, <span class="dt">colour =</span> sex)) <span class="op">+</span>
 <span class="st">              </span><span class="kw">stat_pop_etho</span>() <span class="op">+</span>
 <span class="st">              </span><span class="kw">facet_grid</span>( condition <span class="op">~</span><span class="st"> </span>.)
 pl</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
 </div>
 </div>
 <div id="wrapping-data" class="section level2 unnumbered">
@@ -392,8 +402,61 @@ pl</code></pre></div>
 <p>When behaviours are periodic, we sometimes want to average our variable at the same time over consecutive days. In ggetho, we call that time <em>wrapping</em>. It can be done simply with the <code>time_wrap</code> argument. It will work the same for population or tile plots:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving), <span class="dt">time_wrap =</span> <span class="kw">hours</span>(<span class="dv">24</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_pop_etho</span>()
 pl</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-68-1.png" width="672" /></p>
 <p>Note that you do not have to wrap over specifically 24h, you could work different periods.</p>
+</div>
+<div id="double-plotted-actograms" class="section level2 unnumbered">
+<h2>Double-plotted actograms</h2>
+<p>When analysing periodic behaviour, it makes sense to use a so called double-plotted actogram. This is very useful <strong>to understand periodicity of behaviours</strong>.</p>
+<p>This means data is plotted twice, in a staggered manner:</p>
+<pre><code>row1 [day 1, day2]
+row1 [day 2, day3]
+row1 [day 3, day4]</code></pre>
+<p>To do that, we can set the <code>multiplot</code> argument of <code>ggetho</code> to <code>2</code> (<code>3</code> would do a “tripple-plotted” actogram). This averages the whole population:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">z=</span>moving), <span class="dt">multiplot =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">stat_bar_tile_etho</span>()
+pl</code></pre></div>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
+<p>In practice, we genrally want to do that for <strong>one specific individual</strong> (see next section to do that automatically):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt[id<span class="op">==</span><span class="st">&quot;toy_experiment|01&quot;</span>],
+             <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">z=</span>moving), <span class="dt">multiplot =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">stat_bar_tile_etho</span>()
+pl</code></pre></div>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
+<p>One thing you can do is change the length of the period. For instance <strong>25h instead of 24h</strong>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt[id<span class="op">==</span><span class="st">&quot;toy_experiment|01&quot;</span>], <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">z=</span>moving), 
+             <span class="dt">multiplot =</span> <span class="dv">2</span>,
+             <span class="dt">multiplot_period =</span> <span class="kw">hours</span>(<span class="dv">25</span>) <span class="co"># this is the important part</span>
+             ) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">stat_bar_tile_etho</span>()
+pl</code></pre></div>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-71-1.png" width="672" /></p>
+<p>Keep in mind that you can use the <strong>tile representation if you prefer</strong> it:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt[id<span class="op">==</span><span class="st">&quot;toy_experiment|01&quot;</span>], <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">z=</span>moving), 
+             <span class="dt">multiplot =</span> <span class="dv">2</span>
+             ) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">stat_tile_etho</span>() <span class="co"># tile here</span>
+pl</code></pre></div>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
+</div>
+<div id="faceting-by-id" class="section level2 unnumbered">
+<h2>Faceting by ID</h2>
+<p>When multiplotting, it is difficult to represent individuals (since both y and x axis are used).</p>
+<p>The best way to systematically represent all of them is to use facetting, which is a ggplot feature. Since id represent unique individuals, <strong>each facet (sub-rectangle) is one individual</strong>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">z=</span>moving), 
+             <span class="dt">multiplot =</span> <span class="dv">2</span>
+             ) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">stat_bar_tile_etho</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>( <span class="op">~</span><span class="st"> </span>id)
+pl</code></pre></div>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-73-1.png" width="960" /></p>
+<p>Sometimes, the <code>id</code> variable will be very long, you can use the <code>id_labeller</code> to make things clearer:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">z=</span>moving), 
+             <span class="dt">multiplot =</span> <span class="dv">2</span>
+             ) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">stat_bar_tile_etho</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>( <span class="op">~</span><span class="st"> </span>id, <span class="dt">labeller =</span> <span class="st">&quot;id_labeller&quot;</span>)
+pl</code></pre></div>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-74-1.png" width="960" /></p>
+<p>If you want to understand facets a bit more, have a look at <a href="http://www.cookbook-r.com/Graphs/Facets_(ggplot2)/">this tutorial</a>.</p>
 </div>
 <div id="ld-annotations" class="section level2 unnumbered">
 <h2>LD annotations</h2>
@@ -402,7 +465,7 @@ pl</code></pre></div>
 <p>In circadian experiments, we often like to add annotations (black and white boxes) to show Dark and Light phases. We have another layer for that:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_pop_etho</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_ld_annotations</span>()
 pl</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-68-1.png" width="672" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-75-1.png" width="672" /></p>
 </div>
 <div id="changing-ld-colours" class="section level3 unnumbered">
 <h3>Changing LD colours</h3>
@@ -410,7 +473,7 @@ pl</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_pop_etho</span>() <span class="op">+</span>
 <span class="st">              </span><span class="kw">stat_ld_annotations</span>(<span class="dt">ld_colours =</span> <span class="kw">c</span>(<span class="st">&quot;grey&quot;</span>, <span class="st">&quot;black&quot;</span>))
 pl</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-76-1.png" width="672" /></p>
 </div>
 <div id="ld-in-the-background" class="section level3 unnumbered">
 <h3>LD in the background</h3>
@@ -419,7 +482,7 @@ pl</code></pre></div>
 <span class="st">            </span><span class="kw">stat_ld_annotations</span>(<span class="dt">height=</span><span class="dv">1</span>, <span class="dt">alpha=</span><span class="fl">0.3</span>, <span class="dt">outline =</span> <span class="ot">NA</span>) <span class="op">+</span>
 <span class="st">            </span><span class="kw">stat_pop_etho</span>()
 pl</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-77-1.png" width="672" /></p>
 </div>
 <div id="phase-and-period" class="section level3 unnumbered">
 <h3>Phase and period</h3>
@@ -428,13 +491,13 @@ pl</code></pre></div>
 <span class="st">            </span><span class="kw">stat_ld_annotations</span>(<span class="dt">phase =</span> <span class="kw">hours</span>(<span class="dv">1</span>)) <span class="op">+</span>
 <span class="st">            </span><span class="kw">stat_pop_etho</span>()
 pl</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-71-1.png" width="672" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-78-1.png" width="672" /></p>
 <p>One can also plot over a period different from 24h, say 20h days:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving)) <span class="op">+</span>
 <span class="st">            </span><span class="kw">stat_ld_annotations</span>(<span class="dt">period =</span> <span class="kw">hours</span>(<span class="dv">20</span>)) <span class="op">+</span>
 <span class="st">            </span><span class="kw">stat_pop_etho</span>()
 pl</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-79-1.png" width="672" /></p>
 </div>
 <div id="regime-change" class="section level3 unnumbered">
 <h3>Regime change</h3>
@@ -449,7 +512,7 @@ pl</code></pre></div>
                                 <span class="dt">ld_colours =</span> <span class="kw">c</span>(<span class="st">&quot;grey&quot;</span>, <span class="st">&quot;black&quot;</span> )) <span class="op">+</span>
 <span class="st">            </span><span class="kw">stat_pop_etho</span>()
 pl</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-80-1.png" width="672" /></p>
 </div>
 </div>
 <div id="coordinate-and-scales" class="section level2 unnumbered">
@@ -462,10 +525,10 @@ pl</code></pre></div>
 pl &lt;-<span class="st"> </span>pl <span class="op">+</span><span class="st"> </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),
                               <span class="dt">labels =</span> scales<span class="op">::</span>percent)
 pl</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-81-1.png" width="672" /></p>
 <p>We can also use the same principle to zoom in a finished plot. E.g. between day one and day two:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl <span class="op">+</span><span class="st"> </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim=</span><span class="kw">c</span>(<span class="kw">days</span>(<span class="dv">1</span>), <span class="kw">days</span>(<span class="dv">2</span>)))</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-75-1.png" width="672" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-82-1.png" width="672" /></p>
 </div>
 <div id="time-scale-units" class="section level3 unnumbered">
 <h3>Time scale units</h3>
@@ -473,7 +536,7 @@ pl</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl <span class="op">+</span><span class="st"> </span>ggetho<span class="op">::</span><span class="kw">scale_x_hours</span>()</code></pre></div>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which
 ## will replace the existing scale.</code></pre>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-76-1.png" width="672" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-83-1.png" width="672" /></p>
 <p><code>R</code> actually warns you since you are replacing the scale. Which is fine (as it is precisely what we wanted)!</p>
 </div>
 <div id="coordinate-systems" class="section level3 unnumbered">
@@ -487,12 +550,8 @@ pl</code></pre></div>
 <span class="st">          </span><span class="kw">stat_pop_etho</span>(<span class="dt">geom =</span> <span class="st">&quot;polygon&quot;</span>, <span class="dt">fill=</span><span class="ot">NA</span>)
 
 pl <span class="op">+</span><span class="st"> </span><span class="kw">coord_polar</span>()</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-77-1.png" width="672" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-84-1.png" width="672" /></p>
 </div>
-</div>
-<div id="facet-by-id" class="section level2 unnumbered">
-<h2>Facet by ID</h2>
-<p>TODO</p>
 </div>
 <div id="periodograms" class="section level2 unnumbered">
 <h2>Periodograms</h2>
@@ -535,7 +594,7 @@ per_dt</code></pre></div>
 <span class="st">        </span><span class="kw">geom_line</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">group =</span> id), <span class="dt">alpha=</span>.<span class="dv">1</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">        </span><span class="kw">scale_x_hours</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">        </span><span class="kw">stat_summary</span>(<span class="dt">geom=</span><span class="st">&quot;smooth&quot;</span>, <span class="dt">fun.data =</span>  mean_se)</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-79-1.png" width="672" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-86-1.png" width="672" /></p>
 </div>
 <div id="miscelaneous" class="section level2 unnumbered">
 <h2>Miscelaneous</h2>

@@ -5,7 +5,7 @@
 
 ---------------------------
 
-![Example of an ethoscope experiment. Twenty flies per ethoscope are either treated or not. Positions are randomised. Two machines are used in parallel, and two replicates are performed at another time. In total, 80 animals were present in this experiment. Tracked animals are also subsequently scored for another phenotype (gene expression level)](assets/ethoscope_experiment.png)
+![Example of an ethoscope experiment. Twenty flies per ethoscope are either treated or not. Positions are randomised. Two machines are used in parallel, and two replicates are performed at another time. In total, 80 animals were present in this experiment. Four `.db` files have been recorded. Tracked animals are also subsequently scored for another phenotype (gene expression level)](assets/ethoscope_experiment.png)
 
 ## Aims {-}
 In this practical chapter, we will use a real experiment to learn how to:

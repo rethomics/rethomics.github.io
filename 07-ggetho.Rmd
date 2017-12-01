@@ -15,6 +15,7 @@ In this practical chapter, we will generate toy data to learn how to:
 * Use tile plots to show individual data
 * Make population plots
 * Wrap data around circadian time
+* Make double-plotted actograms
 * Annotate plot with light and dark phases
 * Use ggplot tools (facets, scales) to enhance plots
 * Plot average and individual periodograms
@@ -163,6 +164,16 @@ pl
 In this context, every row is not an individual any more, but a group.
 The `method` argument of `stat_tile_etho()` allows you to use other aggregates (median, max, min, ...).
 
+### Bar tiles {-}
+The bar_tile is a variant of our tile plot.
+Instead of colour intensity, **it shows our z variable by the height of the tiles**.
+You can use it just by replacing `stat_tile_etho` by `stat_bar_tile_etho`:
+
+```{r}
+pl <- ggetho(dt, aes(x=t, z=moving)) + stat_bar_tile_etho()
+pl
+```
+
 
 ## Population plots{-}
 ### One population{-}
@@ -219,6 +230,90 @@ pl
 ```
 
 Note that you do not have to wrap over specifically 24h, you could work different periods.
+
+## Double-plotted actograms {-}
+
+When analysing periodic behaviour, it makes sense to use a so called double-plotted actogram.
+This is very useful **to understand periodicity of behaviours**.
+
+This means data is plotted twice, in a staggered manner:
+```
+row1 [day 1, day2]
+row1 [day 2, day3]
+row1 [day 3, day4]
+```
+
+To do that, we can set the `multiplot` argument of `ggetho` to `2` (`3` would do a "tripple-plotted" actogram).
+This averages the whole population:
+
+```{r}
+pl <- ggetho(dt, aes(x=t, z=moving), multiplot = 2) + stat_bar_tile_etho()
+pl
+```
+
+
+In practice, we genrally want to do that for **one specific individual** (see next section to do that automatically):
+
+```{r}
+pl <- ggetho(dt[id=="toy_experiment|01"],
+             aes(x=t, z=moving), multiplot = 2) + stat_bar_tile_etho()
+pl
+```
+
+
+One thing you can do is change the length of the period. 
+For instance **25h instead of 24h**:
+
+```{r}
+pl <- ggetho(dt[id=="toy_experiment|01"], aes(x=t, z=moving), 
+             multiplot = 2,
+             multiplot_period = hours(25) # this is the important part
+             ) + 
+  stat_bar_tile_etho()
+pl
+```
+
+
+Keep in mind that you can use the **tile representation if you prefer** it:
+
+```{r}
+pl <- ggetho(dt[id=="toy_experiment|01"], aes(x=t, z=moving), 
+             multiplot = 2
+             ) + 
+  stat_tile_etho() # tile here
+pl
+```
+
+## Faceting by ID {-}
+
+When multiplotting, it is difficult to represent individuals (since both y and x axis are used).
+
+The best way to systematically represent all of them is to use facetting, which is a ggplot feature.
+Since id represent unique individuals, **each facet (sub-rectangle) is one individual**:
+
+```{r, fig.width=10, fig.height=6}
+pl <- ggetho(dt, aes(x=t, z=moving), 
+             multiplot = 2
+             ) + 
+  stat_bar_tile_etho() +
+  facet_wrap( ~ id)
+pl
+```
+
+Sometimes, the `id` variable will be very long, you can use the `id_labeller` to make things clearer:
+
+```{r, fig.width=10, fig.height=6}
+pl <- ggetho(dt, aes(x=t, z=moving), 
+             multiplot = 2
+             ) + 
+  stat_bar_tile_etho() +
+  facet_wrap( ~ id, labeller = "id_labeller")
+pl
+```
+ 
+If you want to understand facets a bit more, have a look at [this tutorial](http://www.cookbook-r.com/Graphs/Facets_(ggplot2)/).
+
+
 
 ## LD annotations{-}
 
@@ -340,10 +435,6 @@ pl <- ggetho(dt, aes(x=t, y=moving, colour=sex), time_wrap = days(1)) +
 pl + coord_polar()
 ```
 
-
-## Facet by ID {-}
-
-TODO
 
 ## Periodograms {-}
 

@@ -66,7 +66,7 @@ expl = c(
         "Show metadata as table -- `dt[meta = TRUE]`",
         "Define a new factor that is a comibiation of 'sex x condition' -- `dt[, treatment := paste(sex, condition, sep='|'), meta=T]`",
         "Add 10s to all time, only for animals in condition `'A'` -- `dt[, t := ifelse(xmv(condition) == 'A', t + 10, t)]`",
-        "Remove all males (from data, and metadata) -- `dt_males <- dt[xmv(sex) == 'females']`",
+        "Remove all males (from data, and metadata) -- `dt_females <- dt[xmv(sex) == 'females']`",
         "Compute the average activity, per animal -- `stat_dt <- dt[, .(mean_acti = mean(active)), by='id']`",
         "Merge metadata and summary statistics -- `stat_dt <- rejoin(stat_dt)`",
         "TODO -- TODO"

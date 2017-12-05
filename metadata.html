@@ -267,7 +267,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <img src="assets/metadata_linking.png" alt="Linking adds technical columns" />
 <p class="caption">Linking adds technical columns</p>
 </div>
-<p>Once your metadata is ready, it can be used to create a query to <strong>import the matching data</strong>. Regardless of which acquisition tool you used, the first step when importing data in <code>R</code> will be “metadata linking”. This step will automatically complete the metadata file in a way that can be used for <code>R</code> to retrieve the right amount of data from experiment files. We call it linking, since it links the manually introduced metadata with the right experiment data file, something that is tedious to do manually. In short, linking means at least:</p>
+<p>Once your metadata is ready, it can be used to as a query to <strong>import the matching data</strong>. Regardless of which acquisition tool you used, the first step when importing data in <code>R</code> will be “metadata linking”. This step will automatically complete the metadata file in a way that can be used for <code>R</code> to retrieve the right amount of data from experiment files. We call it linking, since it links the manually introduced metadata with the correct data file, something that is tedious to do manually. In short, linking means at least:</p>
 <ul>
 <li>Adding an <code>id</code> column to the metadata. This will be a unique identifier for each indididual (it generally contains datetime, machine name an region id). This will diferenciate animals with the same conditions in the metadata.</li>
 <li>Adding a column that tracks “how to find the data for each individual”.</li>
@@ -275,7 +275,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="take-home-message" class="section level2 unnumbered">
 <h2>Take home message</h2>
-<p>In conclusion, <strong>metadatafiles are a canonical way to both define experimental condition and load behavioural data</strong>. They are both computer and human friendly. In other words, if you give a query to a colaborator, she/he will be able to tell very quickly what animal underwent which treatment, where and when.</p>
+<p>In conclusion, <strong>metadatafiles are a canonical way to both define experimental condition and load behavioural data</strong>. They are both computer and human friendly. In other words, if you pass a query on to a colaborator, she/he will be able to tell very quickly what individuals underwent which treatment, where and when.</p>
 
 </div>
 </div>

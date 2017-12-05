@@ -40,7 +40,7 @@ ops = c("Summarise `behavr` table",
         "**Create**/alter metavariable",
         "Use **metavariable as variable**",
         "**Remove individuals** according to metavariable",
-        "Compute **indidisual statistics**",
+        "Compute **individual statistics**",
         "**Rejoin** metadata to data",
         "**Stitch** experiments"
         )
@@ -60,13 +60,13 @@ expr = c("`summary(DT)`",
 
 expl = c(
         "How many individuals, variables, metavariables, etc? -- `summary(dt)`",
-        "When are aninimals 'very active'? -- `dt[, very_active := activity >= 2]`",
+        "When are animals 'very active'? -- `dt[, very_active := activity >= 2]`",
         "Lets remove a variable we don't need? --  `dt[, very_active := NULL]`",
         "Exclude data before the first hour -- `small_dt <- dt[t > hours(1)]`",
         "Show metadata as table -- `dt[meta = TRUE]`",
         "Define a new factor that is a comibiation of 'sex x condition' -- `dt[, treatment := paste(sex, condition, sep='|'), meta=T]`",
         "Add 10s to all time, only for animals in condition `'A'` -- `dt[, t := ifelse(xmv(condition) == 'A', t + 10, t)]`",
-        "Remove all males (from data, and metadata) -- `dt_males <- dt[xmv(sex) == 'females']`",
+        "Remove all males (from data, and metadata) -- `dt_females <- dt[xmv(sex) == 'females']`",
         "Compute the average activity, per animal -- `stat_dt <- dt[, .(mean_acti = mean(active)), by='id']`",
         "Merge metadata and summary statistics -- `stat_dt <- rejoin(stat_dt)`",
         "TODO -- TODO"
@@ -108,7 +108,7 @@ dt
 As you can see, when we print `dt`, our `behavr` table, we have two fields: `METADATA` and `DATA`.
 The former is actually just the metadata we created whilst the latter stores the data (i.e. the variables) for **all animals**. 
 The special column `id` is also known as a key, and is shared between both data and metadata. 
-It inernally allows us to map them to one another.
+It internally allows us to map them to one another.
 In other words, it is a unique id for each individual.
 In this specific example, the variables `t` and  `activity` are the time and the number of beam crosses, respectively.
 
@@ -212,7 +212,7 @@ stat_dt <- dt[,
 stat_dt
 ```
 
-Now, in order to perform statistics, we would lke to merge our summaries to the metadata.
+Now, in order to perform statistics, we would like to merge our summaries to the metadata.
 That is we want to **rejoin** them:
 
 ```{r}
@@ -221,7 +221,7 @@ final_dt
 ```
 
 
-This table is exactly what you need for statistcis and vidualisation in `R`!
+This table is exactly what you need for statistics and visualisation in `R`!
 
 
 ### Stitching{-}

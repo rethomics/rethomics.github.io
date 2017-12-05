@@ -271,7 +271,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <td align="left">Pure data</td>
 <td align="left"><strong>Create</strong>/alter a variable</td>
 <td align="left"><code>DT[, new_column := some_value]</code></td>
-<td align="left">When are aninimals ‘very active’? – <code>dt[, very_active := activity &gt;= 2]</code></td>
+<td align="left">When are animals ‘very active’? – <code>dt[, very_active := activity &gt;= 2]</code></td>
 </tr>
 <tr class="odd">
 <td align="left"></td>
@@ -311,7 +311,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </tr>
 <tr class="odd">
 <td align="left">Summarise</td>
-<td align="left">Compute <strong>indidisual statistics</strong></td>
+<td align="left">Compute <strong>individual statistics</strong></td>
 <td align="left"><code>DT[, .( statistics = some_math()), by='id']</code></td>
 <td align="left">Compute the average activity, per animal – <code>stat_dt &lt;- dt[, .(mean_acti = mean(active)), by='id']</code></td>
 </tr>
@@ -383,7 +383,7 @@ dt</code></pre></div>
 ## 14408: toy_experiment|9 86280        2
 ## 14409: toy_experiment|9 86340        1
 ## 14410: toy_experiment|9 86400        0</code></pre>
-<p>As you can see, when we print <code>dt</code>, our <code>behavr</code> table, we have two fields: <code>METADATA</code> and <code>DATA</code>. The former is actually just the metadata we created whilst the latter stores the data (i.e. the variables) for <strong>all animals</strong>. The special column <code>id</code> is also known as a key, and is shared between both data and metadata. It inernally allows us to map them to one another. In other words, it is a unique id for each individual. In this specific example, the variables <code>t</code> and <code>activity</code> are the time and the number of beam crosses, respectively.</p>
+<p>As you can see, when we print <code>dt</code>, our <code>behavr</code> table, we have two fields: <code>METADATA</code> and <code>DATA</code>. The former is actually just the metadata we created whilst the latter stores the data (i.e. the variables) for <strong>all animals</strong>. The special column <code>id</code> is also known as a key, and is shared between both data and metadata. It internally allows us to map them to one another. In other words, it is a unique id for each individual. In this specific example, the variables <code>t</code> and <code>activity</code> are the time and the number of beam crosses, respectively.</p>
 </div>
 <div id="generalities" class="section level2 unnumbered">
 <h2>Generalities</h2>
@@ -523,7 +523,7 @@ stat_dt</code></pre></div>
 ## 3:  toy_experiment|7 0.4434783        3
 ## 4:  toy_experiment|8 0.1731884        2
 ## 5:  toy_experiment|9 0.2550725        2</code></pre>
-<p>Now, in order to perform statistics, we would lke to merge our summaries to the metadata. That is we want to <strong>rejoin</strong> them:</p>
+<p>Now, in order to perform statistics, we would like to merge our summaries to the metadata. That is we want to <strong>rejoin</strong> them:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">final_dt &lt;-<span class="st"> </span><span class="kw">rejoin</span>(stat_dt)
 final_dt</code></pre></div>
 <pre><code>##                   id    sex condition treatment mean_acti max_acti
@@ -532,7 +532,7 @@ final_dt</code></pre></div>
 ## 3:  toy_experiment|7 female         A  female|A 0.4434783        3
 ## 4:  toy_experiment|8 female         B  female|B 0.1731884        2
 ## 5:  toy_experiment|9 female         A  female|A 0.2550725        2</code></pre>
-<p>This table is exactly what you need for statistcis and vidualisation in <code>R</code>!</p>
+<p>This table is exactly what you need for statistics and visualisation in <code>R</code>!</p>
 </div>
 <div id="stitching" class="section level3 unnumbered">
 <h3>Stitching</h3>

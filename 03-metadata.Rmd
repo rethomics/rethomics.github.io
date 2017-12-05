@@ -39,9 +39,9 @@ The whole point of high-througput analysis is that you can load all the data fro
 
 ![Linking adds technical columns](assets/metadata_linking.png)
 
-Once your metadata is ready, it can be used to create a query to **import the matching data**.
+Once your metadata is ready, it can be used to as a query to **import the matching data**.
 Regardless of which acquisition tool you used, the first step when importing data in `R` will be "metadata linking".
-This step will automatically complete the metadata file in a way that can be used for `R` to retrieve the right amount of data from experiment files. We call it linking, since it links the manually introduced metadata with the right experiment data file, something that is tedious to do manually. 
+This step will automatically complete the metadata file in a way that can be used for `R` to retrieve the right amount of data from experiment files. We call it linking, since it links the manually introduced metadata with the correct data file, something that is tedious to do manually. 
 In short, linking means at least:
 
 * Adding an `id` column to the metadata. This will be a unique identifier for each indididual (it generally contains datetime, machine name an region id). This will diferenciate animals with the same conditions in the metadata. 
@@ -50,4 +50,4 @@ In short, linking means at least:
 
 ## Take home message{-}
 In conclusion, **metadatafiles are a canonical way to both define experimental condition and load behavioural data**.
-They are both computer and human friendly. In other words, if you give a query to a colaborator, she/he will be able to tell very quickly what animal underwent which treatment, where and when.
+They are both computer and human friendly. In other words, if you pass a query on to a colaborator, she/he will be able to tell very quickly what individuals underwent which treatment, where and when.

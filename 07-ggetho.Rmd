@@ -231,6 +231,18 @@ pl
 
 Note that you do not have to wrap over specifically 24h, you could work different periods.
 
+If you are interested in events that happen between the end and the start of the wrapping period (e.g. at ZT24).
+You may want to wrap time with an **"offset"**. That is a phase shift. For instance, if we want to have ZT06 in the middle of our graph, we use an offset of +6h:
+
+```{r}
+pl <- ggetho(dt, aes(x=t, y=moving), 
+             time_wrap = hours(24),
+             time_offset = hours(6)) + stat_pop_etho()
+pl
+```
+
+As you can see, it gives have a nice visualisation of the "activity peaks".
+
 ## Double-plotted actograms {-}
 
 When analysing periodic behaviour, it makes sense to use a so called double-plotted actogram.

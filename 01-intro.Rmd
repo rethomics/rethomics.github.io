@@ -4,12 +4,12 @@
 
 If you have never used or heard of `R` before, 
 I suggest you start by reading about [data science in `R`](http://r4ds.had.co.nz/) and [installing RStudio](https://www.rstudio.com/products/rstudio/download/#download).
-Only once you have done can we continue.
+Only once you have done that can we continue.
 
 ## Installing rethomics packages{-}
 
 As of today (`r Sys.Date()`), `rethomics` packages are not on CRAN, the official R package archive yet.
-Therefore, we will install the developmental version.
+Therefore, we will install their developmental version.
 
 As a prerequisite, we need to install (once for all) `devtools` and load it:
 
@@ -20,7 +20,7 @@ library(devtools)
 
 Ensure you have *no error messages*.
 Then, we can install some of the `rethomics` packages.
-For instance, lets install `behavr`.
+For instance, let us install `behavr`.
 
 ```{r, eval=FALSE}
 install_github("rethomics/behavr")

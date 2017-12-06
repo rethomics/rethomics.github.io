@@ -216,6 +216,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#miscelaneous"><i class="fa fa-check"></i>Miscelaneous</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#next-steps-2"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html"><i class="fa fa-check"></i>Sleep analysis</a><ul>
+<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#aims-3"><i class="fa fa-check"></i>Aims</a></li>
+<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#prerequisites-3"><i class="fa fa-check"></i>Prerequisites</a></li>
+<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#background-2"><i class="fa fa-check"></i>Background</a></li>
+<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#getting-the-data-2"><i class="fa fa-check"></i>Getting the data</a></li>
+<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#data-curation"><i class="fa fa-check"></i>Data curation</a><ul>
+<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#dead-animals"><i class="fa fa-check"></i>Dead animals</a></li>
+<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#trimming"><i class="fa fa-check"></i>Trimming</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#population-plots-1"><i class="fa fa-check"></i>Population plots</a></li>
+<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#summarise-data-per-animal"><i class="fa fa-check"></i>Summarise data per animal</a></li>
+<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#todo"><i class="fa fa-check"></i>TODO</a></li>
+<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#next-steps-3"><i class="fa fa-check"></i>Next steps</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org/yihui/bookdown/" target="blank">Published with bookdown</a></li>
 
@@ -279,10 +293,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2>Getting the data</h2>
 <p>For this tutorial, you need to <a href="https://github.com/rethomics/rethomics.github.io/raw/source/material/damr_tutorial.zip">download some DAM2 data</a> that we have made available. This is just a zip archive containing four files. Download and extract the files from the zip into a folder of your choice. <strong>Store the path in a variable</strong>. For instance, <strong>adapt</strong> something like:</p>
 <pre class="r{eval=f}"><code>DATA_DIR &lt;- &quot;C://Where/My/Zip/Has/been/extracted</code></pre>
-<p>Check that all the files live there:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list.files</span>(DATA_DIR)</code></pre></div>
-<pre><code>## [1] &quot;damr_tutorial.zip&quot; &quot;metadata.csv&quot;      &quot;Monitor11.txt&quot;    
-## [4] &quot;Monitor14.txt&quot;     &quot;Monitor64.txt&quot;</code></pre>
+<p>Check that all four files live there:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list.files</span>(DATA_DIR, <span class="dt">pattern=</span> <span class="st">&quot;*.txt|*.csv&quot;</span>)</code></pre></div>
+<pre><code>## [1] &quot;metadata.csv&quot;  &quot;Monitor11.txt&quot; &quot;Monitor14.txt&quot; &quot;Monitor64.txt&quot;</code></pre>
 <p>For this exercise, we will work with the data and metadata in the same place. However, in practice, I recommend to:</p>
 <ul>
 <li>Have <strong>all raw data from your acquisition platform in the same place</strong> (possibly shared with others or a network drive)</li>
@@ -405,7 +418,7 @@ metadata</code></pre></div>
 <p>Immediatly after loading your data, it is a good idea to visualise it, in order to detect anomalies or at least to be sure that everything looks ok. We can use <code>ggetho</code> for that, for example the following code will create an activity tile plot, useful to detect dead animals.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggetho)</code></pre></div>
 <pre><code>## Loading required package: ggplot2</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># I only show firt replicate</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># I only show fisrt replicate</span>
 <span class="kw">ggetho</span>(dt[<span class="kw">xmv</span>(replicate) <span class="op">==</span><span class="st"> </span><span class="dv">1</span> ], <span class="kw">aes</span>(<span class="dt">z=</span>activity)) <span class="op">+</span>
 <span class="st">      </span><span class="kw">stat_tile_etho</span>() <span class="op">+</span>
 <span class="st">      </span><span class="kw">stat_ld_annotations</span>()</code></pre></div>
@@ -428,8 +441,7 @@ metadata</code></pre></div>
 <h2>Apply functions when loading</h2>
 <p>Finaly, we may want to apply function on the data as it is loaded, in order to preprocess it, saving time. This pre-processing will annotate the data, i.e create new information (new columns) based on the original data. As an example, we can perform a sleep (bouts of immobility of 5 min or more), from our <code>sleepr</code> package (which you will have installed, or course).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sleepr)
-<span class="co"># todo</span>
-<span class="co">#dt &lt;- load_dam2(metadata, FUN = sleepr::sleep_dam_annotation)</span>
+dt &lt;-<span class="st"> </span><span class="kw">load_dam2</span>(metadata, <span class="dt">FUN =</span> sleepr<span class="op">::</span>sleep_dam_annotation)
 dt</code></pre></div>
 <pre><code>## 
 ##  ==== METADATA ====
@@ -473,18 +485,18 @@ dt</code></pre></div>
 ## 
 ##  ====== DATA ======
 ## 
-##                                           id      t activity
-##                                       &lt;fctr&gt;  &lt;num&gt;    &lt;int&gt;
-##      1: 2017-07-01 08:00:00|Monitor11.txt|01      0        0
-##      2: 2017-07-01 08:00:00|Monitor11.txt|01     60        0
-##      3: 2017-07-01 08:00:00|Monitor11.txt|01    120        0
-##      4: 2017-07-01 08:00:00|Monitor11.txt|01    180        0
-##     ---                                                     
-## 737468: 2017-07-11 08:00:00|Monitor64.txt|32 230160        0
-## 737469: 2017-07-11 08:00:00|Monitor64.txt|32 230220        0
-## 737470: 2017-07-11 08:00:00|Monitor64.txt|32 230280        0
-## 737471: 2017-07-11 08:00:00|Monitor64.txt|32 230340        0
-## 737472: 2017-07-11 08:00:00|Monitor64.txt|32 230400        0</code></pre>
+##                                           id      t activity moving asleep
+##                                       &lt;fctr&gt;  &lt;num&gt;    &lt;int&gt; &lt;lgcl&gt; &lt;lgcl&gt;
+##      1: 2017-07-01 08:00:00|Monitor11.txt|01      0        0  FALSE   TRUE
+##      2: 2017-07-01 08:00:00|Monitor11.txt|01     60        0  FALSE   TRUE
+##      3: 2017-07-01 08:00:00|Monitor11.txt|01    120        0  FALSE   TRUE
+##      4: 2017-07-01 08:00:00|Monitor11.txt|01    180        0  FALSE   TRUE
+##     ---                                                                   
+## 737468: 2017-07-11 08:00:00|Monitor64.txt|32 230160        0  FALSE   TRUE
+## 737469: 2017-07-11 08:00:00|Monitor64.txt|32 230220        0  FALSE   TRUE
+## 737470: 2017-07-11 08:00:00|Monitor64.txt|32 230280        0  FALSE   TRUE
+## 737471: 2017-07-11 08:00:00|Monitor64.txt|32 230340        0  FALSE   TRUE
+## 737472: 2017-07-11 08:00:00|Monitor64.txt|32 230400        0  FALSE   TRUE</code></pre>
 <p>As you can see, we now have additional columns in the data.</p>
 </div>
 <div id="next-steps" class="section level2 unnumbered">

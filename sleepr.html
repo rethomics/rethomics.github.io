@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="intro.html">
-<link rel="next" href="metadata.html">
+<link rel="prev" href="ggetho.html">
+
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -250,31 +250,204 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="workflow" class="section level1 unnumbered">
-<h1>The <code>rethomics</code> workflow</h1>
-<p><strong>From hypothesis to results</strong></p>
+<div id="sleepr" class="section level1 unnumbered">
+<h1>Sleep analysis</h1>
+<p><strong>TODO</strong></p>
 <hr />
 <div class="figure">
-<img src="assets/workflow.png" alt="The rethomics workflow" />
-<p class="caption">The rethomics workflow</p>
+<img src="assets/dam_experiment.png" alt="A DAM experiment. Two replicates, 10 days apart; three genotypes; two sexes, males and females" />
+<p class="caption">A DAM experiment. Two replicates, 10 days apart; three genotypes; two sexes, males and females</p>
 </div>
-<p>In rethomics, we envisage behavioural experiments as a workflow:</p>
-<ol style="list-style-type: decimal">
-<li><strong>Design</strong> – you plan your experiment (I can’t really help you with that, but I trust you!).</li>
-<li><strong>Record/track</strong> – you use your acquisition platform to record behavioural variables over time. They define the format of the results.</li>
-<li><strong>Write individual information</strong> – you make a spreadsheet (CSV file) that details the experimental conditions <strong>for each individual</strong>. We call this a <strong>metadata file</strong>. It is a crucial concept in rethomics, so we will dedicate it the <a href="metadata.html#metadata">next section</a>. You can often write your metadata as you plan your experiment, but sometimes, you want to enrich it with variables that you can only record after your experiment (e.g. lifespan).</li>
-<li><strong>Link and Load data</strong> – First, we enrich your metadata by “linking” it to the result. This allows you to load all the matching data into <strong>a single<code>behavr</code> table</strong> (see <a href="behavr.html#behavr">section on <code>behavr</code> tables</a>).</li>
-<li><strong>Tranform &amp; analyse &amp; visualise</strong> – you take advantage of <code>rethomics</code> and <code>R</code> analysis and visualisation tools.</li>
-</ol>
+<div id="aims-3" class="section level2 unnumbered">
+<h2>Aims</h2>
+<p>In this practical chapter, we will use a real experiment to learn how to:</p>
+<ul>
+<li>Annotate a <a href="behavr.html">behavr table</a> with <strong>sleep state</strong></li>
+<li>Use <a href="ggetho.html">ggetho</a> to display individual and population sleep amounts</li>
+<li>Compute <strong>average sleep</strong> within a time window</li>
+<li>Perform standard statistics on average sleep</li>
+<li>Analyse sleep <strong>architecture</strong>, sleep <strong>latency</strong>,…</li>
+</ul>
+</div>
+<div id="prerequisites-3" class="section level2 unnumbered">
+<h2>Prerequisites</h2>
+<ul>
+<li>You have read about <a href="behavr.html">behavr tables</a></li>
+<li>You are familiar with <a href="ggetho.html">ggetho</a>, our vidualisation tool</li>
+<li>You have already read the <a href="damr.html">damr tutorial</a></li>
+<li>Ensure you have <a href="intro.html#installing-rethomics-packages">installed</a> <code>behavr</code>, <code>damr</code> and <code>ggetho</code> packages:</li>
+</ul>
+</div>
+<div id="background-2" class="section level2 unnumbered">
+<h2>Background</h2>
+<p>This tutorial focused on sleep in <em>Drosophila</em>. Traditionally, activity is first scored (e.g. beam crosses/video tracking), and any bout of inactivity longer than five minutes counts as sleep. You can easily adapt this tutorial to scoring other models/behaviours as long as you can define <strong>two discrete states</strong> (e.g. sleep vs asleep, moving vs immobile, left vs right, …).</p>
+<p>In the <a href="damr.html">DAM2 tutorial</a>, we have learnt how to load data from a real DAM expriment. Since we already described it in length, it makes sense to use this experiment as an example for our sleep analysis. <strong>I will assume that you have already read and understood the DAM tutorial()</strong>. The last thing we did was loading data and annotating scoring sleep:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sleepr)
+dt &lt;-<span class="st"> </span><span class="kw">load_dam2</span>(metadata, <span class="dt">FUN =</span> sleepr<span class="op">::</span>sleep_dam_annotation)
+dt</code></pre></div>
+</div>
+<div id="getting-the-data-2" class="section level2 unnumbered">
+<h2>Getting the data</h2>
+<p>Instead of going through the whole <code>damr</code> tutorial again, I though I would put the resulting data table online. Importanlty, for simplicity, <strong>I have just kept replicate 1</strong>. We just need to download it and load it:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sleepr)
+<span class="kw">library</span>(ggetho)
 
+<span class="kw">load</span>(<span class="kw">url</span>(<span class="st">&quot;https://github.com/rethomics/rethomics.github.io/raw/source/material/sleep_dam.RData&quot;</span>))
+<span class="kw">summary</span>(dt)</code></pre></div>
+<pre><code>## behavr table with:
+##  96  individuals
+##  8   metavariables
+##  4   variables
+##  3.68736e+05 measurements
+##  1   key (id)</code></pre>
+</div>
+<div id="data-curation" class="section level2 unnumbered">
+<h2>Data curation</h2>
+<p>First of all, lets visualise all our sleep data. It is important to pay critical attention to this graph in order to assess if anything has gone wrong:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">z=</span>asleep)) <span class="op">+</span>
+<span class="st">      </span><span class="kw">stat_ld_annotations</span>(<span class="dt">height =</span> <span class="dv">1</span>)<span class="op">+</span>
+<span class="st">      </span><span class="kw">stat_tile_etho</span>() </code></pre></div>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-92-1.png" width="864" /></p>
+<div id="dead-animals" class="section level3 unnumbered">
+<h3>Dead animals</h3>
+<p>Some animals may hae died during the experiment, but they could be scored as asleep for very long durations. <code>sleepr</code> has an utility function to remove data from dead animals:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># we give our curated data another name so we can see the difference</span>
+dt_curated &lt;-<span class="st"> </span><span class="kw">curate_dead_animals</span>(dt)
+<span class="kw">summary</span>(dt_curated)</code></pre></div>
+<pre><code>## behavr table with:
+##  95  individuals
+##  8   metavariables
+##  4   variables
+##  3.57436e+05 measurements
+##  1   key (id)</code></pre>
+<p>As you can see, we now have 95 individuals vs 96 in the original data. To see whic animals have been removed, we could run something like:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setdiff</span>(dt[, id, <span class="dt">meta=</span>T],
+        dt_curated[, id, <span class="dt">meta=</span>T])</code></pre></div>
+<pre><code>## [1] &quot;2017-07-01 08:00:00|Monitor64.txt|26&quot;</code></pre>
+<p>Indeed, nothing seem to have happened in this channel. Now let’s look at the data after curation:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggetho</span>(dt_curated, <span class="kw">aes</span>(<span class="dt">z=</span>asleep)) <span class="op">+</span>
+<span class="st">      </span><span class="kw">stat_ld_annotations</span>(<span class="dt">ypos =</span> <span class="st">&quot;top&quot;</span>)<span class="op">+</span>
+<span class="st">      </span><span class="kw">stat_tile_etho</span>() </code></pre></div>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-95-1.png" width="864" /> ### Animals that died too early {-} Now, we would like to <strong>remove animals that did not live say longer than 2 days</strong>. To do that, we use the power of <code>behavr</code> tables:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># we make a summary table of all lifespan for each animals</span>
+lifespan_dt &lt;-<span class="st"> </span>dt_curated[, .(<span class="dt">lifespan =</span> <span class="kw">max</span>(t)), by=id]
+<span class="co"># we filter this table for lifespan&gt;2 and we keep the id</span>
+valid_ids &lt;-<span class="st"> </span>lifespan_dt[lifespan <span class="op">&gt;</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">2</span>), id]
+<span class="co"># we apply this filter</span>
+dt_curated &lt;-<span class="st"> </span>dt_curated[id <span class="op">%in%</span><span class="st"> </span>valid_ids]
+<span class="kw">summary</span>(dt_curated)</code></pre></div>
+<pre><code>## behavr table with:
+##  94  individuals
+##  8   metavariables
+##  4   variables
+##  3.54923e+05 measurements
+##  1   key (id)</code></pre>
+</div>
+<div id="trimming" class="section level3 unnumbered">
+<h3>Trimming</h3>
+<p>Generally, we want to remove point according the experimental time. For instance, we want to remove the begening as animals are acclimatising to their new environment. In general, we could simply do:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt_curated &lt;-<span class="st"> </span>dt_curated[t <span class="op">%between%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">days</span>(<span class="fl">2.5</span>))]
+<span class="kw">summary</span>(dt_curated)</code></pre></div>
+<pre><code>## behavr table with:
+##  94  individuals
+##  8   metavariables
+##  4   variables
+##  3.38494e+05 measurements
+##  1   key (id)</code></pre>
+<p>Which means we removed data before <code>t=0</code> and after <code>t=days(2.5)</code>.</p>
+</div>
+</div>
+<div id="population-plots-1" class="section level2 unnumbered">
+<h2>Population plots</h2>
+<p>Now that we have curated our data, we can start looking at the biology. First, we make a global population plot:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggetho</span>(dt_curated, <span class="kw">aes</span>(<span class="dt">y=</span>asleep, <span class="dt">colour=</span>sex)) <span class="op">+</span>
+<span class="st">      </span><span class="kw">stat_pop_etho</span>() <span class="op">+</span>
+<span class="st">      </span><span class="kw">stat_ld_annotations</span>() <span class="op">+</span>
+<span class="st">      </span><span class="kw">facet_grid</span>(genotype <span class="op">~</span><span class="st"> </span>.)</code></pre></div>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-98-1.png" width="672" /></p>
+<p>The y axis shows he proportion of time sent sleeping, averaged for each animal within a 30min (default) time window.</p>
+<p>Then, we can wrap (average) that over one day. We also polish the y axis label:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggetho</span>(dt_curated, <span class="kw">aes</span>(<span class="dt">y=</span>asleep, <span class="dt">colour=</span>sex), <span class="dt">time_wrap =</span> <span class="kw">hours</span>(<span class="dv">24</span>)) <span class="op">+</span>
+<span class="st">      </span><span class="kw">stat_pop_etho</span>() <span class="op">+</span>
+<span class="st">      </span><span class="kw">stat_ld_annotations</span>() <span class="op">+</span>
+<span class="st">      </span><span class="kw">facet_grid</span>(genotype <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span>
+<span class="st">      </span><span class="kw">scale_y_continuous</span>(<span class="dt">name=</span> <span class="st">&quot;Fraction of time sleeping&quot;</span>,<span class="dt">labels =</span> scales<span class="op">::</span>percent)</code></pre></div>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-99-1.png" width="672" /></p>
+<p>That gives us a good understanding of what happens at the population level.</p>
+</div>
+<div id="summarise-data-per-animal" class="section level2 unnumbered">
+<h2>Summarise data per animal</h2>
+<p>Most likely, we want to summarise sleep amount so that we have one number per animal. For instance, we can compute the overall average proportion of time spent sleeping:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">summary_dt &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">rejoin</span>(dt_curated[,
+           .(
+             <span class="co"># this is where the computation happens</span>
+             <span class="dt">sleep_fraction =</span> <span class="kw">mean</span>(asleep)
+             ),
+           ,<span class="dt">by=</span>id])
+summary_dt</code></pre></div>
+<pre><code>##                                       id file_info region_id
+##  1: 2017-07-01 08:00:00|Monitor11.txt|01    &lt;list&gt;         1
+##  2: 2017-07-01 08:00:00|Monitor11.txt|02    &lt;list&gt;         2
+##  3: 2017-07-01 08:00:00|Monitor11.txt|03    &lt;list&gt;         3
+##  4: 2017-07-01 08:00:00|Monitor11.txt|04    &lt;list&gt;         4
+##  5: 2017-07-01 08:00:00|Monitor11.txt|05    &lt;list&gt;         5
+## ---                                                         
+## 90: 2017-07-01 08:00:00|Monitor64.txt|27    &lt;list&gt;        27
+## 91: 2017-07-01 08:00:00|Monitor64.txt|29    &lt;list&gt;        29
+## 92: 2017-07-01 08:00:00|Monitor64.txt|30    &lt;list&gt;        30
+## 93: 2017-07-01 08:00:00|Monitor64.txt|31    &lt;list&gt;        31
+## 94: 2017-07-01 08:00:00|Monitor64.txt|32    &lt;list&gt;        32
+##                         experiment_id      start_datetime stop_datetime
+##  1: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
+##  2: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
+##  3: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
+##  4: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
+##  5: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
+## ---                                                                    
+## 90: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
+## 91: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
+## 92: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
+## 93: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
+## 94: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
+##     sex genotype replicate sleep_fraction
+##  1:   M        A         1      0.7600666
+##  2:   M        A         1      0.7550680
+##  3:   M        A         1      0.8214385
+##  4:   M        A         1      0.7528464
+##  5:   M        A         1      0.8044988
+## ---                                      
+## 90:   F        C         1      0.7661761
+## 91:   F        C         1      0.6725909
+## 92:   F        C         1      0.7622883
+## 93:   F        C         1      0.7967231
+## 94:   F        C         1      0.9208553</code></pre>
+<p>With <code>rejoin</code>, we have put our summary and metadata together, which is suitable for standars graphics/statictics. For instance:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(summary_dt, <span class="kw">aes</span>(<span class="dt">x=</span>sex, <span class="dt">y=</span>sleep_fraction, <span class="dt">fill=</span>sex)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">outlier.colour =</span> <span class="ot">NA</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">alpha=</span>.<span class="dv">75</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_grid</span>( genotype <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">name=</span> <span class="st">&quot;Fraction of time sleeping&quot;</span>,<span class="dt">labels =</span> scales<span class="op">::</span>percent)</code></pre></div>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-101-1.png" width="672" /></p>
+</div>
+<div id="todo" class="section level2 unnumbered">
+<h2>TODO</h2>
+</div>
+<div id="next-steps-3" class="section level2 unnumbered">
+<h2>Next steps</h2>
+<ul>
+<li>TODO</li>
+</ul>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="metadata.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ggetho.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -303,7 +476,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rethomics/rethomics.github.io/edit/source/02-workflow.Rmd",
+"link": "https://github.com/rethomics/rethomics.github.io/edit/source/08-sleepr.Rmd",
 "text": "Edit"
 },
 "download": ["rethomics.pdf", "rethomics.epub"],

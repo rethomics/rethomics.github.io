@@ -64,17 +64,17 @@ For instance, **adapt** something like:
 DATA_DIR <- "C://Where/My/Zip/Has/been/extracted
 ```
 
-Check that all the files live there:
+Check that all four files live there:
 
 ```{r}
-list.files(DATA_DIR)
+list.files(DATA_DIR, pattern= "*.txt|*.csv")
 ```
 
 For this exercise, we will work with the data and metadata in the same place.
 However, in practice, I recommend to:
 
 * Have **all raw data from your acquisition platform in the same place** (possibly shared with others or a network drive)
-*  Have **one folder per "experiment"**. That is a folder that contains one metadata file, your R scripts, your figures regarding a set of consistent experiment.
+* Have **one folder per "experiment"**. That is a folder that contains one metadata file, your R scripts, your figures regarding a set of consistent experiment.
 
 For now, we can just [set our working directory](https://support.rstudio.com/hc/en-us/articles/200711843-Working-Directories-and-Workspaces) to `DATA_DIR`:
 
@@ -191,7 +191,7 @@ We can use `ggetho` for that, for example the following code will create an acti
 
 ```{r, fig.width = 9, fig.height=16}
 library(ggetho)
-# I only show firt replicate
+# I only show fisrt replicate
 ggetho(dt[xmv(replicate) == 1 ], aes(z=activity)) +
       stat_tile_etho() +
       stat_ld_annotations()
@@ -230,9 +230,17 @@ Finaly, we may want to apply function on the data as it is loaded, in order to p
 
 ```{r}
 library(sleepr)
-# todo
-#dt <- load_dam2(metadata, FUN = sleepr::sleep_dam_annotation)
+dt <- load_dam2(metadata, FUN = sleepr::sleep_dam_annotation)
 dt
+```
+
+```{r, echo=FALSE, eval=FALSE}
+## to save the data for next tuto
+# dt <- dt[xmv(replicate) == 1]
+# rm(metadata)
+# rm(pl)
+# save(dt, file="/home/quentin/comput/rethomics/rethomics.github.io/material/sleep_dam.RData")
+# load(file="/home/quentin/comput/rethomics/rethomics.github.io/material/sleep_dam.RData")
 ```
 
 As you can  see, we now have additional columns in the data.

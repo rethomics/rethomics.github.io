@@ -1,0 +1,177 @@
+# Sleep analysis {#sleepr -}
+
+**TODO**
+
+---------------------------
+
+![A DAM experiment. Two replicates, 10 days apart; three genotypes; two sexes, males and females](assets/dam_experiment.png)
+
+## Aims {-}
+In this practical chapter, we will use a real experiment to learn how to:
+
+* Annotate a [behavr table](behavr.html) with **sleep state**
+* Use [ggetho](ggetho.html) to display individual and population sleep amounts
+* Compute **average sleep** within a time window
+* Perform standard statistics on average sleep
+* Analyse sleep **architecture**, sleep **latency**,...
+
+## Prerequisites {-}
+* You have read about [behavr tables](behavr.html)
+* You are familiar with  [ggetho](ggetho.html), our vidualisation tool
+* You have already read the [damr tutorial](damr.html)
+* Ensure you have [installed](intro.html#installing-rethomics-packages)
+`behavr`, `damr` and `ggetho` packages:
+
+
+## Background{-}
+
+This tutorial focused on sleep in *Drosophila*.
+Traditionally, activity is first scored (e.g. beam crosses/video tracking), and any bout of inactivity longer than five minutes counts as sleep.
+You can easily adapt this tutorial to scoring other models/behaviours as long as you can define **two discrete states** (e.g. sleep vs asleep, moving vs immobile, left vs right, ...).
+
+In the [DAM2 tutorial](damr.html), we have learnt how to load data from a real DAM expriment.
+Since we already described it in length, it makes sense to use this experiment as an example for our sleep analysis.
+**I will assume that you have already read and understood the DAM tutorial()**.
+The last thing we did was loading data and annotating scoring sleep:
+
+```{r, eval=FALSE}
+library(sleepr)
+dt <- load_dam2(metadata, FUN = sleepr::sleep_dam_annotation)
+dt
+```
+
+
+## Getting the data {-}
+
+Instead of going through the whole `damr` tutorial again, I though I would put the resulting data table online.
+Importanlty, for simplicity, **I have just kept replicate 1**.
+We just need to download it and load it:
+
+
+```{r}
+library(sleepr)
+library(ggetho)
+
+load(url("https://github.com/rethomics/rethomics.github.io/raw/source/material/sleep_dam.RData"))
+summary(dt)
+```
+
+## Data curation {-}
+First of all, lets visualise all our sleep data.
+It is important to pay critical attention to this graph in order to assess if anything has gone wrong:
+
+```{r, fig.width = 9, fig.height=12}
+ggetho(dt, aes(z=asleep)) +
+      stat_ld_annotations(height = 1)+
+      stat_tile_etho() 
+      
+```
+
+### Dead animals {-}
+
+Some animals may hae died during the experiment, but they could be scored as asleep for very long durations.
+`sleepr` has an utility function to remove data from dead animals:
+
+```{r}
+# we give our curated data another name so we can see the difference
+dt_curated <- curate_dead_animals(dt)
+summary(dt_curated)
+```
+As you can see, we now have `r nrow(dt_curated[meta=T])` individuals vs `r nrow(dt[meta=T])` in the original data.
+To see whic animals have been removed, we could run something like:
+
+```{r}
+setdiff(dt[, id, meta=T],
+        dt_curated[, id, meta=T])
+```
+Indeed, nothing seem to have happened in this channel.
+Now let's look at the data after curation:
+
+```{r, fig.width = 9, fig.height=12}
+ggetho(dt_curated, aes(z=asleep)) +
+      stat_ld_annotations(ypos = "top")+
+      stat_tile_etho() 
+```
+### Animals that died too early {-}
+Now, we would like to **remove animals that did not live say longer than 2 days**.
+To do that, we use the power of `behavr` tables:
+
+```{r}
+# we make a summary table of all lifespan for each animals
+lifespan_dt <- dt_curated[, .(lifespan = max(t)), by=id]
+# we filter this table for lifespan>2 and we keep the id
+valid_ids <- lifespan_dt[lifespan > days(2), id]
+# we apply this filter
+dt_curated <- dt_curated[id %in% valid_ids]
+summary(dt_curated)
+```
+
+### Trimming {-}
+Generally, we want to remove point according the experimental time.
+For instance, we want to remove the begening as animals are acclimatising to their new environment.
+In general, we could simply do:
+
+
+```{r}
+dt_curated <- dt_curated[t %between% c(0, days(2.5))]
+summary(dt_curated)
+```
+
+Which means we removed data before `t=0` and after `t=days(2.5)`.
+
+## Population plots{-}
+
+Now that we have curated our data, we can start looking at the biology.
+First, we make a global population plot:
+
+```{r}
+ggetho(dt_curated, aes(y=asleep, colour=sex)) +
+      stat_pop_etho() +
+      stat_ld_annotations() +
+      facet_grid(genotype ~ .)
+```
+
+The y axis shows he proportion of time sent sleeping, averaged for each animal within a 30min (default) time window.
+
+Then, we can wrap (average) that over one day. We also polish the y axis label:
+
+```{r}
+ggetho(dt_curated, aes(y=asleep, colour=sex), time_wrap = hours(24)) +
+      stat_pop_etho() +
+      stat_ld_annotations() +
+      facet_grid(genotype ~ .) +
+      scale_y_continuous(name= "Fraction of time sleeping",labels = scales::percent)
+```
+
+That gives us a good understanding of what happens at the population level.
+
+## Summarise data per animal{-}
+
+Most likely, we want to summarise sleep amount so that we have one number per animal.
+For instance, we can compute the overall average proportion of time spent sleeping:
+
+```{r}
+summary_dt <- 
+  rejoin(dt_curated[,
+           .(
+             # this is where the computation happens
+             sleep_fraction = mean(asleep)
+             ),
+           ,by=id])
+summary_dt
+```
+With `rejoin`, we have put our summary and metadata together, which is suitable for standars graphics/statictics.
+For instance:
+
+```{r}
+ggplot(summary_dt, aes(x=sex, y=sleep_fraction, fill=sex)) + 
+  geom_boxplot(outlier.colour = NA) +
+  geom_jitter(alpha=.75) +
+  facet_grid( genotype ~ .) +
+  scale_y_continuous(name= "Fraction of time sleeping",labels = scales::percent)
+```
+
+## TODO{-}
+## Next steps {-}
+
+* TODO

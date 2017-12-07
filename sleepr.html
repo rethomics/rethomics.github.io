@@ -241,7 +241,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#architecture-description"><i class="fa fa-check"></i>Architecture description</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#latency-to-sleep"><i class="fa fa-check"></i>Latency to sleep</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#merging-all-staistics"><i class="fa fa-check"></i>Merging all staistics</a></li>
+<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#merging-all-statistics"><i class="fa fa-check"></i>Merging all statistics</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#next-steps-3"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
 <li class="divider"></li>
@@ -266,11 +266,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="sleepr" class="section level1 unnumbered">
 <h1>Sleep analysis</h1>
-<p><strong>TODO</strong></p>
+<p><strong>TODO the perfect one liner</strong></p>
 <hr />
 <div class="figure">
-<img src="assets/dam_experiment.png" alt="A DAM experiment. Two replicates, 10 days apart; three genotypes; two sexes, males and females" />
-<p class="caption">A DAM experiment. Two replicates, 10 days apart; three genotypes; two sexes, males and females</p>
+<embed src="%22rethomics_files/figure-html/achitecture-1.png%22" />
+<p class="caption">TODO add aome figure</p>
 </div>
 <div id="aims-3" class="section level2 unnumbered">
 <h2>Aims</h2>
@@ -758,13 +758,15 @@ bout_summary</code></pre></div>
 <p>For good measures, I also added number of bout and average bout length as we have seen before. You can of course use these result to plot things like the relationship between bout length and bout number:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="kw">rejoin</span>(bout_summary), <span class="kw">aes</span>(n_bouts, mean_bout_length, <span class="dt">colour=</span>sex)) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
-<span class="st">    </span><span class="kw">facet_grid</span>(genotype <span class="op">~</span><span class="st"> </span>.)</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-114-1.png" width="672" /></p>
+<span class="st">    </span><span class="kw">facet_grid</span>(genotype <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">scale_x_continuous</span>(<span class="dt">name=</span><span class="st">&quot;Number of bouts&quot;</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">name=</span><span class="st">&quot;Average bout duration (s)&quot;</span>)</code></pre></div>
+<p><img src="rethomics_files/figure-html/achitecture-1.png" width="672" /></p>
 <p>Always <strong>be critical</strong> about what you do. For instance, what whould be the latency to sleep of an animal that, in the period of observation, does not sleep?</p>
 </div>
 </div>
-<div id="merging-all-staistics" class="section level2 unnumbered">
-<h2>Merging all staistics</h2>
+<div id="merging-all-statistics" class="section level2 unnumbered">
+<h2>Merging all statistics</h2>
 <p>Earlier, we made a <code>summary_dt</code> in which we computed some statitic ssuch as sleep fraction in L and D phase. In addition, we have now a <code>bout_summary</code> where we have other variables. These data have both one row per animal. Ideally, we could <strong>“merge” them into a single table</strong> that has all the individual statistics. This way we can study the relationship say between sleep amount and latency. In order to do that, we perform a so called “join”:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">overall_summary &lt;-<span class="st"> </span>summary_dt[bout_summary]
 overall_summary</code></pre></div>
@@ -832,7 +834,7 @@ overall_summary</code></pre></div>
 <span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">alpha=</span>.<span class="dv">1</span>)<span class="op">+</span>
 <span class="st">    </span><span class="kw">facet_grid</span>(genotype <span class="op">~</span><span class="st"> </span>.)</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-116-1.png" width="672" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-115-1.png" width="672" /></p>
 </div>
 <div id="next-steps-3" class="section level2 unnumbered">
 <h2>Next steps</h2>

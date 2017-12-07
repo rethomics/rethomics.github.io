@@ -482,7 +482,9 @@ title
 
 ## Next steps {-}
 
-* TODO
+* [Sleep analysis with `sleepr`](sleepr.html)
+* [Circadian analysis with `zeitgebr`](zeitgebr.html)
+
 
 
 <!-- library(ggetho) -->

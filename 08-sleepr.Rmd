@@ -26,7 +26,7 @@ In this practical chapter, we will use a real experiment to learn how to:
 ## Background{-}
 
 This tutorial focused on sleep in *Drosophila*.
-Traditionally, activity is first scored (e.g.though beam crosses/video tracking).
+Traditionally, activity is first scored (e.g. though beam crosses/video tracking).
 Then any bout of inactivity longer than five minutes counts as sleep.
 You can easily adapt this tutorial to scoring other models/behaviours as long as you can define **two discrete states** (e.g. sleep vs asleep, moving vs immobile, left vs right, ...).
 
@@ -386,6 +386,15 @@ ggplot(overall_summary, aes(latency / 60, sleep_fraction_l, colour=sex)) +
     geom_smooth(method="lm", alpha=.1)+
     facet_grid(genotype ~ .)
 ```
+
+
+
+## Take home message{-}
+
+Data analysis and visualisation is about **translating your biological questions in another language**.
+Problems in emerging areas of science can be very rich so they should be matched with the equaly rich grammar that only a programming language can provide.
+This tutorial was very simple and does not pretend to provied a canonical sleep analysis.
+Instead, see it as a set of building blocks that you can use and rearange to address your own questions.
 
 
 ## Next steps {-}

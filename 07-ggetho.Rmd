@@ -479,6 +479,11 @@ TODO, list ggplot possibilities:
 <!-- 
 title
  -->
+ 
+## Take home message{-}
+ 
+TODO
+
 
 ## Next steps {-}
 

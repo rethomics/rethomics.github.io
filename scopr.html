@@ -214,6 +214,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#periodograms"><i class="fa fa-check"></i>Periodograms</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#miscelaneous"><i class="fa fa-check"></i>Miscelaneous</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#take-home-message-1"><i class="fa fa-check"></i>Take home message</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#next-steps-2"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html"><i class="fa fa-check"></i>Sleep analysis</a><ul>
@@ -242,6 +243,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#latency-to-sleep"><i class="fa fa-check"></i>Latency to sleep</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#merging-all-statistics"><i class="fa fa-check"></i>Merging all statistics</a></li>
+<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#take-home-message-2"><i class="fa fa-check"></i>Take home message</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#next-steps-3"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
 <li class="divider"></li>
@@ -671,7 +673,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-## 221.672   5.816 227.942</code></pre>
+## 149.192   4.164 155.165</code></pre>
 <p>However, the next time, we do the same thing way faster:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(
   dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata,
@@ -681,7 +683,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-##   1.976   0.024   2.014</code></pre>
+##   1.900   0.052   1.915</code></pre>
 <p>Here, we set <code>cache</code> to <code>&quot;ethoscope_cache&quot;</code>. This creates a new directory called <code>&quot;ethoscope_cache&quot;</code> (you can pick the name and location you want). If you to do a bit of tidying up, you can remove it without risk (it will just take time next time you load your data).</p>
 </div>
 </div>

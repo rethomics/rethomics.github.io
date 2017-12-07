@@ -214,6 +214,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#periodograms"><i class="fa fa-check"></i>Periodograms</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#miscelaneous"><i class="fa fa-check"></i>Miscelaneous</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#take-home-message-1"><i class="fa fa-check"></i>Take home message</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#next-steps-2"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html"><i class="fa fa-check"></i>Sleep analysis</a><ul>
@@ -242,6 +243,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#latency-to-sleep"><i class="fa fa-check"></i>Latency to sleep</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#merging-all-statistics"><i class="fa fa-check"></i>Merging all statistics</a></li>
+<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#take-home-message-2"><i class="fa fa-check"></i>Take home message</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#next-steps-3"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
 <li class="divider"></li>
@@ -294,7 +296,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="background-2" class="section level2 unnumbered">
 <h2>Background</h2>
-<p>This tutorial focused on sleep in <em>Drosophila</em>. Traditionally, activity is first scored (e.g.though beam crosses/video tracking). Then any bout of inactivity longer than five minutes counts as sleep. You can easily adapt this tutorial to scoring other models/behaviours as long as you can define <strong>two discrete states</strong> (e.g. sleep vs asleep, moving vs immobile, left vs right, …).</p>
+<p>This tutorial focused on sleep in <em>Drosophila</em>. Traditionally, activity is first scored (e.g. though beam crosses/video tracking). Then any bout of inactivity longer than five minutes counts as sleep. You can easily adapt this tutorial to scoring other models/behaviours as long as you can define <strong>two discrete states</strong> (e.g. sleep vs asleep, moving vs immobile, left vs right, …).</p>
 <p>In the <a href="damr.html">DAM2 tutorial</a>, we have learnt how to load data from a real DAM expriment. Since we already described it in length, it makes sense to use this experiment as an example for our sleep analysis. <strong>I will assume that you have already read and understood the <a href="damr.html">DAM tutorial</a></strong>. The last thing we did then was loading data and annotating scoring sleep:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sleepr)
 dt &lt;-<span class="st"> </span><span class="kw">load_dam2</span>(metadata, <span class="dt">FUN =</span> sleepr<span class="op">::</span>sleep_dam_annotation)
@@ -835,6 +837,10 @@ overall_summary</code></pre></div>
 <span class="st">    </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">alpha=</span>.<span class="dv">1</span>)<span class="op">+</span>
 <span class="st">    </span><span class="kw">facet_grid</span>(genotype <span class="op">~</span><span class="st"> </span>.)</code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-115-1.png" width="672" /></p>
+</div>
+<div id="take-home-message-2" class="section level2 unnumbered">
+<h2>Take home message</h2>
+<p>Data analysis and visualisation is about <strong>translating your biological questions in another language</strong>. Problems in emerging areas of science can be very rich so they should be matched with the equaly rich grammar that only a programming language can provide. This tutorial was very simple and does not pretend to provied a canonical sleep analysis. Instead, see it as a set of building blocks that you can use and rearange to address your own questions.</p>
 </div>
 <div id="next-steps-3" class="section level2 unnumbered">
 <h2>Next steps</h2>

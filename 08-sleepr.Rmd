@@ -257,7 +257,7 @@ Say we wanted to compute, for **females only**, all pairwise tests between all g
 
 ```{r}
 pairwise.wilcox.test(summary_dt[sex=="F", sleep_fraction_all], 
-                     summary_dt[sex=="F",interaction(genotype)])
+                     summary_dt[sex=="F", genotype])
 ```
 We get a matrix showing us all p-values.
 You could do that also within males, as long as we replace `sex == "F"` by `sex == "M"`
@@ -391,8 +391,8 @@ ggplot(overall_summary, aes(latency / 60, sleep_fraction_l, colour=sex)) +
 
 ## Take home message{-}
 
-Data analysis and visualisation is about **translating your biological questions in another language**.
-Problems in emerging areas of science can be very rich so they should be matched with the equaly rich grammar that only a programming language can provide.
+Data analysis and visualisation is about **translating your biological questions to another language**.
+Problems in emerging areas of science can be very rich so they should be matched with the equally rich grammar that only a programming language can provide.
 This tutorial was very simple and does not pretend to provied a canonical sleep analysis.
 Instead, see it as a set of building blocks that you can use and rearange to address your own questions.
 

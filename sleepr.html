@@ -25,7 +25,7 @@
 <meta name="author" content="Quentin Geissmann">
 
 
-<meta name="date" content="2017-12-07">
+<meta name="date" content="2017-12-08">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -552,7 +552,7 @@ summary_dt</code></pre></div>
 <h3>Pairwise Wilcoxon tests</h3>
 <p>Say we wanted to compute, for <strong>females only</strong>, all pairwise tests between all genotype groups (A vs B, B vs C and C vs A). This could be formulated as:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairwise.wilcox.test</span>(summary_dt[sex<span class="op">==</span><span class="st">&quot;F&quot;</span>, sleep_fraction_all], 
-                     summary_dt[sex<span class="op">==</span><span class="st">&quot;F&quot;</span>,<span class="kw">interaction</span>(genotype)])</code></pre></div>
+                     summary_dt[sex<span class="op">==</span><span class="st">&quot;F&quot;</span>, genotype])</code></pre></div>
 <pre><code>## Warning in wilcox.test.default(xi, xj, paired = paired, ...): cannot
 ## compute exact p-value with ties
 
@@ -561,7 +561,7 @@ summary_dt</code></pre></div>
 <pre><code>## 
 ##  Pairwise comparisons using Wilcoxon rank sum test 
 ## 
-## data:  summary_dt[sex == &quot;F&quot;, sleep_fraction_all] and summary_dt[sex == &quot;F&quot;, interaction(genotype)] 
+## data:  summary_dt[sex == &quot;F&quot;, sleep_fraction_all] and summary_dt[sex == &quot;F&quot;, genotype] 
 ## 
 ##   A       B     
 ## B 0.0047  -     
@@ -840,7 +840,7 @@ overall_summary</code></pre></div>
 </div>
 <div id="take-home-message-2" class="section level2 unnumbered">
 <h2>Take home message</h2>
-<p>Data analysis and visualisation is about <strong>translating your biological questions in another language</strong>. Problems in emerging areas of science can be very rich so they should be matched with the equaly rich grammar that only a programming language can provide. This tutorial was very simple and does not pretend to provied a canonical sleep analysis. Instead, see it as a set of building blocks that you can use and rearange to address your own questions.</p>
+<p>Data analysis and visualisation is about <strong>translating your biological questions to another language</strong>. Problems in emerging areas of science can be very rich so they should be matched with the equally rich grammar that only a programming language can provide. This tutorial was very simple and does not pretend to provied a canonical sleep analysis. Instead, see it as a set of building blocks that you can use and rearange to address your own questions.</p>
 </div>
 <div id="next-steps-3" class="section level2 unnumbered">
 <h2>Next steps</h2>

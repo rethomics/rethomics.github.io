@@ -3,7 +3,10 @@ title: "Rethomics, a framework for high-throughput behaviour analysis in R"
 author: "Quentin Geissmann"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
-output: bookdown::gitbook
+output: 
+  bookdown::gitbook:
+    includes:
+       in_header: ga-script.html
 documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike

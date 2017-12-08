@@ -47,6 +47,15 @@
 
 
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-110947778-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-110947778-1');
+</script>
 
 
 <style type="text/css">
@@ -673,7 +682,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-## 195.768   4.884 201.320</code></pre>
+## 235.588   8.100 244.495</code></pre>
 <p>However, the next time, we do the same thing way faster:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(
   dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata,
@@ -683,7 +692,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-##   2.056   0.024   2.035</code></pre>
+##   2.536   0.128   2.667</code></pre>
 <p>Here, we set <code>cache</code> to <code>&quot;ethoscope_cache&quot;</code>. This creates a new directory called <code>&quot;ethoscope_cache&quot;</code> (you can pick the name and location you want). If you to do a bit of tidying up, you can remove it without risk (it will just take time next time you load your data).</p>
 </div>
 </div>

@@ -145,7 +145,7 @@ dt[, very_active := NULL]
 
 
 Sometimes, we would like to **filter the data**. That is, we select rows according to one or several criteria.
-Often we would lile to exclude thew very start of the experiment. For example, we can keep data after one hour:
+Often we would like to exclude thew very start of the experiment. For example, we can keep data after one hour:
 
 ```{r}
 dt <- dt[ t > hours(1)]

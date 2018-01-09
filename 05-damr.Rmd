@@ -4,14 +4,14 @@
 
 ---------------------------
 
-![A DAM experiment. Two replicates, 10 days apart; three genotypes; two sexes, males and females](assets/dam_experiment.png)
+![A DAM experiment. Two replicates, 3 days of recording each; 10 days apart; three genotypes; two sexes, males and females](assets/dam_experiment.png)
 
 ## Aims {-}
 In this practical chapter, we will use a real experiment to learn how to:
 
 * Translate your experiment design into a metadata file
 * Use this metadata file to load some data
-* Set the circadian reference (ZT0)
+* Set the zeitgeber reference (ZT0)
 * Assess graphically the quality of the data
 * Use good practices to exclude individuals from our experiments
 
@@ -61,7 +61,7 @@ Download and extract the files from the zip into a folder of your choice.
 For instance, **adapt** something like:
 
 ```r{eval=F}
-DATA_DIR <- "C://Where/My/Zip/Has/been/extracted
+DATA_DIR <- "C:/Where/My/Zip/Has/been/extracted
 ```
 
 Check that all four files live there:
@@ -87,7 +87,7 @@ setwd(DATA_DIR)
 ### Our toy experiment{-}
 
 
-![A DAM experiment. Two replicates, 10 days apart; three genotypes; two sexes, males and females](assets/dam_experiment.png)
+![A DAM experiment. Two replicates, 3 days of recording each; 10 days apart; three genotypes; two sexes, males and females](assets/dam_experiment.png)
 
 In this example data, we were interested in comparing the behaviour of populations of fruit flies,
 according to their sex and genotype.

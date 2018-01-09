@@ -457,7 +457,7 @@ dt</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt[, very_active <span class="op">:</span><span class="er">=</span><span class="st"> </span>activity <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span>]</code></pre></div>
 <p>If we decide we don’t need this variable anymore, we can <strong>remove it</strong>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt[, very_active <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="ot">NULL</span>]</code></pre></div>
-<p>Sometimes, we would like to <strong>filter the data</strong>. That is, we select rows according to one or several criteria. Often we would like to exclude thew very start of the experiment. For example, we can keep data after one hour:</p>
+<p>Sometimes, we would like to <strong>filter the data</strong>. That is, we select rows according to one or several criteria. Often we would like to exclude the very start of the experiment. For example, we can keep data after one hour:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt &lt;-<span class="st"> </span>dt[ t <span class="op">&gt;</span><span class="st"> </span><span class="kw">hours</span>(<span class="dv">1</span>)]</code></pre></div>
 <p>Note that that using <code>dt &lt;-</code> mean we make a new table that overwrite the old one (since it has the same name).</p>
 </div>
@@ -497,7 +497,7 @@ dt[meta =<span class="st"> </span><span class="ot">TRUE</span>]</code></pre></di
 <p>The strength of <code>behavr</code> tables is their ability to seamlessly <strong>use metavariables as though they were variables</strong>. For the sake of the example, lets say you would like to alter the variable <code>t</code> (time) so that we add ten seconds, <em>only to individuals that have condition <code>'A'</code></em>.</p>
 <pre><code>dt[, t := ifelse(xmv(condition) == &#39;A&#39;, t + 10, t)]</code></pre>
 <p>The key here is the use of <code>xmv</code> (eXpand MetaVariable), which maps <code>condition</code> back in the data.</p>
-<p>We can also use this mechanism to <strong>remove individual according to the value of a metavariable</strong>. For instance, lets get rid of the males!</p>
+<p>We can also use this mechanism to <strong>remove individuals according to the value of a metavariable</strong>. For instance, lets get rid of the males!</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt &lt;-<span class="st"> </span>dt[<span class="kw">xmv</span>(sex) <span class="op">==</span><span class="st"> &#39;female&#39;</span>]
 <span class="kw">summary</span>(dt)</code></pre></div>
 <pre><code>## behavr table with:
@@ -510,7 +510,7 @@ dt[meta =<span class="st"> </span><span class="ot">TRUE</span>]</code></pre></di
 </div>
 <div id="summerise-data" class="section level3 unnumbered">
 <h3>Summerise data</h3>
-<p>Thanks to data table <code>by</code> operations, it is simple and efficient to <strong>compute statistics per individual</strong>. For instance, we may want to compute the average activity for each animal:</p>
+<p>Thanks to <code>data.table</code> <code>by</code> operations, it is simple and efficient to <strong>compute statistics per individual</strong>. For instance, we may want to compute the average activity for each animal:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stat_dt &lt;-<span class="st"> </span>dt[,
    .(<span class="dt">mean_acti =</span> <span class="kw">mean</span>(activity)),
    by=<span class="st">&#39;id&#39;</span>]

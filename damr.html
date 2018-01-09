@@ -280,8 +280,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><strong>A matter of metadata</strong></p>
 <hr />
 <div class="figure">
-<img src="assets/dam_experiment.png" alt="A DAM experiment. Two replicates, 10 days apart; three genotypes; two sexes, males and females" />
-<p class="caption">A DAM experiment. Two replicates, 10 days apart; three genotypes; two sexes, males and females</p>
+<img src="assets/dam_experiment.png" alt="A DAM experiment. Two replicates, 3 days of recording each; 10 days apart; three genotypes; two sexes, males and females" />
+<p class="caption">A DAM experiment. Two replicates, 3 days of recording each; 10 days apart; three genotypes; two sexes, males and females</p>
 </div>
 <div id="aims" class="section level2 unnumbered">
 <h2>Aims</h2>
@@ -289,7 +289,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ul>
 <li>Translate your experiment design into a metadata file</li>
 <li>Use this metadata file to load some data</li>
-<li>Set the circadian reference (ZT0)</li>
+<li>Set the zeitgeber reference (ZT0)</li>
 <li>Assess graphically the quality of the data</li>
 <li>Use good practices to exclude individuals from our experiments</li>
 </ul>
@@ -317,7 +317,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="getting-the-data" class="section level2 unnumbered">
 <h2>Getting the data</h2>
 <p>For this tutorial, you need to <a href="https://github.com/rethomics/rethomics.github.io/raw/source/material/damr_tutorial.zip">download some DAM2 data</a> that we have made available. This is just a zip archive containing four files. Download and extract the files from the zip into a folder of your choice. <strong>Store the path in a variable</strong>. For instance, <strong>adapt</strong> something like:</p>
-<pre class="r{eval=f}"><code>DATA_DIR &lt;- &quot;C://Where/My/Zip/Has/been/extracted</code></pre>
+<pre class="r{eval=f}"><code>DATA_DIR &lt;- &quot;C:/Where/My/Zip/Has/been/extracted</code></pre>
 <p>Check that all four files live there:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list.files</span>(DATA_DIR, <span class="dt">pattern=</span> <span class="st">&quot;*.txt|*.csv&quot;</span>)</code></pre></div>
 <pre><code>## [1] &quot;metadata.csv&quot;  &quot;Monitor11.txt&quot; &quot;Monitor14.txt&quot; &quot;Monitor64.txt&quot;</code></pre>
@@ -334,8 +334,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="our-toy-experiment" class="section level3 unnumbered">
 <h3>Our toy experiment</h3>
 <div class="figure">
-<img src="assets/dam_experiment.png" alt="A DAM experiment. Two replicates, 10 days apart; three genotypes; two sexes, males and females" />
-<p class="caption">A DAM experiment. Two replicates, 10 days apart; three genotypes; two sexes, males and females</p>
+<img src="assets/dam_experiment.png" alt="A DAM experiment. Two replicates, 3 days of recording each; 10 days apart; three genotypes; two sexes, males and females" />
+<p class="caption">A DAM experiment. Two replicates, 3 days of recording each; 10 days apart; three genotypes; two sexes, males and females</p>
 </div>
 <p>In this example data, we were interested in comparing the behaviour of populations of fruit flies, according to their sex and genotype. We designed the experiment as shown is the figure above. In summary, we have:</p>
 <ul>

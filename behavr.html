@@ -457,7 +457,7 @@ dt</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt[, very_active <span class="op">:</span><span class="er">=</span><span class="st"> </span>activity <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span>]</code></pre></div>
 <p>If we decide we don’t need this variable anymore, we can <strong>remove it</strong>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt[, very_active <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="ot">NULL</span>]</code></pre></div>
-<p>Sometimes, we would like to <strong>filter the data</strong>. That is, we select rows according to one or several criteria. Often we would lile to exclude thew very start of the experiment. For example, we can keep data after one hour:</p>
+<p>Sometimes, we would like to <strong>filter the data</strong>. That is, we select rows according to one or several criteria. Often we would like to exclude thew very start of the experiment. For example, we can keep data after one hour:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt &lt;-<span class="st"> </span>dt[ t <span class="op">&gt;</span><span class="st"> </span><span class="kw">hours</span>(<span class="dv">1</span>)]</code></pre></div>
 <p>Note that that using <code>dt &lt;-</code> mean we make a new table that overwrite the old one (since it has the same name).</p>
 </div>

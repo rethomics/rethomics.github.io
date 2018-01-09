@@ -107,7 +107,7 @@ dt
 ```
 As you can see, when we print `dt`, our `behavr` table, we have two fields: `METADATA` and `DATA`.
 The former is actually just the metadata we created whilst the latter stores the data (i.e. the variables) for **all animals**. 
-The special column `id` is also known as a key, and is shared between both data and metadata. 
+The special column `id` is also known as a **key**, and is shared between both data and metadata. 
 It internally allows us to map them to one another.
 In other words, it is a unique id for each individual.
 In this specific example, the variables `t` and  `activity` are the time and the number of beam crosses, respectively.

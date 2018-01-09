@@ -145,7 +145,7 @@ dt[, very_active := NULL]
 
 
 Sometimes, we would like to **filter the data**. That is, we select rows according to one or several criteria.
-Often we would like to exclude thew very start of the experiment. For example, we can keep data after one hour:
+Often we would like to exclude the very start of the experiment. For example, we can keep data after one hour:
 
 ```{r}
 dt <- dt[ t > hours(1)]
@@ -182,7 +182,7 @@ dt[, t := ifelse(xmv(condition) == 'A', t + 10, t)]
 
 The key here is the use of `xmv` (eXpand MetaVariable), which maps `condition` back in the data.
 
-We can also use this mechanism to **remove individual according to the value of a metavariable**.
+We can also use this mechanism to **remove individuals according to the value of a metavariable**.
 For instance, lets get rid of the males!
 ```{r}
 dt <- dt[xmv(sex) == 'female']
@@ -192,7 +192,7 @@ When individuals are removed, metadata is automatically updated. In effect, we r
 
 ### Summerise data{-}
 
-Thanks to data table `by` operations, it is simple and efficient to **compute statistics per individual**.
+Thanks to `data.table` `by` operations, it is simple and efficient to **compute statistics per individual**.
 For instance, we may want to compute the average activity for each animal:
 
 

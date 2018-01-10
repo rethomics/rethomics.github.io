@@ -25,7 +25,7 @@
 <meta name="author" content="Quentin Geissmann">
 
 
-<meta name="date" content="2018-01-09">
+<meta name="date" content="2018-01-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -408,7 +408,7 @@ metadata</code></pre></div>
 </div>
 <div id="loading" class="section level2 unnumbered">
 <h2>Loading</h2>
-<p>In order to work with the data the last step is to load it into a <a href="behavr.html">behavr</a> structure. To do that simply use <code>load_dam2</code> function (as shown below). This function will store all data in dt (or the any other given name)</p>
+<p>In order to work with the data the last step is to load it into a <a href="behavr.html">behavr</a> structure. To do that simply use <code>load_dam2</code> function (as shown below). This function will store all data in dt (or any other given name)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt &lt;-<span class="st"> </span><span class="kw">load_dam2</span>(metadata)
 <span class="kw">summary</span>(dt)</code></pre></div>
 <pre><code>## behavr table with:
@@ -459,12 +459,12 @@ metadata</code></pre></div>
 </div>
 <div id="how-to-exclude-animals" class="section level3 unnumbered">
 <h3>How to exclude animals?</h3>
-<p>We suggest to exclude animals <em>a priori</em> (e.g. because they died) by recording them as dead <strong>in the metadata</strong>. This way data is not modified or omited and can easily be recovered if needed. For instance, you can add a column <code>status</code> in your metadata file and put a default value such as <code>&quot;OK&quot;</code>. If an animal is to be removed, you can replace <code>&quot;OK&quot;</code> by <strong>a reason</strong> (e.g. <code>&quot;dead&quot;</code>, <code>&quot;escaped&quot;</code>, …). Then, you can load your data without those animals <code>load_dam2_data(metadata[status == &quot;OK&quot;], ...)</code>. This practice has the advantage of making it <strong>very transparent</strong>, why some individuals where excluded. Also, as stipulated before, it can easily be reversed.</p>
+<p>We suggest to exclude animals <em>a priori</em> (e.g. because they died) by recording them as dead <strong>in the metadata</strong>. This way data is not modified or omited and can easily be recovered if needed. For instance, you can add a column <code>status</code> in your metadata file and put a default value such as <code>&quot;OK&quot;</code>. If an animal is to be removed, you can replace <code>&quot;OK&quot;</code> by <strong>a reason</strong> (e.g. <code>&quot;dead&quot;</code>, <code>&quot;escaped&quot;</code>, …). Then, you can load your data without those animals <code>load_dam2_data(metadata[status == &quot;OK&quot;], ...)</code>. This practice has the advantage of making it <strong>very transparent</strong>, why some individuals where excluded. Also, as stated before, it can easily be reversed.</p>
 </div>
 </div>
 <div id="apply-functions-when-loading" class="section level2 unnumbered">
 <h2>Apply functions when loading</h2>
-<p>Finaly, we may want to apply function on the data as it is loaded, in order to preprocess it, saving time. This pre-processing will annotate the data, i.e create new information (new columns) based on the original data. As an example, we can perform a sleep (bouts of immobility of 5 min or more), from our <code>sleepr</code> package (which you will have installed, or course).</p>
+<p>Finaly, we may want to apply a function on the data as it is loaded, in order to preprocess it, saving time. This pre-processing will annotate the data, i.e create new information (new columns) based on the original data. As an example, we can perform a sleep (bouts of immobility of 5 min or more), from our <code>sleepr</code> package (which you will have installed).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sleepr)
 dt &lt;-<span class="st"> </span><span class="kw">load_dam2</span>(metadata, <span class="dt">FUN =</span> sleepr<span class="op">::</span>sleep_dam_annotation)
 dt</code></pre></div>

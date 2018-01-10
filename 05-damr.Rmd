@@ -153,7 +153,7 @@ You can keep all the data in one file per monitor. `rethomics` will use start an
 
 ## Loading {-}
 
-In order to work with the data the last step is to load it into a [behavr](behavr.html) structure. To do that simply use `load_dam2` function (as shown below). This function will store all data in dt (or the any other given name)
+In order to work with the data the last step is to load it into a [behavr](behavr.html) structure. To do that simply use `load_dam2` function (as shown below). This function will store all data in dt (or any other given name)
 
 ```{r}
 dt <- load_dam2(metadata)
@@ -220,13 +220,13 @@ For instance, you can add a column `status` in your metadata file and put a defa
 If an animal is to be removed, you can replace `"OK"` by **a reason** (e.g. `"dead"`, `"escaped"`, ...).
 Then, you can load your data without those animals `load_dam2_data(metadata[status == "OK"], ...)`.
 This practice has the advantage of making it **very transparent**, why some individuals where excluded.
-Also, as stipulated before, it can easily be reversed.
+Also, as stated before, it can easily be reversed.
 
 
 
 ## Apply functions when loading {-}
 
-Finaly, we may want to apply function on the data as it is loaded, in order to preprocess it, saving time. This pre-processing will annotate the data, i.e create new information (new columns) based on the original data. As an example, we can perform a sleep (bouts of immobility of 5 min or more), from our `sleepr` package (which you will have installed, or course).
+Finaly, we may want to apply a function on the data as it is loaded, in order to preprocess it, saving time. This pre-processing will annotate the data, i.e create new information (new columns) based on the original data. As an example, we can perform a sleep (bouts of immobility of 5 min or more), from our `sleepr` package (which you will have installed).
 
 ```{r}
 library(sleepr)

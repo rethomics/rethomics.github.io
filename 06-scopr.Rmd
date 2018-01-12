@@ -120,7 +120,7 @@ setwd(DATA_DIR)
 
 ### Our toy experiment{-}
 
-The data I gave you is from a real experiment, but for the sake of the tutorial, I have made up a story around it. It goes like that:
+The data I gave you is from a real experiment, but for the sake of the tutorial, I have made up a story around it. It goes like that::
 
 * We are interested in **the effect of a drug**, let's call it the "mystery drug", on **sleep and activity** in fruit flies
 * We supect this drug acts indirectly by **inhibiting the expression of a (mystery) gene**

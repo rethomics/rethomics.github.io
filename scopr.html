@@ -25,7 +25,7 @@
 <meta name="author" content="Quentin Geissmann">
 
 
-<meta name="date" content="2018-01-10">
+<meta name="date" content="2018-01-12">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -358,7 +358,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2>From experiment design to metadata</h2>
 <div id="our-toy-experiment-1" class="section level3 unnumbered">
 <h3>Our toy experiment</h3>
-<p>The data I gave you is from a real experiment, but for the sake of the tutorial, I have made up a story around it. It goes like that:</p>
+<p>The data I gave you is from a real experiment, but for the sake of the tutorial, I have made up a story around it. It goes like that::</p>
 <ul>
 <li>We are interested in <strong>the effect of a drug</strong>, let’s call it the “mystery drug”, on <strong>sleep and activity</strong> in fruit flies</li>
 <li>We supect this drug acts indirectly by <strong>inhibiting the expression of a (mystery) gene</strong></li>
@@ -682,7 +682,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-## 187.438   5.991 192.862</code></pre>
+## 149.034   3.277 151.818</code></pre>
 <p>However, the next time, we do the same thing way faster:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(
   dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata,
@@ -692,7 +692,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-##   2.011   0.108   2.079</code></pre>
+##   1.822   0.088   1.862</code></pre>
 <p>Here, we set <code>cache</code> to <code>&quot;ethoscope_cache&quot;</code>. This creates a new directory called <code>&quot;ethoscope_cache&quot;</code> (you can pick the name and location you want). If you to do a bit of tidying up, you can remove it without risk (it will just take time next time you load your data).</p>
 </div>
 </div>

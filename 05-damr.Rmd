@@ -192,7 +192,7 @@ We can use `ggetho` for that, for example the following code will create an acti
 ```{r, fig.width = 9, fig.height=16}
 library(ggetho)
 # I only show fisrt replicate
-ggetho(dt[xmv(replicate) == 1 ], aes(z=activity)) +
+ggetho(dt[xmv(replicate) == 1 ], aes(z=asleep)) +
       stat_tile_etho() +
       stat_ld_annotations()
 ```

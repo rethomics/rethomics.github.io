@@ -162,7 +162,7 @@ summary_dt <-
              # this is where the computation happens
              sleep_fraction = mean(asleep)
              ),
-           ,by=id])
+           by=id])
 summary_dt
 ```
 With `rejoin`, we have put our summary and metadata together, which is suitable for standars graphics/statictics.

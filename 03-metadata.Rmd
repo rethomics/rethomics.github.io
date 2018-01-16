@@ -17,22 +17,23 @@ It is, in fact, **a simple CSV file** (basically a spreadsheet) in which **each 
 
 As shown in the figure above, metadata is classified in two types of columns:
 
-* **Mandatory** techincal columns --  for instance `date`, `machine_name` and others (depending on the acquisition platform). They will be used to match an animal to its data.
+* **Mandatory** techincal columns --  for instance `date`, `machine_name` and others (depending on the acquisition platform). They will be used to match an animal to its data. As it name suggest, they have to be filled. It is the minimum information that the computer needs to be able to sort your data.
 * **Optional** experimental columns -- in this example, `condition` and `sex`. You can use as all the columns you want to characterise your experiments.
 
 
 ## Make them exhaustive{-}
-It is a good habit to **record as much information as possible in our metadata** -- even if it seems redundant.
+It is a good habit to **record as much information as possible in the metadata file** -- even if it seems redundant.
 For instance, if we put animals in different incubators, we can simply add an `incubator` column.
 This way, we keep all our experimental notes, as much as possible, inside one file.
-Not only this will help us to "debug" if anything goes wrong in one incubator, but we will also be able to account for incubator as a covariate later on. From a computational perspective, these columns are virtually free.
+Not only this will help us to "debug" if anything goes wrong in one incubator, but we will also be able to account for incubator as a covariate later on. From a computational perspective, these columns does not have an impact in later processing time, they are therefore, virtually free. 
 
 
 ## Put replicates together{-}
 
 A common mistake for users is to perform several replicates of the same experiment and to make a new metadata file each time. Instead, I strongly recommand you to **put all replicates in the same file**. If it helps,
 you can add a `replicate` column so you can keep track of which replicate each animal comes from.
-The whole point of high-througput analysis is that you can load all the data from all replicates and compare it (and maybe merge it). The bottom line is that, if you start form a single metadata file, your work will be more tracktable, and you can always decide to analyse only one replicate at a time.
+The whole point of high-througput analysis is that you can load all the data from all replicates and compare it (and maybe merge it). The bottom line is that, if you start form a single metadata file, your work will be more trackable, and you can always decide to analyse only one replicate at a time.
+Think about this metadata file as something needed in a line of research or project more than a file needed for every experiment. 
 
 
 ## Linking metadata{-}
@@ -45,7 +46,7 @@ This step will automatically complete the metadata file in a way that can be use
 In short, linking means at least:
 
 * Adding an `id` column to the metadata. This will be a unique identifier for each indididual (it generally contains datetime, machine name an region id). This will diferenciate animals with the same conditions in the metadata. 
-* Adding a column that tracks "how to find the data for each individual".
+* Adding a column that tracks "how to find the data for each individual". i.e. (path to folder, server, shared resource...)
 
 
 ## Take home message{-}

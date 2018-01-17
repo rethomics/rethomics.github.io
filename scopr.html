@@ -255,6 +255,31 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#take-home-message-2"><i class="fa fa-check"></i>Take home message</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#next-steps-3"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html"><i class="fa fa-check"></i>Circadian rhythm analysis</a><ul>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#aims-4"><i class="fa fa-check"></i>Aims</a></li>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#prerequisites-4"><i class="fa fa-check"></i>Prerequisites</a></li>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#background-3"><i class="fa fa-check"></i>Background</a></li>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#getting-the-data-3"><i class="fa fa-check"></i>Getting the data</a></li>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#data-curation-1"><i class="fa fa-check"></i>Data curation</a><ul>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#dead-animals-1"><i class="fa fa-check"></i>Dead animals</a></li>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#animals-that-died-too-early-1"><i class="fa fa-check"></i>Animals that died too early</a></li>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#trimming-1"><i class="fa fa-check"></i>Trimming</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#population-plots-2"><i class="fa fa-check"></i>Population plots</a></li>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#summarise-data-per-animal-1"><i class="fa fa-check"></i>Summarise data per animal</a></li>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#day-sleep-night-sleep-1"><i class="fa fa-check"></i>Day sleep☼ – Night sleep☾</a><ul>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#adding-some-phase-information-1"><i class="fa fa-check"></i>Adding some phase information</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#statistics-1"><i class="fa fa-check"></i>Statistics</a><ul>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#pairwise-wilcoxon-tests-1"><i class="fa fa-check"></i>Pairwise Wilcoxon tests</a></li>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#two-way-anova-1"><i class="fa fa-check"></i>Two way anova</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#sleep-architecture-1"><i class="fa fa-check"></i>Sleep architecture</a><ul>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#bout-analysis-1"><i class="fa fa-check"></i>Bout analysis</a></li>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#bout-length-vs-time-of-the-day-1"><i class="fa fa-check"></i>Bout length vs time of the day</a></li>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#architecture-description-1"><i class="fa fa-check"></i>Architecture description</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org/yihui/bookdown/" target="blank">Published with bookdown</a></li>
 
@@ -682,7 +707,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-## 190.245   5.837 195.256</code></pre>
+## 150.559   3.791 153.924</code></pre>
 <p>However, the next time, we do the same thing way faster:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(
   dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata,
@@ -692,7 +717,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-##   2.048   0.084   2.083</code></pre>
+##   1.904   0.075   1.938</code></pre>
 <p>Here, we set <code>cache</code> to <code>&quot;ethoscope_cache&quot;</code>. This creates a new directory called <code>&quot;ethoscope_cache&quot;</code> (you can pick the name and location you want). If you to do a bit of tidying up, you can remove it without risk (it will just take time next time you load your data).</p>
 </div>
 </div>

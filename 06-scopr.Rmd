@@ -60,7 +60,7 @@ The platform is designed so that many devices run an parallel, and the resulting
 ### Extract the zipped data {-}
 
 Since ethoscopes generate **large amount of data**, compared to DAM, we will work only with a few animals.
-A zip containing data for this tutorial is available on [zenodo](https://zenodo.org/record/826874).
+A zip containing data for this tutorial is available on [zenodo](https://zenodo.org/record/1068324).
 
 Start by downloading and extracting the zip somewhere in your computer.
 Then, store this location as a variable. For example, **adapt** the path here:

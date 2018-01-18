@@ -25,7 +25,7 @@
 <meta name="author" content="Quentin Geissmann">
 
 
-<meta name="date" content="2018-01-17">
+<meta name="date" content="2018-01-18">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -340,7 +340,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2>Getting the data</h2>
 <div id="extract-the-zipped-data" class="section level3 unnumbered">
 <h3>Extract the zipped data</h3>
-<p>Since ethoscopes generate <strong>large amount of data</strong>, compared to DAM, we will work only with a few animals. A zip containing data for this tutorial is available on <a href="https://zenodo.org/record/826874">zenodo</a>.</p>
+<p>Since ethoscopes generate <strong>large amount of data</strong>, compared to DAM, we will work only with a few animals. A zip containing data for this tutorial is available on <a href="https://zenodo.org/record/1068324">zenodo</a>.</p>
 <p>Start by downloading and extracting the zip somewhere in your computer. Then, store this location as a variable. For example, <strong>adapt</strong> the path here:</p>
 <pre class="r{eval=f}"><code>DATA_DIR &lt;- &quot;C://Where/My/Zip/Has/been/extracted</code></pre>
 <p>Check that all the files live there:</p>
@@ -707,7 +707,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-## 160.554   3.852 163.571</code></pre>
+## 164.972   3.832 168.409</code></pre>
 <p>However, the next time, we do the same thing way faster:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(
   dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata,
@@ -717,7 +717,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-##   2.329   0.083   2.364</code></pre>
+##   2.127   0.060   2.149</code></pre>
 <p>Here, we set <code>cache</code> to <code>&quot;ethoscope_cache&quot;</code>. This creates a new directory called <code>&quot;ethoscope_cache&quot;</code> (you can pick the name and location you want). If you to do a bit of tidying up, you can remove it without risk (it will just take time next time you load your data).</p>
 </div>
 </div>

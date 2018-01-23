@@ -16,21 +16,20 @@ In this practical chapter, we will use a real experiment to learn how to:
 
 ## Prerequisites {-}
 * You have read about [behavr tables](behavr.html)
-* You are familiar with  [ggetho](ggetho.html), our vidualisation tool
+* You are familiar with  [ggetho](ggetho.html), our visualisation tool
 * You have already read the [damr tutorial](damr.html)
 * Ensure you have [installed](intro.html#installing-rethomics-packages)
-`behavr`, `damr`, `ggetho` and `zeitgebr` packages:
+`behavr`, `damr`, `ggetho` and `zeitgebr` packages
 
 
 ## Background{-}
 
-This tutorial focused on circadian rhythm in *Drosophila*, but can be adapted easily to investicate periodicity in different context.
-For this tutorial, we will use a DAM dataset that is provided (and preloaded) within the `damr` package.
-
+This tutorial focuses on circadian rhythm in *Drosophila*, but can be adapted easily to investicate periodicity in different context.
+in it, we will use a DAM dataset that is provided (and preloaded) within the `damr` package.
 
 ## Getting the data {-}
 
-This is a lot simple than in the other tutorials as the data is already there
+Getting the data a lot simpler than in the other tutorials as it is already on your computer:
 
 ```{r}
 library(damr)
@@ -41,9 +40,8 @@ library(ggetho)
 data(dams_sample) 
 # We copy the data to our own variable so we can alter it
 dt <- copy(dams_sample) 
-summary(dt)
 ```
-This is a recording of 32 animals for around 10 days in DD.
+This data set is a DD recording of 32 animals, in DD.
 Let us print the metadata to understand the experiment a little bit:
 
 ```{r}
@@ -51,35 +49,36 @@ summary(dt)
 print(dt[meta=T])
 ```
 
-As you can see we have 32 individuals, and three "period groups". 
-That is mutants with "short"", "long"" or wild-type ("wt") periods, encoded in the `period_group` metavariable.
+We can confirm we have 32 individuals, and they are described by one of three "period groups" (e.g.g a genotype or treatment). The `period_group` metavariable can be either "short"", "long"" or wild-type ("wt") periods.
 
-## Data curation {-}
-This data is fairely clean already.
+## Quality control {-}
+This data is fairely clean already, so we will not do much.
 For most purposes, you can apply the same principles as [data curation for sleep analysis](sleepr.html#data-curation).
 
-## `LD -> DD` transitions {-}
+### `LD -> DD` transitions {-}
 
 In general (but not here), you will have a period of `LD` "baseline" preceding a change to a `DD` regime.
 I suggest to encode that in the following way:
 
-1. Manually add a column `baseline_days` in your metadata that defines the number of days of baseline.
-2. Sustract the number of baseline days to all time points: `dt[, t := t - days(xmv(baseline_days))]`
+1. Manually add a column `baseline_days` in your metadata that defines the **number of days of baseline**.
+2. **Sustract the number of baseline days** to all time points: `dt[, t := t - days(xmv(baseline_days))]`
 
-As a result, `t = 0` now means zt0 of the transition day. This makes a lot of sense as any baseline point is in negative time (`t < 0`), whilst `t > 0` is for `DD`. The nice thing is that you can work with data that have diferent baseline duration as now **all time points are relative to the transition**.
+As a result, `t = 0` now means ZT0 of the transition day. This makes a lot of sense as any baseline point is in negative time (`t < 0`), whilst `t > 0` is for `DD`. The nice thing is that you can work with data (e.g. replicates) that have different baseline duration as now **all time points are relative to the transition**.
 
-## Data enrichment {-}
-By defaut, DAM data only has variables `t` and `activity`. The altter being the number of beam crosses over a time bin (e.g. one minute). We could define a variable `moving` that is `TRUE` when and only when `activity > 0`:
+### Data enrichment {-}
+By defaut, DAM data only has variables `t` and `activity`. The latter being the number of beam crosses over a time bin (e.g. one minute). We could define a variable `moving` that is `TRUE` when and only when `activity > 0`, and `FALSE` otherwise:
 
 ```{r}
 dt[, moving := activity > 0]
 ```
 
 
-## Overview plots {-}
+### Overview plots {-}
 
-The first representation we plot could be activity all animals over time in the same page for some quality control.
-Note how we have changed the LD colours to grey and black, grey being for subjective days (we are in DD).
+The first representation we show could be activity all animals over time in the same page.
+This would help to spot ourliers. We simply do that with out tile plot.
+Note how we have changed the LD colours to grey and black, grey being for subjective days (remember, we are in DD).
+
 ```{r, fig.width = 9, fig.height=12}
 ggetho(dt, aes(z=activity)) +
       stat_ld_annotations(ld_colours = c("grey", "black"))+
@@ -87,7 +86,8 @@ ggetho(dt, aes(z=activity)) +
 ```
 
 We see that two animals (region 5 and 10) seem to have died/escaped before the end of the experiment.
-**It is your responsibility to decide what to do with them**.
+There is no right thing to do regarding dead animals. You could keep the data before death, or remove them altogether.
+**It is your responsibility to decide what to do with dead animals**. here, I simply remove data after death:
 
 ```{r}
 library(sleepr)
@@ -101,21 +101,23 @@ ggetho(dt_curated, aes(z=activity)) +
 
 ## Double plotted actograms {-}
 
-At the moment, the `id` is a very long string. It has the advantage to be unambiguous, but it is difficult to plot.
-To help plotting, we can make a new variable that is simply a different number for each individual. Lets call it `uid`:
+At the moment, the `id` is a very long string (e.g. `"2017-01-16 08:00:00|dams_sample.txt|01"`). It has the advantage to be unambiguous, but it is difficult to plot.
+To help plotting, we can make a new variable that is simply **a different number for each individual**. Lets call it `uid`:
 
 ```{r}
 dt_curated[, uid := 1 : .N, meta=T]
 # We can map uid to id
 dt_curated[, .(id, uid) ,meta=T]
 ```
-As you see, we do keep id as a reference but uid for convenience in graphs.
+As you see, we do keep `id` as a reference but `uid` for convenience in graphs.
 
 To make a double plotted actogram, we use `ggetho`.
 Read more about that in the [visualisation tutorial](ggetho.html#double-plotted-actograms).
-Breifly, we set `multiplot` to `2` (`3` would be a triple plotted) one.
-The variable of interest is on the `z` axis, note that instead of `moving`, you could plot raw `activity`.
-Then, we use bar height to show the amount of movement (we could use `stat_tile_etho` which shows the variable of interest as colour a pixel intensity) . Lastly, we split the graph by `uid`, so that each facet is a single animal.
+Briefly, we set `multiplot` to `2` (`3` would be a triple plotted) one.
+The variable of interest is on the `z` axis.
+Note that instead of `moving`, you could plot raw `activity`.
+Then, we use bar height to show the amount of movement (we could use `stat_tile_etho` which shows the variable of interest as colour a pixel intensity). 
+Lastly, we split the graph by `uid`, so that each facet is a single animal.
 
 ```{r}
 ggetho(dt_curated, aes(z=moving), multiplot = 2) + 
@@ -123,29 +125,31 @@ ggetho(dt_curated, aes(z=moving), multiplot = 2) +
     facet_wrap( ~ uid)
 ```
 
-Interestingly, you can use formulae in facet to show or sort with other metavariables:
+Interestingly, you can use formula in facet to show or sort with other metavariables:
 
 ```{r}
 ggetho(dt_curated, aes(z=moving), multiplot = 2) + 
     stat_bar_tile_etho() +
     facet_wrap( ~ period_group + uid , labeller = label_wrap_gen(multi_line=FALSE))
 ```
-Now, we know what is the genotype for each `uid`. You can generalise this concept to display more metavariables.
-For instance, if we had a `sex` metavariable we could do: `facet_wrap( ~ period_group + sex + uid, ...)`.
+Now, we know what is the genotype for each `uid`. 
+In your own work, you could generalise this concept to display more metavariables.
+For instance, if you had a `sex` metavariable you could do: `facet_wrap( ~ period_group + sex + uid, ...)`.
 
 
 
 ## Periodograms {-}
 
 ### Computation {-}
+
 An important part of circadian research is to compute the periodicity of the free running clock of multiple individuals.
 Mathematically, we would like to build a preiodogram. That is, generally speaking, a representation of the density (i.e. **power**) of a signal at different **periods** (or frequencies).
-In addition, a periodogram associates to each pair pf power,period a **significance level*.
+In addition, a periodogram associates to each pair of power-period a **significance level**.
 There are many algorithms to compute periodograms. In `zeitgebr`, we have implemented:
 
-* `ac_periodogram` -- An autocorrelation based method
-* `ls_periodogram` -- Lomb-Scargle algorithm
-* `chi_sq_periodogram` -- A $\chi{}^2$ based one
+* `ac_periodogram` -- An *autocorrelation* based method
+* `ls_periodogram` -- *Lomb-Scargle* algorithm
+* `chi_sq_periodogram` -- A *$\chi{}^2$* based one
 
 See `?periodogram_methods` for references.
 
@@ -169,7 +173,7 @@ Note that there are other options (see `?periodogram`).
 ### Peaks finding {-}
 
 Often, we want to know which are the peak periods in a periodogram.
-Tis can be achieved thanks to the `find_peaks` function.
+This can be achieved thanks to the `find_peaks` function.
 By default, it find a maximum of three peaks, which are sorted by their power (relative to the significance thershold).
 Peaks that are not signifant are not acounted for (see the `alpha` argument).
 
@@ -177,23 +181,23 @@ Peaks that are not signifant are not acounted for (see the `alpha` argument).
 per_xsq_dt <- find_peaks(per_xsq_dt)
 per_xsq_dt
 ```
-This function annotates our data by ading a column names "peak". Whenever the row correspongs to a peak, it puts a number, `NA` otherwise. The number is the rank of the peak (`1` being the first/tallest one).
+This function annotates our data by adding a column named `"peak"`. Whenever the row corresponds to a peak, it puts a number and `NA` otherwise. The number is the rank of the peak (`1` being the first/tallest one).
 
 ### Visualisation{-}
 
-In `ggetho`, the function `ggperio()` is designed specifically for that.
+In `ggetho`, the function `ggperio()` is designed specifically for showing periodograms.
 
 One could plot all the periodograms like so:
 
 ```{r}
 ggperio(per_xsq_dt) + geom_line(aes(group = id, colour=period_group))
 ```
-But it is very hard to read, so we can facet per uid.
-In addition, we can use a special `geom` to show the values of the peak.
-We can draw a signifiance line as well, just using the `signif_threshold` variable:
+But it is very hard to read, so we will facet per uid.
+In addition, we can use a special geometry (`geom_peak`) to show the values of the peak.
+We draw a signifiance line as well, just using the `signif_threshold` variable:
 
 ```{r}
-ggperio(per_xsq_dt, aes(peak=peak)) + 
+ggperio(per_xsq_dt) + 
   geom_line(aes(group = id, colour=period_group)) +
   geom_peak(col="black") +
   geom_line(aes(y= signif_threshold)) +
@@ -201,10 +205,10 @@ ggperio(per_xsq_dt, aes(peak=peak)) +
 ```
 
 
-Instead of drawing only the firts peak, you could draw, for instance,  the first and second (`geom_peak(peak_rank = 1:2)`) or, only the second (`geom_peak(peak_rank = 2)`).
+Instead of drawing only the first peak, you could draw, for instance,  the first and second (`geom_peak(peak_rank = 1:2)`) or, only the second (`geom_peak(peak_rank = 2)`).
 
-An interesting thing to do, is a population average periodogram.
-In this graph, the solid lines are the average power per group, whilst the shaded areas are +- standard error:
+An interesting thing to do is a population average periodogram.
+In this graph, the solid lines are the average power per group, whilst the shaded areas are ± standard error:
 
 ```{r}
 ggperio(per_xsq_dt, aes(
@@ -216,9 +220,9 @@ ggperio(per_xsq_dt, aes(
 ### Exctract the peak values {-}
 
 At some point, you would like to **summarise** each animal by, say, it first peak.
-The you can look at weather there are sigifiant diference in peak periodicity vs genotype.
+Then, you can look at whether there are significant difference in peak periodicity vs genotype.
 Doing that is quite straigtforward.
-We can select only rows where peak is exactly 1, then rejoin our table to its metadata:
+First, we select only rows where peak is exactly 1, then rejoin our table to its metadata:
 
 ```{r}
 summary_dt <- rejoin(per_xsq_dt[peak==1])
@@ -228,16 +232,18 @@ summary_dt
 
 
 
-Then, we can use `summary_dt` for standard `R` analysis.
-For instance, with `ggplot`, I make a boxplot sowing the distrinbution of periods, in h,  for each groups. I also add point for each animal (se we see outliers). Then, I make the size of the point proportional to the power of the peak discovered.
+`summary_dt` can be used as a standard `R` dataframe for further analysis.
+For instance, with `ggplot`, I make a boxplot showing the distribution of periods, in h,  for each groups. I also add point for each animal (so we see outliers). 
+Then, I make the size of the points proportional to the power of the peak discovered.
 
 ```{r}
-ggplot(summary_dt, aes(period_group, period / hours(1), fill= period_group)) + 
+ggplot(summary_dt, aes(period_group, period, fill= period_group)) + 
         geom_boxplot(outlier.colour = NA) +
-        geom_jitter(aes(size=power), alpha=.5)
+        geom_jitter(aes(size=power), alpha=.5) +
+        scale_y_hours(name = "Period (h)") 
 ```
 
-Another direction could be to perform pairewise wilcoxon test between groups:
+Another direction could be to perform pairwise wilcoxon tests between groups:
 
 ```{r}
 pairwise.wilcox.test(summary_dt$period, summary_dt$period_group )

@@ -25,7 +25,7 @@
 <meta name="author" content="Quentin Geissmann">
 
 
-<meta name="date" content="2018-01-22">
+<meta name="date" content="2018-01-23">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -260,25 +260,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#prerequisites-4"><i class="fa fa-check"></i>Prerequisites</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#background-3"><i class="fa fa-check"></i>Background</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#getting-the-data-3"><i class="fa fa-check"></i>Getting the data</a></li>
-<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#data-curation-1"><i class="fa fa-check"></i>Data curation</a><ul>
-<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#dead-animals-1"><i class="fa fa-check"></i>Dead animals</a></li>
-<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#animals-that-died-too-early-1"><i class="fa fa-check"></i>Animals that died too early</a></li>
-<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#trimming-1"><i class="fa fa-check"></i>Trimming</a></li>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#data-curation-1"><i class="fa fa-check"></i>Data curation</a></li>
+<li><a href="zeitgebr.html#ld---dd-transitions"><code>LD -&gt; DD</code> transitions</a></li>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#data-enrichment"><i class="fa fa-check"></i>Data enrichment</a></li>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#overview-plots"><i class="fa fa-check"></i>Overview plots</a></li>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#double-plotted-actograms-1"><i class="fa fa-check"></i>Double plotted actograms</a></li>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#periodograms-1"><i class="fa fa-check"></i>Periodograms</a><ul>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#computation"><i class="fa fa-check"></i>Computation</a></li>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#peaks-finding"><i class="fa fa-check"></i>Peaks finding</a></li>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#visualisation"><i class="fa fa-check"></i>Visualisation</a></li>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#exctract-the-peak-values"><i class="fa fa-check"></i>Exctract the peak values</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#population-plots-2"><i class="fa fa-check"></i>Population plots</a></li>
-<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#summarise-data-per-animal-1"><i class="fa fa-check"></i>Summarise data per animal</a></li>
-<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#day-sleep-night-sleep-1"><i class="fa fa-check"></i>Day sleep☼ – Night sleep☾</a><ul>
-<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#adding-some-phase-information-1"><i class="fa fa-check"></i>Adding some phase information</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#statistics-1"><i class="fa fa-check"></i>Statistics</a><ul>
-<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#pairwise-wilcoxon-tests-1"><i class="fa fa-check"></i>Pairwise Wilcoxon tests</a></li>
-<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#two-way-anova-1"><i class="fa fa-check"></i>Two way anova</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#sleep-architecture-1"><i class="fa fa-check"></i>Sleep architecture</a><ul>
-<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#bout-analysis-1"><i class="fa fa-check"></i>Bout analysis</a></li>
-<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#bout-length-vs-time-of-the-day-1"><i class="fa fa-check"></i>Bout length vs time of the day</a></li>
-<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#architecture-description-1"><i class="fa fa-check"></i>Architecture description</a></li>
-</ul></li>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#next-steps-4"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org/yihui/bookdown/" target="blank">Published with bookdown</a></li>
@@ -324,269 +317,325 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>You have read about <a href="behavr.html">behavr tables</a></li>
 <li>You are familiar with <a href="ggetho.html">ggetho</a>, our vidualisation tool</li>
 <li>You have already read the <a href="damr.html">damr tutorial</a></li>
-<li>Ensure you have <a href="intro.html#installing-rethomics-packages">installed</a> <code>behavr</code>, <code>damr</code> and <code>ggetho</code> packages:</li>
+<li>Ensure you have <a href="intro.html#installing-rethomics-packages">installed</a> <code>behavr</code>, <code>damr</code>, <code>ggetho</code> and <code>zeitgebr</code> packages:</li>
 </ul>
 </div>
 <div id="background-3" class="section level2 unnumbered">
 <h2>Background</h2>
-<p>This tutorial focused on circadian rhythm in <em>Drosophila</em>, but can be adapted easily to investicate periodicity in different context.</p>
-<p>In the <a href="damr.html">DAM2 tutorial</a>, we have learnt how to load data from a real DAM expriment. Since we already described it in length, it makes sense to use this experiment as an example for our sleep analysis. <strong>I will assume that you have already read and understood the <a href="damr.html">DAM tutorial</a></strong>. The last thing we did then was loading data and annotating scoring sleep:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sleepr)
-dt &lt;-<span class="st"> </span><span class="kw">load_dam2</span>(metadata, <span class="dt">FUN =</span> sleepr<span class="op">::</span>sleep_dam_annotation)
-dt</code></pre></div>
+<p>This tutorial focused on circadian rhythm in <em>Drosophila</em>, but can be adapted easily to investicate periodicity in different context. For this tutorial, we will use a DAM dataset that is provided (and preloaded) within the <code>damr</code> package.</p>
 </div>
 <div id="getting-the-data-3" class="section level2 unnumbered">
 <h2>Getting the data</h2>
-<p>Instead of going through the whole <code>damr</code> tutorial again, I though I would put the resulting data table online. Importanlty, for simplicity, <strong>I have just kept replicate 1</strong>. We just need to download it and load it:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sleepr)
+<p>This is a lot simple than in the other tutorials as the data is already there</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(damr)
+<span class="kw">library</span>(zeitgebr)
 <span class="kw">library</span>(ggetho)
 
-URL &lt;-<span class="st"> &quot;https://github.com/rethomics/rethomics.github.io/raw/source/material/sleep_dam.RData&quot;</span>
-<span class="kw">load</span>(<span class="kw">url</span>(URL))
+<span class="co"># We load the data</span>
+<span class="kw">data</span>(dams_sample) 
+<span class="co"># We copy the data to our own variable so we can alter it</span>
+dt &lt;-<span class="st"> </span><span class="kw">copy</span>(dams_sample) 
 <span class="kw">summary</span>(dt)</code></pre></div>
 <pre><code>## behavr table with:
-##  96  individuals
-##  8   metavariables
-##  4   variables
-##  3.68736e+05 measurements
+##  32  individuals
+##  6   metavariables
+##  2   variables
+##  4.1504e+05  measurements
 ##  1   key (id)</code></pre>
+<p>This is a recording of 32 animals for around 10 days in DD. Let us print the metadata to understand the experiment a little bit:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(dt)</code></pre></div>
+<pre><code>## behavr table with:
+##  32  individuals
+##  6   metavariables
+##  2   variables
+##  4.1504e+05  measurements
+##  1   key (id)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(dt[<span class="dt">meta=</span>T])</code></pre></div>
+<pre><code>##                                         id file_info region_id
+##  1: 2017-01-16 08:00:00|dams_sample.txt|01    &lt;list&gt;         1
+##  2: 2017-01-16 08:00:00|dams_sample.txt|02    &lt;list&gt;         2
+##  3: 2017-01-16 08:00:00|dams_sample.txt|03    &lt;list&gt;         3
+##  4: 2017-01-16 08:00:00|dams_sample.txt|04    &lt;list&gt;         4
+##  5: 2017-01-16 08:00:00|dams_sample.txt|05    &lt;list&gt;         5
+## ---                                                           
+## 28: 2017-01-16 08:00:00|dams_sample.txt|28    &lt;list&gt;        28
+## 29: 2017-01-16 08:00:00|dams_sample.txt|29    &lt;list&gt;        29
+## 30: 2017-01-16 08:00:00|dams_sample.txt|30    &lt;list&gt;        30
+## 31: 2017-01-16 08:00:00|dams_sample.txt|31    &lt;list&gt;        31
+## 32: 2017-01-16 08:00:00|dams_sample.txt|32    &lt;list&gt;        32
+##                           experiment_id      start_datetime
+##  1: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
+##  2: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
+##  3: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
+##  4: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
+##  5: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
+## ---                                                        
+## 28: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
+## 29: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
+## 30: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
+## 31: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
+## 32: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
+##           stop_datetime period_group
+##  1: 2017-01-26 00:09:00         long
+##  2: 2017-01-26 00:09:00         long
+##  3: 2017-01-26 00:09:00         long
+##  4: 2017-01-26 00:09:00         long
+##  5: 2017-01-26 00:09:00         long
+## ---                                 
+## 28: 2017-01-26 00:09:00           wt
+## 29: 2017-01-26 00:09:00           wt
+## 30: 2017-01-26 00:09:00           wt
+## 31: 2017-01-26 00:09:00           wt
+## 32: 2017-01-26 00:09:00           wt</code></pre>
+<p>As you can see we have 32 individuals, and three “period groups”. That is mutants with “short”“,”long“” or wild-type (“wt”) periods, encoded in the <code>period_group</code> metavariable.</p>
 </div>
 <div id="data-curation-1" class="section level2 unnumbered">
 <h2>Data curation</h2>
-<p>First of all, lets visualise all our sleep data. It is important to <strong>pay critical attention to this graph</strong> in order to assess if anything has gone wrong:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">z=</span>asleep)) <span class="op">+</span>
-<span class="st">      </span><span class="kw">stat_ld_annotations</span>(<span class="dt">height =</span> <span class="dv">1</span>)<span class="op">+</span>
+<p>This data is fairely clean already. For most purposes, you can apply the same principles as <a href="sleepr.html#data-curation">data curation for sleep analysis</a>.</p>
+</div>
+<div id="ld---dd-transitions" class="section level2 unnumbered">
+<h2><code>LD -&gt; DD</code> transitions</h2>
+<p>In general (but not here), you will have a period of <code>LD</code> “baseline” preceding a change to a <code>DD</code> regime. I suggest to encode that in the following way:</p>
+<ol style="list-style-type: decimal">
+<li>Manually add a column <code>baseline_days</code> in your metadata that defines the number of days of baseline.</li>
+<li>Sustract the number of baseline days to all time points: <code>dt[, t := t - days(xmv(baseline_days))]</code></li>
+</ol>
+<p>As a result, <code>t = 0</code> now means zt0 of the transition day. This makes a lot of sense as any baseline point is in negative time (<code>t &lt; 0</code>), whilst <code>t &gt; 0</code> is for <code>DD</code>. The nice thing is that you can work with data that have diferent baseline duration as now <strong>all time points are relative to the transition</strong>.</p>
+</div>
+<div id="data-enrichment" class="section level2 unnumbered">
+<h2>Data enrichment</h2>
+<p>By defaut, DAM data only has variables <code>t</code> and <code>activity</code>. The altter being the number of beam crosses over a time bin (e.g. one minute). We could define a variable <code>moving</code> that is <code>TRUE</code> when and only when <code>activity &gt; 0</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt[, moving <span class="op">:</span><span class="er">=</span><span class="st"> </span>activity <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>]</code></pre></div>
+</div>
+<div id="overview-plots" class="section level2 unnumbered">
+<h2>Overview plots</h2>
+<p>The first representation we plot could be activity all animals over time in the same page for some quality control. Note how we have changed the LD colours to grey and black, grey being for subjective days (we are in DD).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">z=</span>activity)) <span class="op">+</span>
+<span class="st">      </span><span class="kw">stat_ld_annotations</span>(<span class="dt">ld_colours =</span> <span class="kw">c</span>(<span class="st">&quot;grey&quot;</span>, <span class="st">&quot;black&quot;</span>))<span class="op">+</span>
 <span class="st">      </span><span class="kw">stat_tile_etho</span>() </code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-119-1.png" width="864" /></p>
-<div id="dead-animals-1" class="section level3 unnumbered">
-<h3>Dead animals</h3>
-<p>Some animals may have died during the experiment, and could be wrongly scored as asleep for very long durations. <code>sleepr</code> has an utility function to remove data from dead animals:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># we give our curated data another name so we can see the difference</span>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-120-1.png" width="864" /></p>
+<p>We see that two animals (region 5 and 10) seem to have died/escaped before the end of the experiment. <strong>It is your responsibility to decide what to do with them</strong>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sleepr)
 dt_curated &lt;-<span class="st"> </span><span class="kw">curate_dead_animals</span>(dt)
 <span class="kw">summary</span>(dt_curated)</code></pre></div>
 <pre><code>## behavr table with:
-##  95  individuals
-##  8   metavariables
-##  4   variables
-##  3.57436e+05 measurements
+##  32  individuals
+##  6   metavariables
+##  3   variables
+##  4.06864e+05 measurements
 ##  1   key (id)</code></pre>
-<p>As you can see, we now have 95 individuals vs 96 in the original data. To see which animals have been removed, we could run something like:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setdiff</span>(dt[, id, <span class="dt">meta=</span>T],
-        dt_curated[, id, <span class="dt">meta=</span>T])</code></pre></div>
-<pre><code>## [1] &quot;2017-07-01 08:00:00|Monitor64.txt|26&quot;</code></pre>
-<p>Indeed, from the tile plot nothing seem to have happened in this channel. Now let us look at the data after curation:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggetho</span>(dt_curated, <span class="kw">aes</span>(<span class="dt">z=</span>asleep)) <span class="op">+</span>
-<span class="st">      </span><span class="kw">stat_ld_annotations</span>(<span class="dt">ypos =</span> <span class="st">&quot;top&quot;</span>)<span class="op">+</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggetho</span>(dt_curated, <span class="kw">aes</span>(<span class="dt">z=</span>activity)) <span class="op">+</span>
+<span class="st">      </span><span class="kw">stat_ld_annotations</span>(<span class="dt">ld_colours =</span> <span class="kw">c</span>(<span class="st">&quot;grey&quot;</span>, <span class="st">&quot;black&quot;</span>))<span class="op">+</span>
 <span class="st">      </span><span class="kw">stat_tile_etho</span>() </code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-122-1.png" width="864" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-121-1.png" width="672" /></p>
 </div>
-<div id="animals-that-died-too-early-1" class="section level3 unnumbered">
-<h3>Animals that died too early</h3>
-<p>In addition, we could want to, for instance, <strong>remove animals that did not live say longer than 2 days</strong>. Of course, you need to have a good reason to exclude some animals, and that depends on your specific experiment (this is just showing you how to do it). To remove animals that did not live longer that 2 days, we use the power of <code>behavr</code> tables:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># we make a summary table of all lifespan for each animals</span>
-lifespan_dt &lt;-<span class="st"> </span>dt_curated[, .(<span class="dt">lifespan =</span> <span class="kw">max</span>(t)), by=id]
-<span class="co"># we filter this table for lifespan&gt;2 and we keep the id</span>
-valid_ids &lt;-<span class="st"> </span>lifespan_dt[lifespan <span class="op">&gt;</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">2</span>), id]
-<span class="co"># we apply this filter</span>
-dt_curated &lt;-<span class="st"> </span>dt_curated[id <span class="op">%in%</span><span class="st"> </span>valid_ids]
-<span class="kw">summary</span>(dt_curated)</code></pre></div>
-<pre><code>## behavr table with:
-##  94  individuals
-##  8   metavariables
-##  4   variables
-##  3.54923e+05 measurements
-##  1   key (id)</code></pre>
+<div id="double-plotted-actograms-1" class="section level2 unnumbered">
+<h2>Double plotted actograms</h2>
+<p>At the moment, the <code>id</code> is a very long string. It has the advantage to be unambiguous, but it is difficult to plot. To help plotting, we can make a new variable that is simply a different number for each individual. Lets call it <code>uid</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt_curated[, uid <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span> <span class="op">:</span><span class="st"> </span>.N, meta=T]
+<span class="co"># We can map uid to id</span>
+dt_curated[, .(id, uid) ,meta=T]</code></pre></div>
+<pre><code>##                                         id uid
+##  1: 2017-01-16 08:00:00|dams_sample.txt|01   1
+##  2: 2017-01-16 08:00:00|dams_sample.txt|02   2
+##  3: 2017-01-16 08:00:00|dams_sample.txt|03   3
+##  4: 2017-01-16 08:00:00|dams_sample.txt|04   4
+##  5: 2017-01-16 08:00:00|dams_sample.txt|05   5
+## ---                                           
+## 28: 2017-01-16 08:00:00|dams_sample.txt|28  28
+## 29: 2017-01-16 08:00:00|dams_sample.txt|29  29
+## 30: 2017-01-16 08:00:00|dams_sample.txt|30  30
+## 31: 2017-01-16 08:00:00|dams_sample.txt|31  31
+## 32: 2017-01-16 08:00:00|dams_sample.txt|32  32</code></pre>
+<p>As you see, we do keep id as a reference but uid for convenience in graphs.</p>
+<p>To make a double plotted actogram, we use <code>ggetho</code>. Read more about that in the <a href="ggetho.html#double-plotted-actograms">visualisation tutorial</a>. Breifly, we set <code>multiplot</code> to <code>2</code> (<code>3</code> would be a triple plotted) one. The variable of interest is on the <code>z</code> axis, note that instead of <code>moving</code>, you could plot raw <code>activity</code>. Then, we use bar height to show the amount of movement (we could use <code>stat_tile_etho</code> which shows the variable of interest as colour a pixel intensity) . Lastly, we split the graph by <code>uid</code>, so that each facet is a single animal.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggetho</span>(dt_curated, <span class="kw">aes</span>(<span class="dt">z=</span>moving), <span class="dt">multiplot =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">stat_bar_tile_etho</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">facet_wrap</span>( <span class="op">~</span><span class="st"> </span>uid)</code></pre></div>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-123-1.png" width="672" /></p>
+<p>Interestingly, you can use formulae in facet to show or sort with other metavariables:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggetho</span>(dt_curated, <span class="kw">aes</span>(<span class="dt">z=</span>moving), <span class="dt">multiplot =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">stat_bar_tile_etho</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">facet_wrap</span>( <span class="op">~</span><span class="st"> </span>period_group <span class="op">+</span><span class="st"> </span>uid , <span class="dt">labeller =</span> <span class="kw">label_wrap_gen</span>(<span class="dt">multi_line=</span><span class="ot">FALSE</span>))</code></pre></div>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-124-1.png" width="672" /> Now, we know what is the genotype for each <code>uid</code>. You can generalise this concept to display more metavariables. For instance, if we had a <code>sex</code> metavariable we could do: <code>facet_wrap( ~ period_group + sex + uid, ...)</code>.</p>
 </div>
-<div id="trimming-1" class="section level3 unnumbered">
-<h3>Trimming</h3>
-<p>Generally, we want to remove point according the experimental time. For instance, we want to remove the begening as animals are acclimatising to their new environment. In general, we could simply do:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt_curated &lt;-<span class="st"> </span>dt_curated[t <span class="op">%between%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">days</span>(<span class="fl">2.5</span>))]
-<span class="kw">summary</span>(dt_curated)</code></pre></div>
-<pre><code>## behavr table with:
-##  94  individuals
-##  8   metavariables
-##  4   variables
-##  3.38494e+05 measurements
-##  1   key (id)</code></pre>
-<p>Which means we removed data before <code>t=0</code> and after <code>t=days(2.5)</code>.</p>
-</div>
-</div>
-<div id="population-plots-2" class="section level2 unnumbered">
-<h2>Population plots</h2>
-<p>Now that we have curated our data, we can start looking at the biology. First, we make a global population plot:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggetho</span>(dt_curated, <span class="kw">aes</span>(<span class="dt">y=</span>asleep, <span class="dt">colour=</span>sex)) <span class="op">+</span>
-<span class="st">      </span><span class="kw">stat_pop_etho</span>() <span class="op">+</span>
-<span class="st">      </span><span class="kw">stat_ld_annotations</span>() <span class="op">+</span>
-<span class="st">      </span><span class="kw">facet_grid</span>(genotype <span class="op">~</span><span class="st"> </span>.)</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-125-1.png" width="672" /></p>
-<p>The y axis shows the proportion of time sent sleeping, averaged for each animal within a 30min (default) time window.</p>
-<p>Then, we can wrap (average) that over one day. We also polish the y axis label:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggetho</span>(dt_curated, <span class="kw">aes</span>(<span class="dt">y=</span>asleep, <span class="dt">colour=</span>sex), <span class="dt">time_wrap =</span> <span class="kw">hours</span>(<span class="dv">24</span>)) <span class="op">+</span>
-<span class="st">      </span><span class="kw">stat_pop_etho</span>() <span class="op">+</span>
-<span class="st">      </span><span class="kw">stat_ld_annotations</span>() <span class="op">+</span>
-<span class="st">      </span><span class="kw">facet_grid</span>(genotype <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span>
-<span class="st">      </span><span class="kw">scale_y_continuous</span>(<span class="dt">name=</span> <span class="st">&quot;Fraction of time sleeping&quot;</span>,<span class="dt">labels =</span> scales<span class="op">::</span>percent)</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-126-1.png" width="672" /></p>
-<p>That gives us a good understanding of what happens at the population level.</p>
-</div>
-<div id="summarise-data-per-animal-1" class="section level2 unnumbered">
-<h2>Summarise data per animal</h2>
-<p>Most likely, we want to summarise sleep amount so that we have <strong>one number per animal</strong>. For instance, we can compute the overall average proportion of time spent sleeping:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">summary_dt &lt;-<span class="st"> </span>
-<span class="st">  </span><span class="kw">rejoin</span>(dt_curated[,
-           .(
-             <span class="co"># this is where the computation happens</span>
-             <span class="dt">sleep_fraction =</span> <span class="kw">mean</span>(asleep)
-             ),
-           ,<span class="dt">by=</span>id])
-summary_dt</code></pre></div>
-<pre><code>##                                       id file_info region_id
-##  1: 2017-07-01 08:00:00|Monitor11.txt|01    &lt;list&gt;         1
-##  2: 2017-07-01 08:00:00|Monitor11.txt|02    &lt;list&gt;         2
-##  3: 2017-07-01 08:00:00|Monitor11.txt|03    &lt;list&gt;         3
-##  4: 2017-07-01 08:00:00|Monitor11.txt|04    &lt;list&gt;         4
-##  5: 2017-07-01 08:00:00|Monitor11.txt|05    &lt;list&gt;         5
-## ---                                                         
-## 90: 2017-07-01 08:00:00|Monitor64.txt|27    &lt;list&gt;        27
-## 91: 2017-07-01 08:00:00|Monitor64.txt|29    &lt;list&gt;        29
-## 92: 2017-07-01 08:00:00|Monitor64.txt|30    &lt;list&gt;        30
-## 93: 2017-07-01 08:00:00|Monitor64.txt|31    &lt;list&gt;        31
-## 94: 2017-07-01 08:00:00|Monitor64.txt|32    &lt;list&gt;        32
-##                         experiment_id      start_datetime stop_datetime
-##  1: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
-##  2: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
-##  3: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
-##  4: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
-##  5: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
-## ---                                                                    
-## 90: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
-## 91: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
-## 92: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
-## 93: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
-## 94: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
-##     sex genotype replicate sleep_fraction
-##  1:   M        A         1      0.7600666
-##  2:   M        A         1      0.7550680
-##  3:   M        A         1      0.8214385
-##  4:   M        A         1      0.7528464
-##  5:   M        A         1      0.8044988
-## ---                                      
-## 90:   F        C         1      0.7661761
-## 91:   F        C         1      0.6725909
-## 92:   F        C         1      0.7622883
-## 93:   F        C         1      0.7967231
-## 94:   F        C         1      0.9208553</code></pre>
-<p>With <code>rejoin</code>, we have put our summary and metadata together, which is suitable for standars graphics/statictics. For instance, if we are interested in the effect of sleep and genotype on sleep amount, we can make a faceted boxplot, and also add individual points to show all data.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(summary_dt, <span class="kw">aes</span>(<span class="dt">x=</span>sex, <span class="dt">y=</span>sleep_fraction, <span class="dt">fill=</span>sex)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">outlier.colour =</span> <span class="ot">NA</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">alpha=</span>.<span class="dv">5</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">facet_grid</span>( genotype <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">name=</span> <span class="st">&quot;Fraction of time sleeping&quot;</span>,<span class="dt">labels =</span> scales<span class="op">::</span>percent)</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-128-1.png" width="672" /></p>
-</div>
-<div id="day-sleep-night-sleep-1" class="section level2 unnumbered">
-<h2>Day sleep☼ – Night sleep☾</h2>
-<p>Often, we want to compare amount of sleep during the day vs night as they are different processes.</p>
-<div id="adding-some-phase-information-1" class="section level3 unnumbered">
-<h3>Adding some phase information</h3>
-<p>The simplest way to do that is to start by adding some phase information to our data.</p>
+<div id="periodograms-1" class="section level2 unnumbered">
+<h2>Periodograms</h2>
+<div id="computation" class="section level3 unnumbered">
+<h3>Computation</h3>
+<p>An important part of circadian research is to compute the periodicity of the free running clock of multiple individuals. Mathematically, we would like to build a preiodogram. That is, generally speaking, a representation of the density (i.e. <strong>power</strong>) of a signal at different <strong>periods</strong> (or frequencies). In addition, a periodogram associates to each pair pf power,period a **significance level*. There are many algorithms to compute periodograms. In <code>zeitgebr</code>, we have implemented:</p>
 <ul>
-<li><strong>L phase</strong> (light) should be any point <strong>between ZT0 and ZT12</strong> – [0,12), [24,36), …</li>
-<li><strong>D phase</strong> (dark) should be any point <strong>between ZT12 and ZT24</strong> – [12,24), [36,48), …</li>
+<li><code>ac_periodogram</code> – An autocorrelation based method</li>
+<li><code>ls_periodogram</code> – Lomb-Scargle algorithm</li>
+<li><code>chi_sq_periodogram</code> – A <span class="math inline">\(\chi{}^2\)</span> based one</li>
 </ul>
-<p>Numerically, this can be done very simply using a <a href="https://en.wikipedia.org/wiki/Modulo_operation">modulo operation</a> on time. In <code>R</code>, modulo is <code>%%</code>. The following line creates a new variable in dt. This variable is:</p>
-<ul>
-<li><code>&quot;L&quot;</code> when the remainder of the division of (the corresponding) <code>t</code> by 24h is lower than 12h</li>
-<li><code>&quot;D&quot;</code> otherwise</li>
-</ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt_curated[, phase <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">ifelse</span>(t <span class="op">%%</span><span class="st"> </span><span class="kw">hours</span>(<span class="dv">24</span>) <span class="op">&lt;</span><span class="st"> </span><span class="kw">hours</span>(<span class="dv">12</span>), <span class="st">&quot;L&quot;</span>, <span class="st">&quot;D&quot;</span>)]</code></pre></div>
-<p>Since we have this column, we can make an improved summary (pay special attention to the last columns):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">summary_dt &lt;-<span class="st"> </span>
-<span class="st">  </span><span class="kw">rejoin</span>(dt_curated[,
-           .(
-             <span class="co"># this is where the computation happens</span>
-             <span class="dt">sleep_fraction_all =</span> <span class="kw">mean</span>(asleep),
-             <span class="dt">sleep_fraction_l =</span> <span class="kw">mean</span>(asleep[phase <span class="op">==</span><span class="st"> &quot;L&quot;</span>]),
-             <span class="dt">sleep_fraction_d =</span> <span class="kw">mean</span>(asleep[phase <span class="op">==</span><span class="st"> &quot;D&quot;</span>])
-             ),
-           ,<span class="dt">by=</span>id])
-summary_dt</code></pre></div>
-<pre><code>##                                       id file_info region_id
-##  1: 2017-07-01 08:00:00|Monitor11.txt|01    &lt;list&gt;         1
-##  2: 2017-07-01 08:00:00|Monitor11.txt|02    &lt;list&gt;         2
-##  3: 2017-07-01 08:00:00|Monitor11.txt|03    &lt;list&gt;         3
-##  4: 2017-07-01 08:00:00|Monitor11.txt|04    &lt;list&gt;         4
-##  5: 2017-07-01 08:00:00|Monitor11.txt|05    &lt;list&gt;         5
-## ---                                                         
-## 90: 2017-07-01 08:00:00|Monitor64.txt|27    &lt;list&gt;        27
-## 91: 2017-07-01 08:00:00|Monitor64.txt|29    &lt;list&gt;        29
-## 92: 2017-07-01 08:00:00|Monitor64.txt|30    &lt;list&gt;        30
-## 93: 2017-07-01 08:00:00|Monitor64.txt|31    &lt;list&gt;        31
-## 94: 2017-07-01 08:00:00|Monitor64.txt|32    &lt;list&gt;        32
-##                         experiment_id      start_datetime stop_datetime
-##  1: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
-##  2: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
-##  3: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
-##  4: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
-##  5: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
-## ---                                                                    
-## 90: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
-## 91: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
-## 92: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
-## 93: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
-## 94: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
-##     sex genotype replicate sleep_fraction_all sleep_fraction_l
-##  1:   M        A         1          0.7600666        0.8500000
-##  2:   M        A         1          0.7550680        0.7861111
-##  3:   M        A         1          0.8214385        0.8356481
-##  4:   M        A         1          0.7528464        0.8555556
-##  5:   M        A         1          0.8044988        0.8444444
+<p>See <code>?periodogram_methods</code> for references.</p>
+<p>In order to compute periodograms, we use the <code>periodogram()</code> function. We need to define which variable we want to study (e.g. <code>moving</code> or <code>activity</code>). Then, we provide our data. The methods described above can be passed as an argument.</p>
+<p>For instance, if we want to analyse, with the <span class="math inline">\(\chi{}^2\)</span> method, activity:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">per_xsq_dt &lt;-<span class="st"> </span><span class="kw">periodogram</span>(activity, 
+                        dt_curated,
+                        <span class="dt">FUN =</span> chi_sq_periodogram)
+per_xsq_dt</code></pre></div>
+<pre><code>## 
+##  ==== METADATA ====
+## 
+##                                         id file_info region_id
+##                                     &lt;fctr&gt;    &lt;list&gt;     &lt;int&gt;
+##  1: 2017-01-16 08:00:00|dams_sample.txt|01    &lt;list&gt;         1
+##  2: 2017-01-16 08:00:00|dams_sample.txt|02    &lt;list&gt;         2
+##  3: 2017-01-16 08:00:00|dams_sample.txt|03    &lt;list&gt;         3
+##  4: 2017-01-16 08:00:00|dams_sample.txt|04    &lt;list&gt;         4
 ## ---                                                           
-## 90:   F        C         1          0.7661761        0.7504630
-## 91:   F        C         1          0.6725909        0.6370370
-## 92:   F        C         1          0.7622883        0.7523148
-## 93:   F        C         1          0.7967231        0.7773148
-## 94:   F        C         1          0.9208553        0.9643519
-##     sleep_fraction_d
-##  1:        0.6252602
-##  2:        0.7085357
-##  3:        0.8001388
-##  4:        0.5988897
-##  5:        0.7446218
-## ---                 
-## 90:        0.7897294
-## 91:        0.7258848
-## 92:        0.7772380
-## 93:        0.8258154
-## 94:        0.8556558</code></pre>
-<p>Now, we have three new variables: <code>sleep_fraction_all</code>, <code>sleep_fraction_l</code> and <code>sleep_fraction_d</code>. We can just replace the y axis with our variable of interest (e.g. sleep in D phase):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(summary_dt, <span class="kw">aes</span>(<span class="dt">x=</span>sex, <span class="dt">y=</span>sleep_fraction_d, <span class="dt">fill=</span>sex)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">outlier.colour =</span> <span class="ot">NA</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">alpha=</span>.<span class="dv">5</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">facet_grid</span>(genotype <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">name=</span> <span class="st">&quot;Fraction of time sleeping&quot;</span>,<span class="dt">labels =</span> scales<span class="op">::</span>percent)</code></pre></div>
+## 28: 2017-01-16 08:00:00|dams_sample.txt|28    &lt;list&gt;        28
+## 29: 2017-01-16 08:00:00|dams_sample.txt|29    &lt;list&gt;        29
+## 30: 2017-01-16 08:00:00|dams_sample.txt|30    &lt;list&gt;        30
+## 31: 2017-01-16 08:00:00|dams_sample.txt|31    &lt;list&gt;        31
+## 32: 2017-01-16 08:00:00|dams_sample.txt|32    &lt;list&gt;        32
+##                           experiment_id      start_datetime
+##                                  &lt;char&gt;              &lt;POSc&gt;
+##  1: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
+##  2: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
+##  3: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
+##  4: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
+## ---                                                        
+## 28: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
+## 29: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
+## 30: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
+## 31: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
+## 32: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
+##           stop_datetime period_group   uid
+##                  &lt;fctr&gt;       &lt;fctr&gt; &lt;int&gt;
+##  1: 2017-01-26 00:09:00         long     1
+##  2: 2017-01-26 00:09:00         long     2
+##  3: 2017-01-26 00:09:00         long     3
+##  4: 2017-01-26 00:09:00         long     4
+## ---                                       
+## 28: 2017-01-26 00:09:00           wt    28
+## 29: 2017-01-26 00:09:00           wt    29
+## 30: 2017-01-26 00:09:00           wt    30
+## 31: 2017-01-26 00:09:00           wt    31
+## 32: 2017-01-26 00:09:00           wt    32
+## 
+##  ====== DATA ======
+## 
+##                                           id period     power
+##                                       &lt;fctr&gt;  &lt;num&gt;     &lt;num&gt;
+##    1: 2017-01-16 08:00:00|dams_sample.txt|01  57600  915.1469
+##    2: 2017-01-16 08:00:00|dams_sample.txt|01  57960  850.5985
+##    3: 2017-01-16 08:00:00|dams_sample.txt|01  58320  826.6236
+##    4: 2017-01-16 08:00:00|dams_sample.txt|01  58680  866.8840
+##   ---                                                        
+## 5148: 2017-01-16 08:00:00|dams_sample.txt|32 113760 1894.0673
+## 5149: 2017-01-16 08:00:00|dams_sample.txt|32 114120 1799.8931
+## 5150: 2017-01-16 08:00:00|dams_sample.txt|32 114480 1828.1604
+## 5151: 2017-01-16 08:00:00|dams_sample.txt|32 114840 1900.2470
+## 5152: 2017-01-16 08:00:00|dams_sample.txt|32 115200 1914.5098
+##       signif_threshold   p_value
+##                  &lt;num&gt;     &lt;num&gt;
+##    1:         1116.799 0.8472578
+##    2:         1123.266 0.9967620
+##    3:         1129.731 0.9997322
+##    4:         1136.195 0.9953279
+##   ---                           
+## 5148:         2113.450 0.5082053
+## 5149:         2119.782 0.9530575
+## 5150:         2126.114 0.9032170
+## 5151:         2132.445 0.5839614
+## 5152:         2138.776 0.5310549</code></pre>
+<p>The result is another <code>behavr</code> table, with the same metadata. The data however, is now a list of power vs period (and significance).</p>
+<p>Note that there are other options (see <code>?periodogram</code>).</p>
+</div>
+<div id="peaks-finding" class="section level3 unnumbered">
+<h3>Peaks finding</h3>
+<p>Often, we want to know which are the peak periods in a periodogram. Tis can be achieved thanks to the <code>find_peaks</code> function. By default, it find a maximum of three peaks, which are sorted by their power (relative to the significance thershold). Peaks that are not signifant are not acounted for (see the <code>alpha</code> argument).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">per_xsq_dt &lt;-<span class="st"> </span><span class="kw">find_peaks</span>(per_xsq_dt)
+per_xsq_dt</code></pre></div>
+<p>This function annotates our data by ading a column names “peak”. Whenever the row correspongs to a peak, it puts a number, <code>NA</code> otherwise. The number is the rank of the peak (<code>1</code> being the first/tallest one).</p>
+</div>
+<div id="visualisation" class="section level3 unnumbered">
+<h3>Visualisation</h3>
+<p>In <code>ggetho</code>, the function <code>ggperio()</code> is designed specifically for that.</p>
+<p>One could plot all the periodograms like so:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggperio</span>(per_xsq_dt) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">group =</span> id, <span class="dt">colour=</span>period_group))</code></pre></div>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-127-1.png" width="672" /> But it is very hard to read, so we can facet per uid. In addition, we can use a special <code>geom</code> to show the values of the peak. We can draw a signifiance line as well, just using the <code>signif_threshold</code> variable:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggperio</span>(per_xsq_dt, <span class="kw">aes</span>(<span class="dt">peak=</span>peak)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">group =</span> id, <span class="dt">colour=</span>period_group)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_peak</span>(<span class="dt">col=</span><span class="st">&quot;black&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y=</span> signif_threshold)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>uid)</code></pre></div>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-128-1.png" width="672" /></p>
+<p>Instead of drawing only the firts peak, you could draw, for instance, the first and second (<code>geom_peak(peak_rank = 1:2)</code>) or, only the second (<code>geom_peak(peak_rank = 2)</code>).</p>
+<p>An interesting thing to do, is a population average periodogram. In this graph, the solid lines are the average power per group, whilst the shaded areas are +- standard error:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggperio</span>(per_xsq_dt, <span class="kw">aes</span>(
+                  <span class="dt">y =</span> power <span class="op">-</span><span class="st"> </span>signif_threshold,
+                  <span class="dt">colour=</span>period_group)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">stat_pop_etho</span>()</code></pre></div>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-129-1.png" width="672" /></p>
+</div>
+<div id="exctract-the-peak-values" class="section level3 unnumbered">
+<h3>Exctract the peak values</h3>
+<p>At some point, you would like to <strong>summarise</strong> each animal by, say, it first peak. The you can look at weather there are sigifiant diference in peak periodicity vs genotype. Doing that is quite straigtforward. We can select only rows where peak is exactly 1, then rejoin our table to its metadata:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">summary_dt &lt;-<span class="st"> </span><span class="kw">rejoin</span>(per_xsq_dt[peak<span class="op">==</span><span class="dv">1</span>])
+summary_dt</code></pre></div>
+<pre><code>##                                         id file_info region_id
+##  1: 2017-01-16 08:00:00|dams_sample.txt|01    &lt;list&gt;         1
+##  2: 2017-01-16 08:00:00|dams_sample.txt|02    &lt;list&gt;         2
+##  3: 2017-01-16 08:00:00|dams_sample.txt|03    &lt;list&gt;         3
+##  4: 2017-01-16 08:00:00|dams_sample.txt|04    &lt;list&gt;         4
+##  5: 2017-01-16 08:00:00|dams_sample.txt|05    &lt;list&gt;         5
+## ---                                                           
+## 28: 2017-01-16 08:00:00|dams_sample.txt|28    &lt;list&gt;        28
+## 29: 2017-01-16 08:00:00|dams_sample.txt|29    &lt;list&gt;        29
+## 30: 2017-01-16 08:00:00|dams_sample.txt|30    &lt;list&gt;        30
+## 31: 2017-01-16 08:00:00|dams_sample.txt|31    &lt;list&gt;        31
+## 32: 2017-01-16 08:00:00|dams_sample.txt|32    &lt;list&gt;        32
+##                           experiment_id      start_datetime
+##  1: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
+##  2: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
+##  3: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
+##  4: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
+##  5: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
+## ---                                                        
+## 28: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
+## 29: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
+## 30: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
+## 31: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
+## 32: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
+##           stop_datetime period_group uid period    power signif_threshold
+##  1: 2017-01-26 00:09:00         long   1  96120 2153.087         1802.460
+##  2: 2017-01-26 00:09:00         long   2 100440 2347.342         1878.755
+##  3: 2017-01-26 00:09:00         long   3  97200 2076.914         1821.542
+##  4: 2017-01-26 00:09:00         long   4  91440 2006.426         1719.695
+##  5: 2017-01-26 00:09:00         long   5  99720 1972.638         1866.046
+## ---                                                                      
+## 28: 2017-01-26 00:09:00           wt  28  86400 2181.824         1630.426
+## 29: 2017-01-26 00:09:00           wt  29  85680 1708.511         1617.661
+## 30: 2017-01-26 00:09:00           wt  30  85320 2522.066         1611.277
+## 31: 2017-01-26 00:09:00           wt  31  83880 2382.727         1585.734
+## 32: 2017-01-26 00:09:00           wt  32  87480 1796.982         1649.568
+##          p_value peak
+##  1: 6.125265e-19    1
+##  2: 1.604665e-25    1
+##  3: 7.451378e-14    1
+##  4: 8.065774e-16    1
+##  5: 1.733647e-07    1
+## ---                  
+## 28: 1.999996e-33    1
+## 29: 3.668583e-07    1
+## 30: 2.215774e-64    1
+## 31: 2.308707e-54    1
+## 32: 2.314742e-09    1</code></pre>
+<p>Then, we can use <code>summary_dt</code> for standard <code>R</code> analysis. For instance, with <code>ggplot</code>, I make a boxplot sowing the distrinbution of periods, in h, for each groups. I also add point for each animal (se we see outliers). Then, I make the size of the point proportional to the power of the peak discovered.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(summary_dt, <span class="kw">aes</span>(period_group, period <span class="op">/</span><span class="st"> </span><span class="kw">hours</span>(<span class="dv">1</span>), <span class="dt">fill=</span> period_group)) <span class="op">+</span><span class="st"> </span>
+<span class="st">        </span><span class="kw">geom_boxplot</span>(<span class="dt">outlier.colour =</span> <span class="ot">NA</span>) <span class="op">+</span>
+<span class="st">        </span><span class="kw">geom_jitter</span>(<span class="kw">aes</span>(<span class="dt">size=</span>power), <span class="dt">alpha=</span>.<span class="dv">5</span>)</code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-131-1.png" width="672" /></p>
-<p>If we wanted a plot will all three values, we could <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-reshape.html">“melt”</a> our data, picking all columns starting with <code>&quot;sleep_fraction_&quot;</code> as “measurment variables”:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">summary_dt_melted &lt;-<span class="st"> </span><span class="kw">melt</span>(summary_dt, <span class="dt">measure.vars =</span> <span class="kw">patterns</span>(<span class="st">&quot;sleep_fraction_&quot;</span>),
-                          <span class="dt">variable.name =</span> <span class="st">&quot;phase&quot;</span>, <span class="dt">value.name =</span> <span class="st">&quot;sleep_fraction&quot;</span>)</code></pre></div>
-<p>Now, instead of three columns for the three variable, we have two columns, one for the actual value and one to describe the phase (all vs L vs D). This makes it convenient to use with ggplot:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(summary_dt_melted, <span class="kw">aes</span>(<span class="dt">x=</span>phase, <span class="dt">y=</span>sleep_fraction, <span class="dt">fill=</span>sex)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">outlier.colour =</span> <span class="ot">NA</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">alpha=</span>.<span class="dv">5</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">facet_grid</span>(genotype <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">name=</span> <span class="st">&quot;Fraction of time sleeping&quot;</span>,<span class="dt">labels =</span> scales<span class="op">::</span>percent)</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-133-1.png" width="672" /></p>
-</div>
-</div>
-<div id="statistics-1" class="section level2 unnumbered">
-<h2>Statistics</h2>
-<p>Often, you want to go further than representing the data, and compute statistics. <code>R</code> was designed primarilly as statistical progamming language. As a result, a tremendous variety of simple and elaborate statics are implemented. This section will not go in the details of what you can do in terms of stats, many authors have already published fantastic ressources on this subject. Instead, we present a very simple examples of what can be done. At this stage, what you do depends very much on your question, your knowledge of statistics and how much effort you want to invest.</p>
-<div id="pairwise-wilcoxon-tests-1" class="section level3 unnumbered">
-<h3>Pairwise Wilcoxon tests</h3>
-<p>Say we wanted to compute, for <strong>females only</strong>, all pairwise tests between all genotype groups (A vs B, B vs C and C vs A). This could be formulated as:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairwise.wilcox.test</span>(summary_dt[sex<span class="op">==</span><span class="st">&quot;F&quot;</span>, sleep_fraction_all], 
-                     summary_dt[sex<span class="op">==</span><span class="st">&quot;F&quot;</span>, genotype])</code></pre></div>
+<p>Another direction could be to perform pairewise wilcoxon test between groups:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairwise.wilcox.test</span>(summary_dt<span class="op">$</span>period, summary_dt<span class="op">$</span>period_group )</code></pre></div>
 <pre><code>## Warning in wilcox.test.default(xi, xj, paired = paired, ...): cannot
+## compute exact p-value with ties
+
+## Warning in wilcox.test.default(xi, xj, paired = paired, ...): cannot
 ## compute exact p-value with ties
 
 ## Warning in wilcox.test.default(xi, xj, paired = paired, ...): cannot
@@ -594,121 +643,23 @@ summary_dt</code></pre></div>
 <pre><code>## 
 ##  Pairwise comparisons using Wilcoxon rank sum test 
 ## 
-## data:  summary_dt[sex == &quot;F&quot;, sleep_fraction_all] and summary_dt[sex == &quot;F&quot;, genotype] 
+## data:  summary_dt$period and summary_dt$period_group 
 ## 
-##   A       B     
-## B 0.0047  -     
-## C 4.1e-08 0.0018
+##       long    short  
+## short 0.02507 -      
+## wt    0.00037 0.02507
 ## 
 ## P value adjustment method: holm</code></pre>
-<p>We get a matrix showing us all p-values. You could do that also within males, as long as we replace <code>sex == &quot;F&quot;</code> by <code>sex == &quot;M&quot;</code></p>
-</div>
-<div id="two-way-anova-1" class="section level3 unnumbered">
-<h3>Two way anova</h3>
-<p>If we are interested in the effect of <strong>sex AND genotype</strong>, as well as <strong>their interaction</strong>, we can model our response variable with a formula: <code>sleep_fraction_all ~ sex * genotype</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">aov</span>(sleep_fraction_all <span class="op">~</span><span class="st"> </span>sex <span class="op">*</span><span class="st"> </span>genotype, summary_dt)
-<span class="kw">summary</span>(model)</code></pre></div>
-<pre><code>##              Df Sum Sq Mean Sq F value   Pr(&gt;F)    
-## sex           1 0.3235  0.3235   26.39 1.66e-06 ***
-## genotype      2 0.4417  0.2209   18.02 2.76e-07 ***
-## sex:genotype  2 0.3874  0.1937   15.80 1.37e-06 ***
-## Residuals    88 1.0786  0.0123                     
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<p>This shows a strong affect of sex, genotype and their interaction on sleep amount. There are several way to follow up. For instance see this <a href="https://www.r-bloggers.com/two-way-analysis-of-variance-anova/">short tutorial</a>.</p>
+<p>This tells us that their is a statistically significant difference between each pair of group.</p>
 </div>
 </div>
-<div id="sleep-architecture-1" class="section level2 unnumbered">
-<h2>Sleep architecture</h2>
-<p>Proportion alone is not always a sufficent measure to fully descibe the dynamics of sleep. One way to go further is to study seep as a series of bouts.</p>
-<div id="bout-analysis-1" class="section level3 unnumbered">
-<h3>Bout analysis</h3>
-<p>The function <code>bout_analysis()</code>, in <code>sleepr</code> is designed for that. We would use it like that:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bout_dt &lt;-<span class="st"> </span><span class="kw">bout_analysis</span>(asleep, dt_curated)</code></pre></div>
-<p>The result is a new behavr table, with a few differences compared to the ones we used before:</p>
+<div id="next-steps-4" class="section level2 unnumbered">
+<h2>Next steps</h2>
 <ul>
-<li>Each row in the data describes a bout</li>
-<li>The bout can take the values <code>asleep=TRUE</code> or <code>asleep=FALSE</code> (sleep bout or wake bout, respectively)</li>
-<li><code>t</code> is the onset of the bout (in seconds)</li>
-<li><code>duration</code> is length of the bout (in seconds)</li>
+<li><a href="ggetho.html">Visualise data with <code>ggetho</code></a></li>
+<li><a href="sleepr.html">Sleep analysis <code>sleepr</code></a></li>
 </ul>
-<p>Note that you can use this function to study bouts of other discrete behaviours. For now, we are only interested in <strong>sleep bout</strong>, so we filter for <code>asleep == TRUE</code>. We also remove the, now redundant, <code>asleep</code> column:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bout_dt &lt;-<span class="st"> </span>bout_dt[asleep <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>, <span class="op">-</span><span class="st">&quot;asleep&quot;</span>]</code></pre></div>
-</div>
-<div id="bout-length-vs-time-of-the-day-1" class="section level3 unnumbered">
-<h3>Bout length vs time of the day</h3>
-<p>We can use <code>ggetho</code> to show how the average bout length depend of the time of the onset of the bout.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggetho</span>(bout_dt, <span class="kw">aes</span>(<span class="dt">y=</span>duration <span class="op">/</span><span class="st"> </span><span class="dv">60</span>, <span class="dt">colour=</span><span class="st">&quot;sex&quot;</span>), <span class="dt">time_wrap =</span> <span class="kw">hours</span>(<span class="dv">24</span>)) <span class="op">+</span><span class="st"> </span>
-<span class="st">      </span><span class="kw">stat_pop_etho</span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">      </span><span class="kw">facet_grid</span>(genotype <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span>
-<span class="st">      </span><span class="kw">scale_y_continuous</span>(<span class="dt">name=</span> <span class="st">&quot;Bout length (min)&quot;</span>)</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-138-1.png" width="672" /></p>
-<p>Note that this is a bit noisy as we only have a few animals per conbination of treatment.</p>
-</div>
-<div id="architecture-description-1" class="section level3 unnumbered">
-<h3>Architecture description</h3>
-<p>One can count the total number of bouts and average bout duration for each individual like so:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bout_dt[,
-        .(<span class="dt">n_bouts =</span> .N,
-          <span class="dt">mean_bout_length =</span> <span class="kw">mean</span>(duration)),
-        by=id]</code></pre></div>
-<pre><code>## 
-##  ==== METADATA ====
-## 
-##                                       id file_info region_id
-##                                   &lt;fctr&gt;    &lt;list&gt;     &lt;int&gt;
-##  1: 2017-07-01 08:00:00|Monitor11.txt|01    &lt;list&gt;         1
-##  2: 2017-07-01 08:00:00|Monitor11.txt|02    &lt;list&gt;         2
-##  3: 2017-07-01 08:00:00|Monitor11.txt|03    &lt;list&gt;         3
-##  4: 2017-07-01 08:00:00|Monitor11.txt|04    &lt;list&gt;         4
-## ---                                                         
-## 90: 2017-07-01 08:00:00|Monitor64.txt|27    &lt;list&gt;        27
-## 91: 2017-07-01 08:00:00|Monitor64.txt|29    &lt;list&gt;        29
-## 92: 2017-07-01 08:00:00|Monitor64.txt|30    &lt;list&gt;        30
-## 93: 2017-07-01 08:00:00|Monitor64.txt|31    &lt;list&gt;        31
-## 94: 2017-07-01 08:00:00|Monitor64.txt|32    &lt;list&gt;        32
-##                         experiment_id      start_datetime stop_datetime
-##                                &lt;char&gt;              &lt;POSc&gt;        &lt;char&gt;
-##  1: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
-##  2: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
-##  3: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
-##  4: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
-## ---                                                                    
-## 90: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
-## 91: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
-## 92: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
-## 93: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
-## 94: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
-##        sex genotype replicate
-##     &lt;char&gt;   &lt;char&gt;     &lt;int&gt;
-##  1:      M        A         1
-##  2:      M        A         1
-##  3:      M        A         1
-##  4:      M        A         1
-## ---                          
-## 90:      F        C         1
-## 91:      F        C         1
-## 92:      F        C         1
-## 93:      F        C         1
-## 94:      F        C         1
-## 
-##  ====== DATA ======
-## 
-##                                       id n_bouts mean_bout_length
-##                                   &lt;fctr&gt;   &lt;int&gt;            &lt;num&gt;
-##  1: 2017-07-01 08:00:00|Monitor11.txt|01      80         2052.000
-##  2: 2017-07-01 08:00:00|Monitor11.txt|02     109         1496.147
-##  3: 2017-07-01 08:00:00|Monitor11.txt|03      97         1829.072
-##  4: 2017-07-01 08:00:00|Monitor11.txt|04      95         1711.579
-## ---                                                              
-## 90: 2017-07-01 08:00:00|Monitor64.txt|27      75         2206.400
-## 91: 2017-07-01 08:00:00|Monitor64.txt|29     142         1023.380
-## 92: 2017-07-01 08:00:00|Monitor64.txt|30      99         1663.636
-## 93: 2017-07-01 08:00:00|Monitor64.txt|31      67         2568.358
-## 94: 2017-07-01 08:00:00|Monitor64.txt|32      36         5525.000</code></pre>
-<p>You could apply the approach presented before to compute statistics according the the phase (night vs day bouts).</p>
 
-</div>
 </div>
 </div>
             </section>

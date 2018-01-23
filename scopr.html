@@ -260,10 +260,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#prerequisites-4"><i class="fa fa-check"></i>Prerequisites</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#background-3"><i class="fa fa-check"></i>Background</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#getting-the-data-3"><i class="fa fa-check"></i>Getting the data</a></li>
-<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#data-curation-1"><i class="fa fa-check"></i>Data curation</a></li>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#quality-control-2"><i class="fa fa-check"></i>Quality control</a><ul>
 <li><a href="zeitgebr.html#ld---dd-transitions"><code>LD -&gt; DD</code> transitions</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#data-enrichment"><i class="fa fa-check"></i>Data enrichment</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#overview-plots"><i class="fa fa-check"></i>Overview plots</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#double-plotted-actograms-1"><i class="fa fa-check"></i>Double plotted actograms</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#periodograms-1"><i class="fa fa-check"></i>Periodograms</a><ul>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#computation"><i class="fa fa-check"></i>Computation</a></li>
@@ -700,7 +701,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-## 159.406   4.962 163.458</code></pre>
+## 149.904   3.971 152.972</code></pre>
 <p>However, the next time, we do the same thing way faster:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(
   dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata,
@@ -710,7 +711,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-##   1.967   0.104   2.031</code></pre>
+##   1.847   0.063   1.871</code></pre>
 <p>Here, we set <code>cache</code> to <code>&quot;ethoscope_cache&quot;</code>. This creates a new directory called <code>&quot;ethoscope_cache&quot;</code> (you can pick the name and location you want). If you to do a bit of tidying up, you can remove it without risk (it will just take time next time you load your data).</p>
 </div>
 </div>

@@ -19,310 +19,234 @@ In this practical chapter, we will use a real experiment to learn how to:
 * You are familiar with  [ggetho](ggetho.html), our vidualisation tool
 * You have already read the [damr tutorial](damr.html)
 * Ensure you have [installed](intro.html#installing-rethomics-packages)
-`behavr`, `damr` and `ggetho` packages:
+`behavr`, `damr`, `ggetho` and `zeitgebr` packages:
 
 
 ## Background{-}
 
 This tutorial focused on circadian rhythm in *Drosophila*, but can be adapted easily to investicate periodicity in different context.
-
-In the [DAM2 tutorial](damr.html), we have learnt how to load data from a real DAM expriment.
-Since we already described it in length, it makes sense to use this experiment as an example for our sleep analysis.
-**I will assume that you have already read and understood the [DAM tutorial](damr.html)**.
-The last thing we did then was loading data and annotating scoring sleep:
-
-```{r, eval=FALSE}
-library(sleepr)
-dt <- load_dam2(metadata, FUN = sleepr::sleep_dam_annotation)
-dt
-```
+For this tutorial, we will use a DAM dataset that is provided (and preloaded) within the `damr` package.
 
 
 ## Getting the data {-}
 
-Instead of going through the whole `damr` tutorial again, I though I would put the resulting data table online.
-Importanlty, for simplicity, **I have just kept replicate 1**.
-We just need to download it and load it:
+This is a lot simple than in the other tutorials as the data is already there
 
+```{r}
+library(damr)
+library(zeitgebr)
+library(ggetho)
+
+# We load the data
+data(dams_sample) 
+# We copy the data to our own variable so we can alter it
+dt <- copy(dams_sample) 
+summary(dt)
+```
+This is a recording of 32 animals for around 10 days in DD.
+Let us print the metadata to understand the experiment a little bit:
+
+```{r}
+summary(dt)
+print(dt[meta=T])
+```
+
+As you can see we have 32 individuals, and three "period groups". 
+That is mutants with "short"", "long"" or wild-type ("wt") periods, encoded in the `period_group` metavariable.
+
+## Data curation {-}
+This data is fairely clean already.
+For most purposes, you can apply the same principles as [data curation for sleep analysis](sleepr.html#data-curation).
+
+## `LD -> DD` transitions {-}
+
+In general (but not here), you will have a period of `LD` "baseline" preceding a change to a `DD` regime.
+I suggest to encode that in the following way:
+
+1. Manually add a column `baseline_days` in your metadata that defines the number of days of baseline.
+2. Sustract the number of baseline days to all time points: `dt[, t := t - days(xmv(baseline_days))]`
+
+As a result, `t = 0` now means zt0 of the transition day. This makes a lot of sense as any baseline point is in negative time (`t < 0`), whilst `t > 0` is for `DD`. The nice thing is that you can work with data that have diferent baseline duration as now **all time points are relative to the transition**.
+
+## Data enrichment {-}
+By defaut, DAM data only has variables `t` and `activity`. The altter being the number of beam crosses over a time bin (e.g. one minute). We could define a variable `moving` that is `TRUE` when and only when `activity > 0`:
+
+```{r}
+dt[, moving := activity > 0]
+```
+
+
+## Overview plots {-}
+
+The first representation we plot could be activity all animals over time in the same page for some quality control.
+Note how we have changed the LD colours to grey and black, grey being for subjective days (we are in DD).
+```{r, fig.width = 9, fig.height=12}
+ggetho(dt, aes(z=activity)) +
+      stat_ld_annotations(ld_colours = c("grey", "black"))+
+      stat_tile_etho() 
+```
+
+We see that two animals (region 5 and 10) seem to have died/escaped before the end of the experiment.
+**It is your responsibility to decide what to do with them**.
 
 ```{r}
 library(sleepr)
-library(ggetho)
-
-URL <- "https://github.com/rethomics/rethomics.github.io/raw/source/material/sleep_dam.RData"
-load(url(URL))
-summary(dt)
-```
-
-## Data curation {-}
-First of all, lets visualise all our sleep data.
-It is important to **pay critical attention to this graph** in order to assess if anything has gone wrong:
-
-```{r, fig.width = 9, fig.height=12}
-ggetho(dt, aes(z=asleep)) +
-      stat_ld_annotations(height = 1)+
-      stat_tile_etho() 
-      
-```
-
-### Dead animals {-}
-
-Some animals may have died during the experiment, and could be wrongly scored as asleep for very long durations.
-`sleepr` has an utility function to remove data from dead animals:
-
-```{r}
-# we give our curated data another name so we can see the difference
 dt_curated <- curate_dead_animals(dt)
 summary(dt_curated)
-```
-As you can see, we now have `r nrow(dt_curated[meta=T])` individuals vs `r nrow(dt[meta=T])` in the original data.
-To see which animals have been removed, we could run something like:
-
-```{r}
-setdiff(dt[, id, meta=T],
-        dt_curated[, id, meta=T])
-```
-Indeed, from the tile plot nothing seem to have happened in this channel.
-Now let us look at the data after curation:
-
-```{r, fig.width = 9, fig.height=12}
-ggetho(dt_curated, aes(z=asleep)) +
-      stat_ld_annotations(ypos = "top")+
+ggetho(dt_curated, aes(z=activity)) +
+      stat_ld_annotations(ld_colours = c("grey", "black"))+
       stat_tile_etho() 
+
 ```
 
-### Animals that died too early {-}
+## Double plotted actograms {-}
 
-In addition, we could want to, for instance, **remove animals that did not live say longer than 2 days**.
-Of course, you need to have a good reason to exclude some animals, and that depends on your specific experiment (this is just showing you how to do it).
-To remove animals that did not live longer that 2 days, we use the power of `behavr` tables:
+At the moment, the `id` is a very long string. It has the advantage to be unambiguous, but it is difficult to plot.
+To help plotting, we can make a new variable that is simply a different number for each individual. Lets call it `uid`:
 
 ```{r}
-# we make a summary table of all lifespan for each animals
-lifespan_dt <- dt_curated[, .(lifespan = max(t)), by=id]
-# we filter this table for lifespan>2 and we keep the id
-valid_ids <- lifespan_dt[lifespan > days(2), id]
-# we apply this filter
-dt_curated <- dt_curated[id %in% valid_ids]
-summary(dt_curated)
+dt_curated[, uid := 1 : .N, meta=T]
+# We can map uid to id
+dt_curated[, .(id, uid) ,meta=T]
+```
+As you see, we do keep id as a reference but uid for convenience in graphs.
+
+To make a double plotted actogram, we use `ggetho`.
+Read more about that in the [visualisation tutorial](ggetho.html#double-plotted-actograms).
+Breifly, we set `multiplot` to `2` (`3` would be a triple plotted) one.
+The variable of interest is on the `z` axis, note that instead of `moving`, you could plot raw `activity`.
+Then, we use bar height to show the amount of movement (we could use `stat_tile_etho` which shows the variable of interest as colour a pixel intensity) . Lastly, we split the graph by `uid`, so that each facet is a single animal.
+
+```{r}
+ggetho(dt_curated, aes(z=moving), multiplot = 2) + 
+    stat_bar_tile_etho() +
+    facet_wrap( ~ uid)
 ```
 
-### Trimming {-}
-Generally, we want to remove point according the experimental time.
-For instance, we want to remove the begening as animals are acclimatising to their new environment.
-In general, we could simply do:
-
+Interestingly, you can use formulae in facet to show or sort with other metavariables:
 
 ```{r}
-dt_curated <- dt_curated[t %between% c(0, days(2.5))]
-summary(dt_curated)
+ggetho(dt_curated, aes(z=moving), multiplot = 2) + 
+    stat_bar_tile_etho() +
+    facet_wrap( ~ period_group + uid , labeller = label_wrap_gen(multi_line=FALSE))
+```
+Now, we know what is the genotype for each `uid`. You can generalise this concept to display more metavariables.
+For instance, if we had a `sex` metavariable we could do: `facet_wrap( ~ period_group + sex + uid, ...)`.
+
+
+
+## Periodograms {-}
+
+### Computation {-}
+An important part of circadian research is to compute the periodicity of the free running clock of multiple individuals.
+Mathematically, we would like to build a preiodogram. That is, generally speaking, a representation of the density (i.e. **power**) of a signal at different **periods** (or frequencies).
+In addition, a periodogram associates to each pair pf power,period a **significance level*.
+There are many algorithms to compute periodograms. In `zeitgebr`, we have implemented:
+
+* `ac_periodogram` -- An autocorrelation based method
+* `ls_periodogram` -- Lomb-Scargle algorithm
+* `chi_sq_periodogram` -- A $\chi{}^2$ based one
+
+See `?periodogram_methods` for references.
+
+In order to compute periodograms, we use the `periodogram()` function.
+We need to define which variable we want to study (e.g. `moving` or `activity`).
+Then, we provide our data.
+The methods described above can be passed as an argument.
+
+For instance, if we want to analyse, with the $\chi{}^2$ method, activity:
+
+```{r}
+per_xsq_dt <- periodogram(activity, 
+                        dt_curated,
+                        FUN = chi_sq_periodogram)
+per_xsq_dt
+```
+The result is another `behavr` table, with the same metadata. The data however, is now a list of power vs period (and significance).
+
+Note that there are other options (see `?periodogram`).
+
+### Peaks finding {-}
+
+Often, we want to know which are the peak periods in a periodogram.
+Tis can be achieved thanks to the `find_peaks` function.
+By default, it find a maximum of three peaks, which are sorted by their power (relative to the significance thershold).
+Peaks that are not signifant are not acounted for (see the `alpha` argument).
+
+```{r}
+per_xsq_dt <- find_peaks(per_xsq_dt)
+per_xsq_dt
+```
+This function annotates our data by ading a column names "peak". Whenever the row correspongs to a peak, it puts a number, `NA` otherwise. The number is the rank of the peak (`1` being the first/tallest one).
+
+### Visualisation{-}
+
+In `ggetho`, the function `ggperio()` is designed specifically for that.
+
+One could plot all the periodograms like so:
+
+```{r}
+ggperio(per_xsq_dt) + geom_line(aes(group = id, colour=period_group))
+```
+But it is very hard to read, so we can facet per uid.
+In addition, we can use a special `geom` to show the values of the peak.
+We can draw a signifiance line as well, just using the `signif_threshold` variable:
+
+```{r}
+ggperio(per_xsq_dt, aes(peak=peak)) + 
+  geom_line(aes(group = id, colour=period_group)) +
+  geom_peak(col="black") +
+  geom_line(aes(y= signif_threshold)) +
+  facet_wrap(~ uid)
 ```
 
-Which means we removed data before `t=0` and after `t=days(2.5)`.
 
-## Population plots{-}
+Instead of drawing only the firts peak, you could draw, for instance,  the first and second (`geom_peak(peak_rank = 1:2)`) or, only the second (`geom_peak(peak_rank = 2)`).
 
-Now that we have curated our data, we can start looking at the biology.
-First, we make a global population plot:
+An interesting thing to do, is a population average periodogram.
+In this graph, the solid lines are the average power per group, whilst the shaded areas are +- standard error:
 
 ```{r}
-ggetho(dt_curated, aes(y=asleep, colour=sex)) +
-      stat_pop_etho() +
-      stat_ld_annotations() +
-      facet_grid(genotype ~ .)
+ggperio(per_xsq_dt, aes(
+                  y = power - signif_threshold,
+                  colour=period_group)) + 
+  stat_pop_etho()
 ```
 
-The y axis shows the proportion of time sent sleeping, averaged for each animal within a 30min (default) time window.
+### Exctract the peak values {-}
 
-Then, we can wrap (average) that over one day. We also polish the y axis label:
-
-```{r}
-ggetho(dt_curated, aes(y=asleep, colour=sex), time_wrap = hours(24)) +
-      stat_pop_etho() +
-      stat_ld_annotations() +
-      facet_grid(genotype ~ .) +
-      scale_y_continuous(name= "Fraction of time sleeping",labels = scales::percent)
-```
-
-That gives us a good understanding of what happens at the population level.
-
-## Summarise data per animal{-}
-
-Most likely, we want to summarise sleep amount so that we have **one number per animal**.
-For instance, we can compute the overall average proportion of time spent sleeping:
+At some point, you would like to **summarise** each animal by, say, it first peak.
+The you can look at weather there are sigifiant diference in peak periodicity vs genotype.
+Doing that is quite straigtforward.
+We can select only rows where peak is exactly 1, then rejoin our table to its metadata:
 
 ```{r}
-summary_dt <- 
-  rejoin(dt_curated[,
-           .(
-             # this is where the computation happens
-             sleep_fraction = mean(asleep)
-             ),
-           ,by=id])
+summary_dt <- rejoin(per_xsq_dt[peak==1])
 summary_dt
 ```
-With `rejoin`, we have put our summary and metadata together, which is suitable for standars graphics/statictics.
-For instance, if we are interested in the effect of sleep and genotype on sleep amount, we can make a faceted boxplot, and also add individual points to show all data.
+
+
+
+
+Then, we can use `summary_dt` for standard `R` analysis.
+For instance, with `ggplot`, I make a boxplot sowing the distrinbution of periods, in h,  for each groups. I also add point for each animal (se we see outliers). Then, I make the size of the point proportional to the power of the peak discovered.
 
 ```{r}
-ggplot(summary_dt, aes(x=sex, y=sleep_fraction, fill=sex)) + 
-  geom_boxplot(outlier.colour = NA) +
-  geom_jitter(alpha=.5) +
-  facet_grid( genotype ~ .) +
-  scale_y_continuous(name= "Fraction of time sleeping",labels = scales::percent)
+ggplot(summary_dt, aes(period_group, period / hours(1), fill= period_group)) + 
+        geom_boxplot(outlier.colour = NA) +
+        geom_jitter(aes(size=power), alpha=.5)
 ```
 
-## Day sleep☼ -- Night sleep☾{-}
-
-Often, we want to compare amount of sleep during the day vs night as they are different processes.
- 
-### Adding some phase information {-}
-The simplest way to do that is to start by adding some phase information to our data.
-
-* **L phase** (light) should be any point **between ZT0 and ZT12** -- [0,12), [24,36), ...
-* **D phase** (dark) should be any point **between ZT12 and ZT24** -- [12,24), [36,48), ...
-
-Numerically, this can be done very simply using a [modulo operation](https://en.wikipedia.org/wiki/Modulo_operation) on time. In `R`, modulo is `%%`.
-The following line creates a new variable in dt. This variable is:
-  
-* `"L"`  when the remainder of the division of (the corresponding) `t` by 24h is lower than 12h
-* `"D"`  otherwise
+Another direction could be to perform pairewise wilcoxon test between groups:
 
 ```{r}
-dt_curated[, phase := ifelse(t %% hours(24) < hours(12), "L", "D")]
+pairwise.wilcox.test(summary_dt$period, summary_dt$period_group )
 ```
 
-Since we have this column, we can make an improved summary (pay special attention to the last columns):
+This tells us that their is a statistically significant difference between each pair of group.
 
-```{r}
- 
-summary_dt <- 
-  rejoin(dt_curated[,
-           .(
-             # this is where the computation happens
-             sleep_fraction_all = mean(asleep),
-             sleep_fraction_l = mean(asleep[phase == "L"]),
-             sleep_fraction_d = mean(asleep[phase == "D"])
-             ),
-           ,by=id])
-summary_dt
-```
-Now, we have three new variables: `sleep_fraction_all`, `sleep_fraction_l` and `sleep_fraction_d`.
-We can just replace the y axis with our variable of interest (e.g. sleep in D phase):
+## Next steps {-}
 
-```{r}
-ggplot(summary_dt, aes(x=sex, y=sleep_fraction_d, fill=sex)) + 
-  geom_boxplot(outlier.colour = NA) +
-  geom_jitter(alpha=.5) +
-  facet_grid(genotype ~ .) +
-  scale_y_continuous(name= "Fraction of time sleeping",labels = scales::percent)
-```
-
-If we wanted a plot will all three values, we could ["melt"](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-reshape.html) our data,
-picking all columns starting with `"sleep_fraction_"` as "measurment variables":
-
-```{r}
-summary_dt_melted <- melt(summary_dt, measure.vars = patterns("sleep_fraction_"),
-                          variable.name = "phase", value.name = "sleep_fraction")
-```
-
-Now, instead of three columns for the three variable, we have two columns, one for the actual value and one to describe the phase (all vs L vs D). 
-This makes it convenient to use with ggplot:
-
-```{r}
-ggplot(summary_dt_melted, aes(x=phase, y=sleep_fraction, fill=sex)) + 
-  geom_boxplot(outlier.colour = NA) +
-  geom_jitter(alpha=.5) +
-  facet_grid(genotype ~ .) +
-  scale_y_continuous(name= "Fraction of time sleeping",labels = scales::percent)
-```
-
-## Statistics {-}
-
-Often, you want to go further than representing the data, and compute statistics.
-`R` was designed primarilly as statistical progamming language.
-As a result, a tremendous variety of simple and elaborate statics are implemented.
-This section will not go in the details of what you can do in terms of stats, many authors have already published fantastic ressources on this subject.
-Instead, we present a very simple examples of what can be done.
-At this stage, what you do depends very much on your question, your knowledge of statistics and how much effort you
-want to invest.
-
-### Pairwise Wilcoxon tests {-}
-
-Say we wanted to compute, for **females only**, all pairwise tests between all genotype groups (A vs B, B vs C and C vs A). This could be formulated as:
-
-```{r}
-pairwise.wilcox.test(summary_dt[sex=="F", sleep_fraction_all], 
-                     summary_dt[sex=="F", genotype])
-```
-We get a matrix showing us all p-values.
-You could do that also within males, as long as we replace `sex == "F"` by `sex == "M"`
-
-### Two way anova {-}
-
-If we are interested in the effect of **sex AND genotype**, as well as **their interaction**,
-we can model our response variable with a formula: `sleep_fraction_all ~ sex * genotype`:
-
-```{r}
-model <- aov(sleep_fraction_all ~ sex * genotype, summary_dt)
-summary(model)
-```
-
-This shows a strong affect of sex, genotype and their interaction on sleep amount.
-There are several way to follow up.
-For instance see this [short tutorial](https://www.r-bloggers.com/two-way-analysis-of-variance-anova/).
-
-## Sleep architecture {-}
-
-Proportion alone is not always a sufficent measure to fully descibe the dynamics of sleep.
-One way to go further is to study seep as a series of bouts.
-
-### Bout analysis{-}
-The function `bout_analysis()`, in `sleepr` is designed for that.
-We would use it like that:
-
-```{r}
-bout_dt <- bout_analysis(asleep, dt_curated)
-```
-The result is a new behavr table, with a few differences compared to the ones we used before:
-
-* Each row in the data describes a bout
-* The bout can take the values `asleep=TRUE` or `asleep=FALSE` (sleep bout or wake bout, respectively)
-* `t` is the onset of the bout (in seconds)
-* `duration` is length of the bout (in seconds)
-
-Note that you can use this function to study bouts of other discrete behaviours.
-For now, we are only interested in **sleep bout**, so we filter for `asleep == TRUE`.
-We also remove the, now redundant, `asleep` column:
-
-```{r}
-bout_dt <- bout_dt[asleep == TRUE, -"asleep"]
-```
-
-### Bout length vs time of the day {-}
-
-We can use `ggetho` to show how the average bout length depend of the time of the onset of the bout.
-
-```{r}
-ggetho(bout_dt, aes(y=duration / 60, colour="sex"), time_wrap = hours(24)) + 
-      stat_pop_etho() + 
-      facet_grid(genotype ~ .) +
-      scale_y_continuous(name= "Bout length (min)")
-
-```
-
-Note that this is a bit noisy as we only have a few animals per conbination of treatment.
-
-
-### Architecture description {-}
-
-One can count the total number of bouts and average bout duration for each individual like so:
-
-```{r}
-bout_dt[,
-        .(n_bouts = .N,
-          mean_bout_length = mean(duration)),
-        by=id]
-```
-You could apply the approach presented before to compute statistics according the the phase (night vs day bouts).
+* [Visualise data with `ggetho`](ggetho.html)
+* [Sleep analysis `sleepr`](sleepr.html)
 

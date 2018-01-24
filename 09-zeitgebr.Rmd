@@ -57,7 +57,7 @@ This is encoded int `period_group` metavariable can be either a "short"", "long"
 This data is fairely clean already, so we will not do much.
 For most purposes, you can apply the same principles as [data curation for sleep analysis](sleepr.html#data-curation).
 
-### `LD -> DD` transitions {-}
+### Regime changes {-}
 
 In general (but not here), you will have a period of `LD` **"baseline"** preceding a change to a `DD` regime.
 I suggest to encode that in the following way:

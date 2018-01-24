@@ -167,12 +167,14 @@ pl
 ### Group averages{-}
 
 Sometimes, we also want to aggregate individuals per group.
-For instance, males **average** vs females **average**:
+For instance, males **average** vs females **average**.
+This can be done by changing the `y` axis. Previously, we used `id`, which made one row per individual.
+Instead, if we use a grouping variable like `sex`, we will plot one row per value of `sex` (i.e. two rows, one for males, one for females). In other words, we replace `id` by `sex` on the y axis:
 ```{r}
 pl <- ggetho(dt, aes(x=t, y=sex, z=moving)) + stat_tile_etho()
 pl
 ```
-In this context, every row is not an individual any more, but a group.
+In this context, **every row is not an individual any more, but a population**.
 The `method` argument of `stat_tile_etho()` allows you to use other aggregates (median, max, min, ...).
 
 ### Bar tiles {-}

@@ -33,7 +33,7 @@ You can easily adapt this tutorial to scoring other models/behaviours as long as
 In the [DAM2 tutorial](damr.html), we have learnt how to load data from a real DAM expriment.
 Since we already described it in length, it makes sense to use this experiment as an example for our sleep analysis.
 **I will assume that you have already read and understood the [DAM tutorial](damr.html)**.
-The last thing we did then was loading data and annotating scoring sleep:
+The last thing we did then was loading data and scoring sleep:
 
 ```{r, eval=FALSE}
 library(sleepr)

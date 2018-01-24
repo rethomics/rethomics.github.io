@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Rethomics, a framework for high-throughput behaviour analysis in R</title>
   <meta name="description" content="This is a tutorial for Rethomics, a framework to analyse high-throuput behavioural data in <code>R</code>.">
-  <meta name="generator" content="bookdown 0.5.15 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5.16 and GitBook 2.6.7">
 
   <meta property="og:title" content="Rethomics, a framework for high-throughput behaviour analysis in R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Quentin Geissmann">
 
 
-<meta name="date" content="2018-01-23">
+<meta name="date" content="2018-01-24">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -304,11 +304,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="variables-and-metavariables" class="section level2 unnumbered">
 <h2>Variables and metavariables</h2>
-<p>As we have seen in the <a href="metadata.html">previous section</a>, metadata are crucial for proper statistical analysis of behavioural data. The point of an experiment, is however to acquire <strong>data</strong>. That is, a long time series of recorded <strong>variables</strong> such as position, orientation and number of beam crosses, for each individual. <strong>Variables</strong> are different form <strong>metavariables</strong> in so far as the latter are made of only one value per animal. It is easier (and less error prone) to always keep the data and metadata together. In rethomics, in order to handle large amounts of data (together with metadata), we have designed the <code>behavr</code> package. <code>behavr</code> tables are based on the very powerful package <code>data.table</code>, but enhanced with metadata. For most purposes, you can use a <code>behavr</code> table just like a <code>data.table</code>. Therefore, have a look at the <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html">introduction to <code>data.table</code></a> further detail! <strong>When we load any behavioural data in <code>rethomics</code>, we get a <code>behavr</code> table as a result.</strong> In this section, we will discuss the usual operations that you can perform on <code>behavr</code> tables.</p>
+<p>As we have seen in the <a href="metadata.html">previous section</a>, metadata are crucial for proper statistical analysis of the experiment <strong>data</strong>. That is, a long time series of recorded <strong>variables</strong> such as position, orientation and number of beam crosses, for each individual. <strong>Variables</strong> are different form <strong>metavariables</strong> in so far as the latter are made of only one value per animal. It is easier (and less error prone) to always keep the data and metadata together. In rethomics, in order to handle large amounts of data (together with metadata), we have designed the <code>behavr</code> package. <code>behavr</code> tables are based on the very powerful package <code>data.table</code>, but enhanced with metadata. A <code>behavr</code> table is, indeed, formed internally by two tables: the metadata table and the data table, both are related by the id field. (This squematic is shown in the figure).</p>
+<p>For most purposes, you can use a <code>behavr</code> table just like a <code>data.table</code>. Therefore, we recommend to have a look at the <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html">introduction to <code>data.table</code></a> for further details! <strong>When we load any behavioural data in <code>rethomics</code>, we get a <code>behavr</code> table as a result.</strong> In this section, we will discuss the usual operations that you can perform on <code>behavr</code> tables.</p>
 </div>
 <div id="operating-on-behavr-tables" class="section level2 unnumbered">
 <h2>Operating on <code>behavr</code> tables</h2>
-<p>Now that we have all our data at the same place, we want to be able to manipulate it. In the next part of this tutorial, we will create some toy data and learn how to manipulate it. This table is a short overview:</p>
+<p>Now that we have all our data at the same place, we want to be able to manipulate it. In the next part of this tutorial, we will create some toy data and learn how to manipulate it. Again, we recommend to have a look to <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html">introduction to <code>data.table</code></a> so this part of the tutorial will be easy to understand. This table is a short overview of permited operations in <code>behavr</code> tables, where DT or dt is the name of our <code>behavr</code> table:</p>
 <table>
 <thead>
 <tr class="header">
@@ -390,7 +391,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="playing-with-toy-data" class="section level2 unnumbered">
 <h2>Playing with toy data</h2>
-<p>The <code>behavr</code> package has a set of functions to make toy data. In order to have a look at a <code>behavr</code> object, lets create one. First, we make the metadata:</p>
+<p>The <code>behavr</code> package has a set of functions to make toy data. This is not only useful for the tutorial but also to test functions and plots. In order to have a look at a <code>behavr</code> object, lets create one. First, we make some fake metadata (always needed to create a <code>behavr</code> table):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(behavr)</code></pre></div>
 <pre><code>## Loading required package: data.table</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metadata &lt;-<span class="st"> </span><span class="kw">data.table</span>( <span class="dt">id =</span> <span class="kw">paste</span>(<span class="st">&quot;toy_experiment&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">sep =</span> <span class="st">&quot;|&quot;</span>),
@@ -408,7 +409,7 @@ metadata</code></pre></div>
 ##  8:  toy_experiment|8 female         B
 ##  9:  toy_experiment|9 female         A
 ## 10: toy_experiment|10 female         B</code></pre>
-<p>Then, we use <code>toy_dam_data()</code> to <strong>simulate</strong> (instead of linking/loading) one day of DAMS-like data for these ten animals (and two conditions):</p>
+<p>This metadata describes a theoretical experiment with 10 animals (1:10), where 5 are males and the other 5 are females, they are expose to 2 conditions (A and B). Then, we use <code>toy_dam_data()</code> to <strong>simulate</strong> (instead of linking/loading) one day of DAMS-like data for these ten animals (and two conditions):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt &lt;-<span class="st"> </span><span class="kw">toy_dam_data</span>(metadata, <span class="dt">duration =</span> <span class="kw">days</span>(<span class="dv">1</span>))
 dt</code></pre></div>
 <pre><code>## 
@@ -441,7 +442,7 @@ dt</code></pre></div>
 ## 14408: toy_experiment|9 86280        2
 ## 14409: toy_experiment|9 86340        1
 ## 14410: toy_experiment|9 86400        0</code></pre>
-<p>As you can see, when we print <code>dt</code>, our <code>behavr</code> table, we have two fields: <code>METADATA</code> and <code>DATA</code>. The former is actually just the metadata we created whilst the latter stores the data (i.e. the variables) for <strong>all animals</strong>. The special column <code>id</code> is also known as a <strong>key</strong>, and is shared between both data and metadata. It internally allows us to map them to one another. In other words, it is a unique id for each individual. In this specific example, the variables <code>t</code> and <code>activity</code> are the time and the number of beam crosses, respectively.</p>
+<p>As you can see, when we print <code>dt</code>, our <code>behavr</code> table, we have two tables: <code>METADATA</code> and <code>DATA</code>. The former is actually just the metadata we created whilst the latter stores the data (i.e. the variables) for <strong>all animals</strong>. The special column <code>id</code> is also known as a <strong>key</strong>, and is shared between both data and metadata. It internally allows us to map them to one another. In other words, it is a unique id for each individual. In this specific example, the variables <code>t</code> and <code>activity</code> are the time and the number of beam crosses, respectively.</p>
 </div>
 <div id="generalities" class="section level2 unnumbered">
 <h2>Generalities</h2>
@@ -472,7 +473,7 @@ dt</code></pre></div>
 <div id="data" class="section level3 unnumbered">
 <h3>Data</h3>
 <p>Playing with variables is just like in <code>data.table</code>. Read the <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html">official data.table tutorial</a> for more functionalities.</p>
-<p>For instance, we can add a <strong>new variable</strong>, <code>very_active</code>, that is <code>TRUE</code> if and only if there was at least two beam crosses in a minute, for a given individual:</p>
+<p>For instance, we can add a <strong>new variable</strong>, <code>very_active</code>, that is <code>TRUE</code> if, and only if, there was at least two beam crosses in a minute, for a given individual:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt[, very_active <span class="op">:</span><span class="er">=</span><span class="st"> </span>activity <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span>]</code></pre></div>
 <p>If we decide we don’t need this variable anymore, we can <strong>remove it</strong>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt[, very_active <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="ot">NULL</span>]</code></pre></div>
@@ -510,6 +511,7 @@ dt[meta =<span class="st"> </span><span class="ot">TRUE</span>]</code></pre></di
 ##  8:  toy_experiment|7 female         A  female|A
 ##  9:  toy_experiment|8 female         B  female|B
 ## 10:  toy_experiment|9 female         A  female|A</code></pre>
+<p>note: paste is a r command to link strings by the desired separation character.</p>
 </div>
 <div id="data-metadata" class="section level3 unnumbered">
 <h3>Data &amp; Metadata</h3>
@@ -525,7 +527,7 @@ dt[meta =<span class="st"> </span><span class="ot">TRUE</span>]</code></pre></di
 ##  2   variables
 ##  6.9e+03 measurements
 ##  1   key (id)</code></pre>
-<p>When individuals are removed, metadata is automatically updated. In effect, we removed males from both data and metadata.</p>
+<p>When individuals are removed, metadata is automatically updated. In effect, we removed males from both data and metadata. This operation cannot be undone, so be carefull to delete data. You can create a new <code>beharv</code> table with a new name, if you override it (like in the example) and you want to recover it, you will have to load it again.</p>
 </div>
 <div id="summerise-data" class="section level3 unnumbered">
 <h3>Summerise data</h3>
@@ -581,7 +583,7 @@ stat_dt</code></pre></div>
 ## 3:  toy_experiment|7 0.4434783        3
 ## 4:  toy_experiment|8 0.1731884        2
 ## 5:  toy_experiment|9 0.2550725        2</code></pre>
-<p>Now, in order to perform statistics, we would like to merge our summaries to the metadata. That is we want to <strong>rejoin</strong> them:</p>
+<p>Now, in order to perform statistics, we would like to merge our summaries to the metadata. This way we will end up with only one <code>data.table</code> That is, we want to <strong>rejoin</strong> them or autocomplete our summaries with the metadata:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">final_dt &lt;-<span class="st"> </span><span class="kw">rejoin</span>(stat_dt)
 final_dt</code></pre></div>
 <pre><code>##                   id    sex condition treatment mean_acti max_acti

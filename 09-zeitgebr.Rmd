@@ -24,8 +24,8 @@ In this practical chapter, we will use a real experiment to learn how to:
 
 ## Background{-}
 
-This tutorial focuses on circadian rhythm in *Drosophila*, but can be adapted easily to investicate periodicity in different context.
-in it, we will use a DAM dataset that is provided (and preloaded) within the `damr` package.
+This tutorial focuses on circadian rhythm in *Drosophila*, but can be adapted easily to investigate periodicity in different contexts.
+In it, we will use a DAM dataset that is provided (and preloaded) within the `damr` package.
 
 ## Getting the data {-}
 
@@ -41,7 +41,7 @@ data(dams_sample)
 # We copy the data to our own variable so we can alter it
 dt <- copy(dams_sample) 
 ```
-This data set is a DD recording of 32 animals, in DD.
+This data set is recording of 32 animals, in DD.
 Let us print the metadata to understand the experiment a little bit:
 
 ```{r}
@@ -49,7 +49,9 @@ summary(dt)
 print(dt[meta=T])
 ```
 
-We can confirm we have 32 individuals, and they are described by one of three "period groups" (e.g.g a genotype or treatment). The `period_group` metavariable can be either "short"", "long"" or wild-type ("wt") periods.
+We can confirm we have 32 individuals. 
+They are described by one of three "period groups" (e.g. a genotype or treatment). 
+This is encoded int `period_group` metavariable can be either a "short"", "long"" or wild-type ("wt") period.
 
 ## Quality control {-}
 This data is fairely clean already, so we will not do much.
@@ -57,15 +59,18 @@ For most purposes, you can apply the same principles as [data curation for sleep
 
 ### `LD -> DD` transitions {-}
 
-In general (but not here), you will have a period of `LD` "baseline" preceding a change to a `DD` regime.
+In general (but not here), you will have a period of `LD` **"baseline"** preceding a change to a `DD` regime.
 I suggest to encode that in the following way:
 
 1. Manually add a column `baseline_days` in your metadata that defines the **number of days of baseline**.
 2. **Sustract the number of baseline days** to all time points: `dt[, t := t - days(xmv(baseline_days))]`
 
-As a result, `t = 0` now means ZT0 of the transition day. This makes a lot of sense as any baseline point is in negative time (`t < 0`), whilst `t > 0` is for `DD`. The nice thing is that you can work with data (e.g. replicates) that have different baseline duration as now **all time points are relative to the transition**.
+As a result, `t = 0` now means "ZT0 of the transition day".
+This makes a lot of sense as any baseline point is at a negative time (`t < 0`), whilst `t > 0` is for `DD`.
+The nice thing is that you can work with data (e.g. replicates) that have different baseline duration as now **all time points are relative to the regime change**.
 
 ### Data enrichment {-}
+
 By defaut, DAM data only has variables `t` and `activity`. The latter being the number of beam crosses over a time bin (e.g. one minute). We could define a variable `moving` that is `TRUE` when and only when `activity > 0`, and `FALSE` otherwise:
 
 ```{r}
@@ -76,7 +81,8 @@ dt[, moving := activity > 0]
 ### Overview plots {-}
 
 The first representation we show could be activity all animals over time in the same page.
-This would help to spot ourliers. We simply do that with out tile plot.
+This would help to spot ourliers.
+We simply do that with our **tile plot**.
 Note how we have changed the LD colours to grey and black, grey being for subjective days (remember, we are in DD).
 
 ```{r, fig.width = 9, fig.height=12}
@@ -87,7 +93,8 @@ ggetho(dt, aes(z=activity)) +
 
 We see that two animals (region 5 and 10) seem to have died/escaped before the end of the experiment.
 There is no right thing to do regarding dead animals. You could keep the data before death, or remove them altogether.
-**It is your responsibility to decide what to do with dead animals**. here, I simply remove data after death:
+**It is eventually your responsibility to decide what to do with dead animals**. 
+Here, I simply remove data after death:
 
 ```{r}
 library(sleepr)
@@ -98,6 +105,8 @@ ggetho(dt_curated, aes(z=activity)) +
       stat_tile_etho() 
 
 ```
+
+Our curated data is now stored in `dt_curated`.
 
 ## Double plotted actograms {-}
 
@@ -119,20 +128,20 @@ Note that instead of `moving`, you could plot raw `activity`.
 Then, we use bar height to show the amount of movement (we could use `stat_tile_etho` which shows the variable of interest as colour a pixel intensity). 
 Lastly, we split the graph by `uid`, so that each facet is a single animal.
 
-```{r}
-ggetho(dt_curated, aes(z=moving), multiplot = 2) + 
+```{r, fig.width = 12, fig.height=6}
+ggetho(dt_curated, aes(z = moving), multiplot = 2) + 
     stat_bar_tile_etho() +
-    facet_wrap( ~ uid)
+    facet_wrap( ~ uid, ncol = 8)
 ```
 
 Interestingly, you can use formula in facet to show or sort with other metavariables:
 
-```{r}
+```{r, fig.width = 12, fig.height=6}
 ggetho(dt_curated, aes(z=moving), multiplot = 2) + 
     stat_bar_tile_etho() +
-    facet_wrap( ~ period_group + uid , labeller = label_wrap_gen(multi_line=FALSE))
+    facet_wrap( ~ period_group + uid, ncol=8, labeller = label_wrap_gen(multi_line=FALSE))
 ```
-Now, we know what is the genotype for each `uid`. 
+Now, we know which genotype match each `uid`. 
 In your own work, you could generalise this concept to display more metavariables.
 For instance, if you had a `sex` metavariable you could do: `facet_wrap( ~ period_group + sex + uid, ...)`.
 
@@ -145,7 +154,8 @@ For instance, if you had a `sex` metavariable you could do: `facet_wrap( ~ perio
 An important part of circadian research is to compute the periodicity of the free running clock of multiple individuals.
 Mathematically, we would like to build a preiodogram. That is, generally speaking, a representation of the density (i.e. **power**) of a signal at different **periods** (or frequencies).
 In addition, a periodogram associates to each pair of power-period a **significance level**.
-There are many algorithms to compute periodograms. In `zeitgebr`, we have implemented:
+There are many algorithms to compute periodograms.
+In `zeitgebr`, we have si far implemented:
 
 * `ac_periodogram` -- An *autocorrelation* based method
 * `ls_periodogram` -- *Lomb-Scargle* algorithm
@@ -166,42 +176,46 @@ per_xsq_dt <- periodogram(activity,
                         FUN = chi_sq_periodogram)
 per_xsq_dt
 ```
-The result is another `behavr` table, with the same metadata. The data however, is now a list of power vs period (and significance).
+The result is another `behavr` table, with the same metadata. 
+The data however, is now a list of power vs period (and significance).
 
-Note that there are other options (see `?periodogram`).
+Have a look at the other options (see `?periodogram`).
 
 ### Peaks finding {-}
 
 Often, we want to know which are the peak periods in a periodogram.
 This can be achieved thanks to the `find_peaks` function.
 By default, it find a maximum of three peaks, which are sorted by their power (relative to the significance thershold).
-Peaks that are not signifant are not acounted for (see the `alpha` argument).
+Peaks that are not signifant are not accounted for (see the `alpha` argument).
 
 ```{r}
 per_xsq_dt <- find_peaks(per_xsq_dt)
 per_xsq_dt
 ```
-This function annotates our data by adding a column named `"peak"`. Whenever the row corresponds to a peak, it puts a number and `NA` otherwise. The number is the rank of the peak (`1` being the first/tallest one).
+
+This function annotates our data by adding a column named `"peak"`.
+Whenever the row corresponds to a peak, it puts a number and `NA` otherwise.
+The number is the rank of the peak (`1` being the first/tallest one).
 
 ### Visualisation{-}
 
-In `ggetho`, the function `ggperio()` is designed specifically for showing periodograms.
-
+In `ggetho`, the function `ggperio()` is designed specifically for displaying periodograms.
 One could plot all the periodograms like so:
 
 ```{r}
 ggperio(per_xsq_dt) + geom_line(aes(group = id, colour=period_group))
 ```
-But it is very hard to read, so we will facet per uid.
+
+But it is very hard to read, so we will **facet per `uid`**.
 In addition, we can use a special geometry (`geom_peak`) to show the values of the peak.
 We draw a signifiance line as well, just using the `signif_threshold` variable:
 
-```{r}
+```{r, fig.width = 12, fig.height=6}
 ggperio(per_xsq_dt) + 
-  geom_line(aes(group = id, colour=period_group)) +
-  geom_peak(col="black") +
-  geom_line(aes(y= signif_threshold)) +
-  facet_wrap(~ uid)
+  geom_line(aes(group = id, colour = period_group)) +
+  geom_peak(col = "black") +
+  geom_line(aes(y = signif_threshold)) +
+  facet_wrap(~ uid, ncol = 8)
 ```
 
 
@@ -214,7 +228,7 @@ In this graph, the solid lines are the average power per group, whilst the shade
 ggperio(per_xsq_dt, aes(
                   y = power - signif_threshold,
                   colour=period_group)) + 
-  stat_pop_etho()
+                  stat_pop_etho()
 ```
 
 ### Exctract the peak values {-}
@@ -222,7 +236,7 @@ ggperio(per_xsq_dt, aes(
 At some point, you would like to **summarise** each animal by, say, it first peak.
 Then, you can look at whether there are significant difference in peak periodicity vs genotype.
 Doing that is quite straigtforward.
-First, we select only rows where peak is exactly 1, then rejoin our table to its metadata:
+First, we **select only rows where peak is exactly 1**, then [rejoin](https://rethomics.github.io/behavr.html#operating-on-behavr-tables) our table to its metadata:
 
 ```{r}
 summary_dt <- rejoin(per_xsq_dt[peak==1])
@@ -230,11 +244,10 @@ summary_dt
 ```
 
 
-
-
 `summary_dt` can be used as a standard `R` dataframe for further analysis.
-For instance, with `ggplot`, I make a boxplot showing the distribution of periods, in h,  for each groups. I also add point for each animal (so we see outliers). 
-Then, I make the size of the points proportional to the power of the peak discovered.
+For instance, with `ggplot`, I make a **boxplot showing the distribution of periods**, in h,  for each groups.
+I also add **a point for each animal** (so we see outliers). 
+Then, I make the **size of the points proportional to the relative power of the peak discovered**, so we get an idea of how much to "trust" this point.
 
 ```{r}
 ggplot(summary_dt, aes(period_group, period, fill= period_group)) + 

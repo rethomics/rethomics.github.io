@@ -300,6 +300,7 @@ pl
 
 When multiplotting, it is difficult to represent individuals (since both y and x axis are used).
 
+### Default {-}
 The best way to systematically represent all of them is to use facetting, which is a ggplot feature.
 Since id represent unique individuals, **each facet (sub-rectangle) is one individual**:
 
@@ -312,6 +313,9 @@ pl <- ggetho(dt, aes(x=t, z=moving),
 pl
 ```
 
+
+### Custom labeller {-}
+
 Sometimes, the `id` variable will be very long, you can use the `id_labeller` to make things clearer:
 
 ```{r, fig.width=10, fig.height=6}
@@ -323,6 +327,35 @@ pl <- ggetho(dt, aes(x=t, z=moving),
 pl
 ```
  
+### Numerical labelling {-}
+
+Even with the trick above, ids may become unreadable when plotting many individuals.
+What we can can do in this case is to use numbers instead.
+Firt, we create a new metavariable named, for instance, `uid`. 
+It will be one **unique number** per individual:
+
+```{r}
+dt[, uid := 1:.N, meta=T]
+print(dt[meta=T])
+```
+
+Then, we can use `uid` instead of `id`:
+
+```{r, fig.width=10, fig.height=6}
+pl <- ggetho(dt, aes(x=t, z=moving), 
+             multiplot = 2
+             ) + 
+  stat_bar_tile_etho() +
+  facet_wrap( ~ uid)
+pl
+```
+
+Since we kept both `id` and `uid` in the metadata, we can map them again each other.
+
+The downside of using numbers, is that they are **ambiguous**. 
+Say, you decide to start with more data, or to remove some, then the numbers (`uid`) will not match their previous `id`.
+Conversely, if you try to analyse different datasets independently, and merge results afterwards, you will end up with duplicates in `uid`. Therefore, only use this trick for readability and visualisation.
+
 If you want to understand facets a bit more, have a look at [this tutorial](http://www.cookbook-r.com/Graphs/Facets_(ggplot2)/).
 
 

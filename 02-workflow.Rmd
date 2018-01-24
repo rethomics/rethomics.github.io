@@ -12,5 +12,5 @@ In rethomics, we envisage behavioural experiments as a workflow:
 1. **Design** -- you plan your experiment (I can't really help you with that, but I trust you!).
 2. **Record/track** -- you use your acquisition platform to record behavioural variables over time. They define the format of the results.
 3. **Write individual information** -- you make a spreadsheet (CSV file) that details the experimental conditions **for each individual**. We call this a **metadata file**. It is a crucial concept in rethomics, so we will dedicate it the [next section](#metadata). You can often write your metadata as you plan your experiment, but sometimes, you want to enrich it with variables that you can only record after your experiment (e.g. lifespan).
-4. **Link and Load data**  -- First, we enrich your metadata by "linking" it to the result. This allows you to load all the matching data into **a single`behavr` table** (see [section on `behavr` tables](#behavr)).
+4. **Link and Load data**  -- first, we enrich your metadata by "linking" it to the result. This allows you to load all the matching data into **a single`behavr` table** (see [section on `behavr` tables](#behavr)).
 5. **Tranform & analyse & visualise** -- you take advantage of `rethomics` and `R` analysis and visualisation  tools.

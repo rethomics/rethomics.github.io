@@ -78,7 +78,13 @@ It has a column `moving` that that tells us whether an the animal `id` is moving
 It expresses the **relationship between variables**.
 In this respect, it works very much like `ggplot()`, but it also pre-processes the data.
 
-For example if we would like:
+It is important to understand the **difference between `ggplot()` and `ggetho()`**.
+`ggplot()` is a works with data frames (or data tables), and does not preprocess the data.
+`ggetho()` is only a layer on top of `ggplot()`. 
+It works **exclusively with `behavr` tables** and does preprocess data before calling `ggplot()`.
+`ggetho()` does return `ggplot` a object, therefore, layers available in `ggplot2` can be used natively on top of `ggetho`. 
+
+Let's work with an example. Say, we would like:
 
 * The proportion of time spent **moving, on the y axis**
 * Versus **time, on the x axis**
@@ -93,7 +99,7 @@ pl
 This generates an **empty plot** this is normal because we have, so far, **no layer**.
 We will see some layers very soon!
 
-The role of ggetho is to express a relationship between variables and to **compute a summary**, over a certain time window, of a variable of interest **for each individual**.
+The role of `ggetho` is to express a relationship between variables and to **compute a summary**, over a certain time window, of a variable of interest **for each individual**.
 
 Importantly, **you decide which variable you want to plot**.
 For instance, you could be interested in things like the number (sum) of beam crosses or the average position.

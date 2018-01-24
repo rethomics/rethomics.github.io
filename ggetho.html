@@ -265,7 +265,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#background-3"><i class="fa fa-check"></i>Background</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#getting-the-data-3"><i class="fa fa-check"></i>Getting the data</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#quality-control-2"><i class="fa fa-check"></i>Quality control</a><ul>
-<li><a href="zeitgebr.html#ld---dd-transitions"><code>LD -&gt; DD</code> transitions</a></li>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#regime-changes"><i class="fa fa-check"></i>Regime changes</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#data-enrichment"><i class="fa fa-check"></i>Data enrichment</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#overview-plots"><i class="fa fa-check"></i>Overview plots</a></li>
 </ul></li>
@@ -363,7 +363,8 @@ metadata &lt;-<span class="st"> </span><span class="kw">data.table</span>(<span 
 <div id="the-ggetho-function" class="section level2 unnumbered">
 <h2>The <code>ggetho()</code> function</h2>
 <p><code>ggetho()</code> is the core function. It expresses the <strong>relationship between variables</strong>. In this respect, it works very much like <code>ggplot()</code>, but it also pre-processes the data.</p>
-<p>For example if we would like:</p>
+<p>It is important to understand the <strong>difference between <code>ggplot()</code> and <code>ggetho()</code></strong>. <code>ggplot()</code> is a works with data frames (or data tables), and does not preprocess the data. <code>ggetho()</code> is only a layer on top of <code>ggplot()</code>. It works <strong>exclusively with <code>behavr</code> tables</strong> and does preprocess data before calling <code>ggplot()</code>. <code>ggetho()</code> does return <code>ggplot</code> a object, therefore, layers available in <code>ggplot2</code> can be used natively on top of <code>ggetho</code>.</p>
+<p>Let’s work with an example. Say, we would like:</p>
 <ul>
 <li>The proportion of time spent <strong>moving, on the y axis</strong></li>
 <li>Versus <strong>time, on the x axis</strong></li>
@@ -373,7 +374,7 @@ metadata &lt;-<span class="st"> </span><span class="kw">data.table</span>(<span 
 pl</code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
 <p>This generates an <strong>empty plot</strong> this is normal because we have, so far, <strong>no layer</strong>. We will see some layers very soon!</p>
-<p>The role of ggetho is to express a relationship between variables and to <strong>compute a summary</strong>, over a certain time window, of a variable of interest <strong>for each individual</strong>.</p>
+<p>The role of <code>ggetho</code> is to express a relationship between variables and to <strong>compute a summary</strong>, over a certain time window, of a variable of interest <strong>for each individual</strong>.</p>
 <p>Importantly, <strong>you decide which variable you want to plot</strong>. For instance, you could be interested in things like the number (sum) of beam crosses or the average position.</p>
 </div>
 <div id="tile-plots" class="section level2 unnumbered">
@@ -404,6 +405,7 @@ new_meta &lt;-<span class="st"> </span>dt[mean_mov_dt, meta=T]
 ## 4: toy_experiment|04         4         B   F         118
 ## 5: toy_experiment|05         5         A   M         123
 ## 6: toy_experiment|06         6         B   M         203</code></pre>
+<p>Proportion of time moving (<code>mean(moving)</code>) will be a number between zero and one, with sometimes many decimals, whichs makes it hard to read. A more intuitive way to express it is as a rounded per mille (‰). I prefer it to per cent as we have more more resolution (i.e. less ties) For instance, <code>0.0113333</code> would be expressed as <code>11</code>.</p>
 <p>Now, we can express a new relationship where we show the <em>interaction</em> between our custom variable and id, on the y axis:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span><span class="kw">interaction</span>(id, mean_moving, <span class="dt">sep =</span> <span class="st">&quot; : &quot;</span>), <span class="dt">z=</span>moving)) <span class="op">+</span>
 <span class="st">              </span><span class="kw">stat_tile_etho</span>()
@@ -417,10 +419,10 @@ pl</code></pre></div>
 </div>
 <div id="group-averages" class="section level3 unnumbered">
 <h3>Group averages</h3>
-<p>Sometimes, we also want to aggregate individuals per group. For instance, males <strong>average</strong> vs females <strong>average</strong>:</p>
+<p>Sometimes, we also want to aggregate individuals per group. For instance, males <strong>average</strong> vs females <strong>average</strong>. This can be done by changing the <code>y</code> axis. Previously, we used <code>id</code>, which made one row per individual. Instead, if we use a grouping variable like <code>sex</code>, we will plot one row per value of <code>sex</code> (i.e. two rows, one for males, one for females). In other words, we replace <code>id</code> by <code>sex</code> on the y axis:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>sex, <span class="dt">z=</span>moving)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_tile_etho</span>()
 pl</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-63-1.png" width="672" /> In this context, every row is not an individual any more, but a group. The <code>method</code> argument of <code>stat_tile_etho()</code> allows you to use other aggregates (median, max, min, …).</p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-63-1.png" width="672" /> In this context, <strong>every row is not an individual any more, but a population</strong>. The <code>method</code> argument of <code>stat_tile_etho()</code> allows you to use other aggregates (median, max, min, …).</p>
 </div>
 <div id="bar-tiles" class="section level3 unnumbered">
 <h3>Bar tiles</h3>

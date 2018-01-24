@@ -265,7 +265,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#background-3"><i class="fa fa-check"></i>Background</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#getting-the-data-3"><i class="fa fa-check"></i>Getting the data</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#quality-control-2"><i class="fa fa-check"></i>Quality control</a><ul>
-<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#regime-changes"><i class="fa fa-check"></i>Regime changes</a></li>
+<li><a href="zeitgebr.html#ld---dd-transitions"><code>LD -&gt; DD</code> transitions</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#data-enrichment"><i class="fa fa-check"></i>Data enrichment</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#overview-plots"><i class="fa fa-check"></i>Overview plots</a></li>
 </ul></li>
@@ -390,8 +390,8 @@ dt &lt;-<span class="st"> </span><span class="kw">copy</span>(dams_sample) </cod
 <div id="quality-control-2" class="section level2 unnumbered">
 <h2>Quality control</h2>
 <p>This data is fairely clean already, so we will not do much. For most purposes, you can apply the same principles as <a href="sleepr.html#data-curation">data curation for sleep analysis</a>.</p>
-<div id="regime-changes" class="section level3 unnumbered">
-<h3>Regime changes</h3>
+<div id="ld---dd-transitions" class="section level3 unnumbered">
+<h3><code>LD -&gt; DD</code> transitions</h3>
 <p>In general (but not here), you will have a period of <code>LD</code> <strong>“baseline”</strong> preceding a change to a <code>DD</code> regime. I suggest to encode that in the following way:</p>
 <ol style="list-style-type: decimal">
 <li>Manually add a column <code>baseline_days</code> in your metadata that defines the <strong>number of days of baseline</strong>.</li>

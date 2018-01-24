@@ -208,7 +208,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#wrapping-data"><i class="fa fa-check"></i>Wrapping data</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#double-plotted-actograms"><i class="fa fa-check"></i>Double-plotted actograms</a></li>
-<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#faceting-by-id"><i class="fa fa-check"></i>Faceting by ID</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#faceting-by-id"><i class="fa fa-check"></i>Faceting by ID</a><ul>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#default"><i class="fa fa-check"></i>Default</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#custom-labeller"><i class="fa fa-check"></i>Custom labeller</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#numerical-labelling"><i class="fa fa-check"></i>Numerical labelling</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#ld-annotations"><i class="fa fa-check"></i>LD annotations</a><ul>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#basics"><i class="fa fa-check"></i>Basics</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#changing-ld-colours"><i class="fa fa-check"></i>Changing LD colours</a></li>
@@ -261,7 +265,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#background-3"><i class="fa fa-check"></i>Background</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#getting-the-data-3"><i class="fa fa-check"></i>Getting the data</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#quality-control-2"><i class="fa fa-check"></i>Quality control</a><ul>
-<li><a href="zeitgebr.html#ld---dd-transitions"><code>LD -&gt; DD</code> transitions</a></li>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#regime-changes"><i class="fa fa-check"></i>Regime changes</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#data-enrichment"><i class="fa fa-check"></i>Data enrichment</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#overview-plots"><i class="fa fa-check"></i>Overview plots</a></li>
 </ul></li>
@@ -323,7 +327,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="background-3" class="section level2 unnumbered">
 <h2>Background</h2>
-<p>This tutorial focuses on circadian rhythm in <em>Drosophila</em>, but can be adapted easily to investicate periodicity in different context. in it, we will use a DAM dataset that is provided (and preloaded) within the <code>damr</code> package.</p>
+<p>This tutorial focuses on circadian rhythm in <em>Drosophila</em>, but can be adapted easily to investigate periodicity in different contexts. In it, we will use a DAM dataset that is provided (and preloaded) within the <code>damr</code> package.</p>
 </div>
 <div id="getting-the-data-3" class="section level2 unnumbered">
 <h2>Getting the data</h2>
@@ -336,7 +340,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">data</span>(dams_sample) 
 <span class="co"># We copy the data to our own variable so we can alter it</span>
 dt &lt;-<span class="st"> </span><span class="kw">copy</span>(dams_sample) </code></pre></div>
-<p>This data set is a DD recording of 32 animals, in DD. Let us print the metadata to understand the experiment a little bit:</p>
+<p>This data set is recording of 32 animals, in DD. Let us print the metadata to understand the experiment a little bit:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(dt)</code></pre></div>
 <pre><code>## behavr table with:
 ##  32  individuals
@@ -381,19 +385,19 @@ dt &lt;-<span class="st"> </span><span class="kw">copy</span>(dams_sample) </cod
 ## 30: 2017-01-26 00:09:00           wt
 ## 31: 2017-01-26 00:09:00           wt
 ## 32: 2017-01-26 00:09:00           wt</code></pre>
-<p>We can confirm we have 32 individuals, and they are described by one of three “period groups” (e.g.g a genotype or treatment). The <code>period_group</code> metavariable can be either “short”“,”long“” or wild-type (“wt”) periods.</p>
+<p>We can confirm we have 32 individuals. They are described by one of three “period groups” (e.g. a genotype or treatment). This is encoded int <code>period_group</code> metavariable can be either a “short”“,”long“” or wild-type (“wt”) period.</p>
 </div>
 <div id="quality-control-2" class="section level2 unnumbered">
 <h2>Quality control</h2>
 <p>This data is fairely clean already, so we will not do much. For most purposes, you can apply the same principles as <a href="sleepr.html#data-curation">data curation for sleep analysis</a>.</p>
-<div id="ld---dd-transitions" class="section level3 unnumbered">
-<h3><code>LD -&gt; DD</code> transitions</h3>
-<p>In general (but not here), you will have a period of <code>LD</code> “baseline” preceding a change to a <code>DD</code> regime. I suggest to encode that in the following way:</p>
+<div id="regime-changes" class="section level3 unnumbered">
+<h3>Regime changes</h3>
+<p>In general (but not here), you will have a period of <code>LD</code> <strong>“baseline”</strong> preceding a change to a <code>DD</code> regime. I suggest to encode that in the following way:</p>
 <ol style="list-style-type: decimal">
 <li>Manually add a column <code>baseline_days</code> in your metadata that defines the <strong>number of days of baseline</strong>.</li>
 <li><strong>Sustract the number of baseline days</strong> to all time points: <code>dt[, t := t - days(xmv(baseline_days))]</code></li>
 </ol>
-<p>As a result, <code>t = 0</code> now means ZT0 of the transition day. This makes a lot of sense as any baseline point is in negative time (<code>t &lt; 0</code>), whilst <code>t &gt; 0</code> is for <code>DD</code>. The nice thing is that you can work with data (e.g. replicates) that have different baseline duration as now <strong>all time points are relative to the transition</strong>.</p>
+<p>As a result, <code>t = 0</code> now means “ZT0 of the transition day”. This makes a lot of sense as any baseline point is at a negative time (<code>t &lt; 0</code>), whilst <code>t &gt; 0</code> is for <code>DD</code>. The nice thing is that you can work with data (e.g. replicates) that have different baseline duration as now <strong>all time points are relative to the regime change</strong>.</p>
 </div>
 <div id="data-enrichment" class="section level3 unnumbered">
 <h3>Data enrichment</h3>
@@ -402,12 +406,12 @@ dt &lt;-<span class="st"> </span><span class="kw">copy</span>(dams_sample) </cod
 </div>
 <div id="overview-plots" class="section level3 unnumbered">
 <h3>Overview plots</h3>
-<p>The first representation we show could be activity all animals over time in the same page. This would help to spot ourliers. We simply do that with out tile plot. Note how we have changed the LD colours to grey and black, grey being for subjective days (remember, we are in DD).</p>
+<p>The first representation we show could be activity all animals over time in the same page. This would help to spot ourliers. We simply do that with our <strong>tile plot</strong>. Note how we have changed the LD colours to grey and black, grey being for subjective days (remember, we are in DD).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">z=</span>activity)) <span class="op">+</span>
 <span class="st">      </span><span class="kw">stat_ld_annotations</span>(<span class="dt">ld_colours =</span> <span class="kw">c</span>(<span class="st">&quot;grey&quot;</span>, <span class="st">&quot;black&quot;</span>))<span class="op">+</span>
 <span class="st">      </span><span class="kw">stat_tile_etho</span>() </code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-120-1.png" width="864" /></p>
-<p>We see that two animals (region 5 and 10) seem to have died/escaped before the end of the experiment. There is no right thing to do regarding dead animals. You could keep the data before death, or remove them altogether. <strong>It is your responsibility to decide what to do with dead animals</strong>. here, I simply remove data after death:</p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-122-1.png" width="864" /></p>
+<p>We see that two animals (region 5 and 10) seem to have died/escaped before the end of the experiment. There is no right thing to do regarding dead animals. You could keep the data before death, or remove them altogether. <strong>It is eventually your responsibility to decide what to do with dead animals</strong>. Here, I simply remove data after death:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sleepr)
 dt_curated &lt;-<span class="st"> </span><span class="kw">curate_dead_animals</span>(dt)
 <span class="kw">summary</span>(dt_curated)</code></pre></div>
@@ -420,7 +424,8 @@ dt_curated &lt;-<span class="st"> </span><span class="kw">curate_dead_animals</s
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggetho</span>(dt_curated, <span class="kw">aes</span>(<span class="dt">z=</span>activity)) <span class="op">+</span>
 <span class="st">      </span><span class="kw">stat_ld_annotations</span>(<span class="dt">ld_colours =</span> <span class="kw">c</span>(<span class="st">&quot;grey&quot;</span>, <span class="st">&quot;black&quot;</span>))<span class="op">+</span>
 <span class="st">      </span><span class="kw">stat_tile_etho</span>() </code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-121-1.png" width="672" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-123-1.png" width="672" /></p>
+<p>Our curated data is now stored in <code>dt_curated</code>.</p>
 </div>
 </div>
 <div id="double-plotted-actograms-1" class="section level2 unnumbered">
@@ -443,21 +448,21 @@ dt_curated[, .(id, uid) ,meta=T]</code></pre></div>
 ## 32: 2017-01-16 08:00:00|dams_sample.txt|32  32</code></pre>
 <p>As you see, we do keep <code>id</code> as a reference but <code>uid</code> for convenience in graphs.</p>
 <p>To make a double plotted actogram, we use <code>ggetho</code>. Read more about that in the <a href="ggetho.html#double-plotted-actograms">visualisation tutorial</a>. Briefly, we set <code>multiplot</code> to <code>2</code> (<code>3</code> would be a triple plotted) one. The variable of interest is on the <code>z</code> axis. Note that instead of <code>moving</code>, you could plot raw <code>activity</code>. Then, we use bar height to show the amount of movement (we could use <code>stat_tile_etho</code> which shows the variable of interest as colour a pixel intensity). Lastly, we split the graph by <code>uid</code>, so that each facet is a single animal.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggetho</span>(dt_curated, <span class="kw">aes</span>(<span class="dt">z=</span>moving), <span class="dt">multiplot =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggetho</span>(dt_curated, <span class="kw">aes</span>(<span class="dt">z =</span> moving), <span class="dt">multiplot =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">stat_bar_tile_etho</span>() <span class="op">+</span>
-<span class="st">    </span><span class="kw">facet_wrap</span>( <span class="op">~</span><span class="st"> </span>uid)</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-123-1.png" width="672" /></p>
+<span class="st">    </span><span class="kw">facet_wrap</span>( <span class="op">~</span><span class="st"> </span>uid, <span class="dt">ncol =</span> <span class="dv">8</span>)</code></pre></div>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-125-1.png" width="1152" /></p>
 <p>Interestingly, you can use formula in facet to show or sort with other metavariables:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggetho</span>(dt_curated, <span class="kw">aes</span>(<span class="dt">z=</span>moving), <span class="dt">multiplot =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">stat_bar_tile_etho</span>() <span class="op">+</span>
-<span class="st">    </span><span class="kw">facet_wrap</span>( <span class="op">~</span><span class="st"> </span>period_group <span class="op">+</span><span class="st"> </span>uid , <span class="dt">labeller =</span> <span class="kw">label_wrap_gen</span>(<span class="dt">multi_line=</span><span class="ot">FALSE</span>))</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-124-1.png" width="672" /> Now, we know what is the genotype for each <code>uid</code>. In your own work, you could generalise this concept to display more metavariables. For instance, if you had a <code>sex</code> metavariable you could do: <code>facet_wrap( ~ period_group + sex + uid, ...)</code>.</p>
+<span class="st">    </span><span class="kw">facet_wrap</span>( <span class="op">~</span><span class="st"> </span>period_group <span class="op">+</span><span class="st"> </span>uid, <span class="dt">ncol=</span><span class="dv">8</span>, <span class="dt">labeller =</span> <span class="kw">label_wrap_gen</span>(<span class="dt">multi_line=</span><span class="ot">FALSE</span>))</code></pre></div>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-126-1.png" width="1152" /> Now, we know which genotype match each <code>uid</code>. In your own work, you could generalise this concept to display more metavariables. For instance, if you had a <code>sex</code> metavariable you could do: <code>facet_wrap( ~ period_group + sex + uid, ...)</code>.</p>
 </div>
 <div id="periodograms-1" class="section level2 unnumbered">
 <h2>Periodograms</h2>
 <div id="computation" class="section level3 unnumbered">
 <h3>Computation</h3>
-<p>An important part of circadian research is to compute the periodicity of the free running clock of multiple individuals. Mathematically, we would like to build a preiodogram. That is, generally speaking, a representation of the density (i.e. <strong>power</strong>) of a signal at different <strong>periods</strong> (or frequencies). In addition, a periodogram associates to each pair of power-period a <strong>significance level</strong>. There are many algorithms to compute periodograms. In <code>zeitgebr</code>, we have implemented:</p>
+<p>An important part of circadian research is to compute the periodicity of the free running clock of multiple individuals. Mathematically, we would like to build a preiodogram. That is, generally speaking, a representation of the density (i.e. <strong>power</strong>) of a signal at different <strong>periods</strong> (or frequencies). In addition, a periodogram associates to each pair of power-period a <strong>significance level</strong>. There are many algorithms to compute periodograms. In <code>zeitgebr</code>, we have si far implemented:</p>
 <ul>
 <li><code>ac_periodogram</code> – An <em>autocorrelation</em> based method</li>
 <li><code>ls_periodogram</code> – <em>Lomb-Scargle</em> algorithm</li>
@@ -537,38 +542,38 @@ per_xsq_dt</code></pre></div>
 ## 5151:         2132.445 0.5839614
 ## 5152:         2138.776 0.5310549</code></pre>
 <p>The result is another <code>behavr</code> table, with the same metadata. The data however, is now a list of power vs period (and significance).</p>
-<p>Note that there are other options (see <code>?periodogram</code>).</p>
+<p>Have a look at the other options (see <code>?periodogram</code>).</p>
 </div>
 <div id="peaks-finding" class="section level3 unnumbered">
 <h3>Peaks finding</h3>
-<p>Often, we want to know which are the peak periods in a periodogram. This can be achieved thanks to the <code>find_peaks</code> function. By default, it find a maximum of three peaks, which are sorted by their power (relative to the significance thershold). Peaks that are not signifant are not acounted for (see the <code>alpha</code> argument).</p>
+<p>Often, we want to know which are the peak periods in a periodogram. This can be achieved thanks to the <code>find_peaks</code> function. By default, it find a maximum of three peaks, which are sorted by their power (relative to the significance thershold). Peaks that are not signifant are not accounted for (see the <code>alpha</code> argument).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">per_xsq_dt &lt;-<span class="st"> </span><span class="kw">find_peaks</span>(per_xsq_dt)
 per_xsq_dt</code></pre></div>
 <p>This function annotates our data by adding a column named <code>&quot;peak&quot;</code>. Whenever the row corresponds to a peak, it puts a number and <code>NA</code> otherwise. The number is the rank of the peak (<code>1</code> being the first/tallest one).</p>
 </div>
 <div id="visualisation" class="section level3 unnumbered">
 <h3>Visualisation</h3>
-<p>In <code>ggetho</code>, the function <code>ggperio()</code> is designed specifically for showing periodograms.</p>
-<p>One could plot all the periodograms like so:</p>
+<p>In <code>ggetho</code>, the function <code>ggperio()</code> is designed specifically for displaying periodograms. One could plot all the periodograms like so:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggperio</span>(per_xsq_dt) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">group =</span> id, <span class="dt">colour=</span>period_group))</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-127-1.png" width="672" /> But it is very hard to read, so we will facet per uid. In addition, we can use a special geometry (<code>geom_peak</code>) to show the values of the peak. We draw a signifiance line as well, just using the <code>signif_threshold</code> variable:</p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-129-1.png" width="672" /></p>
+<p>But it is very hard to read, so we will <strong>facet per <code>uid</code></strong>. In addition, we can use a special geometry (<code>geom_peak</code>) to show the values of the peak. We draw a signifiance line as well, just using the <code>signif_threshold</code> variable:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggperio</span>(per_xsq_dt) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">group =</span> id, <span class="dt">colour=</span>period_group)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_peak</span>(<span class="dt">col=</span><span class="st">&quot;black&quot;</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y=</span> signif_threshold)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>uid)</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-128-1.png" width="672" /></p>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">group =</span> id, <span class="dt">colour =</span> period_group)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_peak</span>(<span class="dt">col =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> signif_threshold)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>uid, <span class="dt">ncol =</span> <span class="dv">8</span>)</code></pre></div>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-130-1.png" width="1152" /></p>
 <p>Instead of drawing only the first peak, you could draw, for instance, the first and second (<code>geom_peak(peak_rank = 1:2)</code>) or, only the second (<code>geom_peak(peak_rank = 2)</code>).</p>
 <p>An interesting thing to do is a population average periodogram. In this graph, the solid lines are the average power per group, whilst the shaded areas are ± standard error:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggperio</span>(per_xsq_dt, <span class="kw">aes</span>(
                   <span class="dt">y =</span> power <span class="op">-</span><span class="st"> </span>signif_threshold,
                   <span class="dt">colour=</span>period_group)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">stat_pop_etho</span>()</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-129-1.png" width="672" /></p>
+<span class="st">                  </span><span class="kw">stat_pop_etho</span>()</code></pre></div>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-131-1.png" width="672" /></p>
 </div>
 <div id="exctract-the-peak-values" class="section level3 unnumbered">
 <h3>Exctract the peak values</h3>
-<p>At some point, you would like to <strong>summarise</strong> each animal by, say, it first peak. Then, you can look at whether there are significant difference in peak periodicity vs genotype. Doing that is quite straigtforward. First, we select only rows where peak is exactly 1, then rejoin our table to its metadata:</p>
+<p>At some point, you would like to <strong>summarise</strong> each animal by, say, it first peak. Then, you can look at whether there are significant difference in peak periodicity vs genotype. Doing that is quite straigtforward. First, we <strong>select only rows where peak is exactly 1</strong>, then <a href="https://rethomics.github.io/behavr.html#operating-on-behavr-tables">rejoin</a> our table to its metadata:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">summary_dt &lt;-<span class="st"> </span><span class="kw">rejoin</span>(per_xsq_dt[peak<span class="op">==</span><span class="dv">1</span>])
 summary_dt</code></pre></div>
 <pre><code>##                                         id file_info region_id
@@ -619,12 +624,12 @@ summary_dt</code></pre></div>
 ## 30: 2.215774e-64    1
 ## 31: 2.308707e-54    1
 ## 32: 2.314742e-09    1</code></pre>
-<p><code>summary_dt</code> can be used as a standard <code>R</code> dataframe for further analysis. For instance, with <code>ggplot</code>, I make a boxplot showing the distribution of periods, in h, for each groups. I also add point for each animal (so we see outliers). Then, I make the size of the points proportional to the power of the peak discovered.</p>
+<p><code>summary_dt</code> can be used as a standard <code>R</code> dataframe for further analysis. For instance, with <code>ggplot</code>, I make a <strong>boxplot showing the distribution of periods</strong>, in h, for each groups. I also add <strong>a point for each animal</strong> (so we see outliers). Then, I make the <strong>size of the points proportional to the relative power of the peak discovered</strong>, so we get an idea of how much to “trust” this point.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(summary_dt, <span class="kw">aes</span>(period_group, period, <span class="dt">fill=</span> period_group)) <span class="op">+</span><span class="st"> </span>
 <span class="st">        </span><span class="kw">geom_boxplot</span>(<span class="dt">outlier.colour =</span> <span class="ot">NA</span>) <span class="op">+</span>
 <span class="st">        </span><span class="kw">geom_jitter</span>(<span class="kw">aes</span>(<span class="dt">size=</span>power <span class="op">-</span><span class="st">  </span>signif_threshold), <span class="dt">alpha=</span>.<span class="dv">5</span>) <span class="op">+</span>
 <span class="st">        </span><span class="kw">scale_y_hours</span>(<span class="dt">name =</span> <span class="st">&quot;Period (h)&quot;</span>) </code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-131-1.png" width="672" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-133-1.png" width="672" /></p>
 <p>Another direction could be to perform pairwise wilcoxon tests between groups:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairwise.wilcox.test</span>(summary_dt<span class="op">$</span>period, summary_dt<span class="op">$</span>period_group )</code></pre></div>
 <pre><code>## Warning in wilcox.test.default(xi, xj, paired = paired, ...): cannot

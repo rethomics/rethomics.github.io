@@ -9,15 +9,15 @@
 
 ## Variables and metavariables{-}
 
-As we have seen in the [previous section](metadata.html), metadata are crucial for proper statistical analysis of the experiment **data**. That is, a long time series of recorded **variables** such as position, orientation and number of beam crosses, for each individual.
+As we have seen in the [previous section](metadata.html), metadata are crucial for proper statistical analysis of the experimental **data**. In the context of ethomics, the data are long time series of recorded **variables** such as position, orientation and number of beam crosses, for each individual.
 **Variables** are different form **metavariables** in so far as the latter are made of only one value per animal.
 It is easier (and less error prone) to always keep the data and metadata together.
 In rethomics, in order to handle large amounts of data (together with metadata), we have designed the `behavr` package.
 `behavr` tables are based on the very powerful package `data.table`, but enhanced with metadata.
-A `behavr` table is, indeed, formed internally by two tables: the metadata table and the data table, both are related by the id field. (This squematic is shown in the figure).
+A `behavr` table is, indeed, formed internally by two tables: the metadata table and the data table, both are linked by the `id` column (see figure above).
 
 For most purposes, you can use a `behavr` table just like a `data.table`.
-Therefore, we recommend to have a look at the [introduction to `data.table`](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html) for further details!
+Therefore, do take a look at the [introduction to `data.table`](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html) for further details!
 **When we load any behavioural data in `rethomics`, we get a `behavr` table as a result.**
 In this section, we will discuss the usual operations that you can perform on `behavr` tables.
 
@@ -27,8 +27,9 @@ In this section, we will discuss the usual operations that you can perform on `b
 
 Now that we have all our data at the same place, we want to be able to manipulate it.
 In the next part of this tutorial, we will create some toy data and learn how to manipulate it.
-Again, we recommend to have a look to [introduction to `data.table`](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html) so this part of the tutorial will be easy to understand. 
-This table is a short overview of permited operations in `behavr` tables, where DT or dt is the name of our `behavr` table:
+This is where basic knowledge of [`data.table`](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html) comes in handy. 
+The following table is an overview of operations in `behavr` tables.
+`DT` represents an `behavr` table.
 
 ```{r, echo = FALSE}
 
@@ -88,9 +89,9 @@ kable(data.frame(
 
 ## Playing with toy data{-}
 
-The `behavr` package has a set of functions to make toy data. This is not only useful for the tutorial but also to test functions and plots.
-In order to have a look at a `behavr` object, lets create one.
-First, we make some fake metadata (always needed to create a `behavr` table):
+The `behavr` package has a set of functions to make toy data. This provides us with a playgound to test functions and plots without having to get some real data.
+In order to understand `behavr` object, lets create a toy one.
+First, we make some dummy metadata (always needed to create a `behavr` table):
 
 ```{r}
 library(behavr)
@@ -99,14 +100,15 @@ metadata <- data.table( id = paste("toy_experiment", 1:10, sep = "|"),
                       condition = c("A", "B") )
 metadata
 ```
-This metadata describes a theoretical experiment with 10 animals (1:10), where 5 are males and the other 5 are females, they are expose to 2 conditions (A and B).
+This metadata describes an hypothetical experiment with ten animals (`1:10`, five males and  five females).
+They are exposed to two conditions (`"A"` and `"B"`).
 Then, we use `toy_dam_data()` to **simulate** (instead of linking/loading) one day of DAMS-like data for these ten animals (and two conditions):
 
 ```{r}
 dt <- toy_dam_data(metadata, duration = days(1))
 dt
 ```
-As you can see, when we print `dt`, our `behavr` table, we have two tables: `METADATA` and `DATA`.
+As you can see, when we print `dt`, our `behavr` table, we have two sections: `METADATA` and `DATA`.
 The former is actually just the metadata we created whilst the latter stores the data (i.e. the variables) for **all animals**. 
 The special column `id` is also known as a **key**, and is shared between both data and metadata. 
 It internally allows us to map them to one another.
@@ -130,7 +132,7 @@ summary(dt, detailed = TRUE)
 Playing with variables is just like in `data.table`.
 Read the [official data.table tutorial](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html) for more functionalities.
 
-For instance, we can add a **new variable**, `very_active`, that is `TRUE` if, and only if,
+For instance, we can add a **new variable**, `very_active`, that is `TRUE` if and only if
 there was at least two beam crosses in a minute, for a given individual:
 
 ```{r}
@@ -171,7 +173,7 @@ dt[, treatment := paste(sex, condition, sep='|'), meta=T]
 dt[meta = TRUE]
 ```
 
-note: paste is a r command to link strings by the desired separation character.
+`paste()` is a function that link strings of characters with an arbitrary separator (`"|"` here).
 
 ### Data & Metadata {-}
 
@@ -190,7 +192,11 @@ For instance, lets get rid of the males!
 dt <- dt[xmv(sex) == 'female']
 summary(dt)
 ```
-When individuals are removed, metadata is automatically updated. In effect, we removed males from both data and metadata. This operation cannot be undone, so be carefull to delete data. You can create a new `beharv` table with a new name, if you override it (like in the example) and you want to recover it, you will have to load it again.
+When individuals are removed, metadata is automatically updated. 
+In effect, we removed males from both data and metadata. 
+This operation cannot be undone, as we overwrite `dt` with a new value.
+An alternative would be to save the result in a new table (e.g. `dt_females <- dt[xmv(sex) == 'female']`)
+This would use some additional memory, but it is safer.
 
 ### Summerise data{-}
 
@@ -214,8 +220,9 @@ stat_dt <- dt[,
 stat_dt
 ```
 
-Now, in order to perform statistics, we would like to merge our summaries to the metadata. This way we will end up with only one `data.table`
-That is, we want to **rejoin** them or autocomplete our summaries with the metadata:
+Now, in order to perform statistics, we would like to merge our summaries to the metadata. 
+This way we end up with only one `data.table`
+That is, we want to **rejoin** them to one another (i.e. we enrich our summaries with the metadata):
 
 ```{r}
 final_dt <- rejoin(stat_dt)

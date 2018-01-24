@@ -89,7 +89,7 @@ kable(data.frame(
 
 ## Playing with toy data{-}
 
-The `behavr` package has a set of functions to make toy data. This provides us with a playgound to test functions and plots without having to get some real data.
+The `behavr` package has a set of functions to make toy data. This provides us with a playgound to test functions and plots without having to get any real data.
 In order to understand `behavr` object, lets create a toy one.
 First, we make some dummy metadata (always needed to create a `behavr` table):
 

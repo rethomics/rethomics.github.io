@@ -141,6 +141,11 @@ new_meta <- dt[mean_mov_dt, meta=T]
 setmeta(dt, new_meta)
 head(dt[meta=T])
 ```
+Proportion of time moving (`mean(moving)`) will be a number between zero and one, with sometimes many decimals,
+whichs makes it hard to read.
+A more intuitive way to express it is as a rounded per mille (‰).
+I prefer it to per cent as we have more more resolution (i.e. less ties)
+For instance, `0.0113333` would be expressed as `11`. 
 
 Now, we can express a new relationship where we show the *interaction* between our custom variable and id, on the y axis:
 

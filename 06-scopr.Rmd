@@ -55,7 +55,6 @@ Ethoscopes typically generate hundreads of megabytes per machine per week.
 The platform is designed so that many devices run an parallel, and the resulting data is eventually centralised for all users. 
 **Metadata tables are the best way to both keep track of your expriments and fetch the relevant data.**
 
-
 ## Getting the data {-}
 ### Extract the zipped data {-}
 

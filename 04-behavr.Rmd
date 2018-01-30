@@ -175,6 +175,18 @@ dt[meta = TRUE]
 
 `paste()` is a function that link strings of characters with an arbitrary separator (`"|"` here).
 
+We can also add new metavariables from a summary, in this example we compute the average time moving per fly and then we add it to the metadata.
+```{r}
+# the average time spent moving per 1000 (rounded)
+mean_mov_dt <- dt[, .(mean_moving = round(mean(moving) * 1000)), by=id]
+# create new metadata table by joining curent meta and the summary table
+new_meta <- dt[mean_mov_dt, meta=T]
+# set new metadata
+setmeta(dt, new_meta)
+head(dt[meta=T])
+```
+This way we can store summarized data per individual into metadata, data that othewise will end up taking extra memory space. This will be useful when ploting with ggetho.
+
 ### Data & Metadata {-}
 
 The strength of `behavr` tables is their ability to seamlessly **use metavariables as though they were variables**.

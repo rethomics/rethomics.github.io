@@ -118,7 +118,7 @@ In general, we could simply do:
 
 
 ```{r}
-dt_curated <- dt_curated[t %between% c(days(1), days(3.5)]
+dt_curated <- dt_curated[t %between% c(days(1), days(3.5))]
 summary(dt_curated)
 ```
 

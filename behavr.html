@@ -515,7 +515,7 @@ dt[meta =<span class="st"> </span><span class="ot">TRUE</span>]</code></pre></di
 ##  9:  toy_experiment|8 female         B  female|B
 ## 10:  toy_experiment|9 female         A  female|A</code></pre>
 <p><code>paste()</code> is a function that link strings of characters with an arbitrary separator (<code>&quot;|&quot;</code> here).</p>
-<p>We can also add new metavariables from a summary, see <a href="behavr.html#summarise-data">Summarise data</a> ### Data &amp; Metadata {-}</p>
+<p>New metavariables can also be added from a summary (see <a href="behavr.html#summarise-data">Summarise data</a>). ### Data &amp; Metadata {-}</p>
 <p>The strength of <code>behavr</code> tables is their ability to seamlessly <strong>use metavariables as though they were variables</strong>. For the sake of the example, lets say you would like to alter the variable <code>t</code> (time) so that we add ten seconds, <em>only to individuals that have condition <code>'A'</code></em>.</p>
 <pre><code>dt[, t := ifelse(xmv(condition) == &#39;A&#39;, t + 10, t)]</code></pre>
 <p>The key here is the use of <code>xmv</code> (eXpand MetaVariable), which maps <code>condition</code> back in the data.</p>
@@ -584,8 +584,8 @@ stat_dt</code></pre></div>
 ## 3:  toy_experiment|7 0.4434783        3
 ## 4:  toy_experiment|8 0.1731884        2
 ## 5:  toy_experiment|9 0.2550725        2</code></pre>
-<p>Or add new metadata variables based on a summary:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create new metadata table by joining curent meta and the summary table</span>
+<p>Then, if needed, these summary can be added back to the metadata:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create new metadata table by joining current meta and the summary table</span>
 new_meta &lt;-<span class="st"> </span>dt[stat_dt, meta=T]
 <span class="co"># set new metadata</span>
 <span class="kw">setmeta</span>(dt, new_meta)
@@ -596,7 +596,7 @@ new_meta &lt;-<span class="st"> </span>dt[stat_dt, meta=T]
 ## 3:  toy_experiment|7 female         A  female|A 0.4434783        3
 ## 4:  toy_experiment|8 female         B  female|B 0.1731884        2
 ## 5:  toy_experiment|9 female         A  female|A 0.2550725        2</code></pre>
-<p>This way we can store summarized data per individual into metadata, data that othewise will end up taking extra memory space. This will be useful when ploting with ggetho.</p>
+<p>This way we can store per-individual aggregates and visualise or analyse them with respect to the pre-existing metadata.</p>
 <p>Now, in order to perform statistics, we would like to merge our summaries to the metadata. This way we end up with only one <code>data.table</code> That is, we want to <strong>rejoin</strong> them to one another (i.e. we enrich our summaries with the metadata):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">final_dt &lt;-<span class="st"> </span><span class="kw">rejoin</span>(stat_dt)
 final_dt</code></pre></div>

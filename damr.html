@@ -133,8 +133,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#generalities"><i class="fa fa-check"></i>Generalities</a><ul>
 <li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#data"><i class="fa fa-check"></i>Data</a></li>
 <li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html#metadata"><i class="fa fa-check"></i>Metadata</a></li>
-<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#data-metadata"><i class="fa fa-check"></i>Data &amp; Metadata</a></li>
-<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#summerise-data"><i class="fa fa-check"></i>Summerise data</a></li>
+<li class="chapter" data-level="0.0.1" data-path="behavr.html"><a href="behavr.html#summarise-data-summarise-data"><i class="fa fa-check"></i><b>0.0.1</b> Summarise data{-}[Summarise data]</a></li>
 <li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#stitching"><i class="fa fa-check"></i>Stitching</a></li>
 </ul></li>
 </ul></li>
@@ -470,7 +469,7 @@ metadata</code></pre></div>
 <span class="kw">ggetho</span>(dt[<span class="kw">xmv</span>(replicate) <span class="op">==</span><span class="st"> </span><span class="dv">1</span> ], <span class="kw">aes</span>(<span class="dt">z=</span>activity)) <span class="op">+</span>
 <span class="st">      </span><span class="kw">stat_tile_etho</span>() <span class="op">+</span>
 <span class="st">      </span><span class="kw">stat_ld_annotations</span>()</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-31-1.png" width="864" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-32-1.png" width="864" /></p>
 <p>Here, instead of ploting everything, I show how you can subset data according to metadata in order to display only replicate one (<code>dt[xmv(replicate) == 1]</code>). In practice, you could also plot everything. You can do a lot more with <code>ggetho</code> (see the <a href="ggetho.html">visualisation chapter</a>)</p>
 <p>What does this tile plot tell us? Each row is an animal (and is labelled with its corresponding id). Each column is a 30min window. The colour intensity indicates the activity.</p>
 <p>There are two things that we can imediatly notice:</p>

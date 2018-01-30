@@ -133,8 +133,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#generalities"><i class="fa fa-check"></i>Generalities</a><ul>
 <li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#data"><i class="fa fa-check"></i>Data</a></li>
 <li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html#metadata"><i class="fa fa-check"></i>Metadata</a></li>
-<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#data-metadata"><i class="fa fa-check"></i>Data &amp; Metadata</a></li>
-<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#summerise-data"><i class="fa fa-check"></i>Summerise data</a></li>
+<li class="chapter" data-level="0.0.1" data-path="behavr.html"><a href="behavr.html#summarise-data-summarise-data"><i class="fa fa-check"></i><b>0.0.1</b> Summarise data{-}[Summarise data]</a></li>
 <li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#stitching"><i class="fa fa-check"></i>Stitching</a></li>
 </ul></li>
 </ul></li>
@@ -705,7 +704,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-## 170.878   4.303 174.844</code></pre>
+## 166.572   3.823 169.471</code></pre>
 <p>However, the next time, we do the same thing way faster:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(
   dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata,
@@ -715,7 +714,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-##   2.456   0.108   2.719</code></pre>
+##   2.092   0.064   2.111</code></pre>
 <p>Here, we set <code>cache</code> to <code>&quot;ethoscope_cache&quot;</code>. This creates a new directory called <code>&quot;ethoscope_cache&quot;</code> (you can pick the name and location you want). If you to do a bit of tidying up, you can remove it without risk (it will just take time next time you load your data).</p>
 </div>
 </div>
@@ -726,7 +725,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
 <span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">z=</span>asleep)) <span class="op">+</span>
 <span class="st">      </span><span class="kw">stat_tile_etho</span>() <span class="op">+</span>
 <span class="st">      </span><span class="kw">stat_ld_annotations</span>()</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-49-1.png" width="864" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-50-1.png" width="864" /></p>
 <p>This allows us to spot possible outliers/missing data/artefacts and try to understand what to do whith them. More about tiles plots in the <a href="ggetho.html">visualisation chapter</a>.</p>
 </div>
 <div id="and-then" class="section level2 unnumbered">
@@ -739,7 +738,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
 <span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">y=</span>asleep, <span class="dt">colour=</span>treatment), <span class="dt">time_wrap =</span> <span class="kw">hours</span>(<span class="dv">24</span>)) <span class="op">+</span>
 <span class="st">      </span><span class="kw">stat_pop_etho</span>() <span class="op">+</span>
 <span class="st">      </span><span class="kw">stat_ld_annotations</span>()</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
 </div>
 <div id="total-sleep-vs-expression-level" class="section level3 unnumbered">
 <h3>Total sleep vs expression level</h3>
@@ -790,7 +789,7 @@ summary_dt</code></pre></div>
                        <span class="dt">colour =</span> treatment)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>)</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
 </div>
 </div>
 <div id="next-steps-1" class="section level2 unnumbered">

@@ -175,9 +175,7 @@ dt[meta = TRUE]
 
 `paste()` is a function that link strings of characters with an arbitrary separator (`"|"` here).
 
-We can also add new metavariables from a summary, in this example we compute the average time moving per fly and then we add it to the metadata.
-
-
+We can also add new metavariables from a summary, see [Summarise data][Summarise data]
 ### Data & Metadata {-}
 
 The strength of `behavr` tables is their ability to seamlessly **use metavariables as though they were variables**.
@@ -201,7 +199,7 @@ This operation cannot be undone, as we overwrite `dt` with a new value.
 An alternative would be to save the result in a new table (e.g. `dt_females <- dt[xmv(sex) == 'female']`)
 This would use some additional memory, but it is safer.
 
-### Summerise data{-}
+### Summarise data{-}[Summarise data]
 
 Thanks to `data.table` `by` operations, it is simple and efficient to **compute statistics per individual**.
 For instance, we may want to compute the average activity for each animal:
@@ -225,7 +223,7 @@ stat_dt
 Or add new metadata variables based on a summary:
 ```{r}
 # create new metadata table by joining curent meta and the summary table
-new_meta <- dt[stat_id, meta=T]
+new_meta <- dt[stat_dt, meta=T]
 # set new metadata
 setmeta(dt, new_meta)
 head(dt[meta=T])

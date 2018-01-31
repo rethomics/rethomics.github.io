@@ -113,17 +113,17 @@ summary(dt_curated)
 
 ### Trimming {-}
 Generally, we want to remove point according the experimental time.
-For instance, we want to remove the begining as animals are acclimatising to their new environment.
-In general, we could simply do:
+For instance, lets say we would like to keep only the first 60 hours of data (i.e. 2.5 days)
 
 
 ```{r}
-dt_curated <- dt_curated[t %between% c(days(1), days(3.5))]
+dt_curated <- dt_curated[t %between% c(days(0), days(2.5))]
 summary(dt_curated)
 ```
 
-Which means we are only considering data **between** 1 and 3.5 days after the experiment started. 
+Which means we are only considering data **between** 0 and 2.5 days. 
 
+The same principle can be used to remove the begining of an experiment. Fon instance when animals are acclimatising to their new environment.
 
 ## Population plots{-}
 

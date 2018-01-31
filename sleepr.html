@@ -397,16 +397,17 @@ dt_curated &lt;-<span class="st"> </span>dt_curated[id <span class="op">%in%</sp
 </div>
 <div id="trimming" class="section level3 unnumbered">
 <h3>Trimming</h3>
-<p>Generally, we want to remove point according the experimental time. For instance, we want to remove the begining as animals are acclimatising to their new environment. In general, we could simply do:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt_curated &lt;-<span class="st"> </span>dt_curated[t <span class="op">%between%</span><span class="st"> </span><span class="kw">c</span>(<span class="kw">days</span>(<span class="dv">1</span>), <span class="kw">days</span>(<span class="fl">3.5</span>))]
+<p>Generally, we want to remove point according the experimental time. For instance, lets say we would like to keep only the first 60 hours of data (i.e. 2.5 days)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt_curated &lt;-<span class="st"> </span>dt_curated[t <span class="op">%between%</span><span class="st"> </span><span class="kw">c</span>(<span class="kw">days</span>(<span class="dv">0</span>), <span class="kw">days</span>(<span class="fl">2.5</span>))]
 <span class="kw">summary</span>(dt_curated)</code></pre></div>
 <pre><code>## behavr table with:
 ##  94  individuals
 ##  8   metavariables
 ##  4   variables
-##  2.19563e+05 measurements
+##  3.38494e+05 measurements
 ##  1   key (id)</code></pre>
-<p>Which means we are only considering data <strong>between</strong> 1 and 3.5 days after the experiment started.</p>
+<p>Which means we are only considering data <strong>between</strong> 0 and 2.5 days.</p>
+<p>The same principle can be used to remove the begining of an experiment. Fon instance when animals are acclimatising to their new environment.</p>
 </div>
 </div>
 <div id="population-plots-1" class="section level2 unnumbered">
@@ -463,17 +464,17 @@ summary_dt</code></pre></div>
 ## 93: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
 ## 94: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
 ##     sex genotype replicate sleep_fraction
-##  1:   M        A         1      0.6956159
-##  2:   M        A         1      0.6817043
-##  3:   M        A         1      0.7613588
-##  4:   M        A         1      0.6984590
-##  5:   M        A         1      0.7443832
+##  1:   M        A         1      0.7600666
+##  2:   M        A         1      0.7550680
+##  3:   M        A         1      0.8214385
+##  4:   M        A         1      0.7528464
+##  5:   M        A         1      0.8044988
 ## ---                                      
-## 90:   F        C         1      0.7309454
-## 91:   F        C         1      0.5934455
-## 92:   F        C         1      0.7257455
-## 93:   F        C         1      0.7386745
-## 94:   F        C         1      0.9130982</code></pre>
+## 90:   F        C         1      0.7661761
+## 91:   F        C         1      0.6725909
+## 92:   F        C         1      0.7622883
+## 93:   F        C         1      0.7967231
+## 94:   F        C         1      0.9208553</code></pre>
 <p>With <code>rejoin</code>, we have put our summary and metadata together, which is suitable for standars graphics/statictics. For instance, if we are interested in the effect of sleep and genotype on sleep amount, we can make a faceted boxplot, and also add individual points to show all data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(summary_dt, <span class="kw">aes</span>(<span class="dt">x=</span>sex, <span class="dt">y=</span>sleep_fraction, <span class="dt">fill=</span>sex)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">outlier.colour =</span> <span class="ot">NA</span>) <span class="op">+</span>
@@ -534,29 +535,29 @@ summary_dt</code></pre></div>
 ## 93: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
 ## 94: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
 ##     sex genotype replicate sleep_fraction_all sleep_fraction_l
-##  1:   M        A         1          0.6956159        0.8270833
-##  2:   M        A         1          0.6817043        0.7854167
-##  3:   M        A         1          0.7613588        0.8402778
-##  4:   M        A         1          0.6984590        0.8541667
-##  5:   M        A         1          0.7443832        0.8395833
+##  1:   M        A         1          0.7600666        0.8500000
+##  2:   M        A         1          0.7550680        0.7861111
+##  3:   M        A         1          0.8214385        0.8356481
+##  4:   M        A         1          0.7528464        0.8555556
+##  5:   M        A         1          0.8044988        0.8444444
 ## ---                                                           
-## 90:   F        C         1          0.7309454        0.7118056
-## 91:   F        C         1          0.5934455        0.5465278
-## 92:   F        C         1          0.7257455        0.7229167
-## 93:   F        C         1          0.7386745        0.7152778
-## 94:   F        C         1          0.9130982        0.9777778
+## 90:   F        C         1          0.7661761        0.7504630
+## 91:   F        C         1          0.6725909        0.6370370
+## 92:   F        C         1          0.7622883        0.7523148
+## 93:   F        C         1          0.7967231        0.7773148
+## 94:   F        C         1          0.9208553        0.9643519
 ##     sleep_fraction_d
-##  1:        0.4973822
-##  2:        0.5251572
-##  3:        0.6371585
-##  4:        0.4651405
-##  5:        0.5952122
+##  1:        0.6252602
+##  2:        0.7085357
+##  3:        0.8001388
+##  4:        0.5988897
+##  5:        0.7446218
 ## ---                 
-## 90:        0.7596254
-## 91:        0.6760391
-## 92:        0.7300744
-## 93:        0.7743644
-## 94:        0.8142251</code></pre>
+## 90:        0.7897294
+## 91:        0.7258848
+## 92:        0.7772380
+## 93:        0.8258154
+## 94:        0.8556558</code></pre>
 <p>Now, we have three new variables: <code>sleep_fraction_all</code>, <code>sleep_fraction_l</code> and <code>sleep_fraction_d</code>. We can just replace the y axis with our variable of interest (e.g. sleep in D phase):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(summary_dt, <span class="kw">aes</span>(<span class="dt">x=</span>sex, <span class="dt">y=</span>sleep_fraction_d, <span class="dt">fill=</span>sex)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">outlier.colour =</span> <span class="ot">NA</span>) <span class="op">+</span>
@@ -584,14 +585,19 @@ summary_dt</code></pre></div>
 <p>Say we wanted to compute, for <strong>females only</strong>, all pairwise tests between all genotype groups (A vs B, B vs C and C vs A). This could be formulated as:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairwise.wilcox.test</span>(summary_dt[sex<span class="op">==</span><span class="st">&quot;F&quot;</span>, sleep_fraction_all], 
                      summary_dt[sex<span class="op">==</span><span class="st">&quot;F&quot;</span>, genotype])</code></pre></div>
+<pre><code>## Warning in wilcox.test.default(xi, xj, paired = paired, ...): cannot
+## compute exact p-value with ties
+
+## Warning in wilcox.test.default(xi, xj, paired = paired, ...): cannot
+## compute exact p-value with ties</code></pre>
 <pre><code>## 
 ##  Pairwise comparisons using Wilcoxon rank sum test 
 ## 
 ## data:  summary_dt[sex == &quot;F&quot;, sleep_fraction_all] and summary_dt[sex == &quot;F&quot;, genotype] 
 ## 
 ##   A       B     
-## B 0.0045  -     
-## C 4.1e-08 0.0045
+## B 0.0047  -     
+## C 4.1e-08 0.0018
 ## 
 ## P value adjustment method: holm</code></pre>
 <p>We get a matrix showing us all p-values. You could do that also within males, as long as we replace <code>sex == &quot;F&quot;</code> by <code>sex == &quot;M&quot;</code></p>
@@ -602,10 +608,10 @@ summary_dt</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">aov</span>(sleep_fraction_all <span class="op">~</span><span class="st"> </span>sex <span class="op">*</span><span class="st"> </span>genotype, summary_dt)
 <span class="kw">summary</span>(model)</code></pre></div>
 <pre><code>##              Df Sum Sq Mean Sq F value   Pr(&gt;F)    
-## sex           1 0.3122 0.31222   23.46 5.42e-06 ***
-## genotype      2 0.5328 0.26638   20.02 6.83e-08 ***
-## sex:genotype  2 0.3496 0.17478   13.13 1.02e-05 ***
-## Residuals    88 1.1710 0.01331                     
+## sex           1 0.3235  0.3235   26.39 1.66e-06 ***
+## genotype      2 0.4417  0.2209   18.02 2.76e-07 ***
+## sex:genotype  2 0.3874  0.1937   15.80 1.37e-06 ***
+## Residuals    88 1.0786  0.0123                     
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>This shows a strong affect of sex, genotype and their interaction on sleep amount. There are several way to follow up. For instance see this <a href="https://www.r-bloggers.com/two-way-analysis-of-variance-anova/">short tutorial</a>.</p>
@@ -689,16 +695,16 @@ summary_dt</code></pre></div>
 ## 
 ##                                       id n_bouts mean_bout_length
 ##                                   &lt;fctr&gt;   &lt;int&gt;            &lt;num&gt;
-##  1: 2017-07-01 08:00:00|Monitor11.txt|01      56         1785.000
-##  2: 2017-07-01 08:00:00|Monitor11.txt|02      69         1419.130
-##  3: 2017-07-01 08:00:00|Monitor11.txt|03      58         1854.828
-##  4: 2017-07-01 08:00:00|Monitor11.txt|04      65         1548.000
+##  1: 2017-07-01 08:00:00|Monitor11.txt|01      80         2052.000
+##  2: 2017-07-01 08:00:00|Monitor11.txt|02     109         1496.147
+##  3: 2017-07-01 08:00:00|Monitor11.txt|03      97         1829.072
+##  4: 2017-07-01 08:00:00|Monitor11.txt|04      95         1711.579
 ## ---                                                              
-## 90: 2017-07-01 08:00:00|Monitor64.txt|27      53         1986.792
-## 91: 2017-07-01 08:00:00|Monitor64.txt|29     100          804.000
-## 92: 2017-07-01 08:00:00|Monitor64.txt|30      66         1570.909
-## 93: 2017-07-01 08:00:00|Monitor64.txt|31      39         2709.231
-## 94: 2017-07-01 08:00:00|Monitor64.txt|32      19         6868.421</code></pre>
+## 90: 2017-07-01 08:00:00|Monitor64.txt|27      75         2206.400
+## 91: 2017-07-01 08:00:00|Monitor64.txt|29     142         1023.380
+## 92: 2017-07-01 08:00:00|Monitor64.txt|30      99         1663.636
+## 93: 2017-07-01 08:00:00|Monitor64.txt|31      67         2568.358
+## 94: 2017-07-01 08:00:00|Monitor64.txt|32      36         5525.000</code></pre>
 <p>You could apply the approach presented before to compute statistics according the the phase (night vs day bouts).</p>
 </div>
 <div id="latency-to-sleep" class="section level3 unnumbered">
@@ -727,11 +733,11 @@ bout_summary</code></pre></div>
 ##  3: 2017-07-01 08:00:00|Monitor11.txt|03    &lt;list&gt;         3
 ##  4: 2017-07-01 08:00:00|Monitor11.txt|04    &lt;list&gt;         4
 ## ---                                                         
-## 90: 2017-07-01 08:00:00|Monitor64.txt|27    &lt;list&gt;        27
-## 91: 2017-07-01 08:00:00|Monitor64.txt|29    &lt;list&gt;        29
-## 92: 2017-07-01 08:00:00|Monitor64.txt|30    &lt;list&gt;        30
-## 93: 2017-07-01 08:00:00|Monitor64.txt|31    &lt;list&gt;        31
-## 94: 2017-07-01 08:00:00|Monitor64.txt|32    &lt;list&gt;        32
+## 89: 2017-07-01 08:00:00|Monitor64.txt|27    &lt;list&gt;        27
+## 90: 2017-07-01 08:00:00|Monitor64.txt|29    &lt;list&gt;        29
+## 91: 2017-07-01 08:00:00|Monitor64.txt|30    &lt;list&gt;        30
+## 92: 2017-07-01 08:00:00|Monitor64.txt|31    &lt;list&gt;        31
+## 93: 2017-07-01 08:00:00|Monitor64.txt|32    &lt;list&gt;        32
 ##                         experiment_id      start_datetime stop_datetime
 ##                                &lt;char&gt;              &lt;POSc&gt;        &lt;char&gt;
 ##  1: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
@@ -739,11 +745,11 @@ bout_summary</code></pre></div>
 ##  3: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
 ##  4: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
 ## ---                                                                    
+## 89: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
 ## 90: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
 ## 91: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
 ## 92: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
 ## 93: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
-## 94: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
 ##        sex genotype replicate
 ##     &lt;char&gt;   &lt;char&gt;     &lt;int&gt;
 ##  1:      M        A         1
@@ -751,38 +757,38 @@ bout_summary</code></pre></div>
 ##  3:      M        A         1
 ##  4:      M        A         1
 ## ---                          
+## 89:      F        C         1
 ## 90:      F        C         1
 ## 91:      F        C         1
 ## 92:      F        C         1
 ## 93:      F        C         1
-## 94:      F        C         1
 ## 
 ##  ====== DATA ======
 ## 
 ##                                       id latency first_bout_length
 ##                                   &lt;fctr&gt;   &lt;num&gt;             &lt;num&gt;
-##  1: 2017-07-01 08:00:00|Monitor11.txt|01       0              1560
-##  2: 2017-07-01 08:00:00|Monitor11.txt|02       0              1020
-##  3: 2017-07-01 08:00:00|Monitor11.txt|03       0              1200
-##  4: 2017-07-01 08:00:00|Monitor11.txt|04       0               960
+##  1: 2017-07-01 08:00:00|Monitor11.txt|01    2940               360
+##  2: 2017-07-01 08:00:00|Monitor11.txt|02    3540               420
+##  3: 2017-07-01 08:00:00|Monitor11.txt|03    4500               300
+##  4: 2017-07-01 08:00:00|Monitor11.txt|04    1080               720
 ## ---                                                               
-## 90: 2017-07-01 08:00:00|Monitor64.txt|27       0              1140
-## 91: 2017-07-01 08:00:00|Monitor64.txt|29     900               540
-## 92: 2017-07-01 08:00:00|Monitor64.txt|30       0              1020
-## 93: 2017-07-01 08:00:00|Monitor64.txt|31       0              1200
-## 94: 2017-07-01 08:00:00|Monitor64.txt|32       0              1140
+## 89: 2017-07-01 08:00:00|Monitor64.txt|27    6120               300
+## 90: 2017-07-01 08:00:00|Monitor64.txt|29     900               540
+## 91: 2017-07-01 08:00:00|Monitor64.txt|30    2100               300
+## 92: 2017-07-01 08:00:00|Monitor64.txt|31    4380               420
+## 93: 2017-07-01 08:00:00|Monitor64.txt|32    2160              5640
 ##     latency_to_longest_bout length_longest_bout n_bouts mean_bout_length
 ##                       &lt;num&gt;               &lt;num&gt;   &lt;int&gt;            &lt;num&gt;
-##  1:                   27000                3300      26        1398.4615
-##  2:                   17760                6300      24        1450.0000
-##  3:                   37920                3600      30        1204.0000
-##  4:                   30600                6240      29        1336.5517
+##  1:                   27000                3300      25        1392.0000
+##  2:                   17760                6300      23        1468.6957
+##  3:                   37920                3600      29        1204.1379
+##  4:                   30600                6240      28        1350.0000
 ## ---                                                                     
-## 90:                   14160                6720      20        1767.0000
-## 91:                   11400                1980      42         625.7143
-## 92:                   35820                4560      26        1317.6923
-## 93:                   21360               14760      20        1641.0000
-## 94:                   26820               15360       7        5897.1429</code></pre>
+## 89:                   14160                6720      19        1800.0000
+## 90:                   11400                1980      42         625.7143
+## 91:                   35820                4560      25        1329.6000
+## 92:                   21360               14760      19        1664.2105
+## 93:                   26820               15360       6        6690.0000</code></pre>
 <p>For good measures, I also added number of bout and average bout length as we have seen before. You can of course use these result to plot things like the relationship between bout length and bout number:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="kw">rejoin</span>(bout_summary), <span class="kw">aes</span>(n_bouts, mean_bout_length, <span class="dt">colour=</span>sex)) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
@@ -805,11 +811,11 @@ overall_summary</code></pre></div>
 ##  4: 2017-07-01 08:00:00|Monitor11.txt|04    &lt;list&gt;         4
 ##  5: 2017-07-01 08:00:00|Monitor11.txt|05    &lt;list&gt;         5
 ## ---                                                         
-## 90: 2017-07-01 08:00:00|Monitor64.txt|27    &lt;list&gt;        27
-## 91: 2017-07-01 08:00:00|Monitor64.txt|29    &lt;list&gt;        29
-## 92: 2017-07-01 08:00:00|Monitor64.txt|30    &lt;list&gt;        30
-## 93: 2017-07-01 08:00:00|Monitor64.txt|31    &lt;list&gt;        31
-## 94: 2017-07-01 08:00:00|Monitor64.txt|32    &lt;list&gt;        32
+## 89: 2017-07-01 08:00:00|Monitor64.txt|27    &lt;list&gt;        27
+## 90: 2017-07-01 08:00:00|Monitor64.txt|29    &lt;list&gt;        29
+## 91: 2017-07-01 08:00:00|Monitor64.txt|30    &lt;list&gt;        30
+## 92: 2017-07-01 08:00:00|Monitor64.txt|31    &lt;list&gt;        31
+## 93: 2017-07-01 08:00:00|Monitor64.txt|32    &lt;list&gt;        32
 ##                         experiment_id      start_datetime stop_datetime
 ##  1: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
 ##  2: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
@@ -817,47 +823,47 @@ overall_summary</code></pre></div>
 ##  4: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
 ##  5: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04
 ## ---                                                                    
+## 89: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
 ## 90: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
 ## 91: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
 ## 92: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
 ## 93: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
-## 94: 2017-07-01 08:00:00|Monitor64.txt 2017-07-01 08:00:00    2017-07-04
 ##     sex genotype replicate sleep_fraction_all sleep_fraction_l
-##  1:   M        A         1          0.6956159        0.8270833
-##  2:   M        A         1          0.6817043        0.7854167
-##  3:   M        A         1          0.7613588        0.8402778
-##  4:   M        A         1          0.6984590        0.8541667
-##  5:   M        A         1          0.7443832        0.8395833
+##  1:   M        A         1          0.7600666        0.8500000
+##  2:   M        A         1          0.7550680        0.7861111
+##  3:   M        A         1          0.8214385        0.8356481
+##  4:   M        A         1          0.7528464        0.8555556
+##  5:   M        A         1          0.8044988        0.8444444
 ## ---                                                           
-## 90:   F        C         1          0.7309454        0.7118056
-## 91:   F        C         1          0.5934455        0.5465278
-## 92:   F        C         1          0.7257455        0.7229167
-## 93:   F        C         1          0.7386745        0.7152778
-## 94:   F        C         1          0.9130982        0.9777778
+## 89:   F        C         1          0.7661761        0.7504630
+## 90:   F        C         1          0.6725909        0.6370370
+## 91:   F        C         1          0.7622883        0.7523148
+## 92:   F        C         1          0.7967231        0.7773148
+## 93:   F        C         1          0.9208553        0.9643519
 ##     sleep_fraction_d latency first_bout_length latency_to_longest_bout
-##  1:        0.4973822       0              1560                   27000
-##  2:        0.5251572       0              1020                   17760
-##  3:        0.6371585       0              1200                   37920
-##  4:        0.4651405       0               960                   30600
-##  5:        0.5952122       0               960                   14820
+##  1:        0.6252602    2940               360                   27000
+##  2:        0.7085357    3540               420                   17760
+##  3:        0.8001388    4500               300                   37920
+##  4:        0.5988897    1080               720                   30600
+##  5:        0.7446218    2760               300                   14820
 ## ---                                                                   
-## 90:        0.7596254       0              1140                   14160
-## 91:        0.6760391     900               540                   11400
-## 92:        0.7300744       0              1020                   35820
-## 93:        0.7743644       0              1200                   21360
-## 94:        0.8142251       0              1140                   26820
+## 89:        0.7897294    6120               300                   14160
+## 90:        0.7258848     900               540                   11400
+## 91:        0.7772380    2100               300                   35820
+## 92:        0.8258154    4380               420                   21360
+## 93:        0.8556558    2160              5640                   26820
 ##     length_longest_bout n_bouts mean_bout_length
-##  1:                3300      26        1398.4615
-##  2:                6300      24        1450.0000
-##  3:                3600      30        1204.0000
-##  4:                6240      29        1336.5517
-##  5:                5880      16        2441.2500
+##  1:                3300      25        1392.0000
+##  2:                6300      23        1468.6957
+##  3:                3600      29        1204.1379
+##  4:                6240      28        1350.0000
+##  5:                5880      15        2540.0000
 ## ---                                             
-## 90:                6720      20        1767.0000
-## 91:                1980      42         625.7143
-## 92:                4560      26        1317.6923
-## 93:               14760      20        1641.0000
-## 94:               15360       7        5897.1429</code></pre>
+## 89:                6720      19        1800.0000
+## 90:                1980      42         625.7143
+## 91:                4560      25        1329.6000
+## 92:               14760      19        1664.2105
+## 93:               15360       6        6690.0000</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(overall_summary, <span class="kw">aes</span>(latency <span class="op">/</span><span class="st"> </span><span class="dv">60</span>, sleep_fraction_l, <span class="dt">colour=</span>sex)) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">alpha=</span>.<span class="dv">1</span>)<span class="op">+</span>

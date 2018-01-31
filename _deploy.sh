@@ -4,6 +4,7 @@ set -e
 
 [ -z "${GITHUB_PAT}" ] && exit 0
 [ "${TRAVIS_BRANCH}" != "source" ] && exit 0
+[ "${TRAVIS_PULL_REQUEST}" == "false"] && exit 0
 
 git config user.name "rapporter-travis"
 git config user.email "travis"

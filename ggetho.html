@@ -25,7 +25,7 @@
 <meta name="author" content="Quentin Geissmann">
 
 
-<meta name="date" content="2018-02-07">
+<meta name="date" content="2018-02-14">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -684,10 +684,10 @@ per_dt</code></pre></div>
 ## 
 ##                      id period    power signif_threshold   p_value
 ##                  &lt;char&gt;  &lt;num&gt;    &lt;num&gt;            &lt;num&gt;     &lt;num&gt;
-##    1: toy_experiment|01  57600       NA         116.7888        NA
-##    2: toy_experiment|01  57960       NA         116.7888        NA
-##    3: toy_experiment|01  58320       NA         118.1251        NA
-##    4: toy_experiment|01  58680       NA         118.1251        NA
+##    1: toy_experiment|01  57600 52.75696         116.7888 0.8410714
+##    2: toy_experiment|01  57960 52.75696         116.7888 0.8410714
+##    3: toy_experiment|01  58320 23.13206         118.1251 0.9999997
+##    4: toy_experiment|01  58680 23.13206         118.1251 0.9999997
 ##   ---                                                             
 ## 6436: toy_experiment|40 113760 53.31129         196.2269 1.0000000
 ## 6437: toy_experiment|40 114120 62.78384         197.4675 0.9999997
@@ -698,7 +698,6 @@ per_dt</code></pre></div>
 <span class="st">        </span><span class="kw">geom_line</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">group =</span> id), <span class="dt">alpha=</span>.<span class="dv">1</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">        </span><span class="kw">scale_x_hours</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">        </span><span class="kw">stat_summary</span>(<span class="dt">geom=</span><span class="st">&quot;smooth&quot;</span>, <span class="dt">fun.data =</span>  mean_se)</code></pre></div>
-<pre><code>## Warning: Removed 3220 rows containing non-finite values (stat_summary).</code></pre>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-91-1.png" width="672" /></p>
 </div>
 <div id="miscelaneous" class="section level2 unnumbered">

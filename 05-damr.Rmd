@@ -17,7 +17,7 @@ In this practical chapter, we will use a real experiment to learn how to:
 
 ## Prerequisites {-}
 
-* You are familiar with the [TriKineticks DAM2 system]((http://www.trikinetics.com/))
+* You are familiar with the [TriKineticks DAM system]((http://www.trikinetics.com/))
 * Ensure you have read about the [rethomics workflow](workflow.html) and [metadata](metadata.html)
 * Ensure you have [installed](intro.html#installing-rethomics-packages)
 `behavr`, `damr` and `ggetho` packages:
@@ -48,7 +48,7 @@ unzip(dst, exdir= DATA_DIR)
 
 [Drosophila Activity Monitors](http://www.trikinetics.com/) (DAMs) are a wildely used tool to monitor activity of fruit flies over several days. I am assuming that, if you are reading this tutorial, you are already familiar with the system, but I will make a couple of points clear before we start something more hands-on:
 
-* This tutorial is about single beam **DAM2**
+* This tutorial is about single beam **DAM2** but will addapt very well to multibeam DAM5.
 * We work with the raw data (the data from each monitor is in one single file, and all the monitor files are in the same folder)
 
 ## Getting the data{-}
@@ -141,7 +141,7 @@ It allocates a unique identifier to each animal.
 It is very simple to link metadata:
 
 ```{r}
-metadata <- link_dam2_metadata(metadata, result_dir = DATA_DIR)
+metadata <- link_dam_metadata(metadata, result_dir = DATA_DIR)
 metadata
 ```
 
@@ -153,10 +153,10 @@ You can keep all the data in one file per monitor. `rethomics` will use start an
 
 ## Loading {-}
 
-In order to work with the data the last step is to load it into a [behavr](behavr.html) structure. To do that simply use `load_dam2` function (as shown below). This function will store all data in dt (or any other given name)
+In order to work with the data the last step is to load it into a [behavr](behavr.html) structure. To do that simply use `load_dam` function (as shown below). This function will store all data in dt (or any other given name)
 
 ```{r}
-dt <- load_dam2(metadata)
+dt <- load_dam(metadata)
 summary(dt)
 ```
 
@@ -218,7 +218,7 @@ In other chapters, we will learn how to group individuals, visualise and compute
 We suggest to exclude animals *a priori* (e.g. because they died) by recording them as dead **in the metadata**. This way data is not modified or omited and can easily be recovered if needed.
 For instance, you can add a column `status` in your metadata file and put a default value such as `"OK"`.
 If an animal is to be removed, you can replace `"OK"` by **a reason** (e.g. `"dead"`, `"escaped"`, ...).
-Then, you can load your data without those animals `load_dam2_data(metadata[status == "OK"], ...)`.
+Then, you can load your data without those animals `load_dam_data(metadata[status == "OK"], ...)`.
 This practice has the advantage of making it **very transparent**, why some individuals where excluded.
 Also, as stated before, it can easily be reversed.
 
@@ -230,7 +230,7 @@ Finaly, we may want to apply a function on the data as it is loaded, in order to
 
 ```{r}
 library(sleepr)
-dt <- load_dam2(metadata, FUN = sleepr::sleep_dam_annotation)
+dt <- load_dam(metadata, FUN = sleepr::sleep_dam_annotation)
 dt
 ```
 

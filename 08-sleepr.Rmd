@@ -30,14 +30,14 @@ Traditionally, activity is first scored (e.g. though beam crosses/video tracking
 Then any bout of inactivity longer than five minutes counts as sleep.
 You can easily adapt this tutorial to scoring other models/behaviours as long as you can define **two discrete states** (e.g. sleep vs asleep, moving vs immobile, left vs right, ...).
 
-In the [DAM2 tutorial](damr.html), we have learnt how to load data from a real DAM expriment.
+In the [DAM tutorial](damr.html), we have learnt how to load data from a real DAM expriment.
 Since we already described it in length, it makes sense to use this experiment as an example for our sleep analysis.
 **I will assume that you have already read and understood the [DAM tutorial](damr.html)**.
 The last thing we did then was loading data and scoring sleep:
 
 ```{r, eval=FALSE}
 library(sleepr)
-dt <- load_dam2(metadata, FUN = sleepr::sleep_dam_annotation)
+dt <- load_dam(metadata, FUN = sleepr::sleep_dam_annotation)
 dt
 ```
 

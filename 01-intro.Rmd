@@ -1,4 +1,4 @@
-# First Steps{#intro -}
+# Installation and First Steps{#intro -}
 
 ## Getting R{-}
 

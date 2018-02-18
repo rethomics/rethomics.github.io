@@ -319,7 +319,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="prerequisites" class="section level2 unnumbered">
 <h2>Prerequisites</h2>
 <ul>
-<li>You are familiar with the <a href="(http://www.trikinetics.com/)">TriKineticks DAM2 system</a></li>
+<li>You are familiar with the <a href="(http://www.trikinetics.com/)">TriKineticks DAM system</a></li>
 <li>Ensure you have read about the <a href="workflow.html">rethomics workflow</a> and <a href="metadata.html">metadata</a></li>
 <li>Ensure you have <a href="intro.html#installing-rethomics-packages">installed</a> <code>behavr</code>, <code>damr</code> and <code>ggetho</code> packages:</li>
 </ul>
@@ -332,7 +332,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2>Background</h2>
 <p><a href="http://www.trikinetics.com/">Drosophila Activity Monitors</a> (DAMs) are a wildely used tool to monitor activity of fruit flies over several days. I am assuming that, if you are reading this tutorial, you are already familiar with the system, but I will make a couple of points clear before we start something more hands-on:</p>
 <ul>
-<li>This tutorial is about single beam <strong>DAM2</strong></li>
+<li>This tutorial is about single beam <strong>DAM2</strong> but will addapt very well to multibeam DAM5.</li>
 <li>We work with the raw data (the data from each monitor is in one single file, and all the monitor files are in the same folder)</li>
 </ul>
 </div>
@@ -422,7 +422,7 @@ metadata</code></pre></div>
 <h2>Linking</h2>
 <p><a href="metadata.html#linking-metadata">Linking</a> is the one necessary step before loading the data. It allocates a unique identifier to each animal.</p>
 <p>It is very simple to link metadata:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metadata &lt;-<span class="st"> </span><span class="kw">link_dam2_metadata</span>(metadata, <span class="dt">result_dir =</span> DATA_DIR)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metadata &lt;-<span class="st"> </span><span class="kw">link_dam_metadata</span>(metadata, <span class="dt">result_dir =</span> DATA_DIR)
 metadata</code></pre></div>
 <p>As <code>result_dir</code>, we just use the directory where the data lives, which you decided when you extracted your data (<code>DATA_DIR</code>).</p>
 <p><strong>Importantly, you do not need to cut the relevant parts of your DAM files</strong> (this is an error-prone step that should be avoided). In other words, no need to use the <code>DAMFileScan</code> utility or manipulate in any way the original data.</p>
@@ -430,8 +430,8 @@ metadata</code></pre></div>
 </div>
 <div id="loading" class="section level2 unnumbered">
 <h2>Loading</h2>
-<p>In order to work with the data the last step is to load it into a <a href="behavr.html">behavr</a> structure. To do that simply use <code>load_dam2</code> function (as shown below). This function will store all data in dt (or any other given name)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt &lt;-<span class="st"> </span><span class="kw">load_dam2</span>(metadata)
+<p>In order to work with the data the last step is to load it into a <a href="behavr.html">behavr</a> structure. To do that simply use <code>load_dam</code> function (as shown below). This function will store all data in dt (or any other given name)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt &lt;-<span class="st"> </span><span class="kw">load_dam</span>(metadata)
 <span class="kw">summary</span>(dt)</code></pre></div>
 <pre><code>## behavr table with:
 ##  192 individuals
@@ -481,14 +481,14 @@ metadata</code></pre></div>
 </div>
 <div id="how-to-exclude-animals" class="section level3 unnumbered">
 <h3>How to exclude animals?</h3>
-<p>We suggest to exclude animals <em>a priori</em> (e.g. because they died) by recording them as dead <strong>in the metadata</strong>. This way data is not modified or omited and can easily be recovered if needed. For instance, you can add a column <code>status</code> in your metadata file and put a default value such as <code>&quot;OK&quot;</code>. If an animal is to be removed, you can replace <code>&quot;OK&quot;</code> by <strong>a reason</strong> (e.g. <code>&quot;dead&quot;</code>, <code>&quot;escaped&quot;</code>, …). Then, you can load your data without those animals <code>load_dam2_data(metadata[status == &quot;OK&quot;], ...)</code>. This practice has the advantage of making it <strong>very transparent</strong>, why some individuals where excluded. Also, as stated before, it can easily be reversed.</p>
+<p>We suggest to exclude animals <em>a priori</em> (e.g. because they died) by recording them as dead <strong>in the metadata</strong>. This way data is not modified or omited and can easily be recovered if needed. For instance, you can add a column <code>status</code> in your metadata file and put a default value such as <code>&quot;OK&quot;</code>. If an animal is to be removed, you can replace <code>&quot;OK&quot;</code> by <strong>a reason</strong> (e.g. <code>&quot;dead&quot;</code>, <code>&quot;escaped&quot;</code>, …). Then, you can load your data without those animals <code>load_dam_data(metadata[status == &quot;OK&quot;], ...)</code>. This practice has the advantage of making it <strong>very transparent</strong>, why some individuals where excluded. Also, as stated before, it can easily be reversed.</p>
 </div>
 </div>
 <div id="apply-functions-when-loading" class="section level2 unnumbered">
 <h2>Apply functions when loading</h2>
 <p>Finaly, we may want to apply a function on the data as it is loaded, in order to preprocess it, saving time. This pre-processing will annotate the data, i.e create new information (new columns) based on the original data. As an example, we can perform a sleep (bouts of immobility of 5 min or more), from our <code>sleepr</code> package (which you will have installed).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sleepr)
-dt &lt;-<span class="st"> </span><span class="kw">load_dam2</span>(metadata, <span class="dt">FUN =</span> sleepr<span class="op">::</span>sleep_dam_annotation)
+dt &lt;-<span class="st"> </span><span class="kw">load_dam</span>(metadata, <span class="dt">FUN =</span> sleepr<span class="op">::</span>sleep_dam_annotation)
 dt</code></pre></div>
 <pre><code>## 
 ##  ==== METADATA ====

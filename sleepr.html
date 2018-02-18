@@ -328,9 +328,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="background-2" class="section level2 unnumbered">
 <h2>Background</h2>
 <p>This tutorial focused on sleep in <em>Drosophila</em>. Traditionally, activity is first scored (e.g. though beam crosses/video tracking). Then any bout of inactivity longer than five minutes counts as sleep. You can easily adapt this tutorial to scoring other models/behaviours as long as you can define <strong>two discrete states</strong> (e.g. sleep vs asleep, moving vs immobile, left vs right, …).</p>
-<p>In the <a href="damr.html">DAM2 tutorial</a>, we have learnt how to load data from a real DAM expriment. Since we already described it in length, it makes sense to use this experiment as an example for our sleep analysis. <strong>I will assume that you have already read and understood the <a href="damr.html">DAM tutorial</a></strong>. The last thing we did then was loading data and scoring sleep:</p>
+<p>In the <a href="damr.html">DAM tutorial</a>, we have learnt how to load data from a real DAM expriment. Since we already described it in length, it makes sense to use this experiment as an example for our sleep analysis. <strong>I will assume that you have already read and understood the <a href="damr.html">DAM tutorial</a></strong>. The last thing we did then was loading data and scoring sleep:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sleepr)
-dt &lt;-<span class="st"> </span><span class="kw">load_dam2</span>(metadata, <span class="dt">FUN =</span> sleepr<span class="op">::</span>sleep_dam_annotation)
+dt &lt;-<span class="st"> </span><span class="kw">load_dam</span>(metadata, <span class="dt">FUN =</span> sleepr<span class="op">::</span>sleep_dam_annotation)
 dt</code></pre></div>
 </div>
 <div id="getting-the-data-2" class="section level2 unnumbered">

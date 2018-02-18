@@ -496,40 +496,44 @@ pl + coord_polar()
 
 ## Periodograms {-}
 
-**TODO**
+To draw periodogram, we can use our special fucntion `ggperio`.
 
+The library `zeitgebr` generates periodogram as `behavr` tables. with columns for power, period ...
 ```{r}
 library(zeitgebr)
 dt[, t := ifelse(xmv(condition) == "A", t, t * 1.01)]
-per_dt <- periodogram(moving, dt, FUN = chi_sq_periodogram)
+per_dt <- periodogram(moving, dt, FUN = chi_sq_periodogram, resample_rate = 1/mins(5))
 per_dt
 ```
 
+An average periodogram:
 ```{r}
-ggplot(rejoin(per_dt), aes(period, power, colour=condition)) + 
-        geom_line(mapping = aes(group = id), alpha=.1) + 
-        scale_x_hours() + 
-        stat_summary(geom="smooth", fun.data =  mean_se)
+ggperio(per_dt, aes(period, power, colour=condition)) + 
+        stat_pop_etho()
 ```
 
-## Miscelaneous{-}
+Faceted by uid:
+```{r}
+ggperio(per_dt, aes(period, power, colour=condition)) + 
+        geom_line() + facet_wrap( ~ uid)
+```
 
 
-TODO, list ggplot possibilities:
+Showing peaks:
 
-* Use other geom
-* annotate
-* change title
-* Axis names
+```{r}
+per_dt <-find_peaks(per_dt)
+ggperio(per_dt, aes(period, power, colour=condition)) + 
+        geom_line() +
+        geom_peak(colour="blue") +
+        facet_wrap( ~ uid) 
+```
 
-<!-- 
-title
- -->
- 
 ## Take home message{-}
  
-TODO
-
+`ggetho` provides you with a new set of stats, layers and scales to represent behaviours.
+In particular, `ggetho` and `ggperio` can be used to preprocess `behavr` tables in order to use a regular `ggplot2`
+workflow.
 
 ## Next steps {-}
 

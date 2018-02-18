@@ -225,7 +225,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#coordinate-systems"><i class="fa fa-check"></i>Coordinate systems</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#periodograms"><i class="fa fa-check"></i>Periodograms</a></li>
-<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#miscelaneous"><i class="fa fa-check"></i>Miscelaneous</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#take-home-message-1"><i class="fa fa-check"></i>Take home message</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#next-steps-2"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
@@ -704,7 +703,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-## 165.347   4.566 168.909</code></pre>
+## 218.875   5.548 223.539</code></pre>
 <p>However, the next time, we do the same thing way faster:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(
   dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata,
@@ -714,7 +713,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-##   2.066   0.068   2.091</code></pre>
+##   2.429   0.041   2.410</code></pre>
 <p>Here, we set <code>cache</code> to <code>&quot;ethoscope_cache&quot;</code>. This creates a new directory called <code>&quot;ethoscope_cache&quot;</code> (you can pick the name and location you want). If you to do a bit of tidying up, you can remove it without risk (it will just take time next time you load your data).</p>
 </div>
 </div>

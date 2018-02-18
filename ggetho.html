@@ -225,7 +225,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#coordinate-systems"><i class="fa fa-check"></i>Coordinate systems</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#periodograms"><i class="fa fa-check"></i>Periodograms</a></li>
-<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#miscelaneous"><i class="fa fa-check"></i>Miscelaneous</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#take-home-message-1"><i class="fa fa-check"></i>Take home message</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#next-steps-2"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
@@ -659,10 +658,11 @@ pl <span class="op">+</span><span class="st"> </span><span class="kw">coord_pola
 </div>
 <div id="periodograms" class="section level2 unnumbered">
 <h2>Periodograms</h2>
-<p><strong>TODO</strong></p>
+<p>To draw periodogram, we can use our special fucntion <code>ggperio</code>.</p>
+<p>The library <code>zeitgebr</code> generates periodogram as <code>behavr</code> tables. with columns for power, period …</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zeitgebr)
 dt[, t <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">xmv</span>(condition) <span class="op">==</span><span class="st"> &quot;A&quot;</span>, t, t <span class="op">*</span><span class="st"> </span><span class="fl">1.01</span>)]
-per_dt &lt;-<span class="st"> </span><span class="kw">periodogram</span>(moving, dt, <span class="dt">FUN =</span> chi_sq_periodogram)
+per_dt &lt;-<span class="st"> </span><span class="kw">periodogram</span>(moving, dt, <span class="dt">FUN =</span> chi_sq_periodogram, <span class="dt">resample_rate =</span> <span class="dv">1</span><span class="op">/</span><span class="kw">mins</span>(<span class="dv">5</span>))
 per_dt</code></pre></div>
 <pre><code>## 
 ##  ==== METADATA ====
@@ -682,40 +682,37 @@ per_dt</code></pre></div>
 ## 
 ##  ====== DATA ======
 ## 
-##                      id period    power signif_threshold   p_value
-##                  &lt;char&gt;  &lt;num&gt;    &lt;num&gt;            &lt;num&gt;     &lt;num&gt;
-##    1: toy_experiment|01  57600 52.75696         116.7888 0.8410714
-##    2: toy_experiment|01  57960 52.75696         116.7888 0.8410714
-##    3: toy_experiment|01  58320 23.13206         118.1251 0.9999997
-##    4: toy_experiment|01  58680 23.13206         118.1251 0.9999997
-##   ---                                                             
-## 6436: toy_experiment|40 113760 53.31129         196.2269 1.0000000
-## 6437: toy_experiment|40 114120 62.78384         197.4675 0.9999997
-## 6438: toy_experiment|40 114480 62.78384         197.4675 0.9999997
-## 6439: toy_experiment|40 114840 74.62655         198.7071 0.9999552
-## 6440: toy_experiment|40 115200 74.62655         198.7071 0.9999552</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="kw">rejoin</span>(per_dt), <span class="kw">aes</span>(period, power, <span class="dt">colour=</span>condition)) <span class="op">+</span><span class="st"> </span>
-<span class="st">        </span><span class="kw">geom_line</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">group =</span> id), <span class="dt">alpha=</span>.<span class="dv">1</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">        </span><span class="kw">scale_x_hours</span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">        </span><span class="kw">stat_summary</span>(<span class="dt">geom=</span><span class="st">&quot;smooth&quot;</span>, <span class="dt">fun.data =</span>  mean_se)</code></pre></div>
+##                      id period     power signif_threshold   p_value
+##                  &lt;char&gt;  &lt;num&gt;     &lt;num&gt;            &lt;num&gt;     &lt;num&gt;
+##    1: toy_experiment|01  57600 168.16799         276.4734 0.8917869
+##    2: toy_experiment|01  57960 148.22949         277.6686 0.9928340
+##    3: toy_experiment|01  58320 115.98897         278.8632 0.9999982
+##    4: toy_experiment|01  58680  62.87222         281.2511 1.0000000
+##   ---                                                              
+## 6436: toy_experiment|40 113760 202.30651         493.8790 1.0000000
+## 6437: toy_experiment|40 114120 205.99758         495.0181 1.0000000
+## 6438: toy_experiment|40 114480 226.58389         497.2958 1.0000000
+## 6439: toy_experiment|40 114840 246.68587         498.4344 1.0000000
+## 6440: toy_experiment|40 115200 250.34679         499.5728 1.0000000</code></pre>
+<p>An average periodogram:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggperio</span>(per_dt, <span class="kw">aes</span>(period, power, <span class="dt">colour=</span>condition)) <span class="op">+</span><span class="st"> </span>
+<span class="st">        </span><span class="kw">stat_pop_etho</span>()</code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-91-1.png" width="672" /></p>
-</div>
-<div id="miscelaneous" class="section level2 unnumbered">
-<h2>Miscelaneous</h2>
-<p>TODO, list ggplot possibilities:</p>
-<ul>
-<li>Use other geom</li>
-<li>annotate</li>
-<li>change title</li>
-<li>Axis names</li>
-</ul>
-<!-- 
-title
- -->
+<p>Faceted by uid:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggperio</span>(per_dt, <span class="kw">aes</span>(period, power, <span class="dt">colour=</span>condition)) <span class="op">+</span><span class="st"> </span>
+<span class="st">        </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>( <span class="op">~</span><span class="st"> </span>uid)</code></pre></div>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-92-1.png" width="672" /></p>
+<p>Showing peaks:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">per_dt &lt;-<span class="kw">find_peaks</span>(per_dt)
+<span class="kw">ggperio</span>(per_dt, <span class="kw">aes</span>(period, power, <span class="dt">colour=</span>condition)) <span class="op">+</span><span class="st"> </span>
+<span class="st">        </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">        </span><span class="kw">geom_peak</span>(<span class="dt">colour=</span><span class="st">&quot;blue&quot;</span>) <span class="op">+</span>
+<span class="st">        </span><span class="kw">facet_wrap</span>( <span class="op">~</span><span class="st"> </span>uid) </code></pre></div>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-93-1.png" width="672" /></p>
 </div>
 <div id="take-home-message-1" class="section level2 unnumbered">
 <h2>Take home message</h2>
-<p>TODO</p>
+<p><code>ggetho</code> provides you with a new set of stats, layers and scales to represent behaviours. In particular, <code>ggetho</code> and <code>ggperio</code> can be used to preprocess <code>behavr</code> tables in order to use a regular <code>ggplot2</code> workflow.</p>
 </div>
 <div id="next-steps-2" class="section level2 unnumbered">
 <h2>Next steps</h2>

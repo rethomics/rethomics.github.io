@@ -25,7 +25,7 @@
 <meta name="author" content="Quentin Geissmann">
 
 
-<meta name="date" content="2018-02-21">
+<meta name="date" content="2018-02-28">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -355,6 +355,15 @@ URL &lt;-<span class="st"> &quot;https://github.com/rethomics/rethomics.github.i
 <span class="st">      </span><span class="kw">stat_ld_annotations</span>(<span class="dt">height =</span> <span class="dv">1</span>)<span class="op">+</span>
 <span class="st">      </span><span class="kw">stat_tile_etho</span>() </code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-97-1.png" width="864" /></p>
+<pre><code>##      xmin   xmax ld
+## 1:      0 -43200  L
+## 2:      0      0  D
+## 3:      0  43200  L
+## 4:  43200  86400  D
+## 5:  86400 129600  L
+## 6: 129600 172800  D
+## 7: 172800 216000  L
+## 8: 216000 230400  D</code></pre>
 <div id="dead-animals" class="section level3 unnumbered">
 <h3>Dead animals</h3>
 <p>Some animals may have died during the experiment, and could be wrongly scored as asleep for very long durations. <code>sleepr</code> has an utility function to remove data from dead animals:</p>
@@ -376,6 +385,15 @@ dt_curated &lt;-<span class="st"> </span><span class="kw">curate_dead_animals</s
 <span class="st">      </span><span class="kw">stat_ld_annotations</span>(<span class="dt">ypos =</span> <span class="st">&quot;top&quot;</span>)<span class="op">+</span>
 <span class="st">      </span><span class="kw">stat_tile_etho</span>() </code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-100-1.png" width="864" /></p>
+<pre><code>##      xmin   xmax ld
+## 1:      0 -43200  L
+## 2:      0      0  D
+## 3:      0  43200  L
+## 4:  43200  86400  D
+## 5:  86400 129600  L
+## 6: 129600 172800  D
+## 7: 172800 216000  L
+## 8: 216000 230400  D</code></pre>
 </div>
 <div id="animals-that-died-too-early" class="section level3 unnumbered">
 <h3>Animals that died too early</h3>
@@ -417,6 +435,15 @@ dt_curated &lt;-<span class="st"> </span>dt_curated[id <span class="op">%in%</sp
 <span class="st">      </span><span class="kw">stat_ld_annotations</span>() <span class="op">+</span>
 <span class="st">      </span><span class="kw">facet_grid</span>(genotype <span class="op">~</span><span class="st"> </span>.)</code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-103-1.png" width="672" /></p>
+<pre><code>##      xmin   xmax ld
+## 1:      0 -43200  L
+## 2:      0      0  D
+## 3:      0  43200  L
+## 4:  43200  86400  D
+## 5:  86400 129600  L
+## 6: 129600 172800  D
+## 7: 172800 216000  L
+## 8: 216000 216000  D</code></pre>
 <p>The y axis shows the proportion of time sent sleeping, averaged for each animal within a 30min (default) time window.</p>
 <p>Then, we can wrap (average) that over one day. We also polish the y axis label:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggetho</span>(dt_curated, <span class="kw">aes</span>(<span class="dt">y=</span>asleep, <span class="dt">colour=</span>sex), <span class="dt">time_wrap =</span> <span class="kw">hours</span>(<span class="dv">24</span>)) <span class="op">+</span>
@@ -425,6 +452,11 @@ dt_curated &lt;-<span class="st"> </span>dt_curated[id <span class="op">%in%</sp
 <span class="st">      </span><span class="kw">facet_grid</span>(genotype <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span>
 <span class="st">      </span><span class="kw">scale_y_continuous</span>(<span class="dt">name=</span> <span class="st">&quot;Fraction of time sleeping&quot;</span>,<span class="dt">labels =</span> scales<span class="op">::</span>percent)</code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-104-1.png" width="672" /></p>
+<pre><code>##     xmin   xmax ld
+## 1:     0 -43200  L
+## 2:     0      0  D
+## 3:     0  43200  L
+## 4: 43200  84600  D</code></pre>
 <p>That gives us a good understanding of what happens at the population level.</p>
 </div>
 <div id="summarise-data-per-animal" class="section level2 unnumbered">

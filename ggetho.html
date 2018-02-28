@@ -25,7 +25,7 @@
 <meta name="author" content="Quentin Geissmann">
 
 
-<meta name="date" content="2018-02-21">
+<meta name="date" content="2018-02-28">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -569,6 +569,20 @@ pl</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_pop_etho</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_ld_annotations</span>()
 pl</code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-80-1.png" width="672" /></p>
+<pre><code>##       xmin   xmax ld
+##  1:      0 -43200  L
+##  2:      0      0  D
+##  3:      0  43200  L
+##  4:  43200  86400  D
+##  5:  86400 129600  L
+##  6: 129600 172800  D
+##  7: 172800 216000  L
+##  8: 216000 259200  D
+##  9: 259200 302400  L
+## 10: 302400 345600  D
+## 11: 345600 388800  L
+## 12: 388800 432000  D
+## 13: 432000 432000  L</code></pre>
 </div>
 <div id="changing-ld-colours" class="section level3 unnumbered">
 <h3>Changing LD colours</h3>
@@ -577,6 +591,20 @@ pl</code></pre></div>
 <span class="st">              </span><span class="kw">stat_ld_annotations</span>(<span class="dt">ld_colours =</span> <span class="kw">c</span>(<span class="st">&quot;grey&quot;</span>, <span class="st">&quot;black&quot;</span>))
 pl</code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-81-1.png" width="672" /></p>
+<pre><code>##       xmin   xmax ld
+##  1:      0 -43200  L
+##  2:      0      0  D
+##  3:      0  43200  L
+##  4:  43200  86400  D
+##  5:  86400 129600  L
+##  6: 129600 172800  D
+##  7: 172800 216000  L
+##  8: 216000 259200  D
+##  9: 259200 302400  L
+## 10: 302400 345600  D
+## 11: 345600 388800  L
+## 12: 388800 432000  D
+## 13: 432000 432000  L</code></pre>
 </div>
 <div id="ld-in-the-background" class="section level3 unnumbered">
 <h3>LD in the background</h3>
@@ -586,6 +614,20 @@ pl</code></pre></div>
 <span class="st">            </span><span class="kw">stat_pop_etho</span>()
 pl</code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-82-1.png" width="672" /></p>
+<pre><code>##       xmin   xmax ld
+##  1:      0 -43200  L
+##  2:      0      0  D
+##  3:      0  43200  L
+##  4:  43200  86400  D
+##  5:  86400 129600  L
+##  6: 129600 172800  D
+##  7: 172800 216000  L
+##  8: 216000 259200  D
+##  9: 259200 302400  L
+## 10: 302400 345600  D
+## 11: 345600 388800  L
+## 12: 388800 432000  D
+## 13: 432000 432000  L</code></pre>
 </div>
 <div id="phase-and-period" class="section level3 unnumbered">
 <h3>Phase and period</h3>
@@ -595,12 +637,41 @@ pl</code></pre></div>
 <span class="st">            </span><span class="kw">stat_pop_etho</span>()
 pl</code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-83-1.png" width="672" /></p>
+<pre><code>##       xmin   xmax ld
+##  1:      0 -39600  L
+##  2:      0   3600  D
+##  3:   3600  46800  L
+##  4:  46800  90000  D
+##  5:  90000 133200  L
+##  6: 133200 176400  D
+##  7: 176400 219600  L
+##  8: 219600 262800  D
+##  9: 262800 306000  L
+## 10: 306000 349200  D
+## 11: 349200 392400  L
+## 12: 392400 432000  D</code></pre>
 <p>One can also plot over a period different from 24h, say 20h days:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving)) <span class="op">+</span>
 <span class="st">            </span><span class="kw">stat_ld_annotations</span>(<span class="dt">period =</span> <span class="kw">hours</span>(<span class="dv">20</span>)) <span class="op">+</span>
 <span class="st">            </span><span class="kw">stat_pop_etho</span>()
 pl</code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-84-1.png" width="672" /></p>
+<pre><code>##       xmin   xmax ld
+##  1:      0 -28800  L
+##  2:      0      0  D
+##  3:      0  43200  L
+##  4:  43200  72000  D
+##  5:  72000 115200  L
+##  6: 115200 144000  D
+##  7: 144000 187200  L
+##  8: 187200 216000  D
+##  9: 216000 259200  L
+## 10: 259200 288000  D
+## 11: 288000 331200  L
+## 12: 331200 360000  D
+## 13: 360000 403200  L
+## 14: 403200 432000  D
+## 15: 432000 432000  L</code></pre>
 </div>
 <div id="regime-change" class="section level3 unnumbered">
 <h3>Regime change</h3>
@@ -616,6 +687,30 @@ pl</code></pre></div>
 <span class="st">            </span><span class="kw">stat_pop_etho</span>()
 pl</code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-85-1.png" width="672" /></p>
+<pre><code>##       xmin   xmax ld
+##  1:      0 -43200  L
+##  2:      0      0  D
+##  3:      0  43200  L
+##  4:  43200  86400  D
+##  5:  86400 129600  L
+##  6: 129600 172800  D
+##  7: 172800 216000  L
+##  8: 216000 259200  D
+##  9: 259200 302400  L
+## 10: 302400 345600  D
+## 11: 345600 388800  L
+## 12: 388800 432000  D
+## 13: 432000 432000  L
+##      xmin   xmax ld
+## 1: 172800 129600  L
+## 2: 172800 172800  D
+## 3: 172800 216000  L
+## 4: 216000 259200  D
+## 5: 259200 302400  L
+## 6: 302400 345600  D
+## 7: 345600 388800  L
+## 8: 388800 432000  D
+## 9: 432000 432000  L</code></pre>
 </div>
 </div>
 <div id="coordinate-and-scales" class="section level2 unnumbered">
@@ -629,9 +724,37 @@ pl &lt;-<span class="st"> </span>pl <span class="op">+</span><span class="st"> <
                               <span class="dt">labels =</span> scales<span class="op">::</span>percent)
 pl</code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-86-1.png" width="672" /></p>
+<pre><code>##       xmin   xmax ld
+##  1:      0 -43200  L
+##  2:      0      0  D
+##  3:      0  43200  L
+##  4:  43200  86400  D
+##  5:  86400 129600  L
+##  6: 129600 172800  D
+##  7: 172800 216000  L
+##  8: 216000 259200  D
+##  9: 259200 302400  L
+## 10: 302400 345600  D
+## 11: 345600 388800  L
+## 12: 388800 432000  D
+## 13: 432000 432000  L</code></pre>
 <p>We can also use the same principle to zoom in a finished plot. E.g. between day one and day two:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl <span class="op">+</span><span class="st"> </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim=</span><span class="kw">c</span>(<span class="kw">days</span>(<span class="dv">1</span>), <span class="kw">days</span>(<span class="dv">2</span>)))</code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-87-1.png" width="672" /></p>
+<pre><code>##       xmin   xmax ld
+##  1:      0 -43200  L
+##  2:      0      0  D
+##  3:      0  43200  L
+##  4:  43200  86400  D
+##  5:  86400 129600  L
+##  6: 129600 172800  D
+##  7: 172800 216000  L
+##  8: 216000 259200  D
+##  9: 259200 302400  L
+## 10: 302400 345600  D
+## 11: 345600 388800  L
+## 12: 388800 432000  D
+## 13: 432000 432000  L</code></pre>
 </div>
 <div id="time-scale-units" class="section level3 unnumbered">
 <h3>Time scale units</h3>
@@ -640,6 +763,20 @@ pl</code></pre></div>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which
 ## will replace the existing scale.</code></pre>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-88-1.png" width="672" /></p>
+<pre><code>##       xmin   xmax ld
+##  1:      0 -43200  L
+##  2:      0      0  D
+##  3:      0  43200  L
+##  4:  43200  86400  D
+##  5:  86400 129600  L
+##  6: 129600 172800  D
+##  7: 172800 216000  L
+##  8: 216000 259200  D
+##  9: 259200 302400  L
+## 10: 302400 345600  D
+## 11: 345600 388800  L
+## 12: 388800 432000  D
+## 13: 432000 432000  L</code></pre>
 <p><code>R</code> actually warns you since you are replacing the scale. Which is fine (as it is precisely what we wanted)!</p>
 </div>
 <div id="coordinate-systems" class="section level3 unnumbered">
@@ -654,6 +791,12 @@ pl</code></pre></div>
 
 pl <span class="op">+</span><span class="st"> </span><span class="kw">coord_polar</span>()</code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-89-1.png" width="672" /></p>
+<pre><code>##     xmin   xmax ld
+## 1:     0 -43200  L
+## 2:     0      0  D
+## 3:     0  43200  L
+## 4: 43200  86400  D
+## 5: 86400  86400  L</code></pre>
 </div>
 </div>
 <div id="periodograms" class="section level2 unnumbered">

@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Rethomics, a framework for high-throughput behaviour analysis in R</title>
   <meta name="description" content="This is a tutorial for Rethomics, a framework to analyse high-throuput behavioural data in <code>R</code>.">
-  <meta name="generator" content="bookdown 0.7.6 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="Rethomics, a framework for high-throughput behaviour analysis in R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Quentin Geissmann">
 
 
-<meta name="date" content="2018-04-04">
+<meta name="date" content="2018-04-11">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -409,27 +409,6 @@ dt &lt;-<span class="st"> </span><span class="kw">copy</span>(dams_sample) </cod
 <span class="st">      </span><span class="kw">stat_ld_annotations</span>(<span class="dt">ld_colours =</span> <span class="kw">c</span>(<span class="st">&quot;grey&quot;</span>, <span class="st">&quot;black&quot;</span>))<span class="op">+</span>
 <span class="st">      </span><span class="kw">stat_tile_etho</span>() </code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-125-1.png" width="864" /></p>
-<pre><code>##       xmin   xmax ld
-##  1:  57600  43200  L
-##  2:  57600  86400  D
-##  3:  86400 129600  L
-##  4: 129600 172800  D
-##  5: 172800 216000  L
-##  6: 216000 259200  D
-##  7: 259200 302400  L
-##  8: 302400 345600  D
-##  9: 345600 388800  L
-## 10: 388800 432000  D
-## 11: 432000 475200  L
-## 12: 475200 518400  D
-## 13: 518400 561600  L
-## 14: 561600 604800  D
-## 15: 604800 648000  L
-## 16: 648000 691200  D
-## 17: 691200 734400  L
-## 18: 734400 777600  D
-## 19: 777600 820800  L
-## 20: 820800 835200  D</code></pre>
 <p>We see that two animals (region 5 and 10) seem to have died/escaped before the end of the experiment. There is no right thing to do regarding dead animals. You could keep the data before death, or remove them altogether. <strong>It is eventually your responsibility to decide what to do with dead animals</strong>. Here, I simply remove data after death:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sleepr)
 dt_curated &lt;-<span class="st"> </span><span class="kw">curate_dead_animals</span>(dt)
@@ -444,27 +423,6 @@ dt_curated &lt;-<span class="st"> </span><span class="kw">curate_dead_animals</s
 <span class="st">      </span><span class="kw">stat_ld_annotations</span>(<span class="dt">ld_colours =</span> <span class="kw">c</span>(<span class="st">&quot;grey&quot;</span>, <span class="st">&quot;black&quot;</span>))<span class="op">+</span>
 <span class="st">      </span><span class="kw">stat_tile_etho</span>() </code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-126-1.png" width="672" /></p>
-<pre><code>##       xmin   xmax ld
-##  1:  57600  43200  L
-##  2:  57600  86400  D
-##  3:  86400 129600  L
-##  4: 129600 172800  D
-##  5: 172800 216000  L
-##  6: 216000 259200  D
-##  7: 259200 302400  L
-##  8: 302400 345600  D
-##  9: 345600 388800  L
-## 10: 388800 432000  D
-## 11: 432000 475200  L
-## 12: 475200 518400  D
-## 13: 518400 561600  L
-## 14: 561600 604800  D
-## 15: 604800 648000  L
-## 16: 648000 691200  D
-## 17: 691200 734400  L
-## 18: 734400 777600  D
-## 19: 777600 820800  L
-## 20: 820800 835200  D</code></pre>
 <p>Our curated data is now stored in <code>dt_curated</code>.</p>
 </div>
 </div>

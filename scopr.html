@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Rethomics, a framework for high-throughput behaviour analysis in R</title>
   <meta name="description" content="This is a tutorial for Rethomics, a framework to analyse high-throuput behavioural data in <code>R</code>.">
-  <meta name="generator" content="bookdown 0.7.6 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.7.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="Rethomics, a framework for high-throughput behaviour analysis in R" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Quentin Geissmann">
 
 
-<meta name="date" content="2018-04-04">
+<meta name="date" content="2018-04-11">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -703,7 +703,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-## 183.858   5.277 190.847</code></pre>
+## 164.750   4.167 169.142</code></pre>
 <p>However, the next time, we do the same thing way faster:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(
   dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata,
@@ -713,7 +713,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-##   2.007   0.108   2.103</code></pre>
+##   1.932   0.063   1.951</code></pre>
 <p>Here, we set <code>cache</code> to <code>&quot;ethoscope_cache&quot;</code>. This creates a new directory called <code>&quot;ethoscope_cache&quot;</code> (you can pick the name and location you want). If you to do a bit of tidying up, you can remove it without risk (it will just take time next time you load your data).</p>
 </div>
 </div>
@@ -725,22 +725,6 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
 <span class="st">      </span><span class="kw">stat_tile_etho</span>() <span class="op">+</span>
 <span class="st">      </span><span class="kw">stat_ld_annotations</span>()</code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-50-1.png" width="864" /></p>
-<pre><code>##       xmin   xmax ld
-##  1:  19800  43200  L
-##  2:  43200  86400  D
-##  3:  86400 129600  L
-##  4: 129600 172800  D
-##  5: 172800 216000  L
-##  6: 216000 259200  D
-##  7: 259200 302400  L
-##  8: 302400 345600  D
-##  9: 345600 388800  L
-## 10: 388800 432000  D
-## 11: 432000 475200  L
-## 12: 475200 518400  D
-## 13: 518400 561600  L
-## 14: 561600 604800  D
-## 15: 604800 604800  L</code></pre>
 <p>This allows us to spot possible outliers/missing data/artefacts and try to understand what to do whith them. More about tiles plots in the <a href="ggetho.html">visualisation chapter</a>.</p>
 </div>
 <div id="and-then" class="section level2 unnumbered">
@@ -754,11 +738,6 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
 <span class="st">      </span><span class="kw">stat_pop_etho</span>() <span class="op">+</span>
 <span class="st">      </span><span class="kw">stat_ld_annotations</span>()</code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
-<pre><code>##     xmin   xmax ld
-## 1:     0 -43200  L
-## 2:     0      0  D
-## 3:     0  43200  L
-## 4: 43200  84600  D</code></pre>
 </div>
 <div id="total-sleep-vs-expression-level" class="section level3 unnumbered">
 <h3>Total sleep vs expression level</h3>

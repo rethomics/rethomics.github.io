@@ -44,7 +44,7 @@ dt
 
 ## Getting the data {-}
 
-Instead of going through the whole `damr` tutorial again, I though I would put the resulting data table online.
+Instead of going through the whole `damr` tutorial again, I thought I would put the resulting data table online.
 Importanlty, for simplicity, **I have just kept replicate 1**.
 We just need to download it and load it:
 

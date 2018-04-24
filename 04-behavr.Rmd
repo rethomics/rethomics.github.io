@@ -246,8 +246,8 @@ final_dt
 This table is exactly what you need for statistics and visualisation in `R`!
 
 
-### Stitching{-}
+<!-- ### Stitching{-} -->
 
-TODO
+<!-- TODO -->
 
 

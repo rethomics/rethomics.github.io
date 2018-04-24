@@ -1,10 +1,10 @@
 # Sleep analysis {#sleepr -}
 
-**TODO the perfect one liner**
+<!-- **TODO the perfect one liner** -->
 
----------------------------
+<!-- --------------------------- -->
 
-![TODO add some figure]("rethomics_files/figure-html/achitecture-1.png")
+<!-- ![TODO add some figure]("rethomics_files/figure-html/achitecture-1.png") -->
 
 ## Aims {-}
 In this practical chapter, we will use a real experiment to learn how to:

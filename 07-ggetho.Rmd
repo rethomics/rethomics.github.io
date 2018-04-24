@@ -1,11 +1,11 @@
 # Visualisation with ggetho{#ggetho -}
 
-**Make the most of ggetho**
+<!-- **Make the most of ggetho** -->
 
----------------------------
+<!-- --------------------------- -->
 
-<!-- ![Some sort of slide show?](assets/ethoscope.jpg) -->
-**TODO, a demo of some plots** 
+<!-- <!-- ![Some sort of slide show?](assets/ethoscope.jpg) --> -->
+<!-- **TODO, a demo of some plots**  -->
 
 
 ## Aims {-}

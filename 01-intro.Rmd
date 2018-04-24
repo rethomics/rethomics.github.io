@@ -31,7 +31,7 @@ For instance, you could install `ggetho` with `install_github("rethomics/ggetho"
 
 ## List of `rethomics` packages{-}
 
-Below is a list of all the `rethomics` packages as well as their individual PDF documentation, description and build status. Hello
+Below is a list of all the `rethomics` packages as well as their individual PDF documentation, description and build status.
 
 
 ```{r kable, echo=FALSE}

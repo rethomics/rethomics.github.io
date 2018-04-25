@@ -173,7 +173,7 @@ dt[, treatment := paste(sex, condition, sep='|'), meta=T]
 dt[meta = TRUE]
 ```
 
-`paste()` is a function that link strings of characters with an arbitrary separator (`"|"` here).
+`paste()` is a function that links strings of characters with an arbitrary separator (`"|"` here).
 
 New metavariables can also be added from a summary (see [Summarise data](#summarise-data)).
 ### Data & Metadata {-}

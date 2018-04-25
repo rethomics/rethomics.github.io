@@ -48,7 +48,7 @@ unzip(dst, exdir= DATA_DIR)
 
 [Drosophila Activity Monitors](http://www.trikinetics.com/) (DAMs) are a wildely used tool to monitor activity of fruit flies over several days. I am assuming that, if you are reading this tutorial, you are already familiar with the system, but I will make a couple of points clear before we start something more hands-on:
 
-* This tutorial is about single beam **DAM2** but will addapt very well to multibeam DAM5.
+* This tutorial is about single beam **DAM2** but will adapt very well to multibeam DAM5.
 * We work with the raw data (the data from each monitor is in one single file, and all the monitor files are in the same folder)
 
 ## Getting the data{-}

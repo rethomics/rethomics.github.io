@@ -179,7 +179,7 @@ New metavariables can also be added from a summary (see [Summarise data](#summar
 ### Data & Metadata {-}
 
 The strength of `behavr` tables is their ability to seamlessly **use metavariables as though they were variables**.
-For the sake of the example, lets say you would like to alter the variable `t` (time) so that we add ten seconds, *only to individuals that have condition `'A'`*.
+For the sake of the example, let's say you would like to alter the variable `t` (time) so that we add ten seconds, *only to individuals that have condition `'A'`*.
 
 ```
 dt[, t := ifelse(xmv(condition) == 'A', t + 10, t)]

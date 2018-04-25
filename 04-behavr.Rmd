@@ -221,7 +221,7 @@ stat_dt <- dt[,
 stat_dt
 ```
 
-Then, if needed, these summary can be added back to the metadata:
+Then, if needed, this summary can be added back to the metadata:
 ```{r}
 # create new metadata table by joining current meta and the summary table
 new_meta <- dt[stat_dt, meta=T]

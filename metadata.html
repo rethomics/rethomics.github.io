@@ -308,13 +308,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>When performing many experiments, with multiple condidions and replicates, it becomes challenging to keep track of each individual and to link it to its actual data. In <code>rethomics</code>, regardless of the tool used to generate data, loading results always involves a <strong>metadata file</strong>. It is, in fact, <strong>a simple CSV file</strong> (basically a spreadsheet) in which <strong>each row defines one unique individual</strong>.</p>
 <p>As shown in the figure above, metadata is classified in two types of columns:</p>
 <ul>
-<li><strong>Mandatory</strong> techincal columns – for instance <code>date</code>, <code>machine_name</code> and others (depending on the acquisition platform). They will be used to match an animal to its data. As their name suggests, they <strong>have to</strong> be filled. The contain the minimum information that the computer needs to sort your data.</li>
+<li><strong>Mandatory</strong> techincal columns – for instance <code>date</code>, <code>machine_name</code> and others (depending on the acquisition platform). They will be used to match an animal to its data. As their name suggests, they <strong>have to</strong> be filled. They contain the minimum information that the computer needs to sort your data.</li>
 <li><strong>Optional</strong> experimental columns – in this example, <code>condition</code> and <code>sex</code>. You can use as all the columns you want to characterise your experiments.</li>
 </ul>
 </div>
 <div id="make-them-exhaustive" class="section level2 unnumbered">
 <h2>Make them exhaustive</h2>
-<p>It is a good habit to <strong>record as much information as possible in the metadata file</strong> – even if it seems redundant. For instance, if we put animals in different incubators, we can simply add an <code>incubator</code> column. This way, we keep all our experimental notes, as much as possible, inside one file. Not only this will help us to “debug” if anything goes wrong in one incubator, but we will also be able to account for incubator as a covariate later on. From a computational perspective, having these extra columns is virtually free as they will not impact memory or processing time down the line.</p>
+<p>It is a good habit to <strong>record as much information as possible in the metadata file</strong> – even if it seems redundant. For instance, if we put animals in different incubators, we can simply add an <code>incubator</code> column. This way, we keep all our experimental notes, as much as possible, inside one file. Not only will this help us to “debug” if anything goes wrong in one incubator, but we will also be able to account for incubator as a covariate later on. From a computational perspective, having these extra columns is virtually free as they will not impact memory or processing time down the line.</p>
 </div>
 <div id="put-replicates-together" class="section level2 unnumbered">
 <h2>Put replicates together</h2>

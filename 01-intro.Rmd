@@ -18,7 +18,7 @@ install.packages("devtools")
 library(devtools)
 ```
 
-Ensure you have *no error messages*. `devtool` is a packages that simplify installation of unofficial packages (for instance hosted on github) like `rethomics` ones.
+Ensure you have *no error messages*. `devtool` is a package that simplifies installation of unofficial packages (for instance hosted on github) like `rethomics` ones.
 Then, we can install some of the `rethomics` packages easily.
 For instance, let us install `behavr`.
 

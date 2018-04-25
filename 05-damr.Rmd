@@ -17,7 +17,7 @@ In this practical chapter, we will use a real experiment to learn how to:
 
 ## Prerequisites {-}
 
-* You are familiar with the [TriKineticks DAM system]((http://www.trikinetics.com/))
+* You are familiar with the [TriKineticks DAM system](http://www.trikinetics.com/)
 * Ensure you have read about the [rethomics workflow](workflow.html) and [metadata](metadata.html)
 * Ensure you have [installed](intro.html#installing-rethomics-packages)
 `behavr`, `damr` and `ggetho` packages:
@@ -119,7 +119,7 @@ metadata
 Each of the 192 animals (rows) is defined by a set of mandatory columns (metavariables):
 
 * `file` -- the data file (monitor) that it has been recorded in
-* `start_datetime` -- the date and time (`YYYY-MM-DD HH:MM:SS`) of the start of the experiment. Time will be considered ZT0, see [note](dam-sleep.html#note-on-zt0)
+* `start_datetime` -- the date and time (`YYYY-MM-DD HH:MM:SS`) of the start of the experiment. Time will be considered ZT0, see [note](damr.html#zt0)
 * `stop_datetime` -- the last time point of the experiment (time is optional)
 * `region_id` -- the channel ([1, 32])
 

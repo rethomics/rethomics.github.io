@@ -17,7 +17,7 @@ It is, in fact, **a simple CSV file** (basically a spreadsheet) in which **each 
 
 As shown in the figure above, metadata is classified in two types of columns:
 
-* **Mandatory** techincal columns --  for instance `date`, `machine_name` and others (depending on the acquisition platform). They will be used to match an animal to its data. As their name suggests, they **have to** be filled. The contain the minimum information that the computer needs to sort your data.
+* **Mandatory** techincal columns --  for instance `date`, `machine_name` and others (depending on the acquisition platform). They will be used to match an animal to its data. As their name suggests, they **have to** be filled. They contain the minimum information that the computer needs to sort your data.
 * **Optional** experimental columns -- in this example, `condition` and `sex`. You can use as all the columns you want to characterise your experiments.
 
 

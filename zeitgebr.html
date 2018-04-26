@@ -25,7 +25,7 @@
 <meta name="author" content="Quentin Geissmann">
 
 
-<meta name="date" content="2018-04-25">
+<meta name="date" content="2018-04-26">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="sleepr.html">
-
+<link rel="next" href="community.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -275,6 +275,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#next-steps-4"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="community.html"><a href="community.html"><i class="fa fa-check"></i>Citation, issues and community</a><ul>
+<li class="chapter" data-level="" data-path="community.html"><a href="community.html#citation"><i class="fa fa-check"></i>Citation</a></li>
+<li class="chapter" data-level="" data-path="community.html"><a href="community.html#having-troubles"><i class="fa fa-check"></i>Having troubles</a></li>
+<li class="chapter" data-level="0.1" data-path="community.html"><a href="community.html#contributing"><i class="fa fa-check"></i><b>0.1</b> Contributing</a></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://bookdown.org/yihui/bookdown/" target="blank">Published with bookdown</a></li>
 
@@ -404,11 +409,9 @@ dt &lt;-<span class="st"> </span><span class="kw">copy</span>(dams_sample) </cod
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">z=</span>activity)) <span class="op">+</span>
 <span class="st">      </span><span class="kw">stat_ld_annotations</span>(<span class="dt">ld_colours =</span> <span class="kw">c</span>(<span class="st">&quot;grey&quot;</span>, <span class="st">&quot;black&quot;</span>))<span class="op">+</span>
 <span class="st">      </span><span class="kw">stat_tile_etho</span>() </code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-125-1.png" width="864" /> We can also make an overview using <code>moving</code> variable, (e.g. if you are working with Ethoscope data)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">z=</span>moving)) <span class="op">+</span>
-<span class="st">      </span><span class="kw">stat_ld_annotations</span>(<span class="dt">ld_colours =</span> <span class="kw">c</span>(<span class="st">&quot;grey&quot;</span>, <span class="st">&quot;black&quot;</span>))<span class="op">+</span>
-<span class="st">      </span><span class="kw">stat_tile_etho</span>() </code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-126-1.png" width="864" /> We see that two animals (region 5 and 10) seem to have died/escaped before the end of the experiment. There is no right thing to do regarding dead animals. You could keep the data before death, or remove them altogether. <strong>It is eventually your responsibility to decide what to do with dead animals</strong>. Here, I simply remove data after death:</p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-125-1.png" width="864" /></p>
+<p>Note that you can substitute <code>activity</code> by other variables you have in <code>dt</code> (e.g. <code>moving</code>).</p>
+<p>We see that two animals (region 5 and 10) seem to have died/escaped before the end of the experiment. There is no right thing to do regarding dead animals. You could keep the data before death, or remove them altogether. <strong>It is eventually your responsibility to decide what to do with dead animals</strong>. Here, I simply remove data after death:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sleepr)
 dt_curated &lt;-<span class="st"> </span><span class="kw">curate_dead_animals</span>(dt)
 <span class="kw">summary</span>(dt_curated)</code></pre></div>
@@ -421,7 +424,7 @@ dt_curated &lt;-<span class="st"> </span><span class="kw">curate_dead_animals</s
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggetho</span>(dt_curated, <span class="kw">aes</span>(<span class="dt">z=</span>activity)) <span class="op">+</span>
 <span class="st">      </span><span class="kw">stat_ld_annotations</span>(<span class="dt">ld_colours =</span> <span class="kw">c</span>(<span class="st">&quot;grey&quot;</span>, <span class="st">&quot;black&quot;</span>))<span class="op">+</span>
 <span class="st">      </span><span class="kw">stat_tile_etho</span>() </code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-127-1.png" width="672" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-126-1.png" width="672" /></p>
 <p>Our curated data is now stored in <code>dt_curated</code>.</p>
 </div>
 </div>
@@ -448,12 +451,12 @@ dt_curated[, .(id, uid) ,meta=T]</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggetho</span>(dt_curated, <span class="kw">aes</span>(<span class="dt">z =</span> moving), <span class="dt">multiplot =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">stat_bar_tile_etho</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">facet_wrap</span>( <span class="op">~</span><span class="st"> </span>uid, <span class="dt">ncol =</span> <span class="dv">8</span>)</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-129-1.png" width="1152" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-128-1.png" width="1152" /></p>
 <p>Interestingly, you can use formula in facet to show or sort with other metavariables:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggetho</span>(dt_curated, <span class="kw">aes</span>(<span class="dt">z=</span>moving), <span class="dt">multiplot =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">stat_bar_tile_etho</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">facet_wrap</span>( <span class="op">~</span><span class="st"> </span>period_group <span class="op">+</span><span class="st"> </span>uid, <span class="dt">ncol=</span><span class="dv">8</span>, <span class="dt">labeller =</span> <span class="kw">label_wrap_gen</span>(<span class="dt">multi_line=</span><span class="ot">FALSE</span>))</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-130-1.png" width="1152" /> Now, we know which genotype match each <code>uid</code>. In your own work, you could generalise this concept to display more metavariables. For instance, if you had a <code>sex</code> metavariable you could do: <code>facet_wrap( ~ period_group + sex + uid, ...)</code>.</p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-129-1.png" width="1152" /> Now, we know which genotype match each <code>uid</code>. In your own work, you could generalise this concept to display more metavariables. For instance, if you had a <code>sex</code> metavariable you could do: <code>facet_wrap( ~ period_group + sex + uid, ...)</code>.</p>
 </div>
 <div id="periodograms-1" class="section level2 unnumbered">
 <h2>Periodograms</h2>
@@ -552,21 +555,21 @@ per_xsq_dt</code></pre></div>
 <h3>Visualisation</h3>
 <p>In <code>ggetho</code>, the function <code>ggperio()</code> is designed specifically for displaying periodograms. One could plot all the periodograms like so:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggperio</span>(per_xsq_dt) <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">group =</span> id, <span class="dt">colour=</span>period_group))</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-133-1.png" width="672" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-132-1.png" width="672" /></p>
 <p>But it is very hard to read, so we will <strong>facet per <code>uid</code></strong>. In addition, we can use a special geometry (<code>geom_peak</code>) to show the values of the peak. We draw a signifiance line as well, just using the <code>signif_threshold</code> variable:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggperio</span>(per_xsq_dt) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">group =</span> id, <span class="dt">colour =</span> period_group)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_peak</span>(<span class="dt">col =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> signif_threshold)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>uid, <span class="dt">ncol =</span> <span class="dv">8</span>)</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-134-1.png" width="1152" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-133-1.png" width="1152" /></p>
 <p>Instead of drawing only the first peak, you could draw, for instance, the first and second (<code>geom_peak(peak_rank = 1:2)</code>) or, only the second (<code>geom_peak(peak_rank = 2)</code>).</p>
 <p>An interesting thing to do is a population average periodogram. In this graph, the solid lines are the average power per group, whilst the shaded areas are ± standard error:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggperio</span>(per_xsq_dt, <span class="kw">aes</span>(
                   <span class="dt">y =</span> power <span class="op">-</span><span class="st"> </span>signif_threshold,
                   <span class="dt">colour=</span>period_group)) <span class="op">+</span><span class="st"> </span>
 <span class="st">                  </span><span class="kw">stat_pop_etho</span>()</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-135-1.png" width="672" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-134-1.png" width="672" /></p>
 </div>
 <div id="exctract-the-peak-values" class="section level3 unnumbered">
 <h3>Exctract the peak values</h3>
@@ -702,7 +705,7 @@ summary_dt</code></pre></div>
 <span class="st">        </span><span class="kw">geom_boxplot</span>(<span class="dt">outlier.colour =</span> <span class="ot">NA</span>) <span class="op">+</span>
 <span class="st">        </span><span class="kw">geom_jitter</span>(<span class="kw">aes</span>(<span class="dt">size=</span>power <span class="op">-</span><span class="st">  </span>signif_threshold), <span class="dt">alpha=</span>.<span class="dv">5</span>) <span class="op">+</span>
 <span class="st">        </span><span class="kw">scale_y_hours</span>(<span class="dt">name =</span> <span class="st">&quot;Period (h)&quot;</span>) </code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-137-1.png" width="672" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-136-1.png" width="672" /></p>
 <p>Another direction could be to perform pairwise wilcoxon tests between groups:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairwise.wilcox.test</span>(summary_dt<span class="op">$</span>period, summary_dt<span class="op">$</span>period_group )</code></pre></div>
 <pre><code>## Warning in wilcox.test.default(xi, xj, paired = paired, ...): cannot
@@ -740,8 +743,8 @@ summary_dt</code></pre></div>
           </div>
         </div>
       </div>
-<a href="sleepr.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="sleepr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="community.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

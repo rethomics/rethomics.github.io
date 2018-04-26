@@ -206,7 +206,7 @@ Each row is an animal (and is labelled with its corresponding id).
 Each column is a 30min window.
 The colour intensity indicates the activity.
 
-There are two things that we can imediatly notice:
+There are two things that we can immediatly notice:
 
 * For most animals, the activity is rythmic and synchronised with the light phase transisitions.
 * Some animals are dead or missing. For instance take a look at `channel 26` in `Monitor64.txt`.

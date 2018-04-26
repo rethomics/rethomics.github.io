@@ -6,6 +6,8 @@ set -e
 [ "${TRAVIS_BRANCH}" != "source" ] && exit 0
 [ "${TRAVIS_PULL_REQUEST}" == "false"] && exit 0
 
+echo TRAVIS_PULL_REQUEST is "${TRAVIS_PULL_REQUEST}"
+
 git config user.name "rapporter-travis"
 git config user.email "travis"
 

@@ -336,7 +336,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="lessons-from-ggplot" class="section level2 unnumbered">
 <h2>Lessons from ggplot</h2>
 <p>In the previous tutorials, we have used <code>ggetho</code> to visualise out behavioural data. This section will explain further how this package can be used to produce flexible plots and how it integrates with <code>ggplot2</code>.</p>
-<p><a href="http://ggplot2.org/">ggplot2</a> is one of the most popular visualisation tool and an unavoidable <code>R</code> package. It implements the powerful concepts of the <a href="https://www.cs.uic.edu/~wilkinson/TheGrammarOfGraphics/GOG.html">“Grammar of graphics”</a>. The package <code>ggetho</code>, which we discuss here, extends <code>ggplot</code> for the specific case of behavioural analysis. At this stage, you really want to have some familiarity with <code>ggplot2</code> so you understand its logic. You will find a fair numbers of <a href="https://www.youtube.com/watch?v=TaxJwC_MP9Q">videos</a> and <a href="http://ggplot2.org/book/">books</a> online.</p>
+<p><a href="http://ggplot2.org/">ggplot2</a> is one of the most popular visualisation tools and an unavoidable <code>R</code> package. It implements the powerful concepts of the <a href="https://www.cs.uic.edu/~wilkinson/TheGrammarOfGraphics/GOG.html">“Grammar of graphics”</a>. The package <code>ggetho</code>, which we discuss here, extends <code>ggplot</code> for the specific case of behavioural analysis. At this stage, you really want to have some familiarity with <code>ggplot2</code> so you understand its logic. You will find a fair numbers of <a href="https://www.youtube.com/watch?v=TaxJwC_MP9Q">videos</a> and <a href="http://ggplot2.org/book/">books</a> online.</p>
 </div>
 <div id="some-behavioural-data" class="section level2 unnumbered">
 <h2>Some behavioural data</h2>
@@ -368,7 +368,7 @@ metadata &lt;-<span class="st"> </span><span class="kw">data.table</span>(<span 
 <div id="the-ggetho-function" class="section level2 unnumbered">
 <h2>The <code>ggetho()</code> function</h2>
 <p><code>ggetho()</code> is the core function. It expresses the <strong>relationship between variables</strong>. In this respect, it works very much like <code>ggplot()</code>, but it also pre-processes the data.</p>
-<p>It is important to understand the <strong>difference between <code>ggplot()</code> and <code>ggetho()</code></strong>. <code>ggplot()</code> is a works with data frames (or data tables), and does not preprocess the data. <code>ggetho()</code> is only a layer on top of <code>ggplot()</code>. It works <strong>exclusively with <code>behavr</code> tables</strong> and does preprocess data before calling <code>ggplot()</code>. <code>ggetho()</code> does return <code>ggplot</code> a object, therefore, layers available in <code>ggplot2</code> can be used natively on top of <code>ggetho</code>.</p>
+<p>It is important to understand the <strong>difference between <code>ggplot()</code> and <code>ggetho()</code></strong>. <code>ggplot()</code> works with data frames (or data tables), and does not preprocess the data. <code>ggetho()</code> is only a layer on top of <code>ggplot()</code>. It works <strong>exclusively with <code>behavr</code> tables</strong> and does preprocess data before calling <code>ggplot()</code>. <code>ggetho()</code> does return <code>ggplot</code> a object, therefore, layers available in <code>ggplot2</code> can be used natively on top of <code>ggetho</code>.</p>
 <p>Let’s work with an example. Say, we would like:</p>
 <ul>
 <li>The proportion of time spent <strong>moving, on the y axis</strong></li>
@@ -386,7 +386,7 @@ pl</code></pre></div>
 <h2>Tile plots</h2>
 <div id="per-individual" class="section level3 unnumbered">
 <h3>Per individual</h3>
-<p>One of the most interesting layer is <code>stat_tile_etho</code>. It shows the <strong>variable of interest in the (colour) z axis</strong>. The y axis is discrete (generally the id), taht is <strong>one row per individual</strong>. The x axis is time (by default, summerised, by <code>ggetho</code>, over 30 minutes). So, if we want to show the proportion of time spent moving over time for each individual (id):</p>
+<p>One of the most interesting layers is <code>stat_tile_etho</code>. It shows the <strong>variable of interest in the (colour) z axis</strong>. The y axis is discrete (generally the id), that is <strong>one row per individual</strong>. The x axis is time (by default, summerised, by <code>ggetho</code>, over 30 minutes). So, if we want to show the proportion of time spent moving over time for each individual (id):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>id, <span class="dt">z=</span>moving)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_tile_etho</span>()
 pl</code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
@@ -410,7 +410,7 @@ new_meta &lt;-<span class="st"> </span>dt[mean_mov_dt, meta=T]
 ## 4: toy_experiment|04         4         B   F         118
 ## 5: toy_experiment|05         5         A   M         123
 ## 6: toy_experiment|06         6         B   M         203</code></pre>
-<p>Proportion of time moving (<code>mean(moving)</code>) will be a number between zero and one, with sometimes many decimals, whichs makes it hard to read. A more intuitive way to express it is as a rounded per mille (‰). I prefer it to per cent as we have more more resolution (i.e. less ties) For instance, <code>0.0113333</code> would be expressed as <code>11</code>.</p>
+<p>Proportion of time moving (<code>mean(moving)</code>) will be a number between zero and one, with sometimes many decimals, which makes it hard to read. A more intuitive way to express it is as a rounded per mille (‰). I prefer it to per cent as we have more resolution (i.e. less ties) For instance, <code>0.0113333</code> would be expressed as <code>11</code>.</p>
 <p>Now, we can express a new relationship where we show the <em>interaction</em> between our custom variable and id, on the y axis:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span><span class="kw">interaction</span>(id, mean_moving, <span class="dt">sep =</span> <span class="st">&quot; : &quot;</span>), <span class="dt">z=</span>moving)) <span class="op">+</span>
 <span class="st">              </span><span class="kw">stat_tile_etho</span>()
@@ -445,11 +445,11 @@ pl</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_pop_etho</span>()
 pl</code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
-<p>By defaut, the local average and error bars are computed from the mean an standard errors (<code>method = mean_se</code>). You can compute other types of error bars e.g. bootstrap (<code>method = mean_cl_boot</code>).</p>
+<p>By defaut, the local average and error bars are computed from the mean as standard errors (<code>method = mean_se</code>). You can compute other types of error bars e.g. bootstrap (<code>method = mean_cl_boot</code>).</p>
 </div>
 <div id="several-populations" class="section level3 unnumbered">
 <h3>Several populations</h3>
-<p>Often, we want to compare population with respect to a variable. There are different way to split populations. We can, for instance, <strong>use a different colour line for different groups</strong>:</p>
+<p>Often, we want to compare population with respect to a variable. There are different ways to split populations. We can, for instance, <strong>use a different colour line for different groups</strong>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving, <span class="dt">colour=</span>sex)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_pop_etho</span>()
 pl</code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
@@ -472,14 +472,14 @@ pl</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving), <span class="dt">time_wrap =</span> <span class="kw">hours</span>(<span class="dv">24</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_pop_etho</span>()
 pl</code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
-<p>Note that you do not have to wrap over specifically 24h, you could work different periods.</p>
+<p>Note that you do not have to wrap specifically over 24h, you could work over different periods.</p>
 <p>If you are interested in events that happen between the end and the start of the wrapping period (e.g. at ZT24). You may want to wrap time with an <strong>“offset”</strong>. That is a phase shift. For instance, if we want to have ZT06 in the middle of our graph, we use an offset of +6h:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving), 
              <span class="dt">time_wrap =</span> <span class="kw">hours</span>(<span class="dv">24</span>),
              <span class="dt">time_offset =</span> <span class="kw">hours</span>(<span class="dv">6</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_pop_etho</span>()
 pl</code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-71-1.png" width="672" /></p>
-<p>As you can see, it gives have a nice visualisation of the “activity peaks”.</p>
+<p>As you can see, it gives us a nice visualisation of the “activity peaks”.</p>
 </div>
 <div id="double-plotted-actograms" class="section level2 unnumbered">
 <h2>Double-plotted actograms</h2>
@@ -518,7 +518,7 @@ pl</code></pre></div>
 <p>When multiplotting, it is difficult to represent individuals (since both y and x axis are used).</p>
 <div id="default" class="section level3 unnumbered">
 <h3>Default</h3>
-<p>The best way to systematically represent all of them is to use facetting, which is a ggplot feature. Since id represent unique individuals, <strong>each facet (sub-rectangle) is one individual</strong>:</p>
+<p>The best way to systematically represent all of them is to use facetting, which is a ggplot feature. Since id represents unique individuals, <strong>each facet (sub-rectangle) is one individual</strong>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">z=</span>moving), 
              <span class="dt">multiplot =</span> <span class="dv">2</span>
              ) <span class="op">+</span><span class="st"> </span>
@@ -540,7 +540,7 @@ pl</code></pre></div>
 </div>
 <div id="numerical-labelling" class="section level3 unnumbered">
 <h3>Numerical labelling</h3>
-<p>Even with the trick above, ids may become unreadable when plotting many individuals. What we can can do in this case is to use numbers instead. Firt, we create a new metavariable named, for instance, <code>uid</code>. It will be one <strong>unique number</strong> per individual:</p>
+<p>Even with the trick above, ids may become unreadable when plotting many individuals. What we can can do in this case is to use numbers instead. First, we create a new metavariable named, for instance, <code>uid</code>. It will be one <strong>unique number</strong> per individual:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt[, uid <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span>.N, meta=T]
 <span class="kw">print</span>(dt[<span class="dt">meta=</span>T])</code></pre></div>
 <pre><code>##                    id region_id condition sex mean_moving uid
@@ -579,7 +579,7 @@ pl</code></pre></div>
 </div>
 <div id="changing-ld-colours" class="section level3 unnumbered">
 <h3>Changing LD colours</h3>
-<p>Sometimes you want different colours to explains, for instance, that days are “subjective”(grey).</p>
+<p>Sometimes you want different colours to explain, for instance, that days are “subjective”(grey).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_pop_etho</span>() <span class="op">+</span>
 <span class="st">              </span><span class="kw">stat_ld_annotations</span>(<span class="dt">ld_colours =</span> <span class="kw">c</span>(<span class="st">&quot;grey&quot;</span>, <span class="st">&quot;black&quot;</span>))
 pl</code></pre></div>
@@ -587,7 +587,7 @@ pl</code></pre></div>
 </div>
 <div id="ld-in-the-background" class="section level3 unnumbered">
 <h3>LD in the background</h3>
-<p>To put the annotation in the background, we can invert the order of the layers, set the heigh of the annotation to 1 (100%) and add some transparency (<code>alpha = 0.3</code>). We also remove the outline of the boxes:</p>
+<p>To put the annotation in the background, we can invert the order of the layers, set the height of the annotation to 1 (100%) and add some transparency (<code>alpha = 0.3</code>). We also remove the outline of the boxes:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving)) <span class="op">+</span>
 <span class="st">            </span><span class="kw">stat_ld_annotations</span>(<span class="dt">height=</span><span class="dv">1</span>, <span class="dt">alpha=</span><span class="fl">0.3</span>, <span class="dt">outline =</span> <span class="ot">NA</span>) <span class="op">+</span>
 <span class="st">            </span><span class="kw">stat_pop_etho</span>()
@@ -642,12 +642,12 @@ pl</code></pre></div>
 </div>
 <div id="time-scale-units" class="section level3 unnumbered">
 <h3>Time scale units</h3>
-<p>By default, <code>ggetho</code> decides the unit of the time axis according to the range of the data. Sometime you want to override this behaviour to force time to be in a specific unit (here hours). Using the plot above, we can add a scale:</p>
+<p>By default, <code>ggetho</code> decides the unit of the time axis according to the range of the data. Sometimes you want to override this behaviour to force time to be in a specific unit (here hours). Using the plot above, we can add a scale:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl <span class="op">+</span><span class="st"> </span>ggetho<span class="op">::</span><span class="kw">scale_x_hours</span>()</code></pre></div>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which
 ## will replace the existing scale.</code></pre>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-88-1.png" width="672" /></p>
-<p><code>R</code> actually warns you since you are replacing the scale. Which is fine (as it is precisely what we wanted)!</p>
+<p><code>R</code> actually warns you since you are replacing the scale. This is fine (as it is precisely what we wanted)!</p>
 </div>
 <div id="coordinate-systems" class="section level3 unnumbered">
 <h3>Coordinate systems</h3>

@@ -337,7 +337,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="background-1" class="section level2 unnumbered">
 <h2>Background</h2>
 <p><a href="http://gilestrolab.github.io/ethoscope/">The Ethoscope Platform</a> is a versatile and modular behavioural system to sudy behaviour of small animals. You can read more about it in our <a href="http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.2003026">PLOS Biology publication</a>. Although you can do much more with them, ethoscope are primarily designed to study sleep and circadian rhythms in Drosophila. Therefore, this tutorial targets mainly users in this context.</p>
-<p>Ethoscopes typically generate hundreads of megabytes per machine per week. The platform is designed so that many devices run an parallel, and the resulting data is eventually centralised for all users. <strong>Metadata tables are the best way to both keep track of your expriments and fetch the relevant data.</strong></p>
+<p>Ethoscopes typically generate hundreds of megabytes per machine per week. The platform is designed so that many devices run an parallel, and the resulting data is eventually centralised for all users. <strong>Metadata tables are the best way to both keep track of your expriments and fetch the relevant data.</strong></p>
 </div>
 <div id="getting-the-data-1" class="section level2 unnumbered">
 <h2>Getting the data</h2>
@@ -374,7 +374,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         │   └── 2016-07-22_16-41-21_011d6ba04e534be486069c3db7b10827.db
         └── 2016-07-29_14-59-49
             └── 2016-07-29_14-59-49_011d6ba04e534be486069c3db7b10827.db</code></pre>
-<p>Tracking data are saved in <code>.db</code> files. Everytime an ethoscope is started, one new <code>.db</code> file is created. All animals presents in the same machine at the same time will have their data saved in the same <code>.db</code> file.</p>
+<p>Tracking data are saved in <code>.db</code> files. Everytime an ethoscope is started, one new <code>.db</code> file is created. All animals present in the same machine at the same time will have their data saved in the same <code>.db</code> file.</p>
 </div>
 <div id="set-your-working-directory" class="section level3 unnumbered">
 <h3>Set your working directory</h3>
@@ -593,7 +593,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
 </div>
 <div id="preprocessing" class="section level3 unnumbered">
 <h3>Preprocessing</h3>
-<p>As dissussed before, it is inneficient and not always possible to load all raw data for hundreads of animals. Instead, we can <strong>preprocess data on the go</strong>. In the context of activity and sleep analysis, we can quantified activity in windows of 10s (<a href="http://journals.plos.org/plosbiology/article/file?type=supplementary&amp;id=info:doi/10.1371/journal.pbio.2003026.s005">techinical details here</a>). This is implemented in the function <code>sleep_annotation</code> of our <code>sleepr</code> package. Ensure you have installed <code>sleepr</code> as well (<code>devtools::install_github(&quot;rethomics/sleepr&quot;)</code>).</p>
+<p>As dissussed before, it is inefficient and not always possible to load all raw data for hundreads of animals. Instead, we can <strong>preprocess data on the go</strong>. In the context of activity and sleep analysis, we can quantify activity in windows of 10s (<a href="http://journals.plos.org/plosbiology/article/file?type=supplementary&amp;id=info:doi/10.1371/journal.pbio.2003026.s005">techinical details here</a>). This is implemented in the function <code>sleep_annotation</code> of our <code>sleepr</code> package. Ensure you have installed <code>sleepr</code> as well (<code>devtools::install_github(&quot;rethomics/sleepr&quot;)</code>).</p>
 <p>When running this function:</p>
 <ul>
 <li>The activity in each 10s of data will be scored</li>
@@ -681,7 +681,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
 ## 4641275:            0            1   TRUE  FALSE           FALSE</code></pre>
 <p>We have several variables (see in the <code>===DATA===</code> section of the output). The important ones are:</p>
 <ul>
-<li><code>t</code> – the time, in s, sample eveyr 10s</li>
+<li><code>t</code> – the time, in s, sample every 10s</li>
 <li><code>x</code> – the position in the tube (0 = left, 1=right)</li>
 <li><code>beam_cross</code> – how many times the midline was crossed within the 10s window</li>
 <li><code>moving</code> – whether any movement was detected in this time window</li>
@@ -699,8 +699,8 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
 </div>
 <div id="cache-directory" class="section level3 unnumbered">
 <h3>Cache directory</h3>
-<p>One issue with loading ethoscope data is thta it is <strong>relativelly slow</strong>. For instance, according to our computer, you may take half an hour to load data from 500 animals <span class="math inline">\(times\)</span> 1 week. In your daily life, you will often need to close <code>R</code> and open it again later to analyse things differently, or simply change simple parameters on some figures. You really don’t want to spend too long reloading data this sort of situation.</p>
-<p>To address this issue, <code>load_ethoscope</code> comes with a <a href="https://en.wikipedia.org/wiki/Cache_(computing)">caching</a> option. When turned on, whenever you load any data, it stores a snapshot on the disk (in a directory you pick). Then, the <em>next time</em> you load the data, loading happends directly from the snapshot. This way you will load data one or two orders of magnitudes faster!</p>
+<p>One issue with loading ethoscope data is thta it is <strong>relatively slow</strong>. For instance, according to our computer, you may take half an hour to load data from 500 animals <span class="math inline">\(times\)</span> 1 week. In your daily life, you will often need to close <code>R</code> and open it again later to analyse things differently, or simply change simple parameters on some figures. You really don’t want to spend too long reloading data this sort of situation.</p>
+<p>To address this issue, <code>load_ethoscope</code> comes with a <a href="https://en.wikipedia.org/wiki/Cache_(computing)">caching</a> option. When turned on, whenever you load any data, it stores a snapshot on the disk (in a directory you pick). Then, the <em>next time</em> you load the data, loading happends directly from the snapshot. This way you will load data one or two orders of magnitude faster!</p>
 <p>The first time, everything will take as long:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(
   dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata,
@@ -710,7 +710,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-## 203.976   6.103 209.066</code></pre>
+## 173.196   4.109 176.801</code></pre>
 <p>However, the next time, we do the same thing way faster:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(
   dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata,
@@ -720,7 +720,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-##   1.889   0.060   1.910</code></pre>
+##   1.923   0.065   1.947</code></pre>
 <p>Here, we set <code>cache</code> to <code>&quot;ethoscope_cache&quot;</code>. This creates a new directory called <code>&quot;ethoscope_cache&quot;</code> (you can pick the name and location you want). If you to do a bit of tidying up, you can remove it without risk (it will just take time next time you load your data).</p>
 </div>
 </div>

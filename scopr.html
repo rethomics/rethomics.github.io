@@ -275,13 +275,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#next-steps-4"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="community.html"><a href="community.html"><i class="fa fa-check"></i>Citation, issues and community</a><ul>
+<li class="chapter" data-level="" data-path="community.html"><a href="community.html"><i class="fa fa-check"></i>Issues and community</a><ul>
 <li class="chapter" data-level="" data-path="community.html"><a href="community.html#citation"><i class="fa fa-check"></i>Citation</a></li>
 <li class="chapter" data-level="" data-path="community.html"><a href="community.html#having-troubles"><i class="fa fa-check"></i>Having troubles</a></li>
-<li class="chapter" data-level="0.1" data-path="community.html"><a href="community.html#contributing"><i class="fa fa-check"></i><b>0.1</b> Contributing</a></li>
+<li class="chapter" data-level="" data-path="community.html"><a href="community.html#contributing"><i class="fa fa-check"></i>Contributing</a></li>
 </ul></li>
 <li class="divider"></li>
-<li><a href="https://bookdown.org/yihui/bookdown/" target="blank">Published with bookdown</a></li>
+<li>
+<a href="https://doi.org/10.1101/305664" target="blank">Cite rethomics</a>
+<a href="https://bookdown.org/yihui/bookdown/" target="blank">Published with bookdown</a>
+</li>
 
 </ul>
 
@@ -707,7 +710,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-## 173.993   4.160 177.705</code></pre>
+## 167.041   3.920 170.137</code></pre>
 <p>However, the next time, we do the same thing way faster:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(
   dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata,
@@ -717,7 +720,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-##   1.851   0.111   1.965</code></pre>
+##   2.502   0.120   2.681</code></pre>
 <p>Here, we set <code>cache</code> to <code>&quot;ethoscope_cache&quot;</code>. This creates a new directory called <code>&quot;ethoscope_cache&quot;</code> (you can pick the name and location you want). If you to do a bit of tidying up, you can remove it without risk (it will just take time next time you load your data).</p>
 </div>
 </div>

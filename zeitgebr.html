@@ -275,13 +275,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#next-steps-4"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="community.html"><a href="community.html"><i class="fa fa-check"></i>Citation, issues and community</a><ul>
+<li class="chapter" data-level="" data-path="community.html"><a href="community.html"><i class="fa fa-check"></i>Issues and community</a><ul>
 <li class="chapter" data-level="" data-path="community.html"><a href="community.html#citation"><i class="fa fa-check"></i>Citation</a></li>
 <li class="chapter" data-level="" data-path="community.html"><a href="community.html#having-troubles"><i class="fa fa-check"></i>Having troubles</a></li>
-<li class="chapter" data-level="0.1" data-path="community.html"><a href="community.html#contributing"><i class="fa fa-check"></i><b>0.1</b> Contributing</a></li>
+<li class="chapter" data-level="" data-path="community.html"><a href="community.html#contributing"><i class="fa fa-check"></i>Contributing</a></li>
 </ul></li>
 <li class="divider"></li>
-<li><a href="https://bookdown.org/yihui/bookdown/" target="blank">Published with bookdown</a></li>
+<li>
+<a href="https://doi.org/10.1101/305664" target="blank">Cite rethomics</a>
+<a href="https://bookdown.org/yihui/bookdown/" target="blank">Published with bookdown</a>
+</li>
 
 </ul>
 
@@ -410,7 +413,7 @@ dt &lt;-<span class="st"> </span><span class="kw">copy</span>(dams_sample) </cod
 <span class="st">      </span><span class="kw">stat_ld_annotations</span>(<span class="dt">ld_colours =</span> <span class="kw">c</span>(<span class="st">&quot;grey&quot;</span>, <span class="st">&quot;black&quot;</span>))<span class="op">+</span>
 <span class="st">      </span><span class="kw">stat_tile_etho</span>() </code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-125-1.png" width="864" /></p>
-<p>Note that you can substitute <code>activity</code> by other variables you have in <code>dt</code> (e.g. <code>moving</code>).</p>
+<p>Note that you can substitute other variables you have in <code>dt</code> (e.g. <code>moving</code>) for <code>activity</code>.</p>
 <p>We see that two animals (region 5 and 10) seem to have died/escaped before the end of the experiment. There is no right thing to do regarding dead animals. You could keep the data before death, or remove them altogether. <strong>It is eventually your responsibility to decide what to do with dead animals</strong>. Here, I simply remove data after death:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sleepr)
 dt_curated &lt;-<span class="st"> </span><span class="kw">curate_dead_animals</span>(dt)

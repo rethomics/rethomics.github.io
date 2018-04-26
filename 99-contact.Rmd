@@ -11,7 +11,7 @@ If you are having issues or you want help with something, the best thing you can
 For instance, if you are struggling to load DAMS data, you should go to the [the damr package](https://github.com/rethomics/damr/issues).
 This way, you can see if other users have had the same issue, and if we are already working on it!
 
-## Contributing
+## Contributing {-}
 
 We welcome external contributions and hope rethomics develops as a community.
 There are several ways you can contribute:

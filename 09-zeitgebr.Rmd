@@ -90,13 +90,10 @@ ggetho(dt, aes(z=activity)) +
       stat_ld_annotations(ld_colours = c("grey", "black"))+
       stat_tile_etho() 
 ```
-We can also make an overview using `moving` variable, (e.g. if you are working with Ethoscope data)
 
-```{r, fig.width = 9, fig.height=12}
-ggetho(dt, aes(z=moving)) +
-      stat_ld_annotations(ld_colours = c("grey", "black"))+
-      stat_tile_etho() 
-```
+Note that you can substitute `activity` by other variables you have in `dt` (e.g. `moving`).
+
+
 We see that two animals (region 5 and 10) seem to have died/escaped before the end of the experiment.
 There is no right thing to do regarding dead animals. You could keep the data before death, or remove them altogether.
 **It is eventually your responsibility to decide what to do with dead animals**. 

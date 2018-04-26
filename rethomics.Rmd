@@ -490,7 +490,7 @@ In this practical chapter, we will use a real experiment to learn how to:
 
 ## Prerequisites {-}
 
-* You are familiar with the [TriKineticks DAM system]((http://www.trikinetics.com/))
+* You are familiar with the [TriKineticks DAM system](http://www.trikinetics.com/)
 * Ensure you have read about the [rethomics workflow](workflow.html) and [metadata](metadata.html)
 * Ensure you have [installed](intro.html#installing-rethomics-packages)
 `behavr`, `damr` and `ggetho` packages:
@@ -592,7 +592,7 @@ metadata
 Each of the 192 animals (rows) is defined by a set of mandatory columns (metavariables):
 
 * `file` -- the data file (monitor) that it has been recorded in
-* `start_datetime` -- the date and time (`YYYY-MM-DD HH:MM:SS`) of the start of the experiment. Time will be considered ZT0, see [note](dam-sleep.html#note-on-zt0)
+* `start_datetime` -- the date and time (`YYYY-MM-DD HH:MM:SS`) of the start of the experiment. Time will be considered ZT0, see [note](damr.html#zt0)
 * `stop_datetime` -- the last time point of the experiment (time is optional)
 * `region_id` -- the channel ([1, 32])
 
@@ -2216,13 +2216,10 @@ ggetho(dt, aes(z=activity)) +
       stat_ld_annotations(ld_colours = c("grey", "black"))+
       stat_tile_etho() 
 ```
-We can also make an overview using `moving` variable, (e.g. if you are working with Ethoscope data)
 
-```{r, fig.width = 9, fig.height=12}
-ggetho(dt, aes(z=moving)) +
-      stat_ld_annotations(ld_colours = c("grey", "black"))+
-      stat_tile_etho() 
-```
+Note that you can substitute `activity` by other variables you have in `dt` (e.g. `moving`).
+
+
 We see that two animals (region 5 and 10) seem to have died/escaped before the end of the experiment.
 There is no right thing to do regarding dead animals. You could keep the data before death, or remove them altogether.
 **It is eventually your responsibility to decide what to do with dead animals**. 
@@ -2407,7 +2404,7 @@ This tells us that their is a statistically significant difference between each 
 ```{r include=FALSE, cache=FALSE}
 options("datatable.print.nrows" = 30)
 ```
-# Citation, issues and community {#intro -}
+# Issues and community {#community -}
 
 ## Citation{-}
 
@@ -2420,7 +2417,7 @@ If you are having issues or you want help with something, the best thing you can
 For instance, if you are struggling to load DAMS data, you should go to the [the damr package](https://github.com/rethomics/damr/issues).
 This way, you can see if other users have had the same issue, and if we are already working on it!
 
-## Contributing
+## Contributing {-}
 
 We welcome external contributions and hope rethomics develops as a community.
 There are several ways you can contribute:

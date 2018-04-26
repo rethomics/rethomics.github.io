@@ -6,7 +6,10 @@ bookdown::gitbook:
       before: |
         <li><a href="./">Rethomics Tutorial</a></li>
       after: |
-        <li><a href="https://bookdown.org/yihui/bookdown/" target="blank">Published with bookdown</a></li>
+        <li>
+        <a href="https://doi.org/10.1101/305664" target="blank">Cite rethomics</a>
+        <a href="https://bookdown.org/yihui/bookdown/" target="blank">Published with bookdown</a>
+        </li>
     edit: https://github.com/rethomics/rethomics.github.io/edit/source/%s
     download: ["pdf", "epub"]
     

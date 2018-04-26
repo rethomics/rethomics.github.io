@@ -51,7 +51,7 @@ unzip(dst, exdir= DATA_DIR)
 Although you can do much more with them, ethoscope are primarily designed to study sleep and circadian rhythms in Drosophila. 
 Therefore, this tutorial targets mainly users in this context.
 
-Ethoscopes typically generate hundreads of megabytes per machine per week.
+Ethoscopes typically generate hundreds of megabytes per machine per week.
 The platform is designed so that many devices run an parallel, and the resulting data is eventually centralised for all users. 
 **Metadata tables are the best way to both keep track of your expriments and fetch the relevant data.**
 

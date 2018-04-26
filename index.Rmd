@@ -21,7 +21,12 @@ options("datatable.print.nrows" = 30)
 
 # Introduction{-}
 
+
 **Only if we share a common data structure can we use a common set of tools**
+
+-------------------- 
+
+*`rethomics` is a free academic software, don't hesistate to [cite rethomics](https://doi.org/10.1101/305664) if you use it in your research.*
 
 --------------------
 

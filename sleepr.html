@@ -330,7 +330,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="background-2" class="section level2 unnumbered">
 <h2>Background</h2>
-<p>This tutorial focused on sleep in <em>Drosophila</em>. Traditionally, activity is first scored (e.g. though beam crosses/video tracking). Then any bout of inactivity longer than five minutes counts as sleep. You can easily adapt this tutorial to scoring other models/behaviours as long as you can define <strong>two discrete states</strong> (e.g. sleep vs asleep, moving vs immobile, left vs right, …).</p>
+<p>This tutorial focused on sleep in <em>Drosophila</em>. Traditionally, activity is first scored (e.g. through beam crosses/video tracking). Then any bouts of inactivity longer than five minutes count as sleep. You can easily adapt this tutorial to scoring other models/behaviours as long as you can define <strong>two discrete states</strong> (e.g. sleep vs asleep, moving vs immobile, left vs right, …).</p>
 <p>In the <a href="damr.html">DAM tutorial</a>, we have learnt how to load data from a real DAM expriment. Since we already described it in length, it makes sense to use this experiment as an example for our sleep analysis. <strong>I will assume that you have already read and understood the <a href="damr.html">DAM tutorial</a></strong>. The last thing we did then was loading data and scoring sleep:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sleepr)
 dt &lt;-<span class="st"> </span><span class="kw">load_dam</span>(metadata, <span class="dt">FUN =</span> sleepr<span class="op">::</span>sleep_dam_annotation)
@@ -338,7 +338,7 @@ dt</code></pre></div>
 </div>
 <div id="getting-the-data-2" class="section level2 unnumbered">
 <h2>Getting the data</h2>
-<p>Instead of going through the whole <code>damr</code> tutorial again, I thought I would put the resulting data table online. Importanlty, for simplicity, <strong>I have just kept replicate 1</strong>. We just need to download it and load it:</p>
+<p>Instead of going through the whole <code>damr</code> tutorial again, I thought I would put the resulting data table online. Importantly, for simplicity, <strong>I have just kept replicate 1</strong>. We just need to download it and load it:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sleepr)
 <span class="kw">library</span>(ggetho)
 
@@ -400,7 +400,7 @@ dt_curated &lt;-<span class="st"> </span>dt_curated[id <span class="op">%in%</sp
 </div>
 <div id="trimming" class="section level3 unnumbered">
 <h3>Trimming</h3>
-<p>Generally, we want to remove point according the experimental time. For instance, lets say we would like to keep only the first 60 hours of data (i.e. 2.5 days)</p>
+<p>Generally, we want to remove a point according the experimental time. For instance, lets say we would like to keep only the first 60 hours of data (i.e. 2.5 days)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt_curated &lt;-<span class="st"> </span>dt_curated[t <span class="op">%between%</span><span class="st"> </span><span class="kw">c</span>(<span class="kw">days</span>(<span class="dv">0</span>), <span class="kw">days</span>(<span class="fl">2.5</span>))]
 <span class="kw">summary</span>(dt_curated)</code></pre></div>
 <pre><code>## behavr table with:
@@ -410,7 +410,7 @@ dt_curated &lt;-<span class="st"> </span>dt_curated[id <span class="op">%in%</sp
 ##  3.38494e+05 measurements
 ##  1   key (id)</code></pre>
 <p>Which means we are only considering data <strong>between</strong> 0 and 2.5 days.</p>
-<p>The same principle can be used to remove the begining of an experiment. Fon instance when animals are acclimatising to their new environment.</p>
+<p>The same principle can be used to remove the beginning of an experiment. For instance, when animals are acclimatising to their new environment.</p>
 </div>
 </div>
 <div id="population-plots-1" class="section level2 unnumbered">
@@ -568,10 +568,10 @@ summary_dt</code></pre></div>
 <span class="st">  </span><span class="kw">facet_grid</span>(genotype <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">name=</span> <span class="st">&quot;Fraction of time sleeping&quot;</span>,<span class="dt">labels =</span> scales<span class="op">::</span>percent)</code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-109-1.png" width="672" /></p>
-<p>If we wanted a plot will all three values, we could <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-reshape.html">“melt”</a> our data, picking all columns starting with <code>&quot;sleep_fraction_&quot;</code> as “measurment variables”:</p>
+<p>If we wanted a plot with all three values, we could <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-reshape.html">“melt”</a> our data, picking all columns starting with <code>&quot;sleep_fraction_&quot;</code> as “measurment variables”:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">summary_dt_melted &lt;-<span class="st"> </span><span class="kw">melt</span>(summary_dt, <span class="dt">measure.vars =</span> <span class="kw">patterns</span>(<span class="st">&quot;sleep_fraction_&quot;</span>),
                           <span class="dt">variable.name =</span> <span class="st">&quot;phase&quot;</span>, <span class="dt">value.name =</span> <span class="st">&quot;sleep_fraction&quot;</span>)</code></pre></div>
-<p>Now, instead of three columns for the three variable, we have two columns, one for the actual value and one to describe the phase (all vs L vs D). This makes it convenient to use with ggplot:</p>
+<p>Now, instead of three columns for the three variables, we have two columns, one for the actual value and one to describe the phase (all vs L vs D). This makes it convenient to use with ggplot:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(summary_dt_melted, <span class="kw">aes</span>(<span class="dt">x=</span>phase, <span class="dt">y=</span>sleep_fraction, <span class="dt">fill=</span>sex)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">outlier.colour =</span> <span class="ot">NA</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">alpha=</span>.<span class="dv">5</span>) <span class="op">+</span>
@@ -582,7 +582,7 @@ summary_dt</code></pre></div>
 </div>
 <div id="statistics" class="section level2 unnumbered">
 <h2>Statistics</h2>
-<p>Often, you want to go further than representing the data, and compute statistics. <code>R</code> was designed primarilly as statistical progamming language. As a result, a tremendous variety of simple and elaborate statics are implemented. This section will not go in the details of what you can do in terms of stats, many authors have already published fantastic ressources on this subject. Instead, we present a very simple examples of what can be done. At this stage, what you do depends very much on your question, your knowledge of statistics and how much effort you want to invest.</p>
+<p>Often, you want to go further than representing the data, and compute statistics. <code>R</code> was designed primarilly as statistical progamming language. As a result, a tremendous variety of simple and elaborate statics are implemented. This section will not go in the details of what you can do in terms of stats, many authors have already published fantastic resources on this subject. Instead, we present very simple examples of what can be done. At this stage, what you do depends very much on your question, your knowledge of statistics and how much effort you want to invest.</p>
 <div id="pairwise-wilcoxon-tests" class="section level3 unnumbered">
 <h3>Pairwise Wilcoxon tests</h3>
 <p>Say we wanted to compute, for <strong>females only</strong>, all pairwise tests between all genotype groups (A vs B, B vs C and C vs A). This could be formulated as:</p>
@@ -622,7 +622,7 @@ summary_dt</code></pre></div>
 </div>
 <div id="sleep-architecture" class="section level2 unnumbered">
 <h2>Sleep architecture</h2>
-<p>Proportion alone is not always a sufficent measure to fully descibe the dynamics of sleep. One way to go further is to study seep as a series of bouts.</p>
+<p>Proportion alone is not always a sufficent measure to fully descibe the dynamics of sleep. One way to go further is to study sleep as a series of bouts.</p>
 <div id="bout-analysis" class="section level3 unnumbered">
 <h3>Bout analysis</h3>
 <p>The function <code>bout_analysis()</code>, in <code>sleepr</code> is designed for that. We would use it like that:</p>
@@ -639,13 +639,13 @@ summary_dt</code></pre></div>
 </div>
 <div id="bout-length-vs-time-of-the-day" class="section level3 unnumbered">
 <h3>Bout length vs time of the day</h3>
-<p>We can use <code>ggetho</code> to show how the average bout length depend of the time of the onset of the bout.</p>
+<p>We can use <code>ggetho</code> to show how the average bout length depends on the time of the onset of the bout.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggetho</span>(bout_dt, <span class="kw">aes</span>(<span class="dt">y=</span>duration <span class="op">/</span><span class="st"> </span><span class="dv">60</span>, <span class="dt">colour=</span><span class="st">&quot;sex&quot;</span>), <span class="dt">time_wrap =</span> <span class="kw">hours</span>(<span class="dv">24</span>)) <span class="op">+</span><span class="st"> </span>
 <span class="st">      </span><span class="kw">stat_pop_etho</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">      </span><span class="kw">facet_grid</span>(genotype <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span>
 <span class="st">      </span><span class="kw">scale_y_continuous</span>(<span class="dt">name=</span> <span class="st">&quot;Bout length (min)&quot;</span>)</code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-116-1.png" width="672" /></p>
-<p>Note that this is a bit noisy as we only have a few animals per conbination of treatment.</p>
+<p>Note that this is a bit noisy as we only have a few animals per combination of treatment.</p>
 </div>
 <div id="architecture-description" class="section level3 unnumbered">
 <h3>Architecture description</h3>
@@ -712,7 +712,7 @@ summary_dt</code></pre></div>
 </div>
 <div id="latency-to-sleep" class="section level3 unnumbered">
 <h3>Latency to sleep</h3>
-<p>The latency describe how long it takes for an animal to initiates its <strong>first sleep bout</strong>. Some researchers are also interested in the latency to the <strong>longest bout</strong>. In this example, lets say we focus on the second day (and not the night – 24 to 36 hours).</p>
+<p>The latency describes how long it takes for an animal to initiate its <strong>first sleep bout</strong>. Some researchers are also interested in the latency to the <strong>longest bout</strong>. In this example, lets say we focus on the second day (and not the night – 24 to 36 hours).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bout_dt_second_day &lt;-<span class="st"> </span>bout_dt[t <span class="op">%between%</span><span class="st">  </span><span class="kw">c</span>(<span class="kw">days</span>(<span class="dv">1</span>), <span class="kw">days</span>(<span class="dv">1</span>) <span class="op">+</span><span class="st"> </span><span class="kw">hours</span>(<span class="dv">12</span>))]
 <span class="co"># We express t relatively to the first day</span>
 bout_dt_second_day[, t<span class="op">:</span><span class="er">=</span><span class="st"> </span>t <span class="op">-</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">1</span>)]
@@ -792,7 +792,7 @@ bout_summary</code></pre></div>
 ## 91:                   35820                4560      25        1329.6000
 ## 92:                   21360               14760      19        1664.2105
 ## 93:                   26820               15360       6        6690.0000</code></pre>
-<p>For good measures, I also added number of bout and average bout length as we have seen before. You can of course use these result to plot things like the relationship between bout length and bout number:</p>
+<p>For good measure, I also added number of bouts and average bout length as we have seen before. You can, of course, use these results to plot things like the relationship between bout length and bout number:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="kw">rejoin</span>(bout_summary), <span class="kw">aes</span>(n_bouts, mean_bout_length, <span class="dt">colour=</span>sex)) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">facet_grid</span>(genotype <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span><span class="st"> </span>
@@ -804,7 +804,7 @@ bout_summary</code></pre></div>
 </div>
 <div id="merging-all-statistics" class="section level2 unnumbered">
 <h2>Merging all statistics</h2>
-<p>Earlier, we made a <code>summary_dt</code> in which we computed some statitic ssuch as sleep fraction in L and D phase. In addition, we have now a <code>bout_summary</code> where we have other variables. These data have both one row per animal. Ideally, we could <strong>“merge” them into a single table</strong> that has all the individual statistics. This way we can study the relationship say between sleep amount and latency. In order to do that, we perform a so called “join”:</p>
+<p>Earlier, we made a <code>summary_dt</code> in which we computed some statitics such as sleep fraction in L and D phase. In addition, we have now a <code>bout_summary</code> where we have other variables. These data have both one row per animal. Ideally, we could <strong>“merge” them into a single table</strong> that has all the individual statistics. This way we can study the relationship, say, between sleep amount and latency. In order to do that, we perform a so called “join”:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">overall_summary &lt;-<span class="st"> </span>summary_dt[bout_summary]
 overall_summary</code></pre></div>
 <pre><code>##                                       id file_info region_id
@@ -875,7 +875,7 @@ overall_summary</code></pre></div>
 </div>
 <div id="take-home-message-2" class="section level2 unnumbered">
 <h2>Take home message</h2>
-<p>Data analysis and visualisation is about <strong>translating your biological questions to another language</strong>. Problems in emerging areas of science can be very rich so they should be matched with the equally rich grammar that only a programming language can provide. This tutorial was very simple and does not pretend to provied a canonical sleep analysis. Instead, see it as a set of building blocks that you can use and rearange to address your own questions.</p>
+<p>Data analysis and visualisation is about <strong>translating your biological questions to another language</strong>. Problems in emerging areas of science can be very rich so they should be matched with the equally rich grammar that only a programming language can provide. This tutorial was very simple and does not pretend to provied a canonical sleep analysis. Instead, see it as a set of building blocks that you can use and rearrange to address your own questions.</p>
 </div>
 <div id="next-steps-3" class="section level2 unnumbered">
 <h2>Next steps</h2>

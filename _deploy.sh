@@ -2,11 +2,14 @@
 
 set -e
 
+
+echo TRAVIS_PULL_REQUEST is "${TRAVIS_PULL_REQUEST}"
+echo TRAVIS_BRANCH is "${TRAVIS_BRANCH}"
+
 [ -z "${GITHUB_PAT}" ] && exit 0
 [ "${TRAVIS_BRANCH}" != "source" ] && exit 0
 [ "${TRAVIS_PULL_REQUEST}" == "false"] && exit 0
 
-echo TRAVIS_PULL_REQUEST is "${TRAVIS_PULL_REQUEST}"
 
 git config user.name "rapporter-travis"
 git config user.email "travis"

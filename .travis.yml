@@ -17,6 +17,8 @@ before_script:
 
 script:
   - ./_build.sh
+
+after_success:
   - ./_deploy.sh
 
 branches:

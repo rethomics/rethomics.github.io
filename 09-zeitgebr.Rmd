@@ -29,7 +29,7 @@ In it, we will use a DAM dataset that is provided (and preloaded) within the `da
 
 ## Getting the data {-}
 
-Getting the data a lot simpler than in the other tutorials as it is already on your computer:
+Getting the data is a lot simpler than in the other tutorials as it is already on your computer:
 
 ```{r}
 library(damr)
@@ -41,7 +41,7 @@ data(dams_sample)
 # We copy the data to our own variable so we can alter it
 dt <- copy(dams_sample) 
 ```
-This data set is recording of 32 animals, in DD.
+This data set is a recording of 32 animals, in DD.
 Let us print the metadata to understand the experiment a little bit:
 
 ```{r}
@@ -51,10 +51,10 @@ print(dt[meta=T])
 
 We can confirm we have 32 individuals. 
 They are described by one of three "period groups" (e.g. a genotype or treatment). 
-This is encoded int `period_group` metavariable can be either a "short"", "long"" or wild-type ("wt") period.
+This is encoded in `period_group` metavariable can be either a "short"", "long"" or wild-type ("wt") period.
 
 ## Quality control {-}
-This data is fairely clean already, so we will not do much.
+This data is fairly clean already, so we will not do much.
 For most purposes, you can apply the same principles as [data curation for sleep analysis](sleepr.html#data-curation).
 
 ### Regime changes {-}
@@ -80,8 +80,8 @@ dt[, moving := activity > 0]
 
 ### Overview plots {-}
 
-The first representation we show could be activity all animals over time in the same page.
-This would help to spot ourliers.
+The first representation we show could be the activity of all animals over time in the same page.
+This would help to spot outliers.
 We simply do that with our **tile plot**.
 Note how we have changed the LD colours to grey and black, grey being for subjective days (remember, we are in DD).
 
@@ -128,7 +128,7 @@ Read more about that in the [visualisation tutorial](ggetho.html#double-plotted-
 Briefly, we set `multiplot` to `2` (`3` would be a triple plotted) one.
 The variable of interest is on the `z` axis.
 Note that instead of `moving`, you could plot raw `activity`.
-Then, we use bar height to show the amount of movement (we could use `stat_tile_etho` which shows the variable of interest as colour a pixel intensity). 
+Then, we use bar height to show the amount of movement (we could use `stat_tile_etho` which shows the variable of interest as a colour with pixel intensity). 
 Lastly, we split the graph by `uid`, so that each facet is a single animal.
 
 ```{r, fig.width = 12, fig.height=6}
@@ -144,7 +144,7 @@ ggetho(dt_curated, aes(z=moving), multiplot = 2) +
     stat_bar_tile_etho() +
     facet_wrap( ~ period_group + uid, ncol=8, labeller = label_wrap_gen(multi_line=FALSE))
 ```
-Now, we know which genotype match each `uid`. 
+Now, we know which genotype matches each `uid`. 
 In your own work, you could generalise this concept to display more metavariables.
 For instance, if you had a `sex` metavariable you could do: `facet_wrap( ~ period_group + sex + uid, ...)`.
 
@@ -158,7 +158,7 @@ An important part of circadian research is to compute the periodicity of the fre
 Mathematically, we would like to build a preiodogram. That is, generally speaking, a representation of the density (i.e. **power**) of a signal at different **periods** (or frequencies).
 In addition, a periodogram associates to each pair of power-period a **significance level**.
 There are many algorithms to compute periodograms.
-In `zeitgebr`, we have si far implemented:
+In `zeitgebr`, we have so far implemented:
 
 * `ac_periodogram` -- An *autocorrelation* based method
 * `ls_periodogram` -- *Lomb-Scargle* algorithm
@@ -188,7 +188,7 @@ Have a look at the other options (see `?periodogram`).
 
 Often, we want to know which are the peak periods in a periodogram.
 This can be achieved thanks to the `find_peaks` function.
-By default, it find a maximum of three peaks, which are sorted by their power (relative to the significance thershold).
+By default, it finds a maximum of three peaks, which are sorted by their power (relative to the significance thershold).
 Peaks that are not signifant are not accounted for (see the `alpha` argument).
 
 ```{r}
@@ -222,7 +222,7 @@ ggperio(per_xsq_dt) +
 ```
 
 
-Instead of drawing only the first peak, you could draw, for instance,  the first and second (`geom_peak(peak_rank = 1:2)`) or, only the second (`geom_peak(peak_rank = 2)`).
+Instead of drawing only the first peak, you could draw, for instance, the first and second (`geom_peak(peak_rank = 1:2)`) or, only the second (`geom_peak(peak_rank = 2)`).
 
 An interesting thing to do is a population average periodogram.
 In this graph, the solid lines are the average power per group, whilst the shaded areas are ± standard error:
@@ -237,8 +237,8 @@ ggperio(per_xsq_dt, aes(
 ### Exctract the peak values {-}
 
 At some point, you would like to **summarise** each animal by, say, it first peak.
-Then, you can look at whether there are significant difference in peak periodicity vs genotype.
-Doing that is quite straigtforward.
+Then, you can look at whether there are significant differences in peak periodicity vs genotype.
+Doing that is quite straightforward.
 First, we **select only rows where peak is exactly 1**, then [rejoin](https://rethomics.github.io/behavr.html#operating-on-behavr-tables) our table to its metadata:
 
 ```{r}
@@ -248,7 +248,7 @@ summary_dt
 
 
 `summary_dt` can be used as a standard `R` dataframe for further analysis.
-For instance, with `ggplot`, I make a **boxplot showing the distribution of periods**, in h,  for each groups.
+For instance, with `ggplot`, I make a **boxplot showing the distribution of periods**, in h, for each groups.
 I also add **a point for each animal** (so we see outliers). 
 Then, I make the **size of the points proportional to the relative power of the peak discovered**, so we get an idea of how much to "trust" this point.
 
@@ -265,7 +265,7 @@ Another direction could be to perform pairwise wilcoxon tests between groups:
 pairwise.wilcox.test(summary_dt$period, summary_dt$period_group )
 ```
 
-This tells us that their is a statistically significant difference between each pair of group.
+This tells us that there is a statistically significant difference between each pair of groups.
 
 ## Next steps {-}
 

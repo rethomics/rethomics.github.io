@@ -208,7 +208,7 @@ The colour intensity indicates the activity.
 
 There are two things that we can imediatly notice:
 
-* For most animals, the activity is rythmic and synchronised with the light phase transisitions.
+* For most animals, the activity is rhythmic and synchronised with the light phase transisitions.
 * Some animals are dead or missing. For instance take a look at `channel 26` in `Monitor64.txt`.
 
 In other chapters, we will learn how to group individuals, visualise and compute statistics.

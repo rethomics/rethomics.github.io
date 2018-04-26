@@ -39,7 +39,7 @@ install_github("rethmics/ggetho")
 In the previous tutorials, we have used `ggetho` to visualise out behavioural data.
 This section will explain further how this package can be used to produce flexible plots and how it integrates with `ggplot2`.
 
-[ggplot2](http://ggplot2.org/) is one of the most popular visualisation tool and an unavoidable `R` package.
+[ggplot2](http://ggplot2.org/) is one of the most popular visualisation tools and an unavoidable `R` package.
 It implements the powerful concepts of the ["Grammar of graphics"](https://www.cs.uic.edu/~wilkinson/TheGrammarOfGraphics/GOG.html).
 The package `ggetho`, which we discuss here, extends `ggplot` for the specific case of behavioural analysis.
 At this stage, you really want to have some familiarity with `ggplot2` so you understand its logic.
@@ -79,7 +79,7 @@ It expresses the **relationship between variables**.
 In this respect, it works very much like `ggplot()`, but it also pre-processes the data.
 
 It is important to understand the **difference between `ggplot()` and `ggetho()`**.
-`ggplot()` is a works with data frames (or data tables), and does not preprocess the data.
+`ggplot()` works with data frames (or data tables), and does not preprocess the data.
 `ggetho()` is only a layer on top of `ggplot()`. 
 It works **exclusively with `behavr` tables** and does preprocess data before calling `ggplot()`.
 `ggetho()` does return `ggplot` a object, therefore, layers available in `ggplot2` can be used natively on top of `ggetho`. 
@@ -108,9 +108,9 @@ For instance, you could be interested in things like the number (sum) of beam cr
 
 ### Per individual{-}
 
-One of the most interesting layer is `stat_tile_etho`.
+One of the most interesting layers is `stat_tile_etho`.
 It shows the **variable of interest in the (colour) z axis**.
-The y axis is discrete (generally the id), taht is **one row per individual**.
+The y axis is discrete (generally the id), that is **one row per individual**.
 The x axis is time (by default, summerised, by `ggetho`, over 30 minutes).
 So, if we want to show the proportion of time spent moving over time for each individual (id):
 
@@ -142,9 +142,9 @@ setmeta(dt, new_meta)
 head(dt[meta=T])
 ```
 Proportion of time moving (`mean(moving)`) will be a number between zero and one, with sometimes many decimals,
-whichs makes it hard to read.
+which makes it hard to read.
 A more intuitive way to express it is as a rounded per mille (‰).
-I prefer it to per cent as we have more more resolution (i.e. less ties)
+I prefer it to per cent as we have more resolution (i.e. less ties)
 For instance, `0.0113333` would be expressed as `11`. 
 
 Now, we can express a new relationship where we show the *interaction* between our custom variable and id, on the y axis:
@@ -199,13 +199,13 @@ pl <- ggetho(dt, aes(x=t, y=moving)) + stat_pop_etho()
 pl
 ```
 
-By defaut, the local average and error bars are computed from the mean an standard errors (`method = mean_se`).
+By defaut, the local average and error bars are computed from the mean as standard errors (`method = mean_se`).
 You can compute other types of error bars e.g. bootstrap (`method = mean_cl_boot`).
 
 ### Several populations{-}
 
 Often, we want to compare population with respect to a variable.
-There are different way to split populations. We can, for instance, **use a different colour line for different groups**:
+There are different ways to split populations. We can, for instance, **use a different colour line for different groups**:
 
 ```{r}
 pl <- ggetho(dt, aes(x=t, y=moving, colour=sex)) + stat_pop_etho()
@@ -242,7 +242,7 @@ pl <- ggetho(dt, aes(x=t, y=moving), time_wrap = hours(24)) + stat_pop_etho()
 pl
 ```
 
-Note that you do not have to wrap over specifically 24h, you could work different periods.
+Note that you do not have to wrap specifically over 24h, you could work over different periods.
 
 If you are interested in events that happen between the end and the start of the wrapping period (e.g. at ZT24).
 You may want to wrap time with an **"offset"**. That is a phase shift. For instance, if we want to have ZT06 in the middle of our graph, we use an offset of +6h:
@@ -254,7 +254,7 @@ pl <- ggetho(dt, aes(x=t, y=moving),
 pl
 ```
 
-As you can see, it gives have a nice visualisation of the "activity peaks".
+As you can see, it gives us a nice visualisation of the "activity peaks".
 
 ## Double-plotted actograms {-}
 
@@ -315,7 +315,7 @@ When multiplotting, it is difficult to represent individuals (since both y and x
 
 ### Default {-}
 The best way to systematically represent all of them is to use facetting, which is a ggplot feature.
-Since id represent unique individuals, **each facet (sub-rectangle) is one individual**:
+Since id represents unique individuals, **each facet (sub-rectangle) is one individual**:
 
 ```{r, fig.width=10, fig.height=6}
 pl <- ggetho(dt, aes(x=t, z=moving), 
@@ -344,7 +344,7 @@ pl
 
 Even with the trick above, ids may become unreadable when plotting many individuals.
 What we can can do in this case is to use numbers instead.
-Firt, we create a new metavariable named, for instance, `uid`. 
+First, we create a new metavariable named, for instance, `uid`. 
 It will be one **unique number** per individual:
 
 ```{r}
@@ -386,7 +386,7 @@ pl
 
 ### Changing LD colours{-}
 
-Sometimes you want different colours to explains, for instance, that days are "subjective"(grey).
+Sometimes you want different colours to explain, for instance, that days are "subjective"(grey).
 
 ```{r}
 pl <- ggetho(dt, aes(x=t, y=moving)) + stat_pop_etho() +
@@ -397,7 +397,7 @@ pl
 
 ### LD in the background{-}
 
-To put the annotation in the background, we can invert the order of the layers, set the heigh of the annotation to 1 (100%) and add some transparency (`alpha = 0.3`). We also remove the outline of the boxes:
+To put the annotation in the background, we can invert the order of the layers, set the height of the annotation to 1 (100%) and add some transparency (`alpha = 0.3`). We also remove the outline of the boxes:
 
 ```{r}
 pl <- ggetho(dt, aes(x=t, y=moving)) +
@@ -468,7 +468,7 @@ pl + coord_cartesian(xlim=c(days(1), days(2)))
 ### Time scale units{-}
 
 By default, `ggetho` decides the unit of the time axis according to the range of the data.
-Sometime you want to override this behaviour to force time to be in a specific unit (here hours).
+Sometimes you want to override this behaviour to force time to be in a specific unit (here hours).
 Using the plot above, we can add a scale:
 
 ```{r}
@@ -476,7 +476,7 @@ pl + ggetho::scale_x_hours()
 ```
 
 `R` actually warns you since you are replacing the scale.
-Which is fine (as it is precisely what we wanted)!
+This is fine (as it is precisely what we wanted)!
 
 ### Coordinate systems{-}
 

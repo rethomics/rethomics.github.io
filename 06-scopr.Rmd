@@ -105,7 +105,7 @@ ethoscope_results
 
 Tracking data are saved in `.db` files. 
 Everytime an ethoscope is started, one new `.db` file is created.
-All animals presents in the same machine at the same time will have their data saved in the same `.db` file.
+All animals present in the same machine at the same time will have their data saved in the same `.db` file.
  
 ### Set your working directory {-}
 For this tutorial, we will just [set our working directory](https://support.rstudio.com/hc/en-us/articles/200711843-Working-Directories-and-Workspaces) to `DATA_DIR`:

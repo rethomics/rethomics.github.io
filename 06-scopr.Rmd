@@ -51,7 +51,7 @@ unzip(dst, exdir= DATA_DIR)
 Although you can do much more with them, ethoscope are primarily designed to study sleep and circadian rhythms in Drosophila. 
 Therefore, this tutorial targets mainly users in this context.
 
-Ethoscopes typically generate hundreads of megabytes per machine per week.
+Ethoscopes typically generate hundreds of megabytes per machine per week.
 The platform is designed so that many devices run an parallel, and the resulting data is eventually centralised for all users. 
 **Metadata tables are the best way to both keep track of your expriments and fetch the relevant data.**
 
@@ -105,7 +105,7 @@ ethoscope_results
 
 Tracking data are saved in `.db` files. 
 Everytime an ethoscope is started, one new `.db` file is created.
-All animals presents in the same machine at the same time will have their data saved in the same `.db` file.
+All animals present in the same machine at the same time will have their data saved in the same `.db` file.
  
 ### Set your working directory {-}
 For this tutorial, we will just [set our working directory](https://support.rstudio.com/hc/en-us/articles/200711843-Working-Directories-and-Workspaces) to `DATA_DIR`:
@@ -259,9 +259,9 @@ In the data, there are columns such as `x` and `y` that record position, but als
 **In practice, loading raw data is rare** for long experiments, and I would recommend doing it **only for prototyping** and such.
  
 ### Preprocessing {-}
-As dissussed before, it is inneficient and not always possible to load all raw data for hundreads of animals.
+As dissussed before, it is inefficient and not always possible to load all raw data for hundreads of animals.
 Instead, we can **preprocess data on the go**.
-In the context of activity and sleep analysis, we can quantified activity in windows of 10s ([techinical details here](http://journals.plos.org/plosbiology/article/file?type=supplementary&id=info:doi/10.1371/journal.pbio.2003026.s005)).
+In the context of activity and sleep analysis, we can quantify activity in windows of 10s ([techinical details here](http://journals.plos.org/plosbiology/article/file?type=supplementary&id=info:doi/10.1371/journal.pbio.2003026.s005)).
 This is implemented in the function `sleep_annotation` of our `sleepr` package.
 Ensure you have installed `sleepr` as well (`devtools::install_github("rethomics/sleepr")`).
 
@@ -289,7 +289,7 @@ print(dt)
 We have several variables (see in the  `===DATA===` section of the output).
 The important ones are:
 
-* `t` -- the time, in s, sample eveyr 10s
+* `t` -- the time, in s, sample every 10s
 * `x` -- the position in the tube (0 = left, 1=right)
 * `beam_cross` -- how many times the midline was crossed within the 10s window
 * `moving` -- whether any movement was detected in this time window
@@ -316,7 +316,7 @@ dt <- load_ethoscope(metadata,
 
 ### Cache directory {-}
 
-One issue with loading ethoscope data is thta it is **relativelly slow**.
+One issue with loading ethoscope data is thta it is **relatively slow**.
 For instance, according to our computer, you may take half an hour to load data from 500 animals $times$ 1 week.
 In your daily life, you will often need to close `R` and open it again later to analyse things differently, or simply change simple parameters on some figures. 
 You really don't want to spend too long reloading data this sort of situation.
@@ -324,7 +324,7 @@ You really don't want to spend too long reloading data this sort of situation.
 To address this issue, `load_ethoscope` comes with a [caching](https://en.wikipedia.org/wiki/Cache_(computing)) option.
 When turned on, whenever you load any data, it stores a snapshot on the disk (in a directory you pick). 
 Then, the *next time* you load the data, loading happends directly from the snapshot.
-This way you will load data one or two orders of magnitudes faster!
+This way you will load data one or two orders of magnitude faster!
 
 The first time, everything will take as long:
 

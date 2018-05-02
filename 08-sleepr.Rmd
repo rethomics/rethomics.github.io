@@ -26,8 +26,8 @@ In this practical chapter, we will use a real experiment to learn how to:
 ## Background{-}
 
 This tutorial focused on sleep in *Drosophila*.
-Traditionally, activity is first scored (e.g. though beam crosses/video tracking).
-Then any bout of inactivity longer than five minutes counts as sleep.
+Traditionally, activity is first scored (e.g. through beam crosses/video tracking).
+Then any bouts of inactivity longer than five minutes count as sleep.
 You can easily adapt this tutorial to scoring other models/behaviours as long as you can define **two discrete states** (e.g. sleep vs asleep, moving vs immobile, left vs right, ...).
 
 In the [DAM tutorial](damr.html), we have learnt how to load data from a real DAM expriment.
@@ -45,7 +45,7 @@ dt
 ## Getting the data {-}
 
 Instead of going through the whole `damr` tutorial again, I thought I would put the resulting data table online.
-Importanlty, for simplicity, **I have just kept replicate 1**.
+Importantly, for simplicity, **I have just kept replicate 1**.
 We just need to download it and load it:
 
 
@@ -112,7 +112,7 @@ summary(dt_curated)
 ```
 
 ### Trimming {-}
-Generally, we want to remove point according the experimental time.
+Generally, we want to remove a point according the experimental time.
 For instance, lets say we would like to keep only the first 60 hours of data (i.e. 2.5 days)
 
 
@@ -123,7 +123,7 @@ summary(dt_curated)
 
 Which means we are only considering data **between** 0 and 2.5 days. 
 
-The same principle can be used to remove the begining of an experiment. Fon instance when animals are acclimatising to their new environment.
+The same principle can be used to remove the beginning of an experiment. For instance, when animals are acclimatising to their new environment.
 
 ## Population plots{-}
 
@@ -223,7 +223,7 @@ ggplot(summary_dt, aes(x=sex, y=sleep_fraction_d, fill=sex)) +
   scale_y_continuous(name= "Fraction of time sleeping",labels = scales::percent)
 ```
 
-If we wanted a plot will all three values, we could ["melt"](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-reshape.html) our data,
+If we wanted a plot with all three values, we could ["melt"](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-reshape.html) our data,
 picking all columns starting with `"sleep_fraction_"` as "measurment variables":
 
 ```{r}
@@ -231,7 +231,7 @@ summary_dt_melted <- melt(summary_dt, measure.vars = patterns("sleep_fraction_")
                           variable.name = "phase", value.name = "sleep_fraction")
 ```
 
-Now, instead of three columns for the three variable, we have two columns, one for the actual value and one to describe the phase (all vs L vs D). 
+Now, instead of three columns for the three variables, we have two columns, one for the actual value and one to describe the phase (all vs L vs D). 
 This makes it convenient to use with ggplot:
 
 ```{r}
@@ -247,8 +247,8 @@ ggplot(summary_dt_melted, aes(x=phase, y=sleep_fraction, fill=sex)) +
 Often, you want to go further than representing the data, and compute statistics.
 `R` was designed primarilly as statistical progamming language.
 As a result, a tremendous variety of simple and elaborate statics are implemented.
-This section will not go in the details of what you can do in terms of stats, many authors have already published fantastic ressources on this subject.
-Instead, we present a very simple examples of what can be done.
+This section will not go in the details of what you can do in terms of stats, many authors have already published fantastic resources on this subject.
+Instead, we present very simple examples of what can be done.
 At this stage, what you do depends very much on your question, your knowledge of statistics and how much effort you
 want to invest.
 
@@ -280,7 +280,7 @@ For instance see this [short tutorial](https://www.r-bloggers.com/two-way-analys
 ## Sleep architecture {-}
 
 Proportion alone is not always a sufficent measure to fully descibe the dynamics of sleep.
-One way to go further is to study seep as a series of bouts.
+One way to go further is to study sleep as a series of bouts.
 
 ### Bout analysis{-}
 The function `bout_analysis()`, in `sleepr` is designed for that.
@@ -306,7 +306,7 @@ bout_dt <- bout_dt[asleep == TRUE, -"asleep"]
 
 ### Bout length vs time of the day {-}
 
-We can use `ggetho` to show how the average bout length depend of the time of the onset of the bout.
+We can use `ggetho` to show how the average bout length depends on the time of the onset of the bout.
 
 ```{r}
 ggetho(bout_dt, aes(y=duration / 60, colour="sex"), time_wrap = hours(24)) + 
@@ -316,7 +316,7 @@ ggetho(bout_dt, aes(y=duration / 60, colour="sex"), time_wrap = hours(24)) +
 
 ```
 
-Note that this is a bit noisy as we only have a few animals per conbination of treatment.
+Note that this is a bit noisy as we only have a few animals per combination of treatment.
 
 
 ### Architecture description {-}
@@ -333,7 +333,7 @@ You could apply the approach presented before to compute statistics according th
 
 ### Latency to sleep {-}
 
-The latency describe how long it takes for an animal to initiates its **first sleep bout**.
+The latency describes how long it takes for an animal to initiate its **first sleep bout**.
 Some researchers are also interested in the latency to the **longest bout**.
 In this example, lets say we focus on the second day (and not the night -- 24 to 36 hours).
 
@@ -353,8 +353,8 @@ bout_summary <- bout_dt_second_day[,.(
 bout_summary
 ```
 
-For good measures, I also added number of bout and average bout length as we have seen before.
-You can of course use these result to plot things like the relationship between bout length and bout number:
+For good measure, I also added number of bouts and average bout length as we have seen before.
+You can, of course, use these results to plot things like the relationship between bout length and bout number:
 
 ```{r achitecture}
 ggplot(rejoin(bout_summary), aes(n_bouts, mean_bout_length, colour=sex)) +
@@ -369,11 +369,11 @@ For instance, what whould be the latency to sleep of an animal that, in the peri
 
 ## Merging all statistics {-}
 
-Earlier, we made a `summary_dt` in which we computed some statitic ssuch as sleep fraction in L and D phase.
+Earlier, we made a `summary_dt` in which we computed some statitics such as sleep fraction in L and D phase.
 In addition, we have now a `bout_summary` where we have other variables.
 These data have both one row per animal.
 Ideally, we could **"merge" them into a single table** that has all the individual statistics.
-This way we can study the relationship say between sleep amount and latency.
+This way we can study the relationship, say, between sleep amount and latency.
 In order to do that, we perform a so called "join":
 
 ```{r}
@@ -395,7 +395,7 @@ ggplot(overall_summary, aes(latency / 60, sleep_fraction_l, colour=sex)) +
 Data analysis and visualisation is about **translating your biological questions to another language**.
 Problems in emerging areas of science can be very rich so they should be matched with the equally rich grammar that only a programming language can provide.
 This tutorial was very simple and does not pretend to provied a canonical sleep analysis.
-Instead, see it as a set of building blocks that you can use and rearange to address your own questions.
+Instead, see it as a set of building blocks that you can use and rearrange to address your own questions.
 
 
 ## Next steps {-}

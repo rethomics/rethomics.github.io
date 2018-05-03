@@ -25,7 +25,7 @@
 <meta name="author" content="Quentin Geissmann">
 
 
-<meta name="date" content="2018-04-26">
+<meta name="date" content="2018-05-03">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -571,6 +571,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
 ##       2: 2016-07-22_16-41-21_011d6b|01     38.170 0.4021544 0.05565530
 ##       3: 2016-07-22_16-41-21_011d6b|01     38.760 0.4021544 0.05565530
 ##       4: 2016-07-22_16-41-21_011d6b|01     39.316 0.4039497 0.05385996
+##       5: 2016-07-22_16-41-21_011d6b|01     39.934 0.4021544 0.05385996
 ##      ---                                                              
 ## 3004644: 2016-07-29_14-59-49_011d6b|01 583498.570 0.8432432 0.04684685
 ## 3004645: 2016-07-29_14-59-49_011d6b|01 583499.395 0.8306306 0.05585586
@@ -583,6 +584,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
 ##       2: 0.04308797 0.01615799   159              -2453              0
 ##       3: 0.04129264 0.01795332   162              -2633              0
 ##       4: 0.03949731 0.01615799   153              -2513              0
+##       5: 0.04308797 0.01795332   163              -2666              0
 ##      ---                                                              
 ## 3004644: 0.03783784 0.02522523     0              -2045              0
 ## 3004645: 0.03963964 0.02342342   172              -1756              0
@@ -622,6 +624,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
 ##  2: 2016-07-22_16-41-21_011d6b|02    &lt;list&gt; ETHOSCOPE_011
 ##  3: 2016-07-22_16-41-21_011d6b|03    &lt;list&gt; ETHOSCOPE_011
 ##  4: 2016-07-22_16-41-21_011d6b|04    &lt;list&gt; ETHOSCOPE_011
+##  5: 2016-07-22_16-41-21_011d6b|05    &lt;list&gt; ETHOSCOPE_011
 ## ---                                                      
 ## 76: 2016-07-29_14-59-49_011d6b|16    &lt;list&gt; ETHOSCOPE_011
 ## 77: 2016-07-29_14-59-49_011d6b|17    &lt;list&gt; ETHOSCOPE_011
@@ -634,6 +637,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
 ##  2: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         2
 ##  3: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         3
 ##  4: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         4
+##  5: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         5
 ## ---                                                               
 ## 76: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        16
 ## 77: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        17
@@ -646,6 +650,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
 ##  2:        no         1             2.16
 ##  3:       yes         1             2.11
 ##  4:       yes         1             3.54
+##  5:       yes         1             3.98
 ## ---                                     
 ## 76:       yes         2             4.76
 ## 77:        no         2             2.66
@@ -661,6 +666,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
 ##       2: 2016-07-22_16-41-21_011d6b|01     50 0.6014363   13.0280299
 ##       3: 2016-07-22_16-41-21_011d6b|01     60 0.7612208    4.7849648
 ##       4: 2016-07-22_16-41-21_011d6b|01     70 0.7737882    0.8627376
+##       5: 2016-07-22_16-41-21_011d6b|01     80 0.7719928    3.5227250
 ##      ---                                                            
 ## 4641271: 2016-07-29_14-59-49_011d6b|20 583450 0.4440433    6.8529687
 ## 4641272: 2016-07-29_14-59-49_011d6b|20 583460 0.3989170   19.8097386
@@ -673,6 +679,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
 ##       2:            0            0   TRUE  FALSE           FALSE
 ##       3:            0            0   TRUE  FALSE           FALSE
 ##       4:            0            0  FALSE  FALSE           FALSE
+##       5:            0            0   TRUE  FALSE           FALSE
 ##      ---                                                        
 ## 4641271:            0            0   TRUE  FALSE           FALSE
 ## 4641272:            0            0   TRUE  FALSE           FALSE
@@ -710,7 +717,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-## 208.285   5.217 213.268</code></pre>
+## 175.413   4.485 179.985</code></pre>
 <p>However, the next time, we do the same thing way faster:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(
   dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata,
@@ -720,7 +727,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-##   2.481   0.136   2.627</code></pre>
+##   2.010   0.125   2.138</code></pre>
 <p>Here, we set <code>cache</code> to <code>&quot;ethoscope_cache&quot;</code>. This creates a new directory called <code>&quot;ethoscope_cache&quot;</code> (you can pick the name and location you want). If you to do a bit of tidying up, you can remove it without risk (it will just take time next time you load your data).</p>
 </div>
 </div>

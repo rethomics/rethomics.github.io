@@ -25,7 +25,7 @@
 <meta name="author" content="Quentin Geissmann">
 
 
-<meta name="date" content="2018-05-03">
+<meta name="date" content="2018-05-05">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -113,10 +113,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i>Installation and First Steps</a><ul>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i>Package List and First Steps</a><ul>
 <li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#getting-r"><i class="fa fa-check"></i>Getting R</a></li>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#installing-rethomics-packages"><i class="fa fa-check"></i>Installing rethomics packages</a></li>
-<li><a href="intro.html#list-of-rethomics-packages">List of <code>rethomics</code> packages</a></li>
+<li><a href="intro.html#the-rethomics-packages">The <code>rethomics</code> packages</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#installation"><i class="fa fa-check"></i>Installation</a><ul>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#cran"><i class="fa fa-check"></i>CRAN</a></li>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#devtools"><i class="fa fa-check"></i>devtools</a></li>
+</ul></li>
 </ul></li>
 <li><a href="workflow.html#workflow">The <code>rethomics</code> workflow</a></li>
 <li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html"><i class="fa fa-check"></i>Working with metadata files</a><ul>
@@ -358,7 +361,7 @@ URL &lt;-<span class="st"> &quot;https://github.com/rethomics/rethomics.github.i
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">z=</span>asleep)) <span class="op">+</span>
 <span class="st">      </span><span class="kw">stat_ld_annotations</span>(<span class="dt">height =</span> <span class="dv">1</span>)<span class="op">+</span>
 <span class="st">      </span><span class="kw">stat_tile_etho</span>() </code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-97-1.png" width="864" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-98-1.png" width="864" /></p>
 <div id="dead-animals" class="section level3 unnumbered">
 <h3>Dead animals</h3>
 <p>Some animals may have died during the experiment, and could be wrongly scored as asleep for very long durations. <code>sleepr</code> has an utility function to remove data from dead animals:</p>
@@ -379,7 +382,7 @@ dt_curated &lt;-<span class="st"> </span><span class="kw">curate_dead_animals</s
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggetho</span>(dt_curated, <span class="kw">aes</span>(<span class="dt">z=</span>asleep)) <span class="op">+</span>
 <span class="st">      </span><span class="kw">stat_ld_annotations</span>(<span class="dt">ypos =</span> <span class="st">&quot;top&quot;</span>)<span class="op">+</span>
 <span class="st">      </span><span class="kw">stat_tile_etho</span>() </code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-100-1.png" width="864" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-101-1.png" width="864" /></p>
 </div>
 <div id="animals-that-died-too-early" class="section level3 unnumbered">
 <h3>Animals that died too early</h3>
@@ -420,7 +423,7 @@ dt_curated &lt;-<span class="st"> </span>dt_curated[id <span class="op">%in%</sp
 <span class="st">      </span><span class="kw">stat_pop_etho</span>() <span class="op">+</span>
 <span class="st">      </span><span class="kw">stat_ld_annotations</span>() <span class="op">+</span>
 <span class="st">      </span><span class="kw">facet_grid</span>(genotype <span class="op">~</span><span class="st"> </span>.)</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-103-1.png" width="672" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-104-1.png" width="672" /></p>
 <p>The y axis shows the proportion of time sent sleeping, averaged for each animal within a 30min (default) time window.</p>
 <p>Then, we can wrap (average) that over one day. We also polish the y axis label:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggetho</span>(dt_curated, <span class="kw">aes</span>(<span class="dt">y=</span>asleep, <span class="dt">colour=</span>sex), <span class="dt">time_wrap =</span> <span class="kw">hours</span>(<span class="dv">24</span>)) <span class="op">+</span>
@@ -428,7 +431,7 @@ dt_curated &lt;-<span class="st"> </span>dt_curated[id <span class="op">%in%</sp
 <span class="st">      </span><span class="kw">stat_ld_annotations</span>() <span class="op">+</span>
 <span class="st">      </span><span class="kw">facet_grid</span>(genotype <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span>
 <span class="st">      </span><span class="kw">scale_y_continuous</span>(<span class="dt">name=</span> <span class="st">&quot;Fraction of time sleeping&quot;</span>,<span class="dt">labels =</span> scales<span class="op">::</span>percent)</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-104-1.png" width="672" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-105-1.png" width="672" /></p>
 <p>That gives us a good understanding of what happens at the population level.</p>
 </div>
 <div id="summarise-data-per-animal" class="section level2 unnumbered">
@@ -484,7 +487,7 @@ summary_dt</code></pre></div>
 <span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">alpha=</span>.<span class="dv">5</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_grid</span>( genotype <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">name=</span> <span class="st">&quot;Fraction of time sleeping&quot;</span>,<span class="dt">labels =</span> scales<span class="op">::</span>percent)</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-106-1.png" width="672" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-107-1.png" width="672" /></p>
 </div>
 <div id="day-sleep-night-sleep" class="section level2 unnumbered">
 <h2>Day sleep☼ – Night sleep☾</h2>
@@ -567,7 +570,7 @@ summary_dt</code></pre></div>
 <span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">alpha=</span>.<span class="dv">5</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_grid</span>(genotype <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">name=</span> <span class="st">&quot;Fraction of time sleeping&quot;</span>,<span class="dt">labels =</span> scales<span class="op">::</span>percent)</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-109-1.png" width="672" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-110-1.png" width="672" /></p>
 <p>If we wanted a plot with all three values, we could <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-reshape.html">“melt”</a> our data, picking all columns starting with <code>&quot;sleep_fraction_&quot;</code> as “measurment variables”:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">summary_dt_melted &lt;-<span class="st"> </span><span class="kw">melt</span>(summary_dt, <span class="dt">measure.vars =</span> <span class="kw">patterns</span>(<span class="st">&quot;sleep_fraction_&quot;</span>),
                           <span class="dt">variable.name =</span> <span class="st">&quot;phase&quot;</span>, <span class="dt">value.name =</span> <span class="st">&quot;sleep_fraction&quot;</span>)</code></pre></div>
@@ -577,7 +580,7 @@ summary_dt</code></pre></div>
 <span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">alpha=</span>.<span class="dv">5</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_grid</span>(genotype <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">name=</span> <span class="st">&quot;Fraction of time sleeping&quot;</span>,<span class="dt">labels =</span> scales<span class="op">::</span>percent)</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-111-1.png" width="672" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-112-1.png" width="672" /></p>
 </div>
 </div>
 <div id="statistics" class="section level2 unnumbered">
@@ -644,7 +647,7 @@ summary_dt</code></pre></div>
 <span class="st">      </span><span class="kw">stat_pop_etho</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">      </span><span class="kw">facet_grid</span>(genotype <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span>
 <span class="st">      </span><span class="kw">scale_y_continuous</span>(<span class="dt">name=</span> <span class="st">&quot;Bout length (min)&quot;</span>)</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-116-1.png" width="672" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-117-1.png" width="672" /></p>
 <p>Note that this is a bit noisy as we only have a few animals per combination of treatment.</p>
 </div>
 <div id="architecture-description" class="section level3 unnumbered">
@@ -880,7 +883,7 @@ overall_summary</code></pre></div>
 <span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">alpha=</span>.<span class="dv">1</span>)<span class="op">+</span>
 <span class="st">    </span><span class="kw">facet_grid</span>(genotype <span class="op">~</span><span class="st"> </span>.)</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-120-1.png" width="672" /></p>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-121-1.png" width="672" /></p>
 </div>
 <div id="take-home-message-2" class="section level2 unnumbered">
 <h2>Take home message</h2>

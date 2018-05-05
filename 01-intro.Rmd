@@ -1,4 +1,5 @@
-# Installation and First Steps{#intro -}
+# Package List and First Steps{#intro -}
+
 
 ## Getting R{-}
 
@@ -6,32 +7,12 @@ If you have never used or heard of `R` before,
 I suggest you start by reading about [data science in `R`](http://r4ds.had.co.nz/) and [installing RStudio](https://www.rstudio.com/products/rstudio/download/#download).
 Only once you have done that can we continue.
 
-## Installing rethomics packages{-}
 
-As of today (`r Sys.Date()`), `rethomics` packages are not on CRAN, the official `R` package archive, yet.
-Therefore, we will install their developmental version.
 
-As a prerequisite, we need to install (once for all) `devtools` and load it:
+## The `rethomics` packages{-}
 
-```{r, eval=FALSE}
-install.packages("devtools")
-library(devtools)
-```
-
-Ensure you have *no error messages*. `devtool` is a package that simplifies installation of unofficial packages (for instance hosted on github) like `rethomics` ones.
-Then, we can install some of the `rethomics` packages easily.
-For instance, let us install `behavr`.
-
-```{r, eval=FALSE}
-install_github("rethomics/behavr")
-```
-
-In the same way, you could install other `rethomics` packages by changing `"behavr"` for another package name. 
-For instance, you could install `ggetho` with `install_github("rethomics/ggetho")`.
-
-## List of `rethomics` packages{-}
-
-Below is a list of all the `rethomics` packages as well as their individual PDF documentation, description and build status.
+Rethomics works as a collection of interconnected packages.
+Here is a list of all our packages so far (as well as their individual PDF documentation, description and status).
 
 
 ```{r kable, echo=FALSE}
@@ -53,8 +34,20 @@ titles <- sapply(packages,
 package_name <- sprintf("[%s](https://github.com/rethomics/%s)", packages, packages)
 doc <- sprintf("[![PDF](assets/pdf_icon.png)](https://github.com/rethomics/%s/raw/master/%s.pdf)", packages, packages)
 travis_ci <- sprintf("[![%s Travis-CI Status](https://travis-ci.org/rethomics/%s.svg?branch=master)](https://travis-ci.org/rethomics/%s)", packages,packages,packages)
+coverage <- sprintf("[![%s Coverage Status](https://img.shields.io/codecov/c/github/rethomics/%s/master.svg)](https://codecov.io/github/behavr/%s?branch=master)", packages, packages, packages)
 
-coverage <- sprintf("[![%s Coverage Status](https://img.shields.io/codecov/c/github/rethomics/%s/master.svg)](https://codecov.io/github/%s/behavr?branch=master)", packages, packages, packages)
+
+ 
+cran_img <- sprintf('http://www.r-pkg.org/badges/version/%s',packages)
+cran_url <- sprintf('https://cran.r-project.org/package=%s',packages)
+cran <- sprintf("[![CRAN](%s)](%s)", cran_img,cran_url)
+
+
+
+cran_log_img <- sprintf('https://cranlogs.r-pkg.org/badges/%s',packages)
+cran_log_url <- sprintf('https://www.rdocumentation.org/packages/%s',packages)
+cran_log <- sprintf("[![CRAN log](%s)](%s)", cran_log_img,cran_log_url)
+
 
 # `scopr` [![Travis-CI Build Status](https://travis-ci.org/rethomics/scopr.svg?branch=master)](https://travis-ci.org/rethomics/scopr)[![Coverage Status](https://img.shields.io/codecov/c/github/rethomics/scopr/master.svg)](https://codecov.io/github/scopr/behavr?branch=master)
 
@@ -63,9 +56,42 @@ kable(data.frame(
               Package = package_name,
               Doc = doc, 
               Description = titles,
-              Travis.CI = travis_ci,
-              Coverage = coverage),
+              Travis = travis_ci,
+              Coverage = coverage,
+              CRAN = cran
+              #CRAN.log = cran_log
+              ),
       row.names = FALSE)
 ``` 
 
+## Installation{-}
 
+### CRAN{-}
+You may have noticed, in the table above, that some packages are on the CRAN (the official `R` package repository).
+Therefore, we can use `R`'s default tools to install them.
+For instance, `behavr`, can simply be installed with:
+
+```{r, eval=FALSE}
+install.packages("behavr")
+```
+
+
+### devtools{-}
+For packages that are not on CRAN, or if you want the very latest snapshot of a package, you can use `devtools`.
+First, install and load it:
+
+```{r, eval=FALSE}
+install.packages("devtools")
+library(devtools)
+```
+
+You should see a warning message saying something like `"GitHub repo contains submodules, [...]"`, which is fine.
+Beyond that, ensure you have *no error messages*. `devtool` is a package that simplifies installation of unofficial packages (for instance hosted on github) like `rethomics` ones. 
+To install `behavr`, you would run:
+
+```{r, eval=FALSE}
+install_github("rethomics/behavr")
+```
+
+In the same way, you could install other `rethomics` packages by changing `"behavr"` for another package name. 
+For instance, you could install `ggetho` with `install_github("rethomics/ggetho")`.

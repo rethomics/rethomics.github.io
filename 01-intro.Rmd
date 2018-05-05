@@ -34,7 +34,7 @@ titles <- sapply(packages,
 package_name <- sprintf("[%s](https://github.com/rethomics/%s)", packages, packages)
 doc <- sprintf("[![PDF](assets/pdf_icon.png)](https://github.com/rethomics/%s/raw/master/%s.pdf)", packages, packages)
 travis_ci <- sprintf("[![%s Travis-CI Status](https://travis-ci.org/rethomics/%s.svg?branch=master)](https://travis-ci.org/rethomics/%s)", packages,packages,packages)
-coverage <- sprintf("[![%s Coverage Status](https://img.shields.io/codecov/c/github/rethomics/%s/master.svg)](https://codecov.io/github/behavr/%s?branch=master)", packages, packages, packages)
+coverage <- sprintf("[![%s Coverage Status](https://img.shields.io/codecov/c/github/rethomics/%s/master.svg)](https://codecov.io/github/rethomics/%s?branch=master)", packages, packages, packages)
 
 
  

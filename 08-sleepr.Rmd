@@ -309,7 +309,7 @@ bout_dt <- bout_dt[asleep == TRUE, -"asleep"]
 We can use `ggetho` to show how the average bout length depends on the time of the onset of the bout.
 
 ```{r}
-ggetho(bout_dt, aes(y=duration / 60, colour="sex"), time_wrap = hours(24)) + 
+ggetho(bout_dt, aes(y=duration / 60, colour=sex), time_wrap = hours(24)) + 
       stat_pop_etho() + 
       facet_grid(genotype ~ .) +
       scale_y_continuous(name= "Bout length (min)")

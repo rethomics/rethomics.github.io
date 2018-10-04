@@ -25,7 +25,7 @@
 <meta name="author" content="Quentin Geissmann">
 
 
-<meta name="date" content="2018-10-03">
+<meta name="date" content="2018-10-04">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -227,6 +227,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#coordinate-systems"><i class="fa fa-check"></i>Coordinate systems</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#periodograms"><i class="fa fa-check"></i>Periodograms</a></li>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#spectrograms"><i class="fa fa-check"></i>Spectrograms</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#take-home-message-1"><i class="fa fa-check"></i>Take home message</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#next-steps-2"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
@@ -722,6 +723,36 @@ per_dt</code></pre></div>
 <span class="st">        </span><span class="kw">facet_wrap</span>( <span class="op">~</span><span class="st"> </span>uid) </code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-94-1.png" width="672" /></p>
 </div>
+<div id="spectrograms" class="section level2 unnumbered">
+<h2>Spectrograms</h2>
+<p>A “spectrograms” is a visualistion of the variation in the period spectrum over time. The function <code>spectrogram</code> in the <code>zeitgebr</code> library can generate a spectrogram for each individual in a <code>behavr</code> tables, and return the result as a new <code>behavr</code> table with columns for power, period, time … <code>ggetho</code> makes it possible to visualise spectrograms as a heatmap, annotate them, aggregate them by condition.</p>
+<p>Whilst periodogram represents the average periodicity of a signal over the entiere time series, sometimes, period itself changes over the course of an experiment. Let’s create a <em>dummy dataset</em> where the period one of the groups increases after 5 days:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metadata &lt;-<span class="st"> </span><span class="kw">data.table</span>(<span class="dt">id=</span><span class="kw">sprintf</span>(<span class="st">&quot;toy_experiment|%02d&quot;</span> , <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>), <span class="dt">region_id=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,
+                   <span class="dt">condition=</span><span class="kw">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>),
+                   <span class="dt">sex=</span><span class="kw">c</span>(<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>, <span class="st">&quot;F&quot;</span>))</code></pre></div>
+<pre><code>## Warning in data.table(id = sprintf(&quot;toy_experiment|%02d&quot;, 1:10), region_id
+## = 1:10, : Item 4 is of size 4 but maximum size is 10 (recycled leaving
+## remainder of 2 items)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt &lt;-<span class="st"> </span><span class="kw">toy_activity_data</span>(metadata, <span class="dt">seed=</span><span class="dv">107</span>, <span class="dt">duration =</span> <span class="kw">days</span>(<span class="dv">10</span>))
+
+<span class="co"># to emulate a time ticking 1.2 times slower after day 5 for group A only  </span>
+dt[, t <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">xmv</span>(condition) <span class="op">==</span><span class="st"> &quot;A&quot;</span><span class="op">&amp;</span><span class="st"> </span>t <span class="op">&gt;</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">5</span>), <span class="fl">1.2</span> <span class="op">*</span><span class="st"> </span>( t <span class="op">-</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">5</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">5</span>), t)]
+<span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">y=</span>moving, <span class="dt">colour=</span>condition)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_pop_etho</span>()</code></pre></div>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-95-1.png" width="672" /></p>
+<p>In this simple case, a periodogram would report poorly the overall behaviour of group A and give no information about the time of the change. On the other hand, with a spectrogram, we should clearly see <em>when the shift of period happens</em>. This spectrograms resulting from <code>spectrogram()</code> can be vusualised thanks to our special function, <code>ggspectro()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">spect_dt &lt;-<span class="st"> </span><span class="kw">spectrogram</span>(moving,
+                        dt,
+                        <span class="dt">period_range =</span> <span class="kw">c</span>(<span class="kw">hours</span>(<span class="dv">6</span>), <span class="kw">hours</span>(<span class="dv">28</span>)))
+
+<span class="kw">ggspectro</span>(spect_dt) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">stat_tile_etho</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_y_hours</span>(<span class="dt">name=</span> <span class="st">&quot;Period&quot;</span>, <span class="dt">log=</span>T) <span class="op">+</span><span class="st"> </span><span class="co"># log axis for period </span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>condition) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_ld_annotations</span>()</code></pre></div>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-96-1.png" width="672" /></p>
+<p>We see that at day 5, group A, but not group B, shifts its period from 12 h to approximatly 15 h. Note that, in this example, we facet by condition, but we could also facet by <code>id</code>, or average all individuals in one graph. An intesresting feature of such periodograms is that the phase information is discarded. In other word, we can average the periodograms of multiple individuals (e.g. two populations) even if they are out of phase (e.g. if they are free running). This represents a clear advantage over double-plotted actograms that are often only relevant on single individual.</p>
+<p>Perdiodograms can also be wrapped in one day, for instance to study the modulations of period of an ultradian rhythm along the day (see <code>?ggspectro</code>).</p>
+</div>
 <div id="take-home-message-1" class="section level2 unnumbered">
 <h2>Take home message</h2>
 <p><code>ggetho</code> provides you with a new set of stats, layers and scales to represent behaviours. In particular, <code>ggetho</code> and <code>ggperio</code> can be used to preprocess <code>behavr</code> tables in order to use a regular <code>ggplot2</code> workflow.</p>
@@ -732,16 +763,6 @@ per_dt</code></pre></div>
 <li><a href="sleepr.html">Sleep analysis with <code>sleepr</code></a></li>
 <li><a href="zeitgebr.html">Circadian analysis with <code>zeitgebr</code></a></li>
 </ul>
-<!-- library(ggetho) -->
-<!-- metadata <- data.table(id=sprintf("toy_experiment|%02d" , 1:40), region_id=1:40, -->
-<!--                    condition=c("A","B"), -->
-<!--                    sex=c("M","M", "F", "F")) -->
-<!-- head(metadata) -->
-<!-- dt <- toy_activity_data(metadata, seed=107) -->
-<!-- pl <- ggetho(dt, aes(x=t, y=moving)) + -->
-<!--             stat_ld_annotations(phase = hours(-1)) + -->
-<!--             stat_pop_etho() -->
-<!-- pl -->
 
 </div>
 </div>

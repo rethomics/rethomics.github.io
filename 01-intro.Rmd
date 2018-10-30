@@ -51,8 +51,10 @@ cran_log <- sprintf("[![CRAN log](%s)](%s)", cran_log_img,cran_log_url)
 
 # `scopr` [![Travis-CI Build Status](https://travis-ci.org/rethomics/scopr.svg?branch=master)](https://travis-ci.org/rethomics/scopr)[![Coverage Status](https://img.shields.io/codecov/c/github/rethomics/scopr/master.svg)](https://codecov.io/github/scopr/behavr?branch=master)
 
+titles <- stringr::str_replace(titles, "\n", " ")
+
 library(knitr)
-kable(data.frame(
+knitr::kable(data.frame(
               Package = package_name,
               Doc = doc, 
               Description = titles,

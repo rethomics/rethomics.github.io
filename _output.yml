@@ -7,7 +7,7 @@ bookdown::gitbook:
         <li><a href="./">Rethomics Tutorial</a></li>
       after: |
         <li>
-        <a href="https://doi.org/10.1101/305664" target="blank">Cite rethomics</a>
+        <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0209331" target="blank">Cite rethomics</a>
         <a href="https://bookdown.org/yihui/bookdown/" target="blank">Published with bookdown</a>
         </li>
     edit: https://github.com/rethomics/rethomics.github.io/edit/source/%s

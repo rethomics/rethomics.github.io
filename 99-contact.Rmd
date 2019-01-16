@@ -3,7 +3,7 @@
 ## Citation{-}
 
 `retomics` is an academic software. As such, it is -- and will always be -- completely free and open source. 
-**If you use rethomics as part of your research, please cite [our reference publication](https://doi.org/10.1101/305664).**
+**If you use rethomics as part of your research, please cite [our reference publication](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0209331).**
 
 ## Having troubles{-}
 

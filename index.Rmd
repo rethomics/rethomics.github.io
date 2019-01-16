@@ -26,7 +26,7 @@ options("datatable.print.nrows" = 30)
 
 -------------------- 
 
-*`rethomics` is a free academic software, don't hesistate to [cite rethomics](https://doi.org/10.1101/305664) if you use it in your research.*
+*`rethomics` is a free academic software, don't hesistate to [cite rethomics](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0209331) if you use it in your research.*
 
 --------------------
 

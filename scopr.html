@@ -287,7 +287,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="divider"></li>
 <li>
-<a href="https://doi.org/10.1101/305664" target="blank">Cite rethomics</a>
+<a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0209331" target="blank">Cite rethomics</a>
 <a href="https://bookdown.org/yihui/bookdown/" target="blank">Published with bookdown</a>
 </li>
 
@@ -722,7 +722,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-## 174.332   1.420 148.215</code></pre>
+## 176.872   1.460 150.446</code></pre>
 <p>However, the next time, we do the same thing way faster:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(
   dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata,
@@ -732,7 +732,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-##   2.252   0.020   1.908</code></pre>
+##   2.336   0.036   1.982</code></pre>
 <p>Here, we set <code>cache</code> to <code>&quot;ethoscope_cache&quot;</code>. This creates a new directory called <code>&quot;ethoscope_cache&quot;</code> (you can pick the name and location you want). If you to do a bit of tidying up, you can remove it without risk (it will just take time next time you load your data).</p>
 </div>
 </div>

@@ -24,7 +24,7 @@
 <meta name="author" content="Quentin Geissmann" />
 
 
-<meta name="date" content="2019-06-12" />
+<meta name="date" content="2019-06-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -475,11 +475,6 @@ metadata</code></pre></div>
 <p>Immediatly after loading your data, it is a good idea to visualise it, in order to detect anomalies or at least to be sure that everything looks ok. We can use <code>ggetho</code> for that, for example the following code will create an activity tile plot, useful to detect dead animals.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggetho)</code></pre></div>
 <pre><code>## Loading required package: ggplot2</code></pre>
-<pre><code>## Registered S3 methods overwritten by &#39;ggplot2&#39;:
-##   method         from 
-##   [.quosures     rlang
-##   c.quosures     rlang
-##   print.quosures rlang</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># I only show fisrt replicate</span>
 <span class="kw">ggetho</span>(dt[<span class="kw">xmv</span>(replicate) <span class="op">==</span><span class="st"> </span><span class="dv">1</span> ], <span class="kw">aes</span>(<span class="dt">z=</span>activity)) <span class="op">+</span>
 <span class="st">      </span><span class="kw">stat_tile_etho</span>() <span class="op">+</span>

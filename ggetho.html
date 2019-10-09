@@ -24,7 +24,7 @@
 <meta name="author" content="Quentin Geissmann" />
 
 
-<meta name="date" content="2019-10-02" />
+<meta name="date" content="2019-10-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -733,9 +733,9 @@ per_dt</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metadata &lt;-<span class="st"> </span><span class="kw">data.table</span>(<span class="dt">id=</span><span class="kw">sprintf</span>(<span class="st">&quot;toy_experiment|%02d&quot;</span> , <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>), <span class="dt">region_id=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,
                    <span class="dt">condition=</span><span class="kw">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>),
                    <span class="dt">sex=</span><span class="kw">c</span>(<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>, <span class="st">&quot;F&quot;</span>))</code></pre></div>
-<pre><code>## Warning in data.table(id = sprintf(&quot;toy_experiment|%02d&quot;, 1:10), region_id
-## = 1:10, : Item 4 is of size 4 but maximum size is 10 (recycled leaving
-## remainder of 2 items)</code></pre>
+<pre><code>## Warning in as.data.table.list(x, keep.rownames = keep.rownames, check.names
+## = check.names, : Item 4 has 4 rows but longest item has 10; recycled with
+## remainder.</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt &lt;-<span class="st"> </span><span class="kw">toy_activity_data</span>(metadata, <span class="dt">seed=</span><span class="dv">107</span>, <span class="dt">duration =</span> <span class="kw">days</span>(<span class="dv">10</span>))
 
 <span class="co"># to emulate a time ticking 1.2 times slower after day 5 for group A only  </span>

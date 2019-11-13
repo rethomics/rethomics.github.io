@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Circadian rhythm analysis | Rethomics, a framework for high-throughput behaviour analysis in R</title>
   <meta name="description" content="This is a tutorial for Rethomics, a framework to analyse high-throuput behavioural data in R." />
-  <meta name="generator" content="bookdown 0.14.1 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.15.1 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Circadian rhythm analysis | Rethomics, a framework for high-throughput behaviour analysis in R" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Quentin Geissmann" />
 
 
-<meta name="date" content="2019-11-06" />
+<meta name="date" content="2019-11-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -370,30 +370,30 @@ dt &lt;-<span class="st"> </span><span class="kw">copy</span>(dams_sample) </cod
 ## 30: 2017-01-16 08:00:00|dams_sample.txt|30    &lt;list&gt;        30
 ## 31: 2017-01-16 08:00:00|dams_sample.txt|31    &lt;list&gt;        31
 ## 32: 2017-01-16 08:00:00|dams_sample.txt|32    &lt;list&gt;        32
-##                           experiment_id      start_datetime
-##  1: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-##  2: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-##  3: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-##  4: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-##  5: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-## ---                                                        
-## 28: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-## 29: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-## 30: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-## 31: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-## 32: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-##           stop_datetime period_group
-##  1: 2017-01-26 00:09:00         long
-##  2: 2017-01-26 00:09:00         long
-##  3: 2017-01-26 00:09:00         long
-##  4: 2017-01-26 00:09:00         long
-##  5: 2017-01-26 00:09:00         long
-## ---                                 
-## 28: 2017-01-26 00:09:00           wt
-## 29: 2017-01-26 00:09:00           wt
-## 30: 2017-01-26 00:09:00           wt
-## 31: 2017-01-26 00:09:00           wt
-## 32: 2017-01-26 00:09:00           wt</code></pre>
+##                           experiment_id      start_datetime       stop_datetime
+##  1: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+##  2: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+##  3: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+##  4: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+##  5: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+## ---                                                                            
+## 28: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+## 29: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+## 30: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+## 31: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+## 32: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+##     period_group
+##  1:         long
+##  2:         long
+##  3:         long
+##  4:         long
+##  5:         long
+## ---             
+## 28:           wt
+## 29:           wt
+## 30:           wt
+## 31:           wt
+## 32:           wt</code></pre>
 <p>We can confirm we have 32 individuals. They are described by one of three “period groups” (e.g. a genotype or treatment). This is encoded in <code>period_group</code> metavariable can be either a “short”“,”long“” or wild-type (“wt”) period.</p>
 </div>
 <div id="quality-control-2" class="section level2 unnumbered">
@@ -501,61 +501,61 @@ per_xsq_dt</code></pre></div>
 ## 30: 2017-01-16 08:00:00|dams_sample.txt|30    &lt;list&gt;        30
 ## 31: 2017-01-16 08:00:00|dams_sample.txt|31    &lt;list&gt;        31
 ## 32: 2017-01-16 08:00:00|dams_sample.txt|32    &lt;list&gt;        32
-##                           experiment_id      start_datetime
-##                                  &lt;char&gt;              &lt;POSc&gt;
-##  1: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-##  2: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-##  3: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-##  4: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-##  5: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-## ---                                                        
-## 28: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-## 29: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-## 30: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-## 31: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-## 32: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-##           stop_datetime period_group   uid
-##                  &lt;fctr&gt;       &lt;fctr&gt; &lt;int&gt;
-##  1: 2017-01-26 00:09:00         long     1
-##  2: 2017-01-26 00:09:00         long     2
-##  3: 2017-01-26 00:09:00         long     3
-##  4: 2017-01-26 00:09:00         long     4
-##  5: 2017-01-26 00:09:00         long     5
-## ---                                       
-## 28: 2017-01-26 00:09:00           wt    28
-## 29: 2017-01-26 00:09:00           wt    29
-## 30: 2017-01-26 00:09:00           wt    30
-## 31: 2017-01-26 00:09:00           wt    31
-## 32: 2017-01-26 00:09:00           wt    32
+##                           experiment_id      start_datetime       stop_datetime
+##                                  &lt;char&gt;              &lt;POSc&gt;              &lt;fctr&gt;
+##  1: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+##  2: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+##  3: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+##  4: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+##  5: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+## ---                                                                            
+## 28: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+## 29: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+## 30: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+## 31: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+## 32: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+##     period_group   uid
+##           &lt;fctr&gt; &lt;int&gt;
+##  1:         long     1
+##  2:         long     2
+##  3:         long     3
+##  4:         long     4
+##  5:         long     5
+## ---                   
+## 28:           wt    28
+## 29:           wt    29
+## 30:           wt    30
+## 31:           wt    31
+## 32:           wt    32
 ## 
 ##  ====== DATA ======
 ## 
-##                                           id period     power
-##                                       &lt;fctr&gt;  &lt;num&gt;     &lt;num&gt;
-##    1: 2017-01-16 08:00:00|dams_sample.txt|01  57600  34.17475
-##    2: 2017-01-16 08:00:00|dams_sample.txt|01  57960  34.17475
-##    3: 2017-01-16 08:00:00|dams_sample.txt|01  58320  59.19905
-##    4: 2017-01-16 08:00:00|dams_sample.txt|01  58680  59.19905
-##    5: 2017-01-16 08:00:00|dams_sample.txt|01  59040  37.79175
-##   ---                                                        
-## 5148: 2017-01-16 08:00:00|dams_sample.txt|32 113760 100.21510
-## 5149: 2017-01-16 08:00:00|dams_sample.txt|32 114120 124.12366
-## 5150: 2017-01-16 08:00:00|dams_sample.txt|32 114480 124.12366
-## 5151: 2017-01-16 08:00:00|dams_sample.txt|32 114840 127.12975
-## 5152: 2017-01-16 08:00:00|dams_sample.txt|32 115200 127.12975
-##       signif_threshold   p_value
-##                  &lt;num&gt;     &lt;num&gt;
-##    1:         116.7888 0.9991894
-##    2:         116.7888 0.9991894
-##    3:         118.1251 0.6793185
-##    4:         118.1251 0.6793185
-##    5:         119.4588 0.9979513
-##   ---                           
-## 5148:         196.2269 0.9561612
-## 5149:         197.4675 0.5556435
-## 5150:         197.4675 0.5556435
-## 5151:         198.7071 0.5051096
-## 5152:         198.7071 0.5051096</code></pre>
+##                                           id period     power signif_threshold
+##                                       &lt;fctr&gt;  &lt;num&gt;     &lt;num&gt;            &lt;num&gt;
+##    1: 2017-01-16 08:00:00|dams_sample.txt|01  57600  34.17475         116.7888
+##    2: 2017-01-16 08:00:00|dams_sample.txt|01  57960  34.17475         116.7888
+##    3: 2017-01-16 08:00:00|dams_sample.txt|01  58320  59.19905         118.1251
+##    4: 2017-01-16 08:00:00|dams_sample.txt|01  58680  59.19905         118.1251
+##    5: 2017-01-16 08:00:00|dams_sample.txt|01  59040  37.79175         119.4588
+##   ---                                                                         
+## 5148: 2017-01-16 08:00:00|dams_sample.txt|32 113760 100.21510         196.2269
+## 5149: 2017-01-16 08:00:00|dams_sample.txt|32 114120 124.12366         197.4675
+## 5150: 2017-01-16 08:00:00|dams_sample.txt|32 114480 124.12366         197.4675
+## 5151: 2017-01-16 08:00:00|dams_sample.txt|32 114840 127.12975         198.7071
+## 5152: 2017-01-16 08:00:00|dams_sample.txt|32 115200 127.12975         198.7071
+##         p_value
+##           &lt;num&gt;
+##    1: 0.9991894
+##    2: 0.9991894
+##    3: 0.6793185
+##    4: 0.6793185
+##    5: 0.9979513
+##   ---          
+## 5148: 0.9561612
+## 5149: 0.5556435
+## 5150: 0.5556435
+## 5151: 0.5051096
+## 5152: 0.5051096</code></pre>
 <p>The result is another <code>behavr</code> table, with the same metadata. The data however, is now a list of power vs period (and significance).</p>
 <p>Have a look at the other options (see <code>?periodogram</code>).</p>
 </div>
@@ -622,99 +622,68 @@ summary_dt</code></pre></div>
 ## 28: 2017-01-16 08:00:00|dams_sample.txt|31    &lt;list&gt;        31
 ## 29: 2017-01-16 08:00:00|dams_sample.txt|32    &lt;list&gt;        32
 ##                                         id file_info region_id
-##                           experiment_id      start_datetime
-##  1: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-##  2: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-##  3: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-##  4: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-##  5: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-##  6: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-##  7: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-##  8: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-##  9: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-## 10: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-## 11: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-## 12: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-## 13: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-## 14: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-## 15: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-## 16: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-## 17: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-## 18: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-## 19: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-## 20: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-## 21: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-## 22: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-## 23: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-## 24: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-## 25: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-## 26: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-## 27: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-## 28: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-## 29: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00
-##                           experiment_id      start_datetime
-##           stop_datetime period_group uid period    power signif_threshold
-##  1: 2017-01-26 00:09:00         long   1  99720 276.4555         177.4971
-##  2: 2017-01-26 00:09:00         long   2 100440 315.2950         178.7532
-##  3: 2017-01-26 00:09:00         long   3 100440 257.1494         178.7532
-##  4: 2017-01-26 00:09:00         long   4  95040 268.6532         171.1986
-##  5: 2017-01-26 00:09:00         long   5 100440 195.7411         178.7532
-##  6: 2017-01-26 00:09:00         long   6  96120 360.2246         172.4607
-##  7: 2017-01-26 00:09:00         long   7  98640 200.8368         176.2397
-##  8: 2017-01-26 00:09:00         long   8  99720 280.3768         177.4971
-##  9: 2017-01-26 00:09:00         long   9 101520 309.5947         180.0083
-## 10: 2017-01-26 00:09:00         long  10 103320 246.4732         182.5150
-## 11: 2017-01-26 00:09:00        short  11  68040 285.3857         132.6670
-## 12: 2017-01-26 00:09:00        short  12  69840 177.5452         135.2830
-## 13: 2017-01-26 00:09:00        short  13  67320 307.1445         131.3561
-## 14: 2017-01-26 00:09:00        short  14  69120 193.0421         133.9760
-## 15: 2017-01-26 00:09:00        short  16  69120 151.6117         133.9760
-## 16: 2017-01-26 00:09:00        short  17  69840 225.2747         135.2830
-## 17: 2017-01-26 00:09:00        short  20  69840 187.8997         135.2830
-## 18: 2017-01-26 00:09:00        short  21  68040 170.8709         132.6670
-## 19: 2017-01-26 00:09:00           wt  22  85320 176.0910         157.2301
-## 20: 2017-01-26 00:09:00           wt  23  88920 182.2338         162.3284
-## 21: 2017-01-26 00:09:00           wt  24  84240 204.4373         155.9519
-## 22: 2017-01-26 00:09:00           wt  25  86040 235.2866         158.5068
-## 23: 2017-01-26 00:09:00           wt  26  88920 233.0950         162.3284
-## 24: 2017-01-26 00:09:00           wt  27  87120 272.0614         159.7821
-## 25: 2017-01-26 00:09:00           wt  28  88920 273.3706         162.3284
-## 26: 2017-01-26 00:09:00           wt  29  88920 169.5197         162.3284
-## 27: 2017-01-26 00:09:00           wt  30  88920 301.1270         162.3284
-## 28: 2017-01-26 00:09:00           wt  31  86040 293.7774         158.5068
-## 29: 2017-01-26 00:09:00           wt  32  88920 168.8304         162.3284
-##           stop_datetime period_group uid period    power signif_threshold
-##          p_value peak
-##  1: 4.100760e-16    1
-##  2: 3.074761e-21    1
-##  3: 1.989846e-13    1
-##  4: 4.264752e-16    1
-##  5: 1.676299e-06    1
-##  6: 3.756396e-29    1
-##  7: 2.809713e-07    1
-##  8: 1.232934e-16    1
-##  9: 3.295280e-20    1
-## 10: 1.374486e-11    1
-## 11: 5.399920e-26    1
-## 12: 9.984131e-10    1
-## 13: 7.385662e-30    1
-## 14: 6.120254e-12    1
-## 15: 8.433567e-07    1
-## 16: 3.187945e-16    1
-## 17: 4.674815e-11    1
-## 18: 2.936584e-09    1
-## 19: 8.538032e-07    1
-## 20: 7.089435e-07    1
-## 21: 3.618745e-10    1
-## 22: 1.070912e-13    1
-## 23: 7.960386e-13    1
-## 24: 1.593002e-18    1
-## 25: 2.955673e-18    1
-## 26: 1.328092e-05    1
-## 27: 2.880738e-22    1
-## 28: 6.431675e-22    1
-## 29: 1.546028e-05    1
-##          p_value peak</code></pre>
+##                           experiment_id      start_datetime       stop_datetime
+##  1: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+##  2: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+##  3: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+##  4: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+##  5: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+##  6: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+##  7: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+##  8: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+##  9: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+## 10: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+## 11: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+## 12: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+## 13: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+## 14: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+## 15: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+## 16: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+## 17: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+## 18: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+## 19: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+## 20: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+## 21: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+## 22: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+## 23: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+## 24: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+## 25: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+## 26: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+## 27: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+## 28: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+## 29: 2017-01-16 08:00:00|dams_sample.txt 2017-01-16 08:00:00 2017-01-26 00:09:00
+##                           experiment_id      start_datetime       stop_datetime
+##     period_group uid period    power signif_threshold      p_value peak
+##  1:         long   1  99720 276.4555         177.4971 4.100760e-16    1
+##  2:         long   2 100440 315.2950         178.7532 3.074761e-21    1
+##  3:         long   3 100440 257.1494         178.7532 1.989846e-13    1
+##  4:         long   4  95040 268.6532         171.1986 4.264752e-16    1
+##  5:         long   5 100440 195.7411         178.7532 1.676299e-06    1
+##  6:         long   6  96120 360.2246         172.4607 3.756396e-29    1
+##  7:         long   7  98640 200.8368         176.2397 2.809713e-07    1
+##  8:         long   8  99720 280.3768         177.4971 1.232934e-16    1
+##  9:         long   9 101520 309.5947         180.0083 3.295280e-20    1
+## 10:         long  10 103320 246.4732         182.5150 1.374486e-11    1
+## 11:        short  11  68040 285.3857         132.6670 5.399920e-26    1
+## 12:        short  12  69840 177.5452         135.2830 9.984131e-10    1
+## 13:        short  13  67320 307.1445         131.3561 7.385662e-30    1
+## 14:        short  14  69120 193.0421         133.9760 6.120254e-12    1
+## 15:        short  16  69120 151.6117         133.9760 8.433567e-07    1
+## 16:        short  17  69840 225.2747         135.2830 3.187945e-16    1
+## 17:        short  20  69840 187.8997         135.2830 4.674815e-11    1
+## 18:        short  21  68040 170.8709         132.6670 2.936584e-09    1
+## 19:           wt  22  85320 176.0910         157.2301 8.538032e-07    1
+## 20:           wt  23  88920 182.2338         162.3284 7.089435e-07    1
+## 21:           wt  24  84240 204.4373         155.9519 3.618745e-10    1
+## 22:           wt  25  86040 235.2866         158.5068 1.070912e-13    1
+## 23:           wt  26  88920 233.0950         162.3284 7.960386e-13    1
+## 24:           wt  27  87120 272.0614         159.7821 1.593002e-18    1
+## 25:           wt  28  88920 273.3706         162.3284 2.955673e-18    1
+## 26:           wt  29  88920 169.5197         162.3284 1.328092e-05    1
+## 27:           wt  30  88920 301.1270         162.3284 2.880738e-22    1
+## 28:           wt  31  86040 293.7774         158.5068 6.431675e-22    1
+## 29:           wt  32  88920 168.8304         162.3284 1.546028e-05    1
+##     period_group uid period    power signif_threshold      p_value peak</code></pre>
 <p><code>summary_dt</code> can be used as a standard <code>R</code> dataframe for further analysis. For instance, with <code>ggplot</code>, I make a <strong>boxplot showing the distribution of periods</strong>, in h, for each groups. I also add <strong>a point for each animal</strong> (so we see outliers). Then, I make the <strong>size of the points proportional to the relative power of the peak discovered</strong>, so we get an idea of how much to “trust” this point.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(summary_dt, <span class="kw">aes</span>(period_group, period, <span class="dt">fill=</span> period_group)) <span class="op">+</span><span class="st"> </span>
 <span class="st">        </span><span class="kw">geom_boxplot</span>(<span class="dt">outlier.colour =</span> <span class="ot">NA</span>) <span class="op">+</span>
@@ -723,14 +692,14 @@ summary_dt</code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-139-1.png" width="672" /></p>
 <p>Another direction could be to perform pairwise wilcoxon tests between groups:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairwise.wilcox.test</span>(summary_dt<span class="op">$</span>period, summary_dt<span class="op">$</span>period_group )</code></pre></div>
-<pre><code>## Warning in wilcox.test.default(xi, xj, paired = paired, ...): cannot
-## compute exact p-value with ties
+<pre><code>## Warning in wilcox.test.default(xi, xj, paired = paired, ...): cannot compute
+## exact p-value with ties
 
-## Warning in wilcox.test.default(xi, xj, paired = paired, ...): cannot
-## compute exact p-value with ties
+## Warning in wilcox.test.default(xi, xj, paired = paired, ...): cannot compute
+## exact p-value with ties
 
-## Warning in wilcox.test.default(xi, xj, paired = paired, ...): cannot
-## compute exact p-value with ties</code></pre>
+## Warning in wilcox.test.default(xi, xj, paired = paired, ...): cannot compute
+## exact p-value with ties</code></pre>
 <pre><code>## 
 ##  Pairwise comparisons using Wilcoxon rank sum test 
 ## 

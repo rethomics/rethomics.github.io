@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Ethoscope data, in practice | Rethomics, a framework for high-throughput behaviour analysis in R</title>
   <meta name="description" content="This is a tutorial for Rethomics, a framework to analyse high-throuput behavioural data in R." />
-  <meta name="generator" content="bookdown 0.14.1 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.15.1 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Ethoscope data, in practice | Rethomics, a framework for high-throughput behaviour analysis in R" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Quentin Geissmann" />
 
 
-<meta name="date" content="2019-11-06" />
+<meta name="date" content="2019-11-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -355,8 +355,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre class="r{eval=f}"><code>DATA_DIR &lt;- &quot;C://Where/My/Zip/Has/been/extracted</code></pre>
 <p>Check that all the files live there:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list.files</span>(DATA_DIR)</code></pre></div>
-<pre><code>## [1] &quot;ethoscope_results&quot;      &quot;ethoscope_tutorial.zip&quot;
-## [3] &quot;metadata.csv&quot;</code></pre>
+<pre><code>## [1] &quot;ethoscope_results&quot;      &quot;ethoscope_tutorial.zip&quot; &quot;metadata.csv&quot;</code></pre>
 <p>We have:</p>
 <ul>
 <li>The metadata file that I have prepared for you</li>
@@ -420,30 +419,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(scopr)
 metadata &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;metadata.csv&quot;</span>)
 metadata</code></pre></div>
-<pre><code>##      machine_name       date region_id treatment replicate
-##  1: ETHOSCOPE_011 2016-07-22         1       yes         1
-##  2: ETHOSCOPE_011 2016-07-22         2        no         1
-##  3: ETHOSCOPE_011 2016-07-22         3       yes         1
-##  4: ETHOSCOPE_011 2016-07-22         4       yes         1
-##  5: ETHOSCOPE_011 2016-07-22         5       yes         1
-## ---                                                       
-## 76: ETHOSCOPE_011 2016-07-29        16       yes         2
-## 77: ETHOSCOPE_011 2016-07-29        17        no         2
-## 78: ETHOSCOPE_011 2016-07-29        18        no         2
-## 79: ETHOSCOPE_011 2016-07-29        19        no         2
-## 80: ETHOSCOPE_011 2016-07-29        20       yes         2
-##     expression_level
-##  1:             3.28
-##  2:             2.16
-##  3:             2.11
-##  4:             3.54
-##  5:             3.98
-## ---                 
-## 76:             4.76
-## 77:             2.66
-## 78:             4.35
-## 79:             1.06
-## 80:             5.21</code></pre>
+<pre><code>##      machine_name       date region_id treatment replicate expression_level
+##  1: ETHOSCOPE_011 2016-07-22         1       yes         1             3.28
+##  2: ETHOSCOPE_011 2016-07-22         2        no         1             2.16
+##  3: ETHOSCOPE_011 2016-07-22         3       yes         1             2.11
+##  4: ETHOSCOPE_011 2016-07-22         4       yes         1             3.54
+##  5: ETHOSCOPE_011 2016-07-22         5       yes         1             3.98
+## ---                                                                        
+## 76: ETHOSCOPE_011 2016-07-29        16       yes         2             4.76
+## 77: ETHOSCOPE_011 2016-07-29        17        no         2             2.66
+## 78: ETHOSCOPE_011 2016-07-29        18        no         2             4.35
+## 79: ETHOSCOPE_011 2016-07-29        19        no         2             1.06
+## 80: ETHOSCOPE_011 2016-07-29        20       yes         2             5.21</code></pre>
 <p>Each of the 80 animals (rows) is defined by two mandatory columns (metavariables):</p>
 <ul>
 <li><code>machine_name</code> – the name of the device used (e.g. <code>&quot;ETHOSCOPE_001&quot;</code>)</li>
@@ -480,30 +467,30 @@ metadata</code></pre></div>
 ## 78: 2016-07-29_14-59-49_011d6b|18    &lt;list&gt; ETHOSCOPE_011
 ## 79: 2016-07-29_14-59-49_011d6b|19    &lt;list&gt; ETHOSCOPE_011
 ## 80: 2016-07-29_14-59-49_011d6b|20    &lt;list&gt; ETHOSCOPE_011
-##                           machine_id            datetime region_id
-##  1: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         1
-##  2: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         2
-##  3: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         3
-##  4: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         4
-##  5: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         5
-## ---                                                               
-## 76: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        16
-## 77: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        17
-## 78: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        18
-## 79: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        19
-## 80: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        20
-##     treatment replicate expression_level
-##  1:       yes         1             3.28
-##  2:        no         1             2.16
-##  3:       yes         1             2.11
-##  4:       yes         1             3.54
-##  5:       yes         1             3.98
-## ---                                     
-## 76:       yes         2             4.76
-## 77:        no         2             2.66
-## 78:        no         2             4.35
-## 79:        no         2             1.06
-## 80:       yes         2             5.21</code></pre>
+##                           machine_id            datetime region_id treatment
+##  1: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         1       yes
+##  2: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         2        no
+##  3: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         3       yes
+##  4: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         4       yes
+##  5: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         5       yes
+## ---                                                                         
+## 76: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        16       yes
+## 77: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        17        no
+## 78: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        18        no
+## 79: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        19        no
+## 80: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        20       yes
+##     replicate expression_level
+##  1:         1             3.28
+##  2:         1             2.16
+##  3:         1             2.11
+##  4:         1             3.54
+##  5:         1             3.98
+## ---                           
+## 76:         2             4.76
+## 77:         2             2.66
+## 78:         2             4.35
+## 79:         2             1.06
+## 80:         2             5.21</code></pre>
 </div>
 <div id="remote-data" class="section level3 unnumbered">
 <h3>Remote Data</h3>
@@ -557,18 +544,18 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
 ## 2: 2016-07-22_16-43-29_009d6b|01    &lt;list&gt; ETHOSCOPE_009
 ## 3: 2016-07-29_14-57-35_008d6b|01    &lt;list&gt; ETHOSCOPE_008
 ## 4: 2016-07-29_14-59-49_011d6b|01    &lt;list&gt; ETHOSCOPE_011
-##                          machine_id            datetime region_id
-##                              &lt;char&gt;              &lt;POSc&gt;     &lt;int&gt;
-## 1: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         1
-## 2: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29         1
-## 3: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35         1
-## 4: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49         1
-##    treatment replicate expression_level
-##       &lt;char&gt;     &lt;int&gt;            &lt;num&gt;
-## 1:       yes         1             3.28
-## 2:       yes         1             4.28
-## 3:        no         2             2.52
-## 4:       yes         2             6.04
+##                          machine_id            datetime region_id treatment
+##                              &lt;char&gt;              &lt;POSc&gt;     &lt;int&gt;    &lt;char&gt;
+## 1: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         1       yes
+## 2: 009d6ba04e534be486069c3db7b10827 2016-07-22 16:43:29         1       yes
+## 3: 008d6ba04e534be486069c3db7b10827 2016-07-29 14:57:35         1        no
+## 4: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49         1       yes
+##    replicate expression_level
+##        &lt;int&gt;            &lt;num&gt;
+## 1:         1             3.28
+## 2:         1             4.28
+## 3:         2             2.52
+## 4:         2             6.04
 ## 
 ##  ====== DATA ======
 ## 
@@ -638,32 +625,32 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
 ## 78: 2016-07-29_14-59-49_011d6b|18    &lt;list&gt; ETHOSCOPE_011
 ## 79: 2016-07-29_14-59-49_011d6b|19    &lt;list&gt; ETHOSCOPE_011
 ## 80: 2016-07-29_14-59-49_011d6b|20    &lt;list&gt; ETHOSCOPE_011
-##                           machine_id            datetime region_id
-##                               &lt;char&gt;              &lt;POSc&gt;     &lt;int&gt;
-##  1: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         1
-##  2: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         2
-##  3: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         3
-##  4: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         4
-##  5: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         5
-## ---                                                               
-## 76: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        16
-## 77: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        17
-## 78: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        18
-## 79: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        19
-## 80: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        20
-##     treatment replicate expression_level
-##        &lt;char&gt;     &lt;int&gt;            &lt;num&gt;
-##  1:       yes         1             3.28
-##  2:        no         1             2.16
-##  3:       yes         1             2.11
-##  4:       yes         1             3.54
-##  5:       yes         1             3.98
-## ---                                     
-## 76:       yes         2             4.76
-## 77:        no         2             2.66
-## 78:        no         2             4.35
-## 79:        no         2             1.06
-## 80:       yes         2             5.21
+##                           machine_id            datetime region_id treatment
+##                               &lt;char&gt;              &lt;POSc&gt;     &lt;int&gt;    &lt;char&gt;
+##  1: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         1       yes
+##  2: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         2        no
+##  3: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         3       yes
+##  4: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         4       yes
+##  5: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         5       yes
+## ---                                                                         
+## 76: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        16       yes
+## 77: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        17        no
+## 78: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        18        no
+## 79: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        19        no
+## 80: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        20       yes
+##     replicate expression_level
+##         &lt;int&gt;            &lt;num&gt;
+##  1:         1             3.28
+##  2:         1             2.16
+##  3:         1             2.11
+##  4:         1             3.54
+##  5:         1             3.98
+## ---                           
+## 76:         2             4.76
+## 77:         2             2.66
+## 78:         2             4.35
+## 79:         2             1.06
+## 80:         2             5.21
 ## 
 ##  ====== DATA ======
 ## 
@@ -724,7 +711,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-## 138.148   2.374 140.529</code></pre>
+## 138.306   2.442 140.690</code></pre>
 <p>However, the next time, we do the same thing way faster:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(
   dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata,
@@ -734,7 +721,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-##   1.664   0.059   1.724</code></pre>
+##   1.709   0.032   1.741</code></pre>
 <p>Here, we set <code>cache</code> to <code>&quot;ethoscope_cache&quot;</code>. This creates a new directory called <code>&quot;ethoscope_cache&quot;</code> (you can pick the name and location you want). If you to do a bit of tidying up, you can remove it without risk (it will just take time next time you load your data).</p>
 </div>
 </div>
@@ -779,30 +766,30 @@ summary_dt</code></pre></div>
 ## 78: 2016-07-29_14-59-49_011d6b|18    &lt;list&gt; ETHOSCOPE_011
 ## 79: 2016-07-29_14-59-49_011d6b|19    &lt;list&gt; ETHOSCOPE_011
 ## 80: 2016-07-29_14-59-49_011d6b|20    &lt;list&gt; ETHOSCOPE_011
-##                           machine_id            datetime region_id
-##  1: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         1
-##  2: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         2
-##  3: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         3
-##  4: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         4
-##  5: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         5
-## ---                                                               
-## 76: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        16
-## 77: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        17
-## 78: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        18
-## 79: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        19
-## 80: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        20
-##     treatment replicate expression_level sleep_fraction
-##  1:       yes         1             3.28      0.5716289
-##  2:        no         1             2.16      0.3962078
-##  3:       yes         1             2.11      0.5480788
-##  4:       yes         1             3.54      0.5802635
-##  5:       yes         1             3.98      0.5451192
-## ---                                                    
-## 76:       yes         2             4.76      0.4489939
-## 77:        no         2             2.66      0.4063041
-## 78:        no         2             4.35      0.2806088
-## 79:        no         2             1.06      0.3703443
-## 80:       yes         2             5.21      0.3803006</code></pre>
+##                           machine_id            datetime region_id treatment
+##  1: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         1       yes
+##  2: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         2        no
+##  3: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         3       yes
+##  4: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         4       yes
+##  5: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         5       yes
+## ---                                                                         
+## 76: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        16       yes
+## 77: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        17        no
+## 78: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        18        no
+## 79: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        19        no
+## 80: 011d6ba04e534be486069c3db7b10827 2016-07-29 14:59:49        20       yes
+##     replicate expression_level sleep_fraction
+##  1:         1             3.28      0.5716289
+##  2:         1             2.16      0.3962078
+##  3:         1             2.11      0.5480788
+##  4:         1             3.54      0.5802635
+##  5:         1             3.98      0.5451192
+## ---                                          
+## 76:         2             4.76      0.4489939
+## 77:         2             2.66      0.4063041
+## 78:         2             4.35      0.2806088
+## 79:         2             1.06      0.3703443
+## 80:         2             5.21      0.3803006</code></pre>
 <p>This is a standard data.table (data.frame), so we can use it for some regular <code>R</code> magic. We can show the how <strong>sleep fraction and expression level are decorrelated</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(summary_dt, <span class="kw">aes</span>(<span class="dt">x=</span>expression_level,
                        <span class="dt">y=</span>sleep_fraction,

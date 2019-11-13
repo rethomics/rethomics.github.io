@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Visualisation with ggetho | Rethomics, a framework for high-throughput behaviour analysis in R</title>
   <meta name="description" content="This is a tutorial for Rethomics, a framework to analyse high-throuput behavioural data in R." />
-  <meta name="generator" content="bookdown 0.14.1 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.15.1 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Visualisation with ggetho | Rethomics, a framework for high-throughput behaviour analysis in R" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Quentin Geissmann" />
 
 
-<meta name="date" content="2019-11-06" />
+<meta name="date" content="2019-11-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -651,8 +651,8 @@ pl</code></pre></div>
 <h3>Time scale units</h3>
 <p>By default, <code>ggetho</code> decides the unit of the time axis according to the range of the data. Sometimes you want to override this behaviour to force time to be in a specific unit (here hours). Using the plot above, we can add a scale:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl <span class="op">+</span><span class="st"> </span>ggetho<span class="op">::</span><span class="kw">scale_x_hours</span>()</code></pre></div>
-<pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which
-## will replace the existing scale.</code></pre>
+<pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
+## replace the existing scale.</code></pre>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-89-1.png" width="672" /></p>
 <p><code>R</code> actually warns you since you are replacing the scale. This is fine (as it is precisely what we wanted)!</p>
 </div>

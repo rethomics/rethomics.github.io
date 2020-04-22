@@ -256,7 +256,7 @@ Then, I make the **size of the points proportional to the relative power of the 
 ggplot(summary_dt, aes(period_group, period, fill= period_group)) + 
         geom_boxplot(outlier.colour = NA) +
         geom_jitter(aes(size=power -  signif_threshold), alpha=.5) +
-        scale_y_hours(name = "Period (h)") 
+        scale_y_hours(name = "Period") 
 ```
 
 Another direction could be to perform pairwise wilcoxon tests between groups:

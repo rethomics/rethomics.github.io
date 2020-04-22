@@ -24,10 +24,7 @@ In this practical chapter, we will use a real experiment to learn how to:
 
 
 ```{r, eval=FALSE}
-library(devtools)
-install_github("rethomics/behavr")
-install_github("rethomics/damr")
-install_github("rethomics/ggetho")
+install.packages(c('ggetho', 'damr'))
 ```
 
 

@@ -336,10 +336,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Ensure you have read about the <a href="workflow.html">rethomics workflow</a> and <a href="metadata.html">metadata</a></li>
 <li>Ensure you have <a href="intro.html#installing-rethomics-packages">installed</a> <code>behavr</code>, <code>scopr</code> and <code>ggetho</code> packages:</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
-<span class="kw">install_github</span>(<span class="st">&quot;rethomics/behavr&quot;</span>)
-<span class="kw">install_github</span>(<span class="st">&quot;rethomics/scopr&quot;</span>)
-<span class="kw">install_github</span>(<span class="st">&quot;rethomics/ggetho&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">&#39;ggetho&#39;</span>, <span class="st">&#39;scopr&#39;</span>))</code></pre></div>
 </div>
 <div id="background-1" class="section level2 unnumbered">
 <h2>Background</h2>
@@ -711,7 +708,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-## 106.207   1.518 107.676</code></pre>
+## 102.621   1.513 104.188</code></pre>
 <p>However, the next time, we do the same thing way faster:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(
   dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata,
@@ -721,7 +718,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-##   1.543   0.052   1.594</code></pre>
+##   1.388   0.012   1.400</code></pre>
 <p>Here, we set <code>cache</code> to <code>&quot;ethoscope_cache&quot;</code>. This creates a new directory called <code>&quot;ethoscope_cache&quot;</code> (you can pick the name and location you want). If you to do a bit of tidying up, you can remove it without risk (it will just take time next time you load your data).</p>
 </div>
 </div>

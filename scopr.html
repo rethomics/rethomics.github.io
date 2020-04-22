@@ -711,7 +711,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-## 103.180   1.548 104.730</code></pre>
+## 100.445   1.122 101.521</code></pre>
 <p>However, the next time, we do the same thing way faster:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(
   dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata,
@@ -721,7 +721,7 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
                        <span class="dt">verbose=</span><span class="ot">FALSE</span>)
 )</code></pre></div>
 <pre><code>##    user  system elapsed 
-##   1.427   0.000   1.427</code></pre>
+##   1.307   0.032   1.339</code></pre>
 <p>Here, we set <code>cache</code> to <code>&quot;ethoscope_cache&quot;</code>. This creates a new directory called <code>&quot;ethoscope_cache&quot;</code> (you can pick the name and location you want). If you to do a bit of tidying up, you can remove it without risk (it will just take time next time you load your data).</p>
 </div>
 </div>

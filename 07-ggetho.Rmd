@@ -28,9 +28,7 @@ In this practical chapter, we will generate toy data to learn how to:
 
 
 ```{r, eval=FALSE}
-library(devtools)
-install_github("rethmics/behavr")
-install_github("rethmics/ggetho")
+install.packages("ggetho")
 ```
 
 

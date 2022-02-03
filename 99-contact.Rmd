@@ -20,3 +20,7 @@ There are several ways you can contribute:
 * By sending pull requests to preexisting packages
 * By volunteering to develop a new package (for instance to import a new type of data)
 
+## Related projects{-}
+
+* Arijit Ghosh built [VANESSA](https://github.com/orijitghosh/VANESSA-DAM), a nice shiny app around `rethomics` to analyse circadian data from Drosophila Activity Monitor data.
+

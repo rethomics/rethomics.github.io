@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Visualisation with ggetho | Rethomics, a framework for high-throughput behaviour analysis in R</title>
   <meta name="description" content="This is a tutorial for Rethomics, a framework to analyse high-throuput behavioural data in R." />
-  <meta name="generator" content="bookdown 0.18.1 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Visualisation with ggetho | Rethomics, a framework for high-throughput behaviour analysis in R" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Quentin Geissmann" />
 
 
-<meta name="date" content="2020-04-22" />
+<meta name="date" content="2022-02-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,9 @@
   
 <link rel="prev" href="scopr.html"/>
 <link rel="next" href="sleepr.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,7 +51,8 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110947778-1"></script>
 <script>
@@ -62,42 +65,70 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="css/my_style.css" type="text/css" />
 </head>
@@ -116,115 +147,136 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i>Package List and First Steps</a><ul>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i>Package List and First Steps</a>
+<ul>
 <li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#getting-r"><i class="fa fa-check"></i>Getting R</a></li>
 <li><a href="intro.html#the-rethomics-packages">The <code>rethomics</code> packages</a></li>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#installation"><i class="fa fa-check"></i>Installation</a><ul>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#installation"><i class="fa fa-check"></i>Installation</a>
+<ul>
 <li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#cran"><i class="fa fa-check"></i>CRAN</a></li>
 <li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#devtools"><i class="fa fa-check"></i>devtools</a></li>
 </ul></li>
 </ul></li>
 <li><a href="workflow.html#workflow">The <code>rethomics</code> workflow</a></li>
-<li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html"><i class="fa fa-check"></i>Working with metadata files</a><ul>
+<li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html"><i class="fa fa-check"></i>Working with metadata files</a>
+<ul>
 <li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html#what-are-metadata"><i class="fa fa-check"></i>What are metadata?</a></li>
 <li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html#make-them-exhaustive"><i class="fa fa-check"></i>Make them exhaustive</a></li>
 <li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html#put-replicates-together"><i class="fa fa-check"></i>Put replicates together</a></li>
 <li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html#linking-metadata"><i class="fa fa-check"></i>Linking metadata</a></li>
 <li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html#take-home-message"><i class="fa fa-check"></i>Take home message</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html"><i class="fa fa-check"></i>behavr tables</a><ul>
+<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html"><i class="fa fa-check"></i>behavr tables</a>
+<ul>
 <li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#variables-and-metavariables"><i class="fa fa-check"></i>Variables and metavariables</a></li>
 <li><a href="behavr.html#operating-on-behavr-tables">Operating on <code>behavr</code> tables</a></li>
 <li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#playing-with-toy-data"><i class="fa fa-check"></i>Playing with toy data</a></li>
-<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#generalities"><i class="fa fa-check"></i>Generalities</a><ul>
+<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#generalities"><i class="fa fa-check"></i>Generalities</a>
+<ul>
 <li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#data"><i class="fa fa-check"></i>Data</a></li>
-<li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html#metadata"><i class="fa fa-check"></i>Metadata</a></li>
+<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#metadata-1"><i class="fa fa-check"></i>Metadata</a></li>
 <li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#summarise-data"><i class="fa fa-check"></i>Summarise data</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html"><i class="fa fa-check"></i>DAM2 data, in practice</a><ul>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html"><i class="fa fa-check"></i>DAM2 data, in practice</a>
+<ul>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#aims"><i class="fa fa-check"></i>Aims</a></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#prerequisites"><i class="fa fa-check"></i>Prerequisites</a></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#background"><i class="fa fa-check"></i>Background</a></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#getting-the-data"><i class="fa fa-check"></i>Getting the data</a></li>
-<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#from-experiment-design-to-metadata"><i class="fa fa-check"></i>From experiment design to metadata</a><ul>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#from-experiment-design-to-metadata"><i class="fa fa-check"></i>From experiment design to metadata</a>
+<ul>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#our-toy-experiment"><i class="fa fa-check"></i>Our toy experiment</a></li>
-<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#metadata-1"><i class="fa fa-check"></i>Metadata</a></li>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#metadata-2"><i class="fa fa-check"></i>Metadata</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#linking"><i class="fa fa-check"></i>Linking</a></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#loading"><i class="fa fa-check"></i>Loading</a></li>
-<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#note-on-datetime"><i class="fa fa-check"></i>Note on datetime</a><ul>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#note-on-datetime"><i class="fa fa-check"></i>Note on datetime</a>
+<ul>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#zt0"><i class="fa fa-check"></i>ZT0</a></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#start-and-stop-time"><i class="fa fa-check"></i>Start and stop time</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#quality-control"><i class="fa fa-check"></i>Quality control</a><ul>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#quality-control"><i class="fa fa-check"></i>Quality control</a>
+<ul>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#detecting-anomalies"><i class="fa fa-check"></i>Detecting anomalies</a></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#how-to-exclude-animals"><i class="fa fa-check"></i>How to exclude animals?</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#apply-functions-when-loading"><i class="fa fa-check"></i>Apply functions when loading</a></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#next-steps"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html"><i class="fa fa-check"></i>Ethoscope data, in practice</a><ul>
+<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html"><i class="fa fa-check"></i>Ethoscope data, in practice</a>
+<ul>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#aims-1"><i class="fa fa-check"></i>Aims</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#prerequisites-1"><i class="fa fa-check"></i>Prerequisites</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#background-1"><i class="fa fa-check"></i>Background</a></li>
-<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#getting-the-data-1"><i class="fa fa-check"></i>Getting the data</a><ul>
+<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#getting-the-data-1"><i class="fa fa-check"></i>Getting the data</a>
+<ul>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#extract-the-zipped-data"><i class="fa fa-check"></i>Extract the zipped data</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#note-on-the-data-structure"><i class="fa fa-check"></i>Note on the data structure</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#set-your-working-directory"><i class="fa fa-check"></i>Set your working directory</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#from-experiment-design-to-metadata-1"><i class="fa fa-check"></i>From experiment design to metadata</a><ul>
+<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#from-experiment-design-to-metadata-1"><i class="fa fa-check"></i>From experiment design to metadata</a>
+<ul>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#our-toy-experiment-1"><i class="fa fa-check"></i>Our toy experiment</a></li>
-<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#metadata-2"><i class="fa fa-check"></i>Metadata</a></li>
+<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#metadata-3"><i class="fa fa-check"></i>Metadata</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#linking-1"><i class="fa fa-check"></i>Linking</a><ul>
+<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#linking-1"><i class="fa fa-check"></i>Linking</a>
+<ul>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#local-data"><i class="fa fa-check"></i>Local data</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#remote-data"><i class="fa fa-check"></i>Remote Data</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#loading-1"><i class="fa fa-check"></i>Loading</a><ul>
+<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#loading-1"><i class="fa fa-check"></i>Loading</a>
+<ul>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#raw-data-default"><i class="fa fa-check"></i>Raw data (default)</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#preprocessing"><i class="fa fa-check"></i>Preprocessing</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#zt0-1"><i class="fa fa-check"></i>ZT0</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#cache-directory"><i class="fa fa-check"></i>Cache directory</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#quality-control-1"><i class="fa fa-check"></i>Quality control</a></li>
-<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#and-then"><i class="fa fa-check"></i>And then?</a><ul>
+<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#and-then"><i class="fa fa-check"></i>And then?</a>
+<ul>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#sleep-amount-vs-treatment"><i class="fa fa-check"></i>Sleep amount vs treatment</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#total-sleep-vs-expression-level"><i class="fa fa-check"></i>Total sleep vs expression level</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#next-steps-1"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html"><i class="fa fa-check"></i>Visualisation with ggetho</a><ul>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html"><i class="fa fa-check"></i>Visualisation with ggetho</a>
+<ul>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#aims-2"><i class="fa fa-check"></i>Aims</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#prerequisites-2"><i class="fa fa-check"></i>Prerequisites</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#lessons-from-ggplot"><i class="fa fa-check"></i>Lessons from ggplot</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#some-behavioural-data"><i class="fa fa-check"></i>Some behavioural data</a></li>
 <li><a href="ggetho.html#the-ggetho-function">The <code>ggetho()</code> function</a></li>
-<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#tile-plots"><i class="fa fa-check"></i>Tile plots</a><ul>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#tile-plots"><i class="fa fa-check"></i>Tile plots</a>
+<ul>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#per-individual"><i class="fa fa-check"></i>Per individual</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#sorted-individual"><i class="fa fa-check"></i>Sorted individual</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#group-averages"><i class="fa fa-check"></i>Group averages</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#bar-tiles"><i class="fa fa-check"></i>Bar tiles</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#population-plots"><i class="fa fa-check"></i>Population plots</a><ul>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#population-plots"><i class="fa fa-check"></i>Population plots</a>
+<ul>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#one-population"><i class="fa fa-check"></i>One population</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#several-populations"><i class="fa fa-check"></i>Several populations</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#wrapping-data"><i class="fa fa-check"></i>Wrapping data</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#double-plotted-actograms"><i class="fa fa-check"></i>Double-plotted actograms</a></li>
-<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#faceting-by-id"><i class="fa fa-check"></i>Faceting by ID</a><ul>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#faceting-by-id"><i class="fa fa-check"></i>Faceting by ID</a>
+<ul>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#default"><i class="fa fa-check"></i>Default</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#custom-labeller"><i class="fa fa-check"></i>Custom labeller</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#numerical-labelling"><i class="fa fa-check"></i>Numerical labelling</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#ld-annotations"><i class="fa fa-check"></i>LD annotations</a><ul>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#ld-annotations"><i class="fa fa-check"></i>LD annotations</a>
+<ul>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#basics"><i class="fa fa-check"></i>Basics</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#changing-ld-colours"><i class="fa fa-check"></i>Changing LD colours</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#ld-in-the-background"><i class="fa fa-check"></i>LD in the background</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#phase-and-period"><i class="fa fa-check"></i>Phase and period</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#regime-change"><i class="fa fa-check"></i>Regime change</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#coordinate-and-scales"><i class="fa fa-check"></i>Coordinate and scales</a><ul>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#coordinate-and-scales"><i class="fa fa-check"></i>Coordinate and scales</a>
+<ul>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#plot-limits"><i class="fa fa-check"></i>Plot limits</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#time-scale-units"><i class="fa fa-check"></i>Time scale units</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#coordinate-systems"><i class="fa fa-check"></i>Coordinate systems</a></li>
@@ -234,26 +286,31 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#take-home-message-1"><i class="fa fa-check"></i>Take home message</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#next-steps-2"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html"><i class="fa fa-check"></i>Sleep analysis</a><ul>
+<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html"><i class="fa fa-check"></i>Sleep analysis</a>
+<ul>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#aims-3"><i class="fa fa-check"></i>Aims</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#prerequisites-3"><i class="fa fa-check"></i>Prerequisites</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#background-2"><i class="fa fa-check"></i>Background</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#getting-the-data-2"><i class="fa fa-check"></i>Getting the data</a></li>
-<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#data-curation"><i class="fa fa-check"></i>Data curation</a><ul>
+<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#data-curation"><i class="fa fa-check"></i>Data curation</a>
+<ul>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#dead-animals"><i class="fa fa-check"></i>Dead animals</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#animals-that-died-too-early"><i class="fa fa-check"></i>Animals that died too early</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#trimming"><i class="fa fa-check"></i>Trimming</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#population-plots-1"><i class="fa fa-check"></i>Population plots</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#summarise-data-per-animal"><i class="fa fa-check"></i>Summarise data per animal</a></li>
-<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#day-sleep-night-sleep"><i class="fa fa-check"></i>Day sleep☼ – Night sleep☾</a><ul>
+<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#day-sleep-night-sleep"><i class="fa fa-check"></i>Day sleep☼ – Night sleep☾</a>
+<ul>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#adding-some-phase-information"><i class="fa fa-check"></i>Adding some phase information</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#statistics"><i class="fa fa-check"></i>Statistics</a><ul>
+<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#statistics"><i class="fa fa-check"></i>Statistics</a>
+<ul>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#pairwise-wilcoxon-tests"><i class="fa fa-check"></i>Pairwise Wilcoxon tests</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#two-way-anova"><i class="fa fa-check"></i>Two way anova</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#sleep-architecture"><i class="fa fa-check"></i>Sleep architecture</a><ul>
+<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#sleep-architecture"><i class="fa fa-check"></i>Sleep architecture</a>
+<ul>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#bout-analysis"><i class="fa fa-check"></i>Bout analysis</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#bout-length-vs-time-of-the-day"><i class="fa fa-check"></i>Bout length vs time of the day</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#architecture-description"><i class="fa fa-check"></i>Architecture description</a></li>
@@ -263,18 +320,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#take-home-message-2"><i class="fa fa-check"></i>Take home message</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#next-steps-3"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html"><i class="fa fa-check"></i>Circadian rhythm analysis</a><ul>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html"><i class="fa fa-check"></i>Circadian rhythm analysis</a>
+<ul>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#aims-4"><i class="fa fa-check"></i>Aims</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#prerequisites-4"><i class="fa fa-check"></i>Prerequisites</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#background-3"><i class="fa fa-check"></i>Background</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#getting-the-data-3"><i class="fa fa-check"></i>Getting the data</a></li>
-<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#quality-control-2"><i class="fa fa-check"></i>Quality control</a><ul>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#quality-control-2"><i class="fa fa-check"></i>Quality control</a>
+<ul>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#regime-changes"><i class="fa fa-check"></i>Regime changes</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#data-enrichment"><i class="fa fa-check"></i>Data enrichment</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#overview-plots"><i class="fa fa-check"></i>Overview plots</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#double-plotted-actograms-1"><i class="fa fa-check"></i>Double plotted actograms</a></li>
-<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#periodograms-1"><i class="fa fa-check"></i>Periodograms</a><ul>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#periodograms-1"><i class="fa fa-check"></i>Periodograms</a>
+<ul>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#computation"><i class="fa fa-check"></i>Computation</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#peaks-finding"><i class="fa fa-check"></i>Peaks finding</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#visualisation"><i class="fa fa-check"></i>Visualisation</a></li>
@@ -282,10 +342,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#next-steps-4"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="community.html"><a href="community.html"><i class="fa fa-check"></i>Issues and community</a><ul>
+<li class="chapter" data-level="" data-path="community.html"><a href="community.html"><i class="fa fa-check"></i>Issues and community</a>
+<ul>
 <li class="chapter" data-level="" data-path="community.html"><a href="community.html#citation"><i class="fa fa-check"></i>Citation</a></li>
 <li class="chapter" data-level="" data-path="community.html"><a href="community.html#having-troubles"><i class="fa fa-check"></i>Having troubles</a></li>
 <li class="chapter" data-level="" data-path="community.html"><a href="community.html#contributing"><i class="fa fa-check"></i>Contributing</a></li>
+<li class="chapter" data-level="" data-path="community.html"><a href="community.html#related-projects"><i class="fa fa-check"></i>Related projects</a></li>
 </ul></li>
 <li class="divider"></li>
 <li>
@@ -334,24 +396,32 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2>Prerequisites</h2>
 <ul>
 <li>Some familiarity with <a href="http://ggplot2.org/">ggplot</a></li>
-<li>Ensure you have <a href="intro.html#installing-rethomics-packages">installed</a> <code>behavr</code>and <code>ggetho</code> packages:</li>
+<li>Ensure you have <a href="intro.html#installing-rethomics-packages">installed</a>
+<code>behavr</code>and <code>ggetho</code> packages:</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;ggetho&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="ggetho.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;ggetho&quot;</span>)</span></code></pre></div>
 </div>
 <div id="lessons-from-ggplot" class="section level2 unnumbered">
 <h2>Lessons from ggplot</h2>
-<p>In the previous tutorials, we have used <code>ggetho</code> to visualise out behavioural data. This section will explain further how this package can be used to produce flexible plots and how it integrates with <code>ggplot2</code>.</p>
-<p><a href="http://ggplot2.org/">ggplot2</a> is one of the most popular visualisation tools and an unavoidable <code>R</code> package. It implements the powerful concepts of the <a href="https://www.cs.uic.edu/~wilkinson/TheGrammarOfGraphics/GOG.html">“Grammar of graphics”</a>. The package <code>ggetho</code>, which we discuss here, extends <code>ggplot</code> for the specific case of behavioural analysis. At this stage, you really want to have some familiarity with <code>ggplot2</code> so you understand its logic. You will find a fair numbers of <a href="https://www.youtube.com/watch?v=TaxJwC_MP9Q">videos</a> and <a href="http://ggplot2.org/book/">books</a> online.</p>
+<p>In the previous tutorials, we have used <code>ggetho</code> to visualise out behavioural data.
+This section will explain further how this package can be used to produce flexible plots and how it integrates with <code>ggplot2</code>.</p>
+<p><a href="http://ggplot2.org/">ggplot2</a> is one of the most popular visualisation tools and an unavoidable <code>R</code> package.
+It implements the powerful concepts of the <a href="https://www.cs.uic.edu/~wilkinson/TheGrammarOfGraphics/GOG.html">“Grammar of graphics”</a>.
+The package <code>ggetho</code>, which we discuss here, extends <code>ggplot</code> for the specific case of behavioural analysis.
+At this stage, you really want to have some familiarity with <code>ggplot2</code> so you understand its logic.
+You will find a fair numbers of <a href="https://www.youtube.com/watch?v=TaxJwC_MP9Q">videos</a> and <a href="http://ggplot2.org/book/">books</a> online.</p>
 </div>
 <div id="some-behavioural-data" class="section level2 unnumbered">
 <h2>Some behavioural data</h2>
-<p>In this section, we will <strong>simulate toy behavioural data</strong>. For that, we start by making some arbitrary metadata. Here, we have 40 animals, condition “A” vs “B”, and sex, male (“M”) or female (“F”).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggetho)
-
-metadata &lt;-<span class="st"> </span><span class="kw">data.table</span>(<span class="dt">id=</span><span class="kw">sprintf</span>(<span class="st">&quot;toy_experiment|%02d&quot;</span> , <span class="dv">1</span><span class="op">:</span><span class="dv">40</span>), <span class="dt">region_id=</span><span class="dv">1</span><span class="op">:</span><span class="dv">40</span>,
-                   <span class="dt">condition=</span><span class="kw">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>),
-                   <span class="dt">sex=</span><span class="kw">c</span>(<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>, <span class="st">&quot;F&quot;</span>))
-<span class="kw">head</span>(metadata)</code></pre></div>
+<p>In this section, we will <strong>simulate toy behavioural data</strong>.
+For that, we start by making some arbitrary metadata.
+Here, we have 40 animals, condition “A” vs “B”, and sex, male (“M”) or female (“F”).</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="ggetho.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggetho)</span>
+<span id="cb79-2"><a href="ggetho.html#cb79-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-3"><a href="ggetho.html#cb79-3" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">data.table</span>(<span class="at">id=</span><span class="fu">sprintf</span>(<span class="st">&quot;toy_experiment|%02d&quot;</span> , <span class="dv">1</span><span class="sc">:</span><span class="dv">40</span>), <span class="at">region_id=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">40</span>,</span>
+<span id="cb79-4"><a href="ggetho.html#cb79-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">condition=</span><span class="fu">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>),</span>
+<span id="cb79-5"><a href="ggetho.html#cb79-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">sex=</span><span class="fu">c</span>(<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>, <span class="st">&quot;F&quot;</span>))</span>
+<span id="cb79-6"><a href="ggetho.html#cb79-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(metadata)</span></code></pre></div>
 <pre><code>##                   id region_id condition sex
 ## 1: toy_experiment|01         1         A   M
 ## 2: toy_experiment|02         2         B   M
@@ -359,55 +429,72 @@ metadata &lt;-<span class="st"> </span><span class="kw">data.table</span>(<span 
 ## 4: toy_experiment|04         4         B   F
 ## 5: toy_experiment|05         5         A   M
 ## 6: toy_experiment|06         6         B   M</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt &lt;-<span class="st"> </span><span class="kw">toy_activity_data</span>(metadata, <span class="dt">seed=</span><span class="dv">107</span>)</code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="ggetho.html#cb81-1" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">&lt;-</span> <span class="fu">toy_activity_data</span>(metadata, <span class="at">seed=</span><span class="dv">107</span>)</span></code></pre></div>
 <p>Now, we have a <a href="behavr.html">behavr</a> object, <code>dt</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(dt)</code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="ggetho.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dt)</span></code></pre></div>
 <pre><code>## behavr table with:
 ##  40  individuals
 ##  3   metavariables
 ##  3   variables
 ##  1.72804e+06 measurements
 ##  1   key (id)</code></pre>
-<p>This data is stored in a <a href="behavr.html">behavr table</a>. It has a column <code>moving</code> that that tells us whether an the animal <code>id</code> is moving at a time <code>t</code>.</p>
+<p>This data is stored in a <a href="behavr.html">behavr table</a>.
+It has a column <code>moving</code> that that tells us whether an the animal <code>id</code> is moving at a time <code>t</code>.</p>
 </div>
 <div id="the-ggetho-function" class="section level2 unnumbered">
 <h2>The <code>ggetho()</code> function</h2>
-<p><code>ggetho()</code> is the core function. It expresses the <strong>relationship between variables</strong>. In this respect, it works very much like <code>ggplot()</code>, but it also pre-processes the data.</p>
-<p>It is important to understand the <strong>difference between <code>ggplot()</code> and <code>ggetho()</code></strong>. <code>ggplot()</code> works with data frames (or data tables), and does not preprocess the data. <code>ggetho()</code> is only a layer on top of <code>ggplot()</code>. It works <strong>exclusively with <code>behavr</code> tables</strong> and does preprocess data before calling <code>ggplot()</code>. <code>ggetho()</code> does return <code>ggplot</code> a object, therefore, layers available in <code>ggplot2</code> can be used natively on top of <code>ggetho</code>.</p>
+<p><code>ggetho()</code> is the core function.
+It expresses the <strong>relationship between variables</strong>.
+In this respect, it works very much like <code>ggplot()</code>, but it also pre-processes the data.</p>
+<p>It is important to understand the <strong>difference between <code>ggplot()</code> and <code>ggetho()</code></strong>.
+<code>ggplot()</code> works with data frames (or data tables), and does not preprocess the data.
+<code>ggetho()</code> is only a layer on top of <code>ggplot()</code>.
+It works <strong>exclusively with <code>behavr</code> tables</strong> and does preprocess data before calling <code>ggplot()</code>.
+<code>ggetho()</code> does return <code>ggplot</code> a object, therefore, layers available in <code>ggplot2</code> can be used natively on top of <code>ggetho</code>.</p>
 <p>Let’s work with an example. Say, we would like:</p>
 <ul>
 <li>The proportion of time spent <strong>moving, on the y axis</strong></li>
 <li>Versus <strong>time, on the x axis</strong></li>
 </ul>
 <p>We could write:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving))
-pl</code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="ggetho.html#cb84-1" aria-hidden="true" tabindex="-1"></a>pl <span class="ot">&lt;-</span> <span class="fu">ggetho</span>(dt, <span class="fu">aes</span>(<span class="at">x=</span>t, <span class="at">y=</span>moving))</span>
+<span id="cb84-2"><a href="ggetho.html#cb84-2" aria-hidden="true" tabindex="-1"></a>pl</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
-<p>This generates an <strong>empty plot</strong> this is normal because we have, so far, <strong>no layer</strong>. We will see some layers very soon!</p>
+<p>This generates an <strong>empty plot</strong> this is normal because we have, so far, <strong>no layer</strong>.
+We will see some layers very soon!</p>
 <p>The role of <code>ggetho</code> is to express a relationship between variables and to <strong>compute a summary</strong>, over a certain time window, of a variable of interest <strong>for each individual</strong>.</p>
-<p>Importantly, <strong>you decide which variable you want to plot</strong>. For instance, you could be interested in things like the number (sum) of beam crosses or the average position.</p>
+<p>Importantly, <strong>you decide which variable you want to plot</strong>.
+For instance, you could be interested in things like the number (sum) of beam crosses or the average position.</p>
 </div>
 <div id="tile-plots" class="section level2 unnumbered">
 <h2>Tile plots</h2>
 <div id="per-individual" class="section level3 unnumbered">
 <h3>Per individual</h3>
-<p>One of the most interesting layers is <code>stat_tile_etho</code>. It shows the <strong>variable of interest in the (colour) z axis</strong>. The y axis is discrete (generally the id), that is <strong>one row per individual</strong>. The x axis is time (by default, summerised, by <code>ggetho</code>, over 30 minutes). So, if we want to show the proportion of time spent moving over time for each individual (id):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>id, <span class="dt">z=</span>moving)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_tile_etho</span>()
-pl</code></pre></div>
+<p>One of the most interesting layers is <code>stat_tile_etho</code>.
+It shows the <strong>variable of interest in the (colour) z axis</strong>.
+The y axis is discrete (generally the id), that is <strong>one row per individual</strong>.
+The x axis is time (by default, summerised, by <code>ggetho</code>, over 30 minutes).
+So, if we want to show the proportion of time spent moving over time for each individual (id):</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="ggetho.html#cb85-1" aria-hidden="true" tabindex="-1"></a>pl <span class="ot">&lt;-</span> <span class="fu">ggetho</span>(dt, <span class="fu">aes</span>(<span class="at">x=</span>t, <span class="at">y=</span>id, <span class="at">z=</span>moving)) <span class="sc">+</span> <span class="fu">stat_tile_etho</span>()</span>
+<span id="cb85-2"><a href="ggetho.html#cb85-2" aria-hidden="true" tabindex="-1"></a>pl</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
-<p>By defaut, each pixel is the <strong>mean</strong> (<code>summary_FUN = mean</code>, in <code>ggetho</code>), over 30 min (<code>summary_time_window = mins(30)</code>, in <code>ggetho()</code>). Also, note that the default is <code>x=t</code> and <code>y=id</code>, so we could just obtain exactly the same with <code>ggetho(dt, aes(z=moving)) + stat_tile_etho()</code>.</p>
+<p>By defaut, each pixel is the <strong>mean</strong> (<code>summary_FUN = mean</code>, in <code>ggetho</code>), over 30 min (<code>summary_time_window = mins(30)</code>, in <code>ggetho()</code>).
+Also, note that the default is <code>x=t</code> and <code>y=id</code>, so we could just obtain exactly the same with
+<code>ggetho(dt, aes(z=moving)) + stat_tile_etho()</code>.</p>
 </div>
 <div id="sorted-individual" class="section level3 unnumbered">
 <h3>Sorted individual</h3>
-<p>Sometimes, we want to sort individuals based on a metavariable (discrete or continuous). For instance let us compute the overall average fraction of time spent moving, <strong>add it to the metadata</strong>, to then sort individuals from low to high movers:</p>
+<p>Sometimes, we want to sort individuals based on a metavariable (discrete or continuous).
+For instance let us compute the overall average fraction of time spent moving,
+<strong>add it to the metadata</strong>, to then sort individuals from low to high movers:</p>
 <p>First, we add a new metavariable (<code>mean_moving</code>):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the average time spent moving per 1000 (rounded)</span>
-mean_mov_dt &lt;-<span class="st"> </span>dt[, .(<span class="dt">mean_moving =</span> <span class="kw">round</span>(<span class="kw">mean</span>(moving) <span class="op">*</span><span class="st"> </span><span class="dv">1000</span>)), by=id]
-<span class="co"># join curent meta and the summary table</span>
-new_meta &lt;-<span class="st"> </span>dt[mean_mov_dt, meta=T]
-<span class="co"># set new metadata</span>
-<span class="kw">setmeta</span>(dt, new_meta)
-<span class="kw">head</span>(dt[<span class="dt">meta=</span>T])</code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="ggetho.html#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the average time spent moving per 1000 (rounded)</span></span>
+<span id="cb86-2"><a href="ggetho.html#cb86-2" aria-hidden="true" tabindex="-1"></a>mean_mov_dt <span class="ot">&lt;-</span> dt[, .(<span class="at">mean_moving =</span> <span class="fu">round</span>(<span class="fu">mean</span>(moving) <span class="sc">*</span> <span class="dv">1000</span>)), by<span class="ot">=</span>id]</span>
+<span id="cb86-3"><a href="ggetho.html#cb86-3" aria-hidden="true" tabindex="-1"></a><span class="co"># join curent meta and the summary table</span></span>
+<span id="cb86-4"><a href="ggetho.html#cb86-4" aria-hidden="true" tabindex="-1"></a>new_meta <span class="ot">&lt;-</span> dt[mean_mov_dt, meta<span class="ot">=</span>T]</span>
+<span id="cb86-5"><a href="ggetho.html#cb86-5" aria-hidden="true" tabindex="-1"></a><span class="co"># set new metadata</span></span>
+<span id="cb86-6"><a href="ggetho.html#cb86-6" aria-hidden="true" tabindex="-1"></a><span class="fu">setmeta</span>(dt, new_meta)</span>
+<span id="cb86-7"><a href="ggetho.html#cb86-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dt[<span class="at">meta=</span>T])</span></code></pre></div>
 <pre><code>##                   id region_id condition sex mean_moving
 ## 1: toy_experiment|01         1         A   M         138
 ## 2: toy_experiment|02         2         B   M         195
@@ -415,30 +502,42 @@ new_meta &lt;-<span class="st"> </span>dt[mean_mov_dt, meta=T]
 ## 4: toy_experiment|04         4         B   F         118
 ## 5: toy_experiment|05         5         A   M         123
 ## 6: toy_experiment|06         6         B   M         203</code></pre>
-<p>Proportion of time moving (<code>mean(moving)</code>) will be a number between zero and one, with sometimes many decimals, which makes it hard to read. A more intuitive way to express it is as a rounded per mille (‰). I prefer it to per cent as we have more resolution (i.e. less ties) For instance, <code>0.0113333</code> would be expressed as <code>11</code>.</p>
+<p>Proportion of time moving (<code>mean(moving)</code>) will be a number between zero and one, with sometimes many decimals,
+which makes it hard to read.
+A more intuitive way to express it is as a rounded per mille (‰).
+I prefer it to per cent as we have more resolution (i.e. less ties)
+For instance, <code>0.0113333</code> would be expressed as <code>11</code>.</p>
 <p>Now, we can express a new relationship where we show the <em>interaction</em> between our custom variable and id, on the y axis:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span><span class="kw">interaction</span>(id, mean_moving, <span class="dt">sep =</span> <span class="st">&quot; : &quot;</span>), <span class="dt">z=</span>moving)) <span class="op">+</span>
-<span class="st">              </span><span class="kw">stat_tile_etho</span>()
-pl</code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="ggetho.html#cb88-1" aria-hidden="true" tabindex="-1"></a>pl <span class="ot">&lt;-</span> <span class="fu">ggetho</span>(dt, <span class="fu">aes</span>(<span class="at">x=</span>t, <span class="at">y=</span><span class="fu">interaction</span>(id, mean_moving, <span class="at">sep =</span> <span class="st">&quot; : &quot;</span>), <span class="at">z=</span>moving)) <span class="sc">+</span></span>
+<span id="cb88-2"><a href="ggetho.html#cb88-2" aria-hidden="true" tabindex="-1"></a>              <span class="fu">stat_tile_etho</span>()</span>
+<span id="cb88-3"><a href="ggetho.html#cb88-3" aria-hidden="true" tabindex="-1"></a>pl</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-63-1.png" width="672" /></p>
-<p>Since we use <code>&quot; : &quot;</code> as a separator, we have, on the y axis, names as <code>&lt;id&gt; : &lt;mean_sleep&gt;</code>. You can extend this concept to sort also by <em>males vs females</em>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span><span class="kw">interaction</span>(id, mean_moving, sex, <span class="dt">sep =</span> <span class="st">&quot; : &quot;</span>), <span class="dt">z=</span>moving)) <span class="op">+</span>
-<span class="st">              </span><span class="kw">stat_tile_etho</span>()
-pl</code></pre></div>
+<p>Since we use <code>" : "</code> as a separator, we have, on the y axis, names as <code>&lt;id&gt; : &lt;mean_sleep&gt;</code>.
+You can extend this concept to sort also by <em>males vs females</em>:</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="ggetho.html#cb89-1" aria-hidden="true" tabindex="-1"></a>pl <span class="ot">&lt;-</span> <span class="fu">ggetho</span>(dt, <span class="fu">aes</span>(<span class="at">x=</span>t, <span class="at">y=</span><span class="fu">interaction</span>(id, mean_moving, sex, <span class="at">sep =</span> <span class="st">&quot; : &quot;</span>), <span class="at">z=</span>moving)) <span class="sc">+</span></span>
+<span id="cb89-2"><a href="ggetho.html#cb89-2" aria-hidden="true" tabindex="-1"></a>              <span class="fu">stat_tile_etho</span>()</span>
+<span id="cb89-3"><a href="ggetho.html#cb89-3" aria-hidden="true" tabindex="-1"></a>pl</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
 </div>
 <div id="group-averages" class="section level3 unnumbered">
 <h3>Group averages</h3>
-<p>Sometimes, we also want to aggregate individuals per group. For instance, males <strong>average</strong> vs females <strong>average</strong>. This can be done by changing the <code>y</code> axis. Previously, we used <code>id</code>, which made one row per individual. Instead, if we use a grouping variable like <code>sex</code>, we will plot one row per value of <code>sex</code> (i.e. two rows, one for males, one for females). In other words, we replace <code>id</code> by <code>sex</code> on the y axis:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>sex, <span class="dt">z=</span>moving)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_tile_etho</span>()
-pl</code></pre></div>
-<p><img src="rethomics_files/figure-html/unnamed-chunk-65-1.png" width="672" /> In this context, <strong>every row is not an individual any more, but a population</strong>. The <code>method</code> argument of <code>stat_tile_etho()</code> allows you to use other aggregates (median, max, min, …).</p>
+<p>Sometimes, we also want to aggregate individuals per group.
+For instance, males <strong>average</strong> vs females <strong>average</strong>.
+This can be done by changing the <code>y</code> axis. Previously, we used <code>id</code>, which made one row per individual.
+Instead, if we use a grouping variable like <code>sex</code>, we will plot one row per value of <code>sex</code> (i.e. two rows, one for males, one for females). In other words, we replace <code>id</code> by <code>sex</code> on the y axis:</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="ggetho.html#cb90-1" aria-hidden="true" tabindex="-1"></a>pl <span class="ot">&lt;-</span> <span class="fu">ggetho</span>(dt, <span class="fu">aes</span>(<span class="at">x=</span>t, <span class="at">y=</span>sex, <span class="at">z=</span>moving)) <span class="sc">+</span> <span class="fu">stat_tile_etho</span>()</span>
+<span id="cb90-2"><a href="ggetho.html#cb90-2" aria-hidden="true" tabindex="-1"></a>pl</span></code></pre></div>
+<p><img src="rethomics_files/figure-html/unnamed-chunk-65-1.png" width="672" />
+In this context, <strong>every row is not an individual any more, but a population</strong>.
+The <code>method</code> argument of <code>stat_tile_etho()</code> allows you to use other aggregates (median, max, min, …).</p>
 </div>
 <div id="bar-tiles" class="section level3 unnumbered">
 <h3>Bar tiles</h3>
-<p>The bar_tile is a variant of our tile plot. Instead of colour intensity, <strong>it shows our z variable by the height of the tiles</strong>. You can use it just by replacing <code>stat_tile_etho</code> by <code>stat_bar_tile_etho</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">z=</span>moving)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_bar_tile_etho</span>()
-pl</code></pre></div>
+<p>The bar_tile is a variant of our tile plot.
+Instead of colour intensity, <strong>it shows our z variable by the height of the tiles</strong>.
+You can use it just by replacing <code>stat_tile_etho</code> by <code>stat_bar_tile_etho</code>:</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="ggetho.html#cb91-1" aria-hidden="true" tabindex="-1"></a>pl <span class="ot">&lt;-</span> <span class="fu">ggetho</span>(dt, <span class="fu">aes</span>(<span class="at">x=</span>t, <span class="at">z=</span>moving)) <span class="sc">+</span> <span class="fu">stat_bar_tile_etho</span>()</span>
+<span id="cb91-2"><a href="ggetho.html#cb91-2" aria-hidden="true" tabindex="-1"></a>pl</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-66-1.png" width="672" /></p>
 </div>
 </div>
@@ -446,76 +545,87 @@ pl</code></pre></div>
 <h2>Population plots</h2>
 <div id="one-population" class="section level3 unnumbered">
 <h3>One population</h3>
-<p>The problem with representing a variable on a colour axis is that it is not perceptually comparable, and we cannot make error bars. When the number of groups is not too high, it makes sense to show <strong>the variable of interest on the y axis</strong>, and then draw lines between consecutive points. For this, we can use the <code>stat_pop_etho()</code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_pop_etho</span>()
-pl</code></pre></div>
+<p>The problem with representing a variable on a colour axis is that it is not perceptually comparable, and we cannot make error bars.
+When the number of groups is not too high, it makes sense to show <strong>the variable of interest on the y axis</strong>, and then draw lines between consecutive points.
+For this, we can use the <code>stat_pop_etho()</code> function:</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="ggetho.html#cb92-1" aria-hidden="true" tabindex="-1"></a>pl <span class="ot">&lt;-</span> <span class="fu">ggetho</span>(dt, <span class="fu">aes</span>(<span class="at">x=</span>t, <span class="at">y=</span>moving)) <span class="sc">+</span> <span class="fu">stat_pop_etho</span>()</span>
+<span id="cb92-2"><a href="ggetho.html#cb92-2" aria-hidden="true" tabindex="-1"></a>pl</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
-<p>By defaut, the local average and error bars are computed from the mean as standard errors (<code>method = mean_se</code>). You can compute other types of error bars e.g. bootstrap (<code>method = mean_cl_boot</code>).</p>
+<p>By defaut, the local average and error bars are computed from the mean as standard errors (<code>method = mean_se</code>).
+You can compute other types of error bars e.g. bootstrap (<code>method = mean_cl_boot</code>).</p>
 </div>
 <div id="several-populations" class="section level3 unnumbered">
 <h3>Several populations</h3>
-<p>Often, we want to compare population with respect to a variable. There are different ways to split populations. We can, for instance, <strong>use a different colour line for different groups</strong>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving, <span class="dt">colour=</span>sex)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_pop_etho</span>()
-pl</code></pre></div>
+<p>Often, we want to compare population with respect to a variable.
+There are different ways to split populations. We can, for instance, <strong>use a different colour line for different groups</strong>:</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="ggetho.html#cb93-1" aria-hidden="true" tabindex="-1"></a>pl <span class="ot">&lt;-</span> <span class="fu">ggetho</span>(dt, <span class="fu">aes</span>(<span class="at">x=</span>t, <span class="at">y=</span>moving, <span class="at">colour=</span>sex)) <span class="sc">+</span> <span class="fu">stat_pop_etho</span>()</span>
+<span id="cb93-2"><a href="ggetho.html#cb93-2" aria-hidden="true" tabindex="-1"></a>pl</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-68-1.png" width="672" /></p>
 <p>Another way, is to use <code>ggplot</code>’s faceting system:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_pop_etho</span>() <span class="op">+</span>
-<span class="st">            </span><span class="kw">facet_grid</span>(sex <span class="op">~</span><span class="st"> </span>.)
-pl</code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="ggetho.html#cb94-1" aria-hidden="true" tabindex="-1"></a>pl <span class="ot">&lt;-</span> <span class="fu">ggetho</span>(dt, <span class="fu">aes</span>(<span class="at">x=</span>t, <span class="at">y=</span>moving)) <span class="sc">+</span> <span class="fu">stat_pop_etho</span>() <span class="sc">+</span></span>
+<span id="cb94-2"><a href="ggetho.html#cb94-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">facet_grid</span>(sex <span class="sc">~</span> .)</span>
+<span id="cb94-3"><a href="ggetho.html#cb94-3" aria-hidden="true" tabindex="-1"></a>pl</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
 <p>Of course, you can combine both when you have more than one relevant metavariable:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving, <span class="dt">colour =</span> sex)) <span class="op">+</span>
-<span class="st">              </span><span class="kw">stat_pop_etho</span>() <span class="op">+</span>
-<span class="st">              </span><span class="kw">facet_grid</span>( condition <span class="op">~</span><span class="st"> </span>.)
-pl</code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="ggetho.html#cb95-1" aria-hidden="true" tabindex="-1"></a>pl <span class="ot">&lt;-</span> <span class="fu">ggetho</span>(dt, <span class="fu">aes</span>(<span class="at">x=</span>t, <span class="at">y=</span>moving, <span class="at">colour =</span> sex)) <span class="sc">+</span></span>
+<span id="cb95-2"><a href="ggetho.html#cb95-2" aria-hidden="true" tabindex="-1"></a>              <span class="fu">stat_pop_etho</span>() <span class="sc">+</span></span>
+<span id="cb95-3"><a href="ggetho.html#cb95-3" aria-hidden="true" tabindex="-1"></a>              <span class="fu">facet_grid</span>( condition <span class="sc">~</span> .)</span>
+<span id="cb95-4"><a href="ggetho.html#cb95-4" aria-hidden="true" tabindex="-1"></a>pl</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-70-1.png" width="672" /></p>
 </div>
 </div>
 <div id="wrapping-data" class="section level2 unnumbered">
 <h2>Wrapping data</h2>
-<p>When behaviours are periodic, we sometimes want to average our variable at the same time over consecutive days. In ggetho, we call that time <em>wrapping</em>. It can be done simply with the <code>time_wrap</code> argument. It will work the same for population or tile plots:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving), <span class="dt">time_wrap =</span> <span class="kw">hours</span>(<span class="dv">24</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_pop_etho</span>()
-pl</code></pre></div>
+<p>When behaviours are periodic, we sometimes want to average our variable at the same time over consecutive days.
+In ggetho, we call that time <em>wrapping</em>.
+It can be done simply with the <code>time_wrap</code> argument.
+It will work the same for population or tile plots:</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="ggetho.html#cb96-1" aria-hidden="true" tabindex="-1"></a>pl <span class="ot">&lt;-</span> <span class="fu">ggetho</span>(dt, <span class="fu">aes</span>(<span class="at">x=</span>t, <span class="at">y=</span>moving), <span class="at">time_wrap =</span> <span class="fu">hours</span>(<span class="dv">24</span>)) <span class="sc">+</span> <span class="fu">stat_pop_etho</span>()</span>
+<span id="cb96-2"><a href="ggetho.html#cb96-2" aria-hidden="true" tabindex="-1"></a>pl</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-71-1.png" width="672" /></p>
 <p>Note that you do not have to wrap specifically over 24h, you could work over different periods.</p>
-<p>If you are interested in events that happen between the end and the start of the wrapping period (e.g. at ZT24). You may want to wrap time with an <strong>“offset”</strong>. That is a phase shift. For instance, if we want to have ZT06 in the middle of our graph, we use an offset of +6h:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving), 
-             <span class="dt">time_wrap =</span> <span class="kw">hours</span>(<span class="dv">24</span>),
-             <span class="dt">time_offset =</span> <span class="kw">hours</span>(<span class="dv">6</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_pop_etho</span>()
-pl</code></pre></div>
+<p>If you are interested in events that happen between the end and the start of the wrapping period (e.g. at ZT24).
+You may want to wrap time with an <strong>“offset”</strong>. That is a phase shift. For instance, if we want to have ZT06 in the middle of our graph, we use an offset of +6h:</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="ggetho.html#cb97-1" aria-hidden="true" tabindex="-1"></a>pl <span class="ot">&lt;-</span> <span class="fu">ggetho</span>(dt, <span class="fu">aes</span>(<span class="at">x=</span>t, <span class="at">y=</span>moving), </span>
+<span id="cb97-2"><a href="ggetho.html#cb97-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">time_wrap =</span> <span class="fu">hours</span>(<span class="dv">24</span>),</span>
+<span id="cb97-3"><a href="ggetho.html#cb97-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">time_offset =</span> <span class="fu">hours</span>(<span class="dv">6</span>)) <span class="sc">+</span> <span class="fu">stat_pop_etho</span>()</span>
+<span id="cb97-4"><a href="ggetho.html#cb97-4" aria-hidden="true" tabindex="-1"></a>pl</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-72-1.png" width="672" /></p>
 <p>As you can see, it gives us a nice visualisation of the “activity peaks”.</p>
 </div>
 <div id="double-plotted-actograms" class="section level2 unnumbered">
 <h2>Double-plotted actograms</h2>
-<p>When analysing periodic behaviour, it makes sense to use a so called double-plotted actogram. This is very useful <strong>to understand periodicity of behaviours</strong>.</p>
+<p>When analysing periodic behaviour, it makes sense to use a so called double-plotted actogram.
+This is very useful <strong>to understand periodicity of behaviours</strong>.</p>
 <p>This means data is plotted twice, in a staggered manner:</p>
 <pre><code>row1 [day 1, day2]
 row1 [day 2, day3]
 row1 [day 3, day4]</code></pre>
-<p>To do that, we can set the <code>multiplot</code> argument of <code>ggetho</code> to <code>2</code> (<code>3</code> would do a “tripple-plotted” actogram). This averages the whole population:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">z=</span>moving), <span class="dt">multiplot =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">stat_bar_tile_etho</span>()
-pl</code></pre></div>
+<p>To do that, we can set the <code>multiplot</code> argument of <code>ggetho</code> to <code>2</code> (<code>3</code> would do a “tripple-plotted” actogram).
+This averages the whole population:</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="ggetho.html#cb99-1" aria-hidden="true" tabindex="-1"></a>pl <span class="ot">&lt;-</span> <span class="fu">ggetho</span>(dt, <span class="fu">aes</span>(<span class="at">x=</span>t, <span class="at">z=</span>moving), <span class="at">multiplot =</span> <span class="dv">2</span>) <span class="sc">+</span> <span class="fu">stat_bar_tile_etho</span>()</span>
+<span id="cb99-2"><a href="ggetho.html#cb99-2" aria-hidden="true" tabindex="-1"></a>pl</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-73-1.png" width="672" /></p>
 <p>In practice, we genrally want to do that for <strong>one specific individual</strong> (see next section to do that automatically):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt[id<span class="op">==</span><span class="st">&quot;toy_experiment|01&quot;</span>],
-             <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">z=</span>moving), <span class="dt">multiplot =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="kw">stat_bar_tile_etho</span>()
-pl</code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="ggetho.html#cb100-1" aria-hidden="true" tabindex="-1"></a>pl <span class="ot">&lt;-</span> <span class="fu">ggetho</span>(dt[id<span class="sc">==</span><span class="st">&quot;toy_experiment|01&quot;</span>],</span>
+<span id="cb100-2"><a href="ggetho.html#cb100-2" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">x=</span>t, <span class="at">z=</span>moving), <span class="at">multiplot =</span> <span class="dv">2</span>) <span class="sc">+</span> <span class="fu">stat_bar_tile_etho</span>()</span>
+<span id="cb100-3"><a href="ggetho.html#cb100-3" aria-hidden="true" tabindex="-1"></a>pl</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-74-1.png" width="672" /></p>
-<p>One thing you can do is change the length of the period. For instance <strong>25h instead of 24h</strong>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt[id<span class="op">==</span><span class="st">&quot;toy_experiment|01&quot;</span>], <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">z=</span>moving), 
-             <span class="dt">multiplot =</span> <span class="dv">2</span>,
-             <span class="dt">multiplot_period =</span> <span class="kw">hours</span>(<span class="dv">25</span>) <span class="co"># this is the important part</span>
-             ) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">stat_bar_tile_etho</span>()
-pl</code></pre></div>
+<p>One thing you can do is change the length of the period.
+For instance <strong>25h instead of 24h</strong>:</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="ggetho.html#cb101-1" aria-hidden="true" tabindex="-1"></a>pl <span class="ot">&lt;-</span> <span class="fu">ggetho</span>(dt[id<span class="sc">==</span><span class="st">&quot;toy_experiment|01&quot;</span>], <span class="fu">aes</span>(<span class="at">x=</span>t, <span class="at">z=</span>moving), </span>
+<span id="cb101-2"><a href="ggetho.html#cb101-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">multiplot =</span> <span class="dv">2</span>,</span>
+<span id="cb101-3"><a href="ggetho.html#cb101-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">multiplot_period =</span> <span class="fu">hours</span>(<span class="dv">25</span>) <span class="co"># this is the important part</span></span>
+<span id="cb101-4"><a href="ggetho.html#cb101-4" aria-hidden="true" tabindex="-1"></a>             ) <span class="sc">+</span> </span>
+<span id="cb101-5"><a href="ggetho.html#cb101-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_bar_tile_etho</span>()</span>
+<span id="cb101-6"><a href="ggetho.html#cb101-6" aria-hidden="true" tabindex="-1"></a>pl</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-75-1.png" width="672" /></p>
 <p>Keep in mind that you can use the <strong>tile representation if you prefer</strong> it:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt[id<span class="op">==</span><span class="st">&quot;toy_experiment|01&quot;</span>], <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">z=</span>moving), 
-             <span class="dt">multiplot =</span> <span class="dv">2</span>
-             ) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">stat_tile_etho</span>() <span class="co"># tile here</span>
-pl</code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="ggetho.html#cb102-1" aria-hidden="true" tabindex="-1"></a>pl <span class="ot">&lt;-</span> <span class="fu">ggetho</span>(dt[id<span class="sc">==</span><span class="st">&quot;toy_experiment|01&quot;</span>], <span class="fu">aes</span>(<span class="at">x=</span>t, <span class="at">z=</span>moving), </span>
+<span id="cb102-2"><a href="ggetho.html#cb102-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">multiplot =</span> <span class="dv">2</span></span>
+<span id="cb102-3"><a href="ggetho.html#cb102-3" aria-hidden="true" tabindex="-1"></a>             ) <span class="sc">+</span> </span>
+<span id="cb102-4"><a href="ggetho.html#cb102-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_tile_etho</span>() <span class="co"># tile here</span></span>
+<span id="cb102-5"><a href="ggetho.html#cb102-5" aria-hidden="true" tabindex="-1"></a>pl</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-76-1.png" width="672" /></p>
 </div>
 <div id="faceting-by-id" class="section level2 unnumbered">
@@ -523,31 +633,35 @@ pl</code></pre></div>
 <p>When multiplotting, it is difficult to represent individuals (since both y and x axis are used).</p>
 <div id="default" class="section level3 unnumbered">
 <h3>Default</h3>
-<p>The best way to systematically represent all of them is to use facetting, which is a ggplot feature. Since id represents unique individuals, <strong>each facet (sub-rectangle) is one individual</strong>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">z=</span>moving), 
-             <span class="dt">multiplot =</span> <span class="dv">2</span>
-             ) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">stat_bar_tile_etho</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">facet_wrap</span>( <span class="op">~</span><span class="st"> </span>id)
-pl</code></pre></div>
+<p>The best way to systematically represent all of them is to use facetting, which is a ggplot feature.
+Since id represents unique individuals, <strong>each facet (sub-rectangle) is one individual</strong>:</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="ggetho.html#cb103-1" aria-hidden="true" tabindex="-1"></a>pl <span class="ot">&lt;-</span> <span class="fu">ggetho</span>(dt, <span class="fu">aes</span>(<span class="at">x=</span>t, <span class="at">z=</span>moving), </span>
+<span id="cb103-2"><a href="ggetho.html#cb103-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">multiplot =</span> <span class="dv">2</span></span>
+<span id="cb103-3"><a href="ggetho.html#cb103-3" aria-hidden="true" tabindex="-1"></a>             ) <span class="sc">+</span> </span>
+<span id="cb103-4"><a href="ggetho.html#cb103-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_bar_tile_etho</span>() <span class="sc">+</span></span>
+<span id="cb103-5"><a href="ggetho.html#cb103-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>( <span class="sc">~</span> id)</span>
+<span id="cb103-6"><a href="ggetho.html#cb103-6" aria-hidden="true" tabindex="-1"></a>pl</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-77-1.png" width="960" /></p>
 </div>
 <div id="custom-labeller" class="section level3 unnumbered">
 <h3>Custom labeller</h3>
 <p>Sometimes, the <code>id</code> variable will be very long, you can use the <code>id_labeller</code> to make things clearer:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">z=</span>moving), 
-             <span class="dt">multiplot =</span> <span class="dv">2</span>
-             ) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">stat_bar_tile_etho</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">facet_wrap</span>( <span class="op">~</span><span class="st"> </span>id, <span class="dt">labeller =</span> <span class="st">&quot;id_labeller&quot;</span>)
-pl</code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="ggetho.html#cb104-1" aria-hidden="true" tabindex="-1"></a>pl <span class="ot">&lt;-</span> <span class="fu">ggetho</span>(dt, <span class="fu">aes</span>(<span class="at">x=</span>t, <span class="at">z=</span>moving), </span>
+<span id="cb104-2"><a href="ggetho.html#cb104-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">multiplot =</span> <span class="dv">2</span></span>
+<span id="cb104-3"><a href="ggetho.html#cb104-3" aria-hidden="true" tabindex="-1"></a>             ) <span class="sc">+</span> </span>
+<span id="cb104-4"><a href="ggetho.html#cb104-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_bar_tile_etho</span>() <span class="sc">+</span></span>
+<span id="cb104-5"><a href="ggetho.html#cb104-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>( <span class="sc">~</span> id, <span class="at">labeller =</span> <span class="st">&quot;id_labeller&quot;</span>)</span>
+<span id="cb104-6"><a href="ggetho.html#cb104-6" aria-hidden="true" tabindex="-1"></a>pl</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-78-1.png" width="960" /></p>
 </div>
 <div id="numerical-labelling" class="section level3 unnumbered">
 <h3>Numerical labelling</h3>
-<p>Even with the trick above, ids may become unreadable when plotting many individuals. What we can can do in this case is to use numbers instead. First, we create a new metavariable named, for instance, <code>uid</code>. It will be one <strong>unique number</strong> per individual:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt[, uid <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span>.N, meta=T]
-<span class="kw">print</span>(dt[<span class="dt">meta=</span>T])</code></pre></div>
+<p>Even with the trick above, ids may become unreadable when plotting many individuals.
+What we can can do in this case is to use numbers instead.
+First, we create a new metavariable named, for instance, <code>uid</code>.
+It will be one <strong>unique number</strong> per individual:</p>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="ggetho.html#cb105-1" aria-hidden="true" tabindex="-1"></a>dt[, uid <span class="sc">:</span><span class="er">=</span> <span class="dv">1</span><span class="sc">:</span>.N, meta<span class="ot">=</span>T]</span>
+<span id="cb105-2"><a href="ggetho.html#cb105-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(dt[<span class="at">meta=</span>T])</span></code></pre></div>
 <pre><code>##                    id region_id condition sex mean_moving uid
 ##  1: toy_experiment|01         1         A   M         138   1
 ##  2: toy_experiment|02         2         B   M         195   2
@@ -561,15 +675,17 @@ pl</code></pre></div>
 ## 39: toy_experiment|39        39         A   F          59  39
 ## 40: toy_experiment|40        40         B   F          84  40</code></pre>
 <p>Then, we can use <code>uid</code> instead of <code>id</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">z=</span>moving), 
-             <span class="dt">multiplot =</span> <span class="dv">2</span>
-             ) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">stat_bar_tile_etho</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">facet_wrap</span>( <span class="op">~</span><span class="st"> </span>uid)
-pl</code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="ggetho.html#cb107-1" aria-hidden="true" tabindex="-1"></a>pl <span class="ot">&lt;-</span> <span class="fu">ggetho</span>(dt, <span class="fu">aes</span>(<span class="at">x=</span>t, <span class="at">z=</span>moving), </span>
+<span id="cb107-2"><a href="ggetho.html#cb107-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">multiplot =</span> <span class="dv">2</span></span>
+<span id="cb107-3"><a href="ggetho.html#cb107-3" aria-hidden="true" tabindex="-1"></a>             ) <span class="sc">+</span> </span>
+<span id="cb107-4"><a href="ggetho.html#cb107-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_bar_tile_etho</span>() <span class="sc">+</span></span>
+<span id="cb107-5"><a href="ggetho.html#cb107-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>( <span class="sc">~</span> uid)</span>
+<span id="cb107-6"><a href="ggetho.html#cb107-6" aria-hidden="true" tabindex="-1"></a>pl</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-80-1.png" width="960" /></p>
 <p>Since we kept both <code>id</code> and <code>uid</code> in the metadata, we can map them again each other.</p>
-<p>The downside of using numbers, is that they are <strong>ambiguous</strong>. Say, you decide to start with more data, or to remove some, then the numbers (<code>uid</code>) will not match their previous <code>id</code>. Conversely, if you try to analyse different datasets independently, and merge results afterwards, you will end up with duplicates in <code>uid</code>. Therefore, only use this trick for readability and visualisation.</p>
+<p>The downside of using numbers, is that they are <strong>ambiguous</strong>.
+Say, you decide to start with more data, or to remove some, then the numbers (<code>uid</code>) will not match their previous <code>id</code>.
+Conversely, if you try to analyse different datasets independently, and merge results afterwards, you will end up with duplicates in <code>uid</code>. Therefore, only use this trick for readability and visualisation.</p>
 <p>If you want to understand facets a bit more, have a look at <a href="http://www.cookbook-r.com/Graphs/Facets_(ggplot2)/">this tutorial</a>.</p>
 </div>
 </div>
@@ -578,55 +694,57 @@ pl</code></pre></div>
 <div id="basics" class="section level3 unnumbered">
 <h3>Basics</h3>
 <p>In circadian experiments, we often like to add annotations (black and white boxes) to show Dark and Light phases. We have another layer for that:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_pop_etho</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_ld_annotations</span>()
-pl</code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="ggetho.html#cb108-1" aria-hidden="true" tabindex="-1"></a>pl <span class="ot">&lt;-</span> <span class="fu">ggetho</span>(dt, <span class="fu">aes</span>(<span class="at">x=</span>t, <span class="at">y=</span>moving)) <span class="sc">+</span> <span class="fu">stat_pop_etho</span>() <span class="sc">+</span> <span class="fu">stat_ld_annotations</span>()</span>
+<span id="cb108-2"><a href="ggetho.html#cb108-2" aria-hidden="true" tabindex="-1"></a>pl</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-81-1.png" width="672" /></p>
 </div>
 <div id="changing-ld-colours" class="section level3 unnumbered">
 <h3>Changing LD colours</h3>
 <p>Sometimes you want different colours to explain, for instance, that days are “subjective”(grey).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_pop_etho</span>() <span class="op">+</span>
-<span class="st">              </span><span class="kw">stat_ld_annotations</span>(<span class="dt">ld_colours =</span> <span class="kw">c</span>(<span class="st">&quot;grey&quot;</span>, <span class="st">&quot;black&quot;</span>))
-pl</code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="ggetho.html#cb109-1" aria-hidden="true" tabindex="-1"></a>pl <span class="ot">&lt;-</span> <span class="fu">ggetho</span>(dt, <span class="fu">aes</span>(<span class="at">x=</span>t, <span class="at">y=</span>moving)) <span class="sc">+</span> <span class="fu">stat_pop_etho</span>() <span class="sc">+</span></span>
+<span id="cb109-2"><a href="ggetho.html#cb109-2" aria-hidden="true" tabindex="-1"></a>              <span class="fu">stat_ld_annotations</span>(<span class="at">ld_colours =</span> <span class="fu">c</span>(<span class="st">&quot;grey&quot;</span>, <span class="st">&quot;black&quot;</span>))</span>
+<span id="cb109-3"><a href="ggetho.html#cb109-3" aria-hidden="true" tabindex="-1"></a>pl</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-82-1.png" width="672" /></p>
 </div>
 <div id="ld-in-the-background" class="section level3 unnumbered">
 <h3>LD in the background</h3>
 <p>To put the annotation in the background, we can invert the order of the layers, set the height of the annotation to 1 (100%) and add some transparency (<code>alpha = 0.3</code>). We also remove the outline of the boxes:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving)) <span class="op">+</span>
-<span class="st">            </span><span class="kw">stat_ld_annotations</span>(<span class="dt">height=</span><span class="dv">1</span>, <span class="dt">alpha=</span><span class="fl">0.3</span>, <span class="dt">outline =</span> <span class="ot">NA</span>) <span class="op">+</span>
-<span class="st">            </span><span class="kw">stat_pop_etho</span>()
-pl</code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="ggetho.html#cb110-1" aria-hidden="true" tabindex="-1"></a>pl <span class="ot">&lt;-</span> <span class="fu">ggetho</span>(dt, <span class="fu">aes</span>(<span class="at">x=</span>t, <span class="at">y=</span>moving)) <span class="sc">+</span></span>
+<span id="cb110-2"><a href="ggetho.html#cb110-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">stat_ld_annotations</span>(<span class="at">height=</span><span class="dv">1</span>, <span class="at">alpha=</span><span class="fl">0.3</span>, <span class="at">outline =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb110-3"><a href="ggetho.html#cb110-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">stat_pop_etho</span>()</span>
+<span id="cb110-4"><a href="ggetho.html#cb110-4" aria-hidden="true" tabindex="-1"></a>pl</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-83-1.png" width="672" /></p>
 </div>
 <div id="phase-and-period" class="section level3 unnumbered">
 <h3>Phase and period</h3>
-<p>Sometimes you want to show annotations with different phases and periods. For instance, here, we shift the LD annotations 1h forward:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving)) <span class="op">+</span>
-<span class="st">            </span><span class="kw">stat_ld_annotations</span>(<span class="dt">phase =</span> <span class="kw">hours</span>(<span class="dv">1</span>)) <span class="op">+</span>
-<span class="st">            </span><span class="kw">stat_pop_etho</span>()
-pl</code></pre></div>
+<p>Sometimes you want to show annotations with different phases and periods.
+For instance, here, we shift the LD annotations 1h forward:</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="ggetho.html#cb111-1" aria-hidden="true" tabindex="-1"></a>pl <span class="ot">&lt;-</span> <span class="fu">ggetho</span>(dt, <span class="fu">aes</span>(<span class="at">x=</span>t, <span class="at">y=</span>moving)) <span class="sc">+</span></span>
+<span id="cb111-2"><a href="ggetho.html#cb111-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">stat_ld_annotations</span>(<span class="at">phase =</span> <span class="fu">hours</span>(<span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb111-3"><a href="ggetho.html#cb111-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">stat_pop_etho</span>()</span>
+<span id="cb111-4"><a href="ggetho.html#cb111-4" aria-hidden="true" tabindex="-1"></a>pl</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-84-1.png" width="672" /></p>
 <p>One can also plot over a period different from 24h, say 20h days:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving)) <span class="op">+</span>
-<span class="st">            </span><span class="kw">stat_ld_annotations</span>(<span class="dt">period =</span> <span class="kw">hours</span>(<span class="dv">20</span>)) <span class="op">+</span>
-<span class="st">            </span><span class="kw">stat_pop_etho</span>()
-pl</code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="ggetho.html#cb112-1" aria-hidden="true" tabindex="-1"></a>pl <span class="ot">&lt;-</span> <span class="fu">ggetho</span>(dt, <span class="fu">aes</span>(<span class="at">x=</span>t, <span class="at">y=</span>moving)) <span class="sc">+</span></span>
+<span id="cb112-2"><a href="ggetho.html#cb112-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">stat_ld_annotations</span>(<span class="at">period =</span> <span class="fu">hours</span>(<span class="dv">20</span>)) <span class="sc">+</span></span>
+<span id="cb112-3"><a href="ggetho.html#cb112-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">stat_pop_etho</span>()</span>
+<span id="cb112-4"><a href="ggetho.html#cb112-4" aria-hidden="true" tabindex="-1"></a>pl</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-85-1.png" width="672" /></p>
 </div>
 <div id="regime-change" class="section level3 unnumbered">
 <h3>Regime change</h3>
-<p>When, you want to indicate a change in regime, say from LD to DD. A simple way is to use multiple layers with explicit start and end points:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving)) <span class="op">+</span>
-<span class="st">            </span><span class="co"># the default annotation layer</span>
-<span class="st">            </span><span class="kw">stat_ld_annotations</span>() <span class="op">+</span>
-<span class="st">            </span><span class="co"># on top of it, a second layer that</span>
-<span class="st">            </span><span class="co"># starts at day 2 thoughout day 5,</span>
-<span class="st">            </span><span class="co"># and where L colour is grey</span>
-<span class="st">            </span><span class="kw">stat_ld_annotations</span>(<span class="dt">x_limits =</span> <span class="kw">days</span>(<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">5</span>)),
-                                <span class="dt">ld_colours =</span> <span class="kw">c</span>(<span class="st">&quot;grey&quot;</span>, <span class="st">&quot;black&quot;</span> )) <span class="op">+</span>
-<span class="st">            </span><span class="kw">stat_pop_etho</span>()
-pl</code></pre></div>
+<p>When, you want to indicate a change in regime, say from LD to DD.
+A simple way is to use multiple layers with explicit start and end points:</p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="ggetho.html#cb113-1" aria-hidden="true" tabindex="-1"></a>pl <span class="ot">&lt;-</span> <span class="fu">ggetho</span>(dt, <span class="fu">aes</span>(<span class="at">x=</span>t, <span class="at">y=</span>moving)) <span class="sc">+</span></span>
+<span id="cb113-2"><a href="ggetho.html#cb113-2" aria-hidden="true" tabindex="-1"></a>            <span class="co"># the default annotation layer</span></span>
+<span id="cb113-3"><a href="ggetho.html#cb113-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">stat_ld_annotations</span>() <span class="sc">+</span></span>
+<span id="cb113-4"><a href="ggetho.html#cb113-4" aria-hidden="true" tabindex="-1"></a>            <span class="co"># on top of it, a second layer that</span></span>
+<span id="cb113-5"><a href="ggetho.html#cb113-5" aria-hidden="true" tabindex="-1"></a>            <span class="co"># starts at day 2 thoughout day 5,</span></span>
+<span id="cb113-6"><a href="ggetho.html#cb113-6" aria-hidden="true" tabindex="-1"></a>            <span class="co"># and where L colour is grey</span></span>
+<span id="cb113-7"><a href="ggetho.html#cb113-7" aria-hidden="true" tabindex="-1"></a>            <span class="fu">stat_ld_annotations</span>(<span class="at">x_limits =</span> <span class="fu">days</span>(<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">5</span>)),</span>
+<span id="cb113-8"><a href="ggetho.html#cb113-8" aria-hidden="true" tabindex="-1"></a>                                <span class="at">ld_colours =</span> <span class="fu">c</span>(<span class="st">&quot;grey&quot;</span>, <span class="st">&quot;black&quot;</span> )) <span class="sc">+</span></span>
+<span id="cb113-9"><a href="ggetho.html#cb113-9" aria-hidden="true" tabindex="-1"></a>            <span class="fu">stat_pop_etho</span>()</span>
+<span id="cb113-10"><a href="ggetho.html#cb113-10" aria-hidden="true" tabindex="-1"></a>pl</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-86-1.png" width="672" /></p>
 </div>
 </div>
@@ -634,37 +752,41 @@ pl</code></pre></div>
 <h2>Coordinate and scales</h2>
 <div id="plot-limits" class="section level3 unnumbered">
 <h3>Plot limits</h3>
-<p>As <code>ggetho</code> creates regular ggplot objects, which we can extend. For instance, we can change the scales. For instance, put the y scale as a percentage between 0 and 100:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_pop_etho</span>() <span class="op">+</span>
-<span class="st">        </span><span class="kw">stat_ld_annotations</span>()
-pl &lt;-<span class="st"> </span>pl <span class="op">+</span><span class="st"> </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),
-                              <span class="dt">labels =</span> scales<span class="op">::</span>percent)
-pl</code></pre></div>
+<p>As <code>ggetho</code> creates regular ggplot objects, which we can extend. For instance, we can change the scales.
+For instance, put the y scale as a percentage between 0 and 100:</p>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="ggetho.html#cb114-1" aria-hidden="true" tabindex="-1"></a>pl <span class="ot">&lt;-</span> <span class="fu">ggetho</span>(dt, <span class="fu">aes</span>(<span class="at">x=</span>t, <span class="at">y=</span>moving)) <span class="sc">+</span> <span class="fu">stat_pop_etho</span>() <span class="sc">+</span></span>
+<span id="cb114-2"><a href="ggetho.html#cb114-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">stat_ld_annotations</span>()</span>
+<span id="cb114-3"><a href="ggetho.html#cb114-3" aria-hidden="true" tabindex="-1"></a>pl <span class="ot">&lt;-</span> pl <span class="sc">+</span> <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),</span>
+<span id="cb114-4"><a href="ggetho.html#cb114-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labels =</span> scales<span class="sc">::</span>percent)</span>
+<span id="cb114-5"><a href="ggetho.html#cb114-5" aria-hidden="true" tabindex="-1"></a>pl</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-87-1.png" width="672" /></p>
 <p>We can also use the same principle to zoom in a finished plot. E.g. between day one and day two:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl <span class="op">+</span><span class="st"> </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim=</span><span class="kw">c</span>(<span class="kw">days</span>(<span class="dv">1</span>), <span class="kw">days</span>(<span class="dv">2</span>)))</code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="ggetho.html#cb115-1" aria-hidden="true" tabindex="-1"></a>pl <span class="sc">+</span> <span class="fu">coord_cartesian</span>(<span class="at">xlim=</span><span class="fu">c</span>(<span class="fu">days</span>(<span class="dv">1</span>), <span class="fu">days</span>(<span class="dv">2</span>)))</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-88-1.png" width="672" /></p>
 </div>
 <div id="time-scale-units" class="section level3 unnumbered">
 <h3>Time scale units</h3>
-<p>By default, <code>ggetho</code> decides the unit of the time axis according to the range of the data. Sometimes you want to override this behaviour to force time to be in a specific unit (here hours). Using the plot above, we can add a scale:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl <span class="op">+</span><span class="st"> </span>ggetho<span class="op">::</span><span class="kw">scale_x_hours</span>()</code></pre></div>
+<p>By default, <code>ggetho</code> decides the unit of the time axis according to the range of the data.
+Sometimes you want to override this behaviour to force time to be in a specific unit (here hours).
+Using the plot above, we can add a scale:</p>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="ggetho.html#cb116-1" aria-hidden="true" tabindex="-1"></a>pl <span class="sc">+</span> ggetho<span class="sc">::</span><span class="fu">scale_x_hours</span>()</span></code></pre></div>
 <pre><code>## Scale for &#39;x&#39; is already present. Adding another scale for &#39;x&#39;, which will
 ## replace the existing scale.</code></pre>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-89-1.png" width="672" /></p>
-<p><code>R</code> actually warns you since you are replacing the scale. This is fine (as it is precisely what we wanted)!</p>
+<p><code>R</code> actually warns you since you are replacing the scale.
+This is fine (as it is precisely what we wanted)!</p>
 </div>
 <div id="coordinate-systems" class="section level3 unnumbered">
 <h3>Coordinate systems</h3>
 <p>Sometimes, it makes sense to use <strong>polar coordinates</strong> to show data around the clock:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl &lt;-<span class="st"> </span><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">x=</span>t, <span class="dt">y=</span>moving, <span class="dt">colour=</span>sex), <span class="dt">time_wrap =</span> <span class="kw">days</span>(<span class="dv">1</span>)) <span class="op">+</span>
-<span class="st">          </span><span class="kw">stat_ld_annotations</span>(<span class="dt">height=</span>.<span class="dv">5</span>,
-                              <span class="dt">alpha=</span>.<span class="dv">2</span>,
-                              <span class="dt">x_limits =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">days</span>(<span class="dv">1</span>)),
-                              <span class="dt">outline =</span> <span class="ot">NA</span>) <span class="op">+</span>
-<span class="st">          </span><span class="kw">stat_pop_etho</span>(<span class="dt">geom =</span> <span class="st">&quot;polygon&quot;</span>, <span class="dt">fill=</span><span class="ot">NA</span>)</code></pre></div>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="ggetho.html#cb118-1" aria-hidden="true" tabindex="-1"></a>pl <span class="ot">&lt;-</span> <span class="fu">ggetho</span>(dt, <span class="fu">aes</span>(<span class="at">x=</span>t, <span class="at">y=</span>moving, <span class="at">colour=</span>sex), <span class="at">time_wrap =</span> <span class="fu">days</span>(<span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb118-2"><a href="ggetho.html#cb118-2" aria-hidden="true" tabindex="-1"></a>          <span class="fu">stat_ld_annotations</span>(<span class="at">height=</span>.<span class="dv">5</span>,</span>
+<span id="cb118-3"><a href="ggetho.html#cb118-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">alpha=</span>.<span class="dv">2</span>,</span>
+<span id="cb118-4"><a href="ggetho.html#cb118-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">x_limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">days</span>(<span class="dv">1</span>)),</span>
+<span id="cb118-5"><a href="ggetho.html#cb118-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">outline =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb118-6"><a href="ggetho.html#cb118-6" aria-hidden="true" tabindex="-1"></a>          <span class="fu">stat_pop_etho</span>(<span class="at">geom =</span> <span class="st">&quot;polygon&quot;</span>, <span class="at">fill=</span><span class="cn">NA</span>)</span></code></pre></div>
 <pre><code>## Warning: Ignoring unknown parameters: se</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pl <span class="op">+</span><span class="st"> </span><span class="kw">coord_polar</span>()</code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="ggetho.html#cb120-1" aria-hidden="true" tabindex="-1"></a>pl <span class="sc">+</span> <span class="fu">coord_polar</span>()</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-90-1.png" width="672" /></p>
 </div>
 </div>
@@ -672,10 +794,10 @@ pl</code></pre></div>
 <h2>Periodograms</h2>
 <p>To draw periodogram, we can use our special fucntion <code>ggperio</code>.</p>
 <p>The library <code>zeitgebr</code> generates periodogram as <code>behavr</code> tables. with columns for power, period …</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zeitgebr)
-dt[, t <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">xmv</span>(condition) <span class="op">==</span><span class="st"> &quot;A&quot;</span>, t, t <span class="op">*</span><span class="st"> </span><span class="fl">1.01</span>)]
-per_dt &lt;-<span class="st"> </span><span class="kw">periodogram</span>(moving, dt, <span class="dt">FUN =</span> chi_sq_periodogram, <span class="dt">resample_rate =</span> <span class="dv">1</span><span class="op">/</span><span class="kw">mins</span>(<span class="dv">5</span>))
-per_dt</code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="ggetho.html#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(zeitgebr)</span>
+<span id="cb121-2"><a href="ggetho.html#cb121-2" aria-hidden="true" tabindex="-1"></a>dt[, t <span class="sc">:</span><span class="er">=</span> <span class="fu">ifelse</span>(<span class="fu">xmv</span>(condition) <span class="sc">==</span> <span class="st">&quot;A&quot;</span>, t, t <span class="sc">*</span> <span class="fl">1.01</span>)]</span>
+<span id="cb121-3"><a href="ggetho.html#cb121-3" aria-hidden="true" tabindex="-1"></a>per_dt <span class="ot">&lt;-</span> <span class="fu">periodogram</span>(moving, dt, <span class="at">FUN =</span> chi_sq_periodogram, <span class="at">resample_rate =</span> <span class="dv">1</span><span class="sc">/</span><span class="fu">mins</span>(<span class="dv">5</span>))</span>
+<span id="cb121-4"><a href="ggetho.html#cb121-4" aria-hidden="true" tabindex="-1"></a>per_dt</span></code></pre></div>
 <pre><code>## 
 ##  ==== METADATA ====
 ## 
@@ -709,56 +831,64 @@ per_dt</code></pre></div>
 ## 6439: toy_experiment|40 114840 246.68587         498.4344 1.0000000
 ## 6440: toy_experiment|40 115200 250.34679         499.5728 1.0000000</code></pre>
 <p>An average periodogram:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggperio</span>(per_dt, <span class="kw">aes</span>(period, power, <span class="dt">colour=</span>condition)) <span class="op">+</span><span class="st"> </span>
-<span class="st">        </span><span class="kw">stat_pop_etho</span>()</code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="ggetho.html#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggperio</span>(per_dt, <span class="fu">aes</span>(period, power, <span class="at">colour=</span>condition)) <span class="sc">+</span> </span>
+<span id="cb123-2"><a href="ggetho.html#cb123-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">stat_pop_etho</span>()</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-92-1.png" width="672" /></p>
 <p>Faceted by uid:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggperio</span>(per_dt, <span class="kw">aes</span>(period, power, <span class="dt">colour=</span>condition)) <span class="op">+</span><span class="st"> </span>
-<span class="st">        </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>( <span class="op">~</span><span class="st"> </span>uid)</code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="ggetho.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggperio</span>(per_dt, <span class="fu">aes</span>(period, power, <span class="at">colour=</span>condition)) <span class="sc">+</span> </span>
+<span id="cb124-2"><a href="ggetho.html#cb124-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>( <span class="sc">~</span> uid)</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-93-1.png" width="672" /></p>
 <p>Showing peaks:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">per_dt &lt;-<span class="kw">find_peaks</span>(per_dt)
-<span class="kw">ggperio</span>(per_dt, <span class="kw">aes</span>(period, power, <span class="dt">colour=</span>condition)) <span class="op">+</span><span class="st"> </span>
-<span class="st">        </span><span class="kw">geom_line</span>() <span class="op">+</span>
-<span class="st">        </span><span class="kw">geom_peak</span>(<span class="dt">colour=</span><span class="st">&quot;blue&quot;</span>) <span class="op">+</span>
-<span class="st">        </span><span class="kw">facet_wrap</span>( <span class="op">~</span><span class="st"> </span>uid) </code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="ggetho.html#cb125-1" aria-hidden="true" tabindex="-1"></a>per_dt <span class="ot">&lt;-</span><span class="fu">find_peaks</span>(per_dt)</span>
+<span id="cb125-2"><a href="ggetho.html#cb125-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggperio</span>(per_dt, <span class="fu">aes</span>(period, power, <span class="at">colour=</span>condition)) <span class="sc">+</span> </span>
+<span id="cb125-3"><a href="ggetho.html#cb125-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb125-4"><a href="ggetho.html#cb125-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_peak</span>(<span class="at">colour=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb125-5"><a href="ggetho.html#cb125-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">facet_wrap</span>( <span class="sc">~</span> uid) </span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-94-1.png" width="672" /></p>
 </div>
 <div id="spectrograms" class="section level2 unnumbered">
 <h2>Spectrograms</h2>
-<p>A “spectrogram” is a visualistion of the variation in the period spectrum over time. The function <code>spectrogram()</code> in the <code>zeitgebr</code> library can generate a spectrogram for each individual in a <code>behavr</code> table, and return the result as a new <code>behavr</code> table with columns for power, period and time. <code>ggetho</code> makes it possible to visualise spectrograms as a heatmap, annotate them, aggregate them by condition.</p>
-<p>Whilst periodogram represents the average periodicity of a signal over the entiere time series, sometimes, period itself changes over the course of an experiment. Let’s create a <em>dummy dataset</em> where the period one of the groups increases after 5 days:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metadata &lt;-<span class="st"> </span><span class="kw">data.table</span>(<span class="dt">id=</span><span class="kw">sprintf</span>(<span class="st">&quot;toy_experiment|%02d&quot;</span> , <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>), <span class="dt">region_id=</span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,
-                   <span class="dt">condition=</span><span class="kw">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>),
-                   <span class="dt">sex=</span><span class="kw">c</span>(<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>, <span class="st">&quot;F&quot;</span>))</code></pre></div>
+<p>A “spectrogram” is a visualistion of the variation in the period spectrum over time.
+The function <code>spectrogram()</code> in the <code>zeitgebr</code> library can generate a spectrogram for each individual in a <code>behavr</code> table, and return the result as a new <code>behavr</code> table with columns for power, period and time. <code>ggetho</code> makes it possible to visualise spectrograms as a heatmap, annotate them, aggregate them by condition.</p>
+<p>Whilst periodogram represents the average periodicity of a signal over the entiere time series, sometimes, period itself changes over the course of an experiment.
+Let’s create a <em>dummy dataset</em> where the period one of the groups increases after 5 days:</p>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="ggetho.html#cb126-1" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">data.table</span>(<span class="at">id=</span><span class="fu">sprintf</span>(<span class="st">&quot;toy_experiment|%02d&quot;</span> , <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>), <span class="at">region_id=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,</span>
+<span id="cb126-2"><a href="ggetho.html#cb126-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">condition=</span><span class="fu">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>),</span>
+<span id="cb126-3"><a href="ggetho.html#cb126-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">sex=</span><span class="fu">c</span>(<span class="st">&quot;M&quot;</span>,<span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>, <span class="st">&quot;F&quot;</span>))</span></code></pre></div>
 <pre><code>## Warning in as.data.table.list(x, keep.rownames = keep.rownames, check.names
 ## = check.names, : Item 4 has 4 rows but longest item has 10; recycled with
 ## remainder.</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt &lt;-<span class="st"> </span><span class="kw">toy_activity_data</span>(metadata, <span class="dt">seed=</span><span class="dv">107</span>, <span class="dt">duration =</span> <span class="kw">days</span>(<span class="dv">10</span>))
-
-<span class="co"># to emulate a time ticking 1.2 times slower after day 5 for group A only  </span>
-dt[, t <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">xmv</span>(condition) <span class="op">==</span><span class="st"> &quot;A&quot;</span><span class="op">&amp;</span><span class="st"> </span>t <span class="op">&gt;</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">5</span>), <span class="fl">1.2</span> <span class="op">*</span><span class="st"> </span>( t <span class="op">-</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">5</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">5</span>), t)]
-
-<span class="co"># the average activity over time</span>
-<span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">y=</span>moving, <span class="dt">colour=</span>condition)) <span class="op">+</span><span class="st"> </span><span class="kw">stat_pop_etho</span>()</code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="ggetho.html#cb128-1" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">&lt;-</span> <span class="fu">toy_activity_data</span>(metadata, <span class="at">seed=</span><span class="dv">107</span>, <span class="at">duration =</span> <span class="fu">days</span>(<span class="dv">10</span>))</span>
+<span id="cb128-2"><a href="ggetho.html#cb128-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-3"><a href="ggetho.html#cb128-3" aria-hidden="true" tabindex="-1"></a><span class="co"># to emulate a time ticking 1.2 times slower after day 5 for group A only  </span></span>
+<span id="cb128-4"><a href="ggetho.html#cb128-4" aria-hidden="true" tabindex="-1"></a>dt[, t <span class="sc">:</span><span class="er">=</span> <span class="fu">ifelse</span>(<span class="fu">xmv</span>(condition) <span class="sc">==</span> <span class="st">&quot;A&quot;</span><span class="sc">&amp;</span> t <span class="sc">&gt;</span> <span class="fu">days</span>(<span class="dv">5</span>), <span class="fl">1.2</span> <span class="sc">*</span> ( t <span class="sc">-</span> <span class="fu">days</span>(<span class="dv">5</span>)) <span class="sc">+</span> <span class="fu">days</span>(<span class="dv">5</span>), t)]</span>
+<span id="cb128-5"><a href="ggetho.html#cb128-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-6"><a href="ggetho.html#cb128-6" aria-hidden="true" tabindex="-1"></a><span class="co"># the average activity over time</span></span>
+<span id="cb128-7"><a href="ggetho.html#cb128-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggetho</span>(dt, <span class="fu">aes</span>(<span class="at">y=</span>moving, <span class="at">colour=</span>condition)) <span class="sc">+</span> <span class="fu">stat_pop_etho</span>()</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-95-1.png" width="672" /></p>
-<p>In this simple case, a periodogram would report poorly the overall behaviour of group A and give no information about the time of the change. On the other hand, with a spectrogram, we should clearly see <em>when the shift of period happens</em>. This spectrograms resulting from <code>spectrogram()</code> can be vusualised with our function, <code>ggspectro()</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">spect_dt &lt;-<span class="st"> </span><span class="kw">spectrogram</span>(moving,
-                        dt,
-                        <span class="dt">period_range =</span> <span class="kw">c</span>(<span class="kw">hours</span>(<span class="dv">6</span>), <span class="kw">hours</span>(<span class="dv">28</span>)))
-
-<span class="kw">ggspectro</span>(spect_dt) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">stat_tile_etho</span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">scale_y_hours</span>(<span class="dt">name=</span> <span class="st">&quot;Period&quot;</span>, <span class="dt">log=</span>T) <span class="op">+</span><span class="st"> </span><span class="co"># log axis for period </span>
-<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>condition) <span class="op">+</span>
-<span class="st">  </span><span class="kw">stat_ld_annotations</span>()</code></pre></div>
+<p>In this simple case, a periodogram would report poorly the overall behaviour of group A and give no information about the time of the change.
+On the other hand, with a spectrogram, we should clearly see <em>when the shift of period happens</em>.
+This spectrograms resulting from <code>spectrogram()</code> can be vusualised with our function, <code>ggspectro()</code>:</p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="ggetho.html#cb129-1" aria-hidden="true" tabindex="-1"></a>spect_dt <span class="ot">&lt;-</span> <span class="fu">spectrogram</span>(moving,</span>
+<span id="cb129-2"><a href="ggetho.html#cb129-2" aria-hidden="true" tabindex="-1"></a>                        dt,</span>
+<span id="cb129-3"><a href="ggetho.html#cb129-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">period_range =</span> <span class="fu">c</span>(<span class="fu">hours</span>(<span class="dv">6</span>), <span class="fu">hours</span>(<span class="dv">28</span>)))</span>
+<span id="cb129-4"><a href="ggetho.html#cb129-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb129-5"><a href="ggetho.html#cb129-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggspectro</span>(spect_dt) <span class="sc">+</span> </span>
+<span id="cb129-6"><a href="ggetho.html#cb129-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_tile_etho</span>() <span class="sc">+</span> </span>
+<span id="cb129-7"><a href="ggetho.html#cb129-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_hours</span>(<span class="at">name=</span> <span class="st">&quot;Period&quot;</span>, <span class="at">log=</span>T) <span class="sc">+</span> <span class="co"># log axis for period </span></span>
+<span id="cb129-8"><a href="ggetho.html#cb129-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> condition) <span class="sc">+</span></span>
+<span id="cb129-9"><a href="ggetho.html#cb129-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_ld_annotations</span>()</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-96-1.png" width="672" /></p>
-<p>We see that at day 5, group A, but not group B, shifts its period from 12 h to approximatly 15 h. Note that, in this example, we facet by condition, but we could also facet by <code>id</code> or, instead, average all individuals in one graph. An intesresting feature of such periodograms is that the phase information is discarded. In other word, we can average the periodograms of multiple individuals (e.g. two populations) even if they are out of phase (e.g. if they are free running). This represents a clear advantage over <a href="ggetho.html#double-plotted-actograms">double-plotted actograms</a>, which are often only relevant on single individual.</p>
+<p>We see that at day 5, group A, but not group B, shifts its period from 12 h to approximatly 15 h.
+Note that, in this example, we facet by condition, but we could also facet by <code>id</code> or, instead, average all individuals in one graph. An intesresting feature of such periodograms is that the phase information is discarded.
+In other word, we can average the periodograms of multiple individuals (e.g. two populations) even if they are out of phase (e.g. if they are free running). This represents a clear advantage over <a href="ggetho.html#double-plotted-actograms">double-plotted actograms</a>, which are often only relevant on single individual.</p>
 <p>Perdiodograms can also be wrapped in one day, for instance to study the modulations of period of an ultradian rhythm along the day (see <code>?ggspectro</code>).</p>
 </div>
 <div id="take-home-message-1" class="section level2 unnumbered">
 <h2>Take home message</h2>
-<p><code>ggetho</code> provides you with a new set of stats, layers and scales to represent behaviours. In particular, <code>ggetho</code> and <code>ggperio</code> can be used to preprocess <code>behavr</code> tables in order to use a regular <code>ggplot2</code> workflow.</p>
+<p><code>ggetho</code> provides you with a new set of stats, layers and scales to represent behaviours.
+In particular, <code>ggetho</code> and <code>ggperio</code> can be used to preprocess <code>behavr</code> tables in order to use a regular <code>ggplot2</code>
+workflow.</p>
 </div>
 <div id="next-steps-2" class="section level2 unnumbered">
 <h2>Next steps</h2>
@@ -779,7 +909,6 @@ dt[, t <span class="op">:</span><span class="er">=</span><span class="st"> </spa
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -798,6 +927,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -818,6 +948,10 @@ gitbook.start({
 "text": null
 },
 "download": ["rethomics.pdf", "rethomics.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 }
@@ -830,7 +964,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))

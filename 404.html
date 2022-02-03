@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Working with metadata files | Rethomics, a framework for high-throughput behaviour analysis in R</title>
+  <title>Page not found | Rethomics, a framework for high-throughput behaviour analysis in R</title>
   <meta name="description" content="This is a tutorial for Rethomics, a framework to analyse high-throuput behavioural data in R." />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Working with metadata files | Rethomics, a framework for high-throughput behaviour analysis in R" />
+  <meta property="og:title" content="Page not found | Rethomics, a framework for high-throughput behaviour analysis in R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="rethomics/rethomics.github.io" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Working with metadata files | Rethomics, a framework for high-throughput behaviour analysis in R" />
+  <meta name="twitter:title" content="Page not found | Rethomics, a framework for high-throughput behaviour analysis in R" />
   
   <meta name="twitter:description" content="This is a tutorial for Rethomics, a framework to analyse high-throuput behavioural data in R." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="workflow.html"/>
-<link rel="next" href="behavr.html"/>
+
+
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -372,70 +372,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="metadata" class="section level1 unnumbered">
-<h1>Working with metadata files</h1>
-<p><strong>Using and understanding metadata files makes your analyses more transparent and tracktable</strong></p>
-<hr />
-<div class="figure">
-<img src="assets/metadata.png" alt="" />
-<p class="caption">Schematic of a metadata file</p>
-</div>
-<div id="what-are-metadata" class="section level2 unnumbered">
-<h2>What are metadata?</h2>
-<p>When performing many experiments, with multiple condidions and replicates,
-it becomes challenging to keep track of each individual and to link it to its actual data.
-In <code>rethomics</code>, regardless of the tool used to generate data, loading results always involves a <strong>metadata file</strong>.
-It is, in fact, <strong>a simple CSV file</strong> (basically a spreadsheet) in which <strong>each row defines one unique individual</strong>.</p>
-<p>As shown in the figure above, metadata is classified in two types of columns:</p>
-<ul>
-<li><strong>Mandatory</strong> techincal columns – for instance <code>date</code>, <code>machine_name</code> and others (depending on the acquisition platform). They will be used to match an animal to its data. As their name suggests, they <strong>have to</strong> be filled. They contain the minimum information that the computer needs to sort your data.</li>
-<li><strong>Optional</strong> experimental columns – in this example, <code>condition</code> and <code>sex</code>. You can use as all the columns you want to characterise your experiments.</li>
-</ul>
-</div>
-<div id="make-them-exhaustive" class="section level2 unnumbered">
-<h2>Make them exhaustive</h2>
-<p>It is a good habit to <strong>record as much information as possible in the metadata file</strong> – even if it seems redundant.
-For instance, if we put animals in different incubators, we can simply add an <code>incubator</code> column.
-This way, we keep all our experimental notes, as much as possible, inside one file.
-Not only will this help us to “debug” if anything goes wrong in one incubator, but we will also be able to account for incubator as a covariate later on.
-From a computational perspective, having these extra columns is virtually free as they will not impact memory or processing time down the line.</p>
-</div>
-<div id="put-replicates-together" class="section level2 unnumbered">
-<h2>Put replicates together</h2>
-<p>A common mistake for users is to perform several replicates of the same experiment and to make a new metadata file each time. Instead, I strongly recommand you to <strong>put all replicates in the same file</strong>. If it helps,
-you can add a <code>replicate</code> column so you can keep track of which replicate each animal comes from.
-The whole point of high-througput analysis is that you can load all the data from all replicates and compare it (and maybe merge it). The bottom line is that, if you start form a single metadata file, your work will be more trackable, and you can always decide to analyse only one replicate at a time.
-Think about this metadata file as something needed in a line of research or project more than a file needed for every experiment.</p>
-</div>
-<div id="linking-metadata" class="section level2 unnumbered">
-<h2>Linking metadata</h2>
-<div class="figure">
-<img src="assets/metadata_linking.png" alt="" />
-<p class="caption">Linking adds technical columns</p>
-</div>
-<p>Once your metadata is ready, it can be used to as a query to <strong>import the matching data</strong>.
-Regardless of which acquisition tool you used, the first step when importing data in <code>R</code> will be “metadata linking”.
-This step will automatically complete the metadata file in a way that can be used for <code>R</code> to retrieve the right amount of data from experiment files. We call it linking, since it links the manually introduced metadata with the correct data file, something that is tedious to do manually.
-In short, linking means at least:</p>
-<ul>
-<li>Adding an <code>id</code> column to the metadata. This will be a unique identifier for each indididual (it generally contains datetime, machine name an region id). This will diferenciate animals with the same conditions in the metadata.</li>
-<li>Adding a column that tracks “how to find the data for each individual”( i.e. local or remote path the the data file)</li>
-</ul>
-</div>
-<div id="take-home-message" class="section level2 unnumbered">
-<h2>Take home message</h2>
-<p>In conclusion, <strong>metadatafiles are a canonical way to both define experimental condition and load behavioural data</strong>.
-They are both computer and human friendly. In other words, if you pass a query on to a colaborator, she/he will be able to tell very quickly what individuals underwent which treatment, where and when.</p>
-
-</div>
+<div id="page-not-found" class="section level1">
+<h1>Page not found</h1>
+<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
+<p>You may want to try searching to find the page's new location, or use
+the table of contents to find the page you are looking for.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="workflow.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="behavr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -466,7 +415,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/rethomics/rethomics.github.io/edit/source/03-metadata.Rmd",
+"link": "https://github.com/rethomics/rethomics.github.io/edit/source/%s",
 "text": "Edit"
 },
 "history": {

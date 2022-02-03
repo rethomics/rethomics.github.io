@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Ethoscope data, in practice | Rethomics, a framework for high-throughput behaviour analysis in R</title>
   <meta name="description" content="This is a tutorial for Rethomics, a framework to analyse high-throuput behavioural data in R." />
-  <meta name="generator" content="bookdown 0.18.1 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Ethoscope data, in practice | Rethomics, a framework for high-throughput behaviour analysis in R" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Quentin Geissmann" />
 
 
-<meta name="date" content="2020-04-22" />
+<meta name="date" content="2022-02-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,9 @@
   
 <link rel="prev" href="damr.html"/>
 <link rel="next" href="ggetho.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,7 +51,8 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110947778-1"></script>
 <script>
@@ -62,42 +65,70 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="css/my_style.css" type="text/css" />
 </head>
@@ -116,115 +147,136 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i>Package List and First Steps</a><ul>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i>Package List and First Steps</a>
+<ul>
 <li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#getting-r"><i class="fa fa-check"></i>Getting R</a></li>
 <li><a href="intro.html#the-rethomics-packages">The <code>rethomics</code> packages</a></li>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#installation"><i class="fa fa-check"></i>Installation</a><ul>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#installation"><i class="fa fa-check"></i>Installation</a>
+<ul>
 <li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#cran"><i class="fa fa-check"></i>CRAN</a></li>
 <li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#devtools"><i class="fa fa-check"></i>devtools</a></li>
 </ul></li>
 </ul></li>
 <li><a href="workflow.html#workflow">The <code>rethomics</code> workflow</a></li>
-<li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html"><i class="fa fa-check"></i>Working with metadata files</a><ul>
+<li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html"><i class="fa fa-check"></i>Working with metadata files</a>
+<ul>
 <li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html#what-are-metadata"><i class="fa fa-check"></i>What are metadata?</a></li>
 <li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html#make-them-exhaustive"><i class="fa fa-check"></i>Make them exhaustive</a></li>
 <li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html#put-replicates-together"><i class="fa fa-check"></i>Put replicates together</a></li>
 <li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html#linking-metadata"><i class="fa fa-check"></i>Linking metadata</a></li>
 <li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html#take-home-message"><i class="fa fa-check"></i>Take home message</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html"><i class="fa fa-check"></i>behavr tables</a><ul>
+<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html"><i class="fa fa-check"></i>behavr tables</a>
+<ul>
 <li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#variables-and-metavariables"><i class="fa fa-check"></i>Variables and metavariables</a></li>
 <li><a href="behavr.html#operating-on-behavr-tables">Operating on <code>behavr</code> tables</a></li>
 <li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#playing-with-toy-data"><i class="fa fa-check"></i>Playing with toy data</a></li>
-<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#generalities"><i class="fa fa-check"></i>Generalities</a><ul>
+<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#generalities"><i class="fa fa-check"></i>Generalities</a>
+<ul>
 <li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#data"><i class="fa fa-check"></i>Data</a></li>
-<li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html#metadata"><i class="fa fa-check"></i>Metadata</a></li>
+<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#metadata-1"><i class="fa fa-check"></i>Metadata</a></li>
 <li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#summarise-data"><i class="fa fa-check"></i>Summarise data</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html"><i class="fa fa-check"></i>DAM2 data, in practice</a><ul>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html"><i class="fa fa-check"></i>DAM2 data, in practice</a>
+<ul>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#aims"><i class="fa fa-check"></i>Aims</a></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#prerequisites"><i class="fa fa-check"></i>Prerequisites</a></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#background"><i class="fa fa-check"></i>Background</a></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#getting-the-data"><i class="fa fa-check"></i>Getting the data</a></li>
-<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#from-experiment-design-to-metadata"><i class="fa fa-check"></i>From experiment design to metadata</a><ul>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#from-experiment-design-to-metadata"><i class="fa fa-check"></i>From experiment design to metadata</a>
+<ul>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#our-toy-experiment"><i class="fa fa-check"></i>Our toy experiment</a></li>
-<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#metadata-1"><i class="fa fa-check"></i>Metadata</a></li>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#metadata-2"><i class="fa fa-check"></i>Metadata</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#linking"><i class="fa fa-check"></i>Linking</a></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#loading"><i class="fa fa-check"></i>Loading</a></li>
-<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#note-on-datetime"><i class="fa fa-check"></i>Note on datetime</a><ul>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#note-on-datetime"><i class="fa fa-check"></i>Note on datetime</a>
+<ul>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#zt0"><i class="fa fa-check"></i>ZT0</a></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#start-and-stop-time"><i class="fa fa-check"></i>Start and stop time</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#quality-control"><i class="fa fa-check"></i>Quality control</a><ul>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#quality-control"><i class="fa fa-check"></i>Quality control</a>
+<ul>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#detecting-anomalies"><i class="fa fa-check"></i>Detecting anomalies</a></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#how-to-exclude-animals"><i class="fa fa-check"></i>How to exclude animals?</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#apply-functions-when-loading"><i class="fa fa-check"></i>Apply functions when loading</a></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#next-steps"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html"><i class="fa fa-check"></i>Ethoscope data, in practice</a><ul>
+<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html"><i class="fa fa-check"></i>Ethoscope data, in practice</a>
+<ul>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#aims-1"><i class="fa fa-check"></i>Aims</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#prerequisites-1"><i class="fa fa-check"></i>Prerequisites</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#background-1"><i class="fa fa-check"></i>Background</a></li>
-<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#getting-the-data-1"><i class="fa fa-check"></i>Getting the data</a><ul>
+<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#getting-the-data-1"><i class="fa fa-check"></i>Getting the data</a>
+<ul>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#extract-the-zipped-data"><i class="fa fa-check"></i>Extract the zipped data</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#note-on-the-data-structure"><i class="fa fa-check"></i>Note on the data structure</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#set-your-working-directory"><i class="fa fa-check"></i>Set your working directory</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#from-experiment-design-to-metadata-1"><i class="fa fa-check"></i>From experiment design to metadata</a><ul>
+<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#from-experiment-design-to-metadata-1"><i class="fa fa-check"></i>From experiment design to metadata</a>
+<ul>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#our-toy-experiment-1"><i class="fa fa-check"></i>Our toy experiment</a></li>
-<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#metadata-2"><i class="fa fa-check"></i>Metadata</a></li>
+<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#metadata-3"><i class="fa fa-check"></i>Metadata</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#linking-1"><i class="fa fa-check"></i>Linking</a><ul>
+<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#linking-1"><i class="fa fa-check"></i>Linking</a>
+<ul>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#local-data"><i class="fa fa-check"></i>Local data</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#remote-data"><i class="fa fa-check"></i>Remote Data</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#loading-1"><i class="fa fa-check"></i>Loading</a><ul>
+<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#loading-1"><i class="fa fa-check"></i>Loading</a>
+<ul>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#raw-data-default"><i class="fa fa-check"></i>Raw data (default)</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#preprocessing"><i class="fa fa-check"></i>Preprocessing</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#zt0-1"><i class="fa fa-check"></i>ZT0</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#cache-directory"><i class="fa fa-check"></i>Cache directory</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#quality-control-1"><i class="fa fa-check"></i>Quality control</a></li>
-<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#and-then"><i class="fa fa-check"></i>And then?</a><ul>
+<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#and-then"><i class="fa fa-check"></i>And then?</a>
+<ul>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#sleep-amount-vs-treatment"><i class="fa fa-check"></i>Sleep amount vs treatment</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#total-sleep-vs-expression-level"><i class="fa fa-check"></i>Total sleep vs expression level</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#next-steps-1"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html"><i class="fa fa-check"></i>Visualisation with ggetho</a><ul>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html"><i class="fa fa-check"></i>Visualisation with ggetho</a>
+<ul>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#aims-2"><i class="fa fa-check"></i>Aims</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#prerequisites-2"><i class="fa fa-check"></i>Prerequisites</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#lessons-from-ggplot"><i class="fa fa-check"></i>Lessons from ggplot</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#some-behavioural-data"><i class="fa fa-check"></i>Some behavioural data</a></li>
 <li><a href="ggetho.html#the-ggetho-function">The <code>ggetho()</code> function</a></li>
-<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#tile-plots"><i class="fa fa-check"></i>Tile plots</a><ul>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#tile-plots"><i class="fa fa-check"></i>Tile plots</a>
+<ul>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#per-individual"><i class="fa fa-check"></i>Per individual</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#sorted-individual"><i class="fa fa-check"></i>Sorted individual</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#group-averages"><i class="fa fa-check"></i>Group averages</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#bar-tiles"><i class="fa fa-check"></i>Bar tiles</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#population-plots"><i class="fa fa-check"></i>Population plots</a><ul>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#population-plots"><i class="fa fa-check"></i>Population plots</a>
+<ul>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#one-population"><i class="fa fa-check"></i>One population</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#several-populations"><i class="fa fa-check"></i>Several populations</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#wrapping-data"><i class="fa fa-check"></i>Wrapping data</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#double-plotted-actograms"><i class="fa fa-check"></i>Double-plotted actograms</a></li>
-<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#faceting-by-id"><i class="fa fa-check"></i>Faceting by ID</a><ul>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#faceting-by-id"><i class="fa fa-check"></i>Faceting by ID</a>
+<ul>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#default"><i class="fa fa-check"></i>Default</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#custom-labeller"><i class="fa fa-check"></i>Custom labeller</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#numerical-labelling"><i class="fa fa-check"></i>Numerical labelling</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#ld-annotations"><i class="fa fa-check"></i>LD annotations</a><ul>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#ld-annotations"><i class="fa fa-check"></i>LD annotations</a>
+<ul>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#basics"><i class="fa fa-check"></i>Basics</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#changing-ld-colours"><i class="fa fa-check"></i>Changing LD colours</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#ld-in-the-background"><i class="fa fa-check"></i>LD in the background</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#phase-and-period"><i class="fa fa-check"></i>Phase and period</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#regime-change"><i class="fa fa-check"></i>Regime change</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#coordinate-and-scales"><i class="fa fa-check"></i>Coordinate and scales</a><ul>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#coordinate-and-scales"><i class="fa fa-check"></i>Coordinate and scales</a>
+<ul>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#plot-limits"><i class="fa fa-check"></i>Plot limits</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#time-scale-units"><i class="fa fa-check"></i>Time scale units</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#coordinate-systems"><i class="fa fa-check"></i>Coordinate systems</a></li>
@@ -234,26 +286,31 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#take-home-message-1"><i class="fa fa-check"></i>Take home message</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#next-steps-2"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html"><i class="fa fa-check"></i>Sleep analysis</a><ul>
+<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html"><i class="fa fa-check"></i>Sleep analysis</a>
+<ul>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#aims-3"><i class="fa fa-check"></i>Aims</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#prerequisites-3"><i class="fa fa-check"></i>Prerequisites</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#background-2"><i class="fa fa-check"></i>Background</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#getting-the-data-2"><i class="fa fa-check"></i>Getting the data</a></li>
-<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#data-curation"><i class="fa fa-check"></i>Data curation</a><ul>
+<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#data-curation"><i class="fa fa-check"></i>Data curation</a>
+<ul>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#dead-animals"><i class="fa fa-check"></i>Dead animals</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#animals-that-died-too-early"><i class="fa fa-check"></i>Animals that died too early</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#trimming"><i class="fa fa-check"></i>Trimming</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#population-plots-1"><i class="fa fa-check"></i>Population plots</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#summarise-data-per-animal"><i class="fa fa-check"></i>Summarise data per animal</a></li>
-<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#day-sleep-night-sleep"><i class="fa fa-check"></i>Day sleep☼ – Night sleep☾</a><ul>
+<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#day-sleep-night-sleep"><i class="fa fa-check"></i>Day sleep☼ – Night sleep☾</a>
+<ul>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#adding-some-phase-information"><i class="fa fa-check"></i>Adding some phase information</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#statistics"><i class="fa fa-check"></i>Statistics</a><ul>
+<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#statistics"><i class="fa fa-check"></i>Statistics</a>
+<ul>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#pairwise-wilcoxon-tests"><i class="fa fa-check"></i>Pairwise Wilcoxon tests</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#two-way-anova"><i class="fa fa-check"></i>Two way anova</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#sleep-architecture"><i class="fa fa-check"></i>Sleep architecture</a><ul>
+<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#sleep-architecture"><i class="fa fa-check"></i>Sleep architecture</a>
+<ul>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#bout-analysis"><i class="fa fa-check"></i>Bout analysis</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#bout-length-vs-time-of-the-day"><i class="fa fa-check"></i>Bout length vs time of the day</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#architecture-description"><i class="fa fa-check"></i>Architecture description</a></li>
@@ -263,18 +320,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#take-home-message-2"><i class="fa fa-check"></i>Take home message</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#next-steps-3"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html"><i class="fa fa-check"></i>Circadian rhythm analysis</a><ul>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html"><i class="fa fa-check"></i>Circadian rhythm analysis</a>
+<ul>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#aims-4"><i class="fa fa-check"></i>Aims</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#prerequisites-4"><i class="fa fa-check"></i>Prerequisites</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#background-3"><i class="fa fa-check"></i>Background</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#getting-the-data-3"><i class="fa fa-check"></i>Getting the data</a></li>
-<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#quality-control-2"><i class="fa fa-check"></i>Quality control</a><ul>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#quality-control-2"><i class="fa fa-check"></i>Quality control</a>
+<ul>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#regime-changes"><i class="fa fa-check"></i>Regime changes</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#data-enrichment"><i class="fa fa-check"></i>Data enrichment</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#overview-plots"><i class="fa fa-check"></i>Overview plots</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#double-plotted-actograms-1"><i class="fa fa-check"></i>Double plotted actograms</a></li>
-<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#periodograms-1"><i class="fa fa-check"></i>Periodograms</a><ul>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#periodograms-1"><i class="fa fa-check"></i>Periodograms</a>
+<ul>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#computation"><i class="fa fa-check"></i>Computation</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#peaks-finding"><i class="fa fa-check"></i>Peaks finding</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#visualisation"><i class="fa fa-check"></i>Visualisation</a></li>
@@ -282,10 +342,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#next-steps-4"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="community.html"><a href="community.html"><i class="fa fa-check"></i>Issues and community</a><ul>
+<li class="chapter" data-level="" data-path="community.html"><a href="community.html"><i class="fa fa-check"></i>Issues and community</a>
+<ul>
 <li class="chapter" data-level="" data-path="community.html"><a href="community.html#citation"><i class="fa fa-check"></i>Citation</a></li>
 <li class="chapter" data-level="" data-path="community.html"><a href="community.html#having-troubles"><i class="fa fa-check"></i>Having troubles</a></li>
 <li class="chapter" data-level="" data-path="community.html"><a href="community.html#contributing"><i class="fa fa-check"></i>Contributing</a></li>
+<li class="chapter" data-level="" data-path="community.html"><a href="community.html#related-projects"><i class="fa fa-check"></i>Related projects</a></li>
 </ul></li>
 <li class="divider"></li>
 <li>
@@ -315,7 +377,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><strong>Large data</strong></p>
 <hr />
 <div class="figure">
-<img src="assets/ethoscope_experiment.png" alt="Example of an ethoscope experiment. Twenty flies per ethoscope are either treated or not. Positions are randomised. Two machines are used in parallel, and two replicates are performed at another time. In total, 80 animals were present in this experiment. Four .db files have been recorded. Tracked animals are also subsequently scored for another phenotype (gene expression level)" />
+<img src="assets/ethoscope_experiment.png" alt="" />
 <p class="caption">Example of an ethoscope experiment. Twenty flies per ethoscope are either treated or not. Positions are randomised. Two machines are used in parallel, and two replicates are performed at another time. In total, 80 animals were present in this experiment. Four <code>.db</code> files have been recorded. Tracked animals are also subsequently scored for another phenotype (gene expression level)</p>
 </div>
 <div id="aims-1" class="section level2 unnumbered">
@@ -334,24 +396,31 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <ul>
 <li>You are familiar with the <a href="http://gilestrolab.github.io/ethoscope/">Ethoscope Platform</a></li>
 <li>Ensure you have read about the <a href="workflow.html">rethomics workflow</a> and <a href="metadata.html">metadata</a></li>
-<li>Ensure you have <a href="intro.html#installing-rethomics-packages">installed</a> <code>behavr</code>, <code>scopr</code> and <code>ggetho</code> packages:</li>
+<li>Ensure you have <a href="intro.html#installing-rethomics-packages">installed</a>
+<code>behavr</code>, <code>scopr</code> and <code>ggetho</code> packages:</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">&#39;ggetho&#39;</span>, <span class="st">&#39;scopr&#39;</span>))</code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="scopr.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&#39;ggetho&#39;</span>, <span class="st">&#39;scopr&#39;</span>))</span></code></pre></div>
 </div>
 <div id="background-1" class="section level2 unnumbered">
 <h2>Background</h2>
-<p><a href="http://gilestrolab.github.io/ethoscope/">The Ethoscope Platform</a> is a versatile and modular behavioural system to sudy behaviour of small animals. You can read more about it in our <a href="http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.2003026">PLOS Biology publication</a>. Although you can do much more with them, ethoscope are primarily designed to study sleep and circadian rhythms in Drosophila. Therefore, this tutorial targets mainly users in this context.</p>
-<p>Ethoscopes typically generate hundreds of megabytes per machine per week. The platform is designed so that many devices run an parallel, and the resulting data is eventually centralised for all users. <strong>Metadata tables are the best way to both keep track of your expriments and fetch the relevant data.</strong></p>
+<p><a href="http://gilestrolab.github.io/ethoscope/">The Ethoscope Platform</a> is a versatile and modular behavioural system to sudy behaviour of small animals. You can read more about it in our <a href="http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.2003026">PLOS Biology publication</a>.
+Although you can do much more with them, ethoscope are primarily designed to study sleep and circadian rhythms in Drosophila.
+Therefore, this tutorial targets mainly users in this context.</p>
+<p>Ethoscopes typically generate hundreds of megabytes per machine per week.
+The platform is designed so that many devices run an parallel, and the resulting data is eventually centralised for all users.
+<strong>Metadata tables are the best way to both keep track of your expriments and fetch the relevant data.</strong></p>
 </div>
 <div id="getting-the-data-1" class="section level2 unnumbered">
 <h2>Getting the data</h2>
 <div id="extract-the-zipped-data" class="section level3 unnumbered">
 <h3>Extract the zipped data</h3>
-<p>Since ethoscopes generate <strong>large amount of data</strong>, compared to DAM, we will work only with a few animals. A zip containing data for this tutorial is available on <a href="https://zenodo.org/record/1068324">zenodo</a>.</p>
-<p>Start by downloading and extracting the zip somewhere in your computer. Then, store this location as a variable. For example, <strong>adapt</strong> the path here:</p>
+<p>Since ethoscopes generate <strong>large amount of data</strong>, compared to DAM, we will work only with a few animals.
+A zip containing data for this tutorial is available on <a href="https://zenodo.org/record/1068324">zenodo</a>.</p>
+<p>Start by downloading and extracting the zip somewhere in your computer.
+Then, store this location as a variable. For example, <strong>adapt</strong> the path here:</p>
 <pre class="r{eval=f}"><code>DATA_DIR &lt;- &quot;C://Where/My/Zip/Has/been/extracted</code></pre>
 <p>Check that all the files live there:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list.files</span>(DATA_DIR)</code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="scopr.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(DATA_DIR)</span></code></pre></div>
 <pre><code>## [1] &quot;ethoscope_results&quot;      &quot;ethoscope_tutorial.zip&quot; &quot;metadata.csv&quot;</code></pre>
 <p>We have:</p>
 <ul>
@@ -361,7 +430,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="note-on-the-data-structure" class="section level3 unnumbered">
 <h3>Note on the data structure</h3>
-<p>It is informative to take a look at the latter. Files are organised as <code>&lt;machine_id&gt;/&lt;machine_name&gt;/&lt;datetime&gt;/&lt;file&gt;</code>:</p>
+<p>It is informative to take a look at the latter.
+Files are organised as <code>&lt;machine_id&gt;/&lt;machine_name&gt;/&lt;datetime&gt;/&lt;file&gt;</code>:</p>
 <pre><code>ethoscope_results
 ├── 008d6ba04e534be486069c3db7b10827
 │   └── ETHOSCOPE_008
@@ -377,12 +447,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         │   └── 2016-07-22_16-41-21_011d6ba04e534be486069c3db7b10827.db
         └── 2016-07-29_14-59-49
             └── 2016-07-29_14-59-49_011d6ba04e534be486069c3db7b10827.db</code></pre>
-<p>Tracking data are saved in <code>.db</code> files. Everytime an ethoscope is started, one new <code>.db</code> file is created. All animals present in the same machine at the same time will have their data saved in the same <code>.db</code> file.</p>
+<p>Tracking data are saved in <code>.db</code> files.
+Everytime an ethoscope is started, one new <code>.db</code> file is created.
+All animals present in the same machine at the same time will have their data saved in the same <code>.db</code> file.</p>
 </div>
 <div id="set-your-working-directory" class="section level3 unnumbered">
 <h3>Set your working directory</h3>
 <p>For this tutorial, we will just <a href="https://support.rstudio.com/hc/en-us/articles/200711843-Working-Directories-and-Workspaces">set our working directory</a> to <code>DATA_DIR</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setwd</span>(DATA_DIR)</code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="scopr.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(DATA_DIR)</span></code></pre></div>
 </div>
 </div>
 <div id="from-experiment-design-to-metadata-1" class="section level2 unnumbered">
@@ -394,28 +466,35 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>We are interested in <strong>the effect of a drug</strong>, let’s call it the “mystery drug”, on <strong>sleep and activity</strong> in fruit flies</li>
 <li>We supect this drug acts indirectly by <strong>inhibiting the expression of a (mystery) gene</strong></li>
 </ul>
-<p>To address these two questions, we have delivered a <strong>drug</strong> (yes or no) to fruit flies, and <strong>randomised</strong> their position in <strong>two ethoscopes</strong>. We then acquiered individual data (e.g. position and activity) about <strong>twice a second for several days</strong>. We performed <strong>two replicates</strong>, one week appart. In addition, in the end of the experiment, we also collected flies and <strong>measured the relative expression of our candidate gene</strong>.</p>
+<p>To address these two questions, we have delivered a <strong>drug</strong> (yes or no) to fruit flies, and <strong>randomised</strong> their position in <strong>two ethoscopes</strong>.
+We then acquiered individual data (e.g. position and activity) about <strong>twice a second for several days</strong>.
+We performed <strong>two replicates</strong>, one week appart.
+In addition, in the end of the experiment, we also collected flies and <strong>measured the relative expression of our candidate gene</strong>.</p>
 <p>Ultimatly, we would like to:</p>
 <ul>
 <li>Analyse the effect of the drug on sleep</li>
-<li>Study the correlations between the activity (or the drug) and the level of transcript <!-- * Account for the replication design (aka [random effect](https://en.wikipedia.org/wiki/Random_effects_model)) --></li>
+<li>Study the correlations between the activity (or the drug) and the level of transcript
+<!-- * Account for the replication design (aka [random effect](https://en.wikipedia.org/wiki/Random_effects_model)) --></li>
 </ul>
 <div class="figure">
-<img src="assets/ethoscope_experiment.png" alt="Our experimental design" />
+<img src="assets/ethoscope_experiment.png" alt="" />
 <p class="caption">Our experimental design</p>
 </div>
 </div>
-<div id="metadata-2" class="section level3 unnumbered">
+<div id="metadata-3" class="section level3 unnumbered">
 <h3>Metadata</h3>
-<p><strong>It is crucial that you have read <a href="metadata.html">metadata chapter</a></strong> to understand this part. Our goal is to encode our whole experiment in a single file in which:</p>
+<p><strong>It is crucial that you have read <a href="metadata.html">metadata chapter</a></strong> to understand this part.
+Our goal is to encode our whole experiment in a single file in which:</p>
 <ul>
 <li>each row is an individual</li>
 <li>each column is a metavariable</li>
 </ul>
-<p>Luckily for you, I have already put this file together for you as <code>metadata.csv</code>! Lets have a look at it (you can use <code>R</code>, excel or whatever you want). If you are using <code>R</code>, type this commands:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(scopr)
-metadata &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;metadata.csv&quot;</span>)
-metadata</code></pre></div>
+<p>Luckily for you, I have already put this file together for you as <code>metadata.csv</code>!
+Lets have a look at it (you can use <code>R</code>, excel or whatever you want).
+If you are using <code>R</code>, type this commands:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="scopr.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scopr)</span>
+<span id="cb53-2"><a href="scopr.html#cb53-2" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="st">&quot;metadata.csv&quot;</span>)</span>
+<span id="cb53-3"><a href="scopr.html#cb53-3" aria-hidden="true" tabindex="-1"></a>metadata</span></code></pre></div>
 <pre><code>##      machine_name       date region_id treatment replicate expression_level
 ##  1: ETHOSCOPE_011 2016-07-22         1       yes         1             3.28
 ##  2: ETHOSCOPE_011 2016-07-22         2        no         1             2.16
@@ -430,7 +509,7 @@ metadata</code></pre></div>
 ## 80: ETHOSCOPE_011 2016-07-29        20       yes         2             5.21</code></pre>
 <p>Each of the 80 animals (rows) is defined by two mandatory columns (metavariables):</p>
 <ul>
-<li><code>machine_name</code> – the name of the device used (e.g. <code>&quot;ETHOSCOPE_001&quot;</code>)</li>
+<li><code>machine_name</code> – the name of the device used (e.g. <code>"ETHOSCOPE_001"</code>)</li>
 <li><code>date</code> – the date and time (<code>YYYY-MM-DD</code>) of the start of the experiment</li>
 <li><code>region_id</code> – The tube (region of interest) in which an animal was tracked ([1,20])</li>
 </ul>
@@ -445,25 +524,27 @@ metadata</code></pre></div>
 </div>
 <div id="linking-1" class="section level2 unnumbered">
 <h2>Linking</h2>
-<p><a href="metadata.html#linking-metadata">Linking</a> is the one necessary step before loading the data. It <strong>allocates a unique identifier to each animal</strong>. In addition, it finds the file needed to load its data.</p>
+<p><a href="metadata.html#linking-metadata">Linking</a> is the one necessary step before loading the data.
+It <strong>allocates a unique identifier to each animal</strong>. In addition, it finds the file needed to load its data.</p>
 <div id="local-data" class="section level3 unnumbered">
 <h3>Local data</h3>
-<p>If your data is already in your computer (as it is now sice you have downloaded it manually), you can simply link it like:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metadata &lt;-<span class="st"> </span><span class="kw">link_ethoscope_metadata</span>(metadata, 
-                                    <span class="dt">result_dir =</span> <span class="st">&quot;ethoscope_results&quot;</span>)
-<span class="kw">print</span>(metadata)</code></pre></div>
+<p>If your data is already in your computer (as it is now sice you have downloaded it manually),
+you can simply link it like:</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="scopr.html#cb55-1" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">link_ethoscope_metadata</span>(metadata, </span>
+<span id="cb55-2"><a href="scopr.html#cb55-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">result_dir =</span> <span class="st">&quot;ethoscope_results&quot;</span>)</span>
+<span id="cb55-3"><a href="scopr.html#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(metadata)</span></code></pre></div>
 <pre><code>##                                id file_info  machine_name
-##  1: 2016-07-22_16-41-21_011d6b|01    &lt;list&gt; ETHOSCOPE_011
-##  2: 2016-07-22_16-41-21_011d6b|02    &lt;list&gt; ETHOSCOPE_011
-##  3: 2016-07-22_16-41-21_011d6b|03    &lt;list&gt; ETHOSCOPE_011
-##  4: 2016-07-22_16-41-21_011d6b|04    &lt;list&gt; ETHOSCOPE_011
-##  5: 2016-07-22_16-41-21_011d6b|05    &lt;list&gt; ETHOSCOPE_011
+##  1: 2016-07-22_16-41-21_011d6b|01 &lt;list[2]&gt; ETHOSCOPE_011
+##  2: 2016-07-22_16-41-21_011d6b|02 &lt;list[2]&gt; ETHOSCOPE_011
+##  3: 2016-07-22_16-41-21_011d6b|03 &lt;list[2]&gt; ETHOSCOPE_011
+##  4: 2016-07-22_16-41-21_011d6b|04 &lt;list[2]&gt; ETHOSCOPE_011
+##  5: 2016-07-22_16-41-21_011d6b|05 &lt;list[2]&gt; ETHOSCOPE_011
 ## ---                                                      
-## 76: 2016-07-29_14-59-49_011d6b|16    &lt;list&gt; ETHOSCOPE_011
-## 77: 2016-07-29_14-59-49_011d6b|17    &lt;list&gt; ETHOSCOPE_011
-## 78: 2016-07-29_14-59-49_011d6b|18    &lt;list&gt; ETHOSCOPE_011
-## 79: 2016-07-29_14-59-49_011d6b|19    &lt;list&gt; ETHOSCOPE_011
-## 80: 2016-07-29_14-59-49_011d6b|20    &lt;list&gt; ETHOSCOPE_011
+## 76: 2016-07-29_14-59-49_011d6b|16 &lt;list[2]&gt; ETHOSCOPE_011
+## 77: 2016-07-29_14-59-49_011d6b|17 &lt;list[2]&gt; ETHOSCOPE_011
+## 78: 2016-07-29_14-59-49_011d6b|18 &lt;list[2]&gt; ETHOSCOPE_011
+## 79: 2016-07-29_14-59-49_011d6b|19 &lt;list[2]&gt; ETHOSCOPE_011
+## 80: 2016-07-29_14-59-49_011d6b|20 &lt;list[2]&gt; ETHOSCOPE_011
 ##                           machine_id            datetime region_id treatment
 ##  1: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         1       yes
 ##  2: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         2        no
@@ -491,56 +572,67 @@ metadata</code></pre></div>
 </div>
 <div id="remote-data" class="section level3 unnumbered">
 <h3>Remote Data</h3>
-<p>In real life situations, when several experimenters are working in parallel, Users should not:</p>
+<p>In real life situations, when several experimenters are working in parallel,
+Users should not:</p>
 <ul>
 <li>Have to download all the data from all users at all time (very inefficient)</li>
 <li>Download data by hand from a server (error prone and time consuming)</li>
 </ul>
-<p>Instead, it will be more common that all the data is stored on an <strong>FTP</strong> server (i.e. a network drive). <code>scopr</code> allows us to look up in the metadata and download, incrementally, only the files needed. For more information about how to set up network backups check the <a href="https://qgeissmann.gitbooks.io/ethoscope-manual/administration-and-maintenance/backing-up-data.html">ethocope documentation</a>.</p>
-<p>In this context, we will be using <code>link_ethoscope_metadata_remote</code>. It works almost exactly like <code>link_ethoscope_metadata</code>, but takes a <code>remote_dir</code> argument. <code>remote_dir</code> is generally the address to an FTP directory.</p>
+<p>Instead, it will be more common that all the data is stored on an <strong>FTP</strong> server (i.e. a network drive).
+<code>scopr</code> allows us to look up in the metadata and download, incrementally, only the files needed.
+For more information about how to set up network backups check the <a href="https://qgeissmann.gitbooks.io/ethoscope-manual/administration-and-maintenance/backing-up-data.html">ethocope documentation</a>.</p>
+<p>In this context, we will be using <code>link_ethoscope_metadata_remote</code>.
+It works almost exactly like <code>link_ethoscope_metadata</code>, but takes a <code>remote_dir</code> argument.
+<code>remote_dir</code> is generally the address to an FTP directory.</p>
 <p>This is just an example that you will have to <strong>adapt to your own situation</strong>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">REMOTE_DIR &lt;-<span class="st"> &quot;ftp://my-share-drive.com/where/the-data/lives&quot;</span>
-RESULT_DIR &lt;-<span class="st"> &quot;/where/to/save/the/data&quot;</span> 
-
-metadata &lt;-<span class="st"> </span><span class="kw">link_ethoscope_metadata_remote</span>(metadata,
-                                      <span class="dt">remote_dir =</span>  REMOTE_DIR,
-                                      <span class="dt">result_dir =</span> RESULT_DIR,
-                                      <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p>Note that, as long as you have an internet connection, you can use this function to link your metadata. It will not download data files everytime (unless new data is available upstream).</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="scopr.html#cb57-1" aria-hidden="true" tabindex="-1"></a>REMOTE_DIR <span class="ot">&lt;-</span> <span class="st">&quot;ftp://my-share-drive.com/where/the-data/lives&quot;</span></span>
+<span id="cb57-2"><a href="scopr.html#cb57-2" aria-hidden="true" tabindex="-1"></a>RESULT_DIR <span class="ot">&lt;-</span> <span class="st">&quot;/where/to/save/the/data&quot;</span> </span>
+<span id="cb57-3"><a href="scopr.html#cb57-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-4"><a href="scopr.html#cb57-4" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">link_ethoscope_metadata_remote</span>(metadata,</span>
+<span id="cb57-5"><a href="scopr.html#cb57-5" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">remote_dir =</span>  REMOTE_DIR,</span>
+<span id="cb57-6"><a href="scopr.html#cb57-6" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">result_dir =</span> RESULT_DIR,</span>
+<span id="cb57-7"><a href="scopr.html#cb57-7" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">verbose =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>Note that, as long as you have an internet connection, you can use this function to link your metadata.
+It will not download data files everytime (unless new data is available upstream).</p>
 </div>
 </div>
 <div id="loading-1" class="section level2 unnumbered">
 <h2>Loading</h2>
-<p>The core fucntion of <code>scopr</code> is <code>load_ethoscope()</code>. It is quite flexible and we will show here just a few examples of how to use it. <strong>Do have a look at the documentation</strong> (e.g. by running <code>?load_ethoscope</code>), if you want to know more.</p>
+<p>The core fucntion of <code>scopr</code> is <code>load_ethoscope()</code>.
+It is quite flexible and we will show here just a few examples of how to use it.
+<strong>Do have a look at the documentation</strong> (e.g. by running <code>?load_ethoscope</code>), if you want to know more.</p>
 <div id="raw-data-default" class="section level3 unnumbered">
 <h3>Raw data (default)</h3>
-<p>The simplest thing one can do is to load <strong>all tracking data</strong>. However, this comes with several caveats:</p>
+<p>The simplest thing one can do is to load <strong>all tracking data</strong>.
+However, this comes with several caveats:</p>
 <ul>
 <li>A lot (gigabytes) of data will be needed</li>
 <li>You will probably have to process the data immediatly after in order to extract biological meaning</li>
 </ul>
-<p>Here, we will just load data from animals in region 1 (metadata[region_id == 1]). As it is could otherwise be too much data:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">metadata_subset &lt;-<span class="st"> </span>metadata[region_id <span class="op">==</span><span class="st"> </span><span class="dv">1</span>]
-dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata_subset, <span class="dt">verbose=</span><span class="ot">FALSE</span>)
-<span class="kw">summary</span>(dt)</code></pre></div>
+<p>Here, we will just load data from animals in region 1 (metadata[region_id == 1]).
+As it is could otherwise be too much data:</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="scopr.html#cb58-1" aria-hidden="true" tabindex="-1"></a>metadata_subset <span class="ot">&lt;-</span> metadata[region_id <span class="sc">==</span> <span class="dv">1</span>]</span>
+<span id="cb58-2"><a href="scopr.html#cb58-2" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">&lt;-</span> <span class="fu">load_ethoscope</span>(metadata_subset, <span class="at">verbose=</span><span class="cn">FALSE</span>)</span>
+<span id="cb58-3"><a href="scopr.html#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dt)</span></code></pre></div>
 <pre><code>## behavr table with:
 ##  4   individuals
 ##  8   metavariables
 ##  8   variables
 ##  3.004648e+06    measurements
 ##  1   key (id)</code></pre>
-<p>Note that I set <code>verbose</code> to <code>FALSE</code>. This is to avoid printing progress. You may want to set it to <code>TRUE</code> (the default), so you can check how fast data loading is happening.</p>
+<p>Note that I set <code>verbose</code> to <code>FALSE</code>. This is to avoid printing progress.
+You may want to set it to <code>TRUE</code> (the default), so you can check how fast data loading is happening.</p>
 <p>It is also good practice to print your resutling behavr table (<code>dt</code> in this case):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(dt)</code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="scopr.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(dt)</span></code></pre></div>
 <pre><code>## 
 ##  ==== METADATA ====
 ## 
 ##                               id file_info  machine_name
 ##                           &lt;fctr&gt;    &lt;list&gt;        &lt;char&gt;
-## 1: 2016-07-22_16-41-21_011d6b|01    &lt;list&gt; ETHOSCOPE_011
-## 2: 2016-07-22_16-43-29_009d6b|01    &lt;list&gt; ETHOSCOPE_009
-## 3: 2016-07-29_14-57-35_008d6b|01    &lt;list&gt; ETHOSCOPE_008
-## 4: 2016-07-29_14-59-49_011d6b|01    &lt;list&gt; ETHOSCOPE_011
+## 1: 2016-07-22_16-41-21_011d6b|01 &lt;list[2]&gt; ETHOSCOPE_011
+## 2: 2016-07-22_16-43-29_009d6b|01 &lt;list[2]&gt; ETHOSCOPE_009
+## 3: 2016-07-29_14-57-35_008d6b|01 &lt;list[2]&gt; ETHOSCOPE_008
+## 4: 2016-07-29_14-59-49_011d6b|01 &lt;list[2]&gt; ETHOSCOPE_011
 ##                          machine_id            datetime region_id treatment
 ##                              &lt;char&gt;              &lt;POSc&gt;     &lt;int&gt;    &lt;char&gt;
 ## 1: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         1       yes
@@ -582,11 +674,17 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
 ## 3004646: 0.04324324 0.02522523    10              -1959              0
 ## 3004647: 0.03963964 0.02522523   164              -1785              0
 ## 3004648: 0.03783784 0.02702703   169              -2097              0</code></pre>
-<p>It shows us the metadata as well as the first few and last few lines of actual data. In the data, there are columns such as <code>x</code> and <code>y</code> that record position, but also others that may not make immediate sense to you. <strong>In practice, loading raw data is rare</strong> for long experiments, and I would recommend doing it <strong>only for prototyping</strong> and such.</p>
+<p>It shows us the metadata as well as the first few and last few lines of actual data.
+In the data, there are columns such as <code>x</code> and <code>y</code> that record position, but also others that may not make immediate sense to you.
+<strong>In practice, loading raw data is rare</strong> for long experiments, and I would recommend doing it <strong>only for prototyping</strong> and such.</p>
 </div>
 <div id="preprocessing" class="section level3 unnumbered">
 <h3>Preprocessing</h3>
-<p>As dissussed before, it is inefficient and not always possible to load all raw data for hundreads of animals. Instead, we can <strong>preprocess data on the go</strong>. In the context of activity and sleep analysis, we can quantify activity in windows of 10s (<a href="http://journals.plos.org/plosbiology/article/file?type=supplementary&amp;id=info:doi/10.1371/journal.pbio.2003026.s005">techinical details here</a>). This is implemented in the function <code>sleep_annotation</code> of our <code>sleepr</code> package. Ensure you have installed <code>sleepr</code> as well (<code>devtools::install_github(&quot;rethomics/sleepr&quot;)</code>).</p>
+<p>As dissussed before, it is inefficient and not always possible to load all raw data for hundreads of animals.
+Instead, we can <strong>preprocess data on the go</strong>.
+In the context of activity and sleep analysis, we can quantify activity in windows of 10s (<a href="http://journals.plos.org/plosbiology/article/file?type=supplementary&amp;id=info:doi/10.1371/journal.pbio.2003026.s005">techinical details here</a>).
+This is implemented in the function <code>sleep_annotation</code> of our <code>sleepr</code> package.
+Ensure you have installed <code>sleepr</code> as well (<code>devtools::install_github("rethomics/sleepr")</code>).</p>
 <p>When running this function:</p>
 <ul>
 <li>The activity in each 10s of data will be scored</li>
@@ -594,10 +692,10 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
 <li>Sleep will be scored according to the “five minute rule”</li>
 </ul>
 <p>To apply a function to <strong>all individual data, as they are loaded</strong>, we can use the <code>FUN</code> argument:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata,
-                       <span class="dt">FUN =</span> sleepr<span class="op">::</span>sleep_annotation, 
-                       <span class="dt">verbose=</span><span class="ot">FALSE</span>)
-<span class="kw">summary</span>(dt)</code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="scopr.html#cb62-1" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">&lt;-</span> <span class="fu">load_ethoscope</span>(metadata,</span>
+<span id="cb62-2"><a href="scopr.html#cb62-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">FUN =</span> sleepr<span class="sc">::</span>sleep_annotation, </span>
+<span id="cb62-3"><a href="scopr.html#cb62-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">verbose=</span><span class="cn">FALSE</span>)</span>
+<span id="cb62-4"><a href="scopr.html#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dt)</span></code></pre></div>
 <pre><code>## behavr table with:
 ##  80  individuals
 ##  8   metavariables
@@ -605,23 +703,23 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
 ##  4.641275e+06    measurements
 ##  1   key (id)</code></pre>
 <p>Again, we have a look at the resulting table:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(dt)</code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="scopr.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(dt)</span></code></pre></div>
 <pre><code>## 
 ##  ==== METADATA ====
 ## 
 ##                                id file_info  machine_name
 ##                            &lt;fctr&gt;    &lt;list&gt;        &lt;char&gt;
-##  1: 2016-07-22_16-41-21_011d6b|01    &lt;list&gt; ETHOSCOPE_011
-##  2: 2016-07-22_16-41-21_011d6b|02    &lt;list&gt; ETHOSCOPE_011
-##  3: 2016-07-22_16-41-21_011d6b|03    &lt;list&gt; ETHOSCOPE_011
-##  4: 2016-07-22_16-41-21_011d6b|04    &lt;list&gt; ETHOSCOPE_011
-##  5: 2016-07-22_16-41-21_011d6b|05    &lt;list&gt; ETHOSCOPE_011
+##  1: 2016-07-22_16-41-21_011d6b|01 &lt;list[2]&gt; ETHOSCOPE_011
+##  2: 2016-07-22_16-41-21_011d6b|02 &lt;list[2]&gt; ETHOSCOPE_011
+##  3: 2016-07-22_16-41-21_011d6b|03 &lt;list[2]&gt; ETHOSCOPE_011
+##  4: 2016-07-22_16-41-21_011d6b|04 &lt;list[2]&gt; ETHOSCOPE_011
+##  5: 2016-07-22_16-41-21_011d6b|05 &lt;list[2]&gt; ETHOSCOPE_011
 ## ---                                                      
-## 76: 2016-07-29_14-59-49_011d6b|16    &lt;list&gt; ETHOSCOPE_011
-## 77: 2016-07-29_14-59-49_011d6b|17    &lt;list&gt; ETHOSCOPE_011
-## 78: 2016-07-29_14-59-49_011d6b|18    &lt;list&gt; ETHOSCOPE_011
-## 79: 2016-07-29_14-59-49_011d6b|19    &lt;list&gt; ETHOSCOPE_011
-## 80: 2016-07-29_14-59-49_011d6b|20    &lt;list&gt; ETHOSCOPE_011
+## 76: 2016-07-29_14-59-49_011d6b|16 &lt;list[2]&gt; ETHOSCOPE_011
+## 77: 2016-07-29_14-59-49_011d6b|17 &lt;list[2]&gt; ETHOSCOPE_011
+## 78: 2016-07-29_14-59-49_011d6b|18 &lt;list[2]&gt; ETHOSCOPE_011
+## 79: 2016-07-29_14-59-49_011d6b|19 &lt;list[2]&gt; ETHOSCOPE_011
+## 80: 2016-07-29_14-59-49_011d6b|20 &lt;list[2]&gt; ETHOSCOPE_011
 ##                           machine_id            datetime region_id treatment
 ##                               &lt;char&gt;              &lt;POSc&gt;     &lt;int&gt;    &lt;char&gt;
 ##  1: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         1       yes
@@ -677,7 +775,8 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
 ## 4641273:            0            0   TRUE  FALSE           FALSE
 ## 4641274:            0            0   TRUE  FALSE           FALSE
 ## 4641275:            0            1   TRUE  FALSE           FALSE</code></pre>
-<p>We have several variables (see in the <code>===DATA===</code> section of the output). The important ones are:</p>
+<p>We have several variables (see in the <code>===DATA===</code> section of the output).
+The important ones are:</p>
 <ul>
 <li><code>t</code> – the time, in s, sample every 10s</li>
 <li><code>x</code> – the position in the tube (0 = left, 1=right)</li>
@@ -689,48 +788,63 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
 </div>
 <div id="zt0-1" class="section level3 unnumbered">
 <h3>ZT0</h3>
-<p>By default, <strong>the time is expressed relative to the onset of the experiment</strong>. In other words, <span class="math inline">\(t_0\)</span> is when you click on the “start tracking” button. In the context of sleep, we care more about time <strong>within a day</strong>. Therefore, we express time relative to ZT0 (i.e the hour of the day when the L phase starts). In our lab, it is at <strong>09:00:00, GMT</strong>. In <code>load_ethoscope</code>, we translate that by using the argument <code>reference_hour=9.0</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata,
-             <span class="dt">reference_hour=</span><span class="fl">9.0</span>, 
-                       <span class="dt">FUN =</span> sleepr<span class="op">::</span>sleep_annotation, 
-                       <span class="dt">verbose=</span><span class="ot">FALSE</span>)</code></pre></div>
+<p>By default, <strong>the time is expressed relative to the onset of the experiment</strong>.
+In other words, <span class="math inline">\(t_0\)</span> is when you click on the “start tracking” button.
+In the context of sleep, we care more about time <strong>within a day</strong>.
+Therefore, we express time relative to ZT0 (i.e the hour of the day when the L phase starts).
+In our lab, it is at <strong>09:00:00, GMT</strong>.
+In <code>load_ethoscope</code>, we translate that by using the argument <code>reference_hour=9.0</code>:</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="scopr.html#cb66-1" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">&lt;-</span> <span class="fu">load_ethoscope</span>(metadata,</span>
+<span id="cb66-2"><a href="scopr.html#cb66-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">reference_hour=</span><span class="fl">9.0</span>, </span>
+<span id="cb66-3"><a href="scopr.html#cb66-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">FUN =</span> sleepr<span class="sc">::</span>sleep_annotation, </span>
+<span id="cb66-4"><a href="scopr.html#cb66-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">verbose=</span><span class="cn">FALSE</span>)</span></code></pre></div>
 </div>
 <div id="cache-directory" class="section level3 unnumbered">
 <h3>Cache directory</h3>
-<p>One issue with loading ethoscope data is thta it is <strong>relatively slow</strong>. For instance, according to our computer, you may take half an hour to load data from 500 animals <span class="math inline">\(times\)</span> 1 week. In your daily life, you will often need to close <code>R</code> and open it again later to analyse things differently, or simply change simple parameters on some figures. You really don’t want to spend too long reloading data this sort of situation.</p>
-<p>To address this issue, <code>load_ethoscope</code> comes with a <a href="https://en.wikipedia.org/wiki/Cache_(computing)">caching</a> option. When turned on, whenever you load any data, it stores a snapshot on the disk (in a directory you pick). Then, the <em>next time</em> you load the data, loading happends directly from the snapshot. This way you will load data one or two orders of magnitude faster!</p>
+<p>One issue with loading ethoscope data is thta it is <strong>relatively slow</strong>.
+For instance, according to our computer, you may take half an hour to load data from 500 animals <span class="math inline">\(times\)</span> 1 week.
+In your daily life, you will often need to close <code>R</code> and open it again later to analyse things differently, or simply change simple parameters on some figures.
+You really don’t want to spend too long reloading data this sort of situation.</p>
+<p>To address this issue, <code>load_ethoscope</code> comes with a <a href="https://en.wikipedia.org/wiki/Cache_(computing)">caching</a> option.
+When turned on, whenever you load any data, it stores a snapshot on the disk (in a directory you pick).
+Then, the <em>next time</em> you load the data, loading happends directly from the snapshot.
+This way you will load data one or two orders of magnitude faster!</p>
 <p>The first time, everything will take as long:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(
-  dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata,
-             <span class="dt">reference_hour=</span><span class="fl">9.0</span>, 
-                       <span class="dt">FUN =</span> sleepr<span class="op">::</span>sleep_annotation, 
-             <span class="dt">cache =</span> <span class="st">&quot;ethoscope_cache&quot;</span>, 
-                       <span class="dt">verbose=</span><span class="ot">FALSE</span>)
-)</code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="scopr.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(</span>
+<span id="cb67-2"><a href="scopr.html#cb67-2" aria-hidden="true" tabindex="-1"></a>  dt <span class="ot">&lt;-</span> <span class="fu">load_ethoscope</span>(metadata,</span>
+<span id="cb67-3"><a href="scopr.html#cb67-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">reference_hour=</span><span class="fl">9.0</span>, </span>
+<span id="cb67-4"><a href="scopr.html#cb67-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">FUN =</span> sleepr<span class="sc">::</span>sleep_annotation, </span>
+<span id="cb67-5"><a href="scopr.html#cb67-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">cache =</span> <span class="st">&quot;ethoscope_cache&quot;</span>, </span>
+<span id="cb67-6"><a href="scopr.html#cb67-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">verbose=</span><span class="cn">FALSE</span>)</span>
+<span id="cb67-7"><a href="scopr.html#cb67-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-## 102.621   1.513 104.188</code></pre>
+## 129.519   1.183  95.264</code></pre>
 <p>However, the next time, we do the same thing way faster:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(
-  dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata,
-             <span class="dt">reference_hour=</span><span class="fl">9.0</span>, 
-                       <span class="dt">FUN =</span> sleepr<span class="op">::</span>sleep_annotation, 
-             <span class="dt">cache =</span> <span class="st">&quot;ethoscope_cache&quot;</span>, 
-                       <span class="dt">verbose=</span><span class="ot">FALSE</span>)
-)</code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="scopr.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(</span>
+<span id="cb69-2"><a href="scopr.html#cb69-2" aria-hidden="true" tabindex="-1"></a>  dt <span class="ot">&lt;-</span> <span class="fu">load_ethoscope</span>(metadata,</span>
+<span id="cb69-3"><a href="scopr.html#cb69-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">reference_hour=</span><span class="fl">9.0</span>, </span>
+<span id="cb69-4"><a href="scopr.html#cb69-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">FUN =</span> sleepr<span class="sc">::</span>sleep_annotation, </span>
+<span id="cb69-5"><a href="scopr.html#cb69-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">cache =</span> <span class="st">&quot;ethoscope_cache&quot;</span>, </span>
+<span id="cb69-6"><a href="scopr.html#cb69-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">verbose=</span><span class="cn">FALSE</span>)</span>
+<span id="cb69-7"><a href="scopr.html#cb69-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##   1.388   0.012   1.400</code></pre>
-<p>Here, we set <code>cache</code> to <code>&quot;ethoscope_cache&quot;</code>. This creates a new directory called <code>&quot;ethoscope_cache&quot;</code> (you can pick the name and location you want). If you to do a bit of tidying up, you can remove it without risk (it will just take time next time you load your data).</p>
+##   1.031   0.060   0.693</code></pre>
+<p>Here, we set <code>cache</code> to <code>"ethoscope_cache"</code>.
+This creates a new directory called <code>"ethoscope_cache"</code> (you can pick the name and location you want).
+If you to do a bit of tidying up, you can remove it without risk (it will just take time next time you load your data).</p>
 </div>
 </div>
 <div id="quality-control-1" class="section level2 unnumbered">
 <h2>Quality control</h2>
-<p>One way to check everything is in order with our data is to visualise it with a <strong>tile plot</strong>. For instance, here, the variable <code>asleep</code>, for each animal (rows in the plot) over time (columns):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggetho)
-<span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">z=</span>asleep)) <span class="op">+</span>
-<span class="st">      </span><span class="kw">stat_tile_etho</span>() <span class="op">+</span>
-<span class="st">      </span><span class="kw">stat_ld_annotations</span>()</code></pre></div>
+<p>One way to check everything is in order with our data is to visualise it with a <strong>tile plot</strong>.
+For instance, here, the variable <code>asleep</code>, for each animal (rows in the plot) over time (columns):</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="scopr.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggetho)</span>
+<span id="cb71-2"><a href="scopr.html#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggetho</span>(dt, <span class="fu">aes</span>(<span class="at">z=</span>asleep)) <span class="sc">+</span></span>
+<span id="cb71-3"><a href="scopr.html#cb71-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">stat_tile_etho</span>() <span class="sc">+</span></span>
+<span id="cb71-4"><a href="scopr.html#cb71-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">stat_ld_annotations</span>()</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-51-1.png" width="864" /></p>
-<p>This allows us to spot possible outliers/missing data/artefacts and try to understand what to do whith them. More about tiles plots in the <a href="ggetho.html">visualisation chapter</a>.</p>
+<p>This allows us to spot possible outliers/missing data/artefacts and try to understand what to do whith them.
+More about tiles plots in the <a href="ggetho.html">visualisation chapter</a>.</p>
 </div>
 <div id="and-then" class="section level2 unnumbered">
 <h2>And then?</h2>
@@ -738,31 +852,31 @@ dt &lt;-<span class="st"> </span><span class="kw">load_ethoscope</span>(metadata
 <div id="sleep-amount-vs-treatment" class="section level3 unnumbered">
 <h3>Sleep amount vs treatment</h3>
 <p>We can start to see that <em>treatment increases sleep</em>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggetho)
-<span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">y=</span>asleep, <span class="dt">colour=</span>treatment), <span class="dt">time_wrap =</span> <span class="kw">hours</span>(<span class="dv">24</span>)) <span class="op">+</span>
-<span class="st">      </span><span class="kw">stat_pop_etho</span>() <span class="op">+</span>
-<span class="st">      </span><span class="kw">stat_ld_annotations</span>()</code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="scopr.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggetho)</span>
+<span id="cb72-2"><a href="scopr.html#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggetho</span>(dt, <span class="fu">aes</span>(<span class="at">y=</span>asleep, <span class="at">colour=</span>treatment), <span class="at">time_wrap =</span> <span class="fu">hours</span>(<span class="dv">24</span>)) <span class="sc">+</span></span>
+<span id="cb72-3"><a href="scopr.html#cb72-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">stat_pop_etho</span>() <span class="sc">+</span></span>
+<span id="cb72-4"><a href="scopr.html#cb72-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">stat_ld_annotations</span>()</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
 </div>
 <div id="total-sleep-vs-expression-level" class="section level3 unnumbered">
 <h3>Total sleep vs expression level</h3>
 <p>First we <a href="behavr.html#summerise-data">summarise</a> the total proportion of time spent sleeping for each animal (i.e. by id).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">summary_dt &lt;-<span class="st"> </span>dt[, .(<span class="dt">sleep_fraction =</span> <span class="kw">mean</span>(asleep)), by=id]</code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="scopr.html#cb73-1" aria-hidden="true" tabindex="-1"></a>summary_dt <span class="ot">&lt;-</span> dt[, .(<span class="at">sleep_fraction =</span> <span class="fu">mean</span>(asleep)), by<span class="ot">=</span>id]</span></code></pre></div>
 <p>Then we rejoin this summary to metadata:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">summary_dt &lt;-<span class="st"> </span><span class="kw">rejoin</span>(summary_dt)
-summary_dt</code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="scopr.html#cb74-1" aria-hidden="true" tabindex="-1"></a>summary_dt <span class="ot">&lt;-</span> <span class="fu">rejoin</span>(summary_dt)</span>
+<span id="cb74-2"><a href="scopr.html#cb74-2" aria-hidden="true" tabindex="-1"></a>summary_dt</span></code></pre></div>
 <pre><code>##                                id file_info  machine_name
-##  1: 2016-07-22_16-41-21_011d6b|01    &lt;list&gt; ETHOSCOPE_011
-##  2: 2016-07-22_16-41-21_011d6b|02    &lt;list&gt; ETHOSCOPE_011
-##  3: 2016-07-22_16-41-21_011d6b|03    &lt;list&gt; ETHOSCOPE_011
-##  4: 2016-07-22_16-41-21_011d6b|04    &lt;list&gt; ETHOSCOPE_011
-##  5: 2016-07-22_16-41-21_011d6b|05    &lt;list&gt; ETHOSCOPE_011
+##  1: 2016-07-22_16-41-21_011d6b|01 &lt;list[2]&gt; ETHOSCOPE_011
+##  2: 2016-07-22_16-41-21_011d6b|02 &lt;list[2]&gt; ETHOSCOPE_011
+##  3: 2016-07-22_16-41-21_011d6b|03 &lt;list[2]&gt; ETHOSCOPE_011
+##  4: 2016-07-22_16-41-21_011d6b|04 &lt;list[2]&gt; ETHOSCOPE_011
+##  5: 2016-07-22_16-41-21_011d6b|05 &lt;list[2]&gt; ETHOSCOPE_011
 ## ---                                                      
-## 76: 2016-07-29_14-59-49_011d6b|16    &lt;list&gt; ETHOSCOPE_011
-## 77: 2016-07-29_14-59-49_011d6b|17    &lt;list&gt; ETHOSCOPE_011
-## 78: 2016-07-29_14-59-49_011d6b|18    &lt;list&gt; ETHOSCOPE_011
-## 79: 2016-07-29_14-59-49_011d6b|19    &lt;list&gt; ETHOSCOPE_011
-## 80: 2016-07-29_14-59-49_011d6b|20    &lt;list&gt; ETHOSCOPE_011
+## 76: 2016-07-29_14-59-49_011d6b|16 &lt;list[2]&gt; ETHOSCOPE_011
+## 77: 2016-07-29_14-59-49_011d6b|17 &lt;list[2]&gt; ETHOSCOPE_011
+## 78: 2016-07-29_14-59-49_011d6b|18 &lt;list[2]&gt; ETHOSCOPE_011
+## 79: 2016-07-29_14-59-49_011d6b|19 &lt;list[2]&gt; ETHOSCOPE_011
+## 80: 2016-07-29_14-59-49_011d6b|20 &lt;list[2]&gt; ETHOSCOPE_011
 ##                           machine_id            datetime region_id treatment
 ##  1: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         1       yes
 ##  2: 011d6ba04e534be486069c3db7b10827 2016-07-22 16:41:21         2        no
@@ -787,12 +901,13 @@ summary_dt</code></pre></div>
 ## 78:         2             4.35      0.2806088
 ## 79:         2             1.06      0.3703443
 ## 80:         2             5.21      0.3803006</code></pre>
-<p>This is a standard data.table (data.frame), so we can use it for some regular <code>R</code> magic. We can show the how <strong>sleep fraction and expression level are decorrelated</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(summary_dt, <span class="kw">aes</span>(<span class="dt">x=</span>expression_level,
-                       <span class="dt">y=</span>sleep_fraction,
-                       <span class="dt">colour =</span> treatment)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>)</code></pre></div>
+<p>This is a standard data.table (data.frame), so we can use it for some regular <code>R</code> magic.
+We can show the how <strong>sleep fraction and expression level are decorrelated</strong></p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="scopr.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(summary_dt, <span class="fu">aes</span>(<span class="at">x=</span>expression_level,</span>
+<span id="cb76-2"><a href="scopr.html#cb76-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y=</span>sleep_fraction,</span>
+<span id="cb76-3"><a href="scopr.html#cb76-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">colour =</span> treatment)) <span class="sc">+</span></span>
+<span id="cb76-4"><a href="scopr.html#cb76-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb76-5"><a href="scopr.html#cb76-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
 </div>
@@ -817,7 +932,6 @@ summary_dt</code></pre></div>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -836,6 +950,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -856,6 +971,10 @@ gitbook.start({
 "text": null
 },
 "download": ["rethomics.pdf", "rethomics.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 }
@@ -868,7 +987,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))

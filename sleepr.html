@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Sleep analysis | Rethomics, a framework for high-throughput behaviour analysis in R</title>
   <meta name="description" content="This is a tutorial for Rethomics, a framework to analyse high-throuput behavioural data in R." />
-  <meta name="generator" content="bookdown 0.18.1 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Sleep analysis | Rethomics, a framework for high-throughput behaviour analysis in R" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Quentin Geissmann" />
 
 
-<meta name="date" content="2020-04-22" />
+<meta name="date" content="2022-02-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,9 @@
   
 <link rel="prev" href="ggetho.html"/>
 <link rel="next" href="zeitgebr.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,7 +51,8 @@
 
 
 
-
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110947778-1"></script>
 <script>
@@ -62,42 +65,70 @@
 
 
 <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="css/my_style.css" type="text/css" />
 </head>
@@ -116,115 +147,136 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i>Package List and First Steps</a><ul>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i>Package List and First Steps</a>
+<ul>
 <li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#getting-r"><i class="fa fa-check"></i>Getting R</a></li>
 <li><a href="intro.html#the-rethomics-packages">The <code>rethomics</code> packages</a></li>
-<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#installation"><i class="fa fa-check"></i>Installation</a><ul>
+<li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#installation"><i class="fa fa-check"></i>Installation</a>
+<ul>
 <li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#cran"><i class="fa fa-check"></i>CRAN</a></li>
 <li class="chapter" data-level="" data-path="intro.html"><a href="intro.html#devtools"><i class="fa fa-check"></i>devtools</a></li>
 </ul></li>
 </ul></li>
 <li><a href="workflow.html#workflow">The <code>rethomics</code> workflow</a></li>
-<li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html"><i class="fa fa-check"></i>Working with metadata files</a><ul>
+<li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html"><i class="fa fa-check"></i>Working with metadata files</a>
+<ul>
 <li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html#what-are-metadata"><i class="fa fa-check"></i>What are metadata?</a></li>
 <li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html#make-them-exhaustive"><i class="fa fa-check"></i>Make them exhaustive</a></li>
 <li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html#put-replicates-together"><i class="fa fa-check"></i>Put replicates together</a></li>
 <li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html#linking-metadata"><i class="fa fa-check"></i>Linking metadata</a></li>
 <li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html#take-home-message"><i class="fa fa-check"></i>Take home message</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html"><i class="fa fa-check"></i>behavr tables</a><ul>
+<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html"><i class="fa fa-check"></i>behavr tables</a>
+<ul>
 <li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#variables-and-metavariables"><i class="fa fa-check"></i>Variables and metavariables</a></li>
 <li><a href="behavr.html#operating-on-behavr-tables">Operating on <code>behavr</code> tables</a></li>
 <li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#playing-with-toy-data"><i class="fa fa-check"></i>Playing with toy data</a></li>
-<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#generalities"><i class="fa fa-check"></i>Generalities</a><ul>
+<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#generalities"><i class="fa fa-check"></i>Generalities</a>
+<ul>
 <li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#data"><i class="fa fa-check"></i>Data</a></li>
-<li class="chapter" data-level="" data-path="metadata.html"><a href="metadata.html#metadata"><i class="fa fa-check"></i>Metadata</a></li>
+<li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#metadata-1"><i class="fa fa-check"></i>Metadata</a></li>
 <li class="chapter" data-level="" data-path="behavr.html"><a href="behavr.html#summarise-data"><i class="fa fa-check"></i>Summarise data</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html"><i class="fa fa-check"></i>DAM2 data, in practice</a><ul>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html"><i class="fa fa-check"></i>DAM2 data, in practice</a>
+<ul>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#aims"><i class="fa fa-check"></i>Aims</a></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#prerequisites"><i class="fa fa-check"></i>Prerequisites</a></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#background"><i class="fa fa-check"></i>Background</a></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#getting-the-data"><i class="fa fa-check"></i>Getting the data</a></li>
-<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#from-experiment-design-to-metadata"><i class="fa fa-check"></i>From experiment design to metadata</a><ul>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#from-experiment-design-to-metadata"><i class="fa fa-check"></i>From experiment design to metadata</a>
+<ul>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#our-toy-experiment"><i class="fa fa-check"></i>Our toy experiment</a></li>
-<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#metadata-1"><i class="fa fa-check"></i>Metadata</a></li>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#metadata-2"><i class="fa fa-check"></i>Metadata</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#linking"><i class="fa fa-check"></i>Linking</a></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#loading"><i class="fa fa-check"></i>Loading</a></li>
-<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#note-on-datetime"><i class="fa fa-check"></i>Note on datetime</a><ul>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#note-on-datetime"><i class="fa fa-check"></i>Note on datetime</a>
+<ul>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#zt0"><i class="fa fa-check"></i>ZT0</a></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#start-and-stop-time"><i class="fa fa-check"></i>Start and stop time</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#quality-control"><i class="fa fa-check"></i>Quality control</a><ul>
+<li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#quality-control"><i class="fa fa-check"></i>Quality control</a>
+<ul>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#detecting-anomalies"><i class="fa fa-check"></i>Detecting anomalies</a></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#how-to-exclude-animals"><i class="fa fa-check"></i>How to exclude animals?</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#apply-functions-when-loading"><i class="fa fa-check"></i>Apply functions when loading</a></li>
 <li class="chapter" data-level="" data-path="damr.html"><a href="damr.html#next-steps"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html"><i class="fa fa-check"></i>Ethoscope data, in practice</a><ul>
+<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html"><i class="fa fa-check"></i>Ethoscope data, in practice</a>
+<ul>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#aims-1"><i class="fa fa-check"></i>Aims</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#prerequisites-1"><i class="fa fa-check"></i>Prerequisites</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#background-1"><i class="fa fa-check"></i>Background</a></li>
-<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#getting-the-data-1"><i class="fa fa-check"></i>Getting the data</a><ul>
+<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#getting-the-data-1"><i class="fa fa-check"></i>Getting the data</a>
+<ul>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#extract-the-zipped-data"><i class="fa fa-check"></i>Extract the zipped data</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#note-on-the-data-structure"><i class="fa fa-check"></i>Note on the data structure</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#set-your-working-directory"><i class="fa fa-check"></i>Set your working directory</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#from-experiment-design-to-metadata-1"><i class="fa fa-check"></i>From experiment design to metadata</a><ul>
+<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#from-experiment-design-to-metadata-1"><i class="fa fa-check"></i>From experiment design to metadata</a>
+<ul>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#our-toy-experiment-1"><i class="fa fa-check"></i>Our toy experiment</a></li>
-<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#metadata-2"><i class="fa fa-check"></i>Metadata</a></li>
+<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#metadata-3"><i class="fa fa-check"></i>Metadata</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#linking-1"><i class="fa fa-check"></i>Linking</a><ul>
+<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#linking-1"><i class="fa fa-check"></i>Linking</a>
+<ul>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#local-data"><i class="fa fa-check"></i>Local data</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#remote-data"><i class="fa fa-check"></i>Remote Data</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#loading-1"><i class="fa fa-check"></i>Loading</a><ul>
+<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#loading-1"><i class="fa fa-check"></i>Loading</a>
+<ul>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#raw-data-default"><i class="fa fa-check"></i>Raw data (default)</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#preprocessing"><i class="fa fa-check"></i>Preprocessing</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#zt0-1"><i class="fa fa-check"></i>ZT0</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#cache-directory"><i class="fa fa-check"></i>Cache directory</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#quality-control-1"><i class="fa fa-check"></i>Quality control</a></li>
-<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#and-then"><i class="fa fa-check"></i>And then?</a><ul>
+<li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#and-then"><i class="fa fa-check"></i>And then?</a>
+<ul>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#sleep-amount-vs-treatment"><i class="fa fa-check"></i>Sleep amount vs treatment</a></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#total-sleep-vs-expression-level"><i class="fa fa-check"></i>Total sleep vs expression level</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="scopr.html"><a href="scopr.html#next-steps-1"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html"><i class="fa fa-check"></i>Visualisation with ggetho</a><ul>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html"><i class="fa fa-check"></i>Visualisation with ggetho</a>
+<ul>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#aims-2"><i class="fa fa-check"></i>Aims</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#prerequisites-2"><i class="fa fa-check"></i>Prerequisites</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#lessons-from-ggplot"><i class="fa fa-check"></i>Lessons from ggplot</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#some-behavioural-data"><i class="fa fa-check"></i>Some behavioural data</a></li>
 <li><a href="ggetho.html#the-ggetho-function">The <code>ggetho()</code> function</a></li>
-<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#tile-plots"><i class="fa fa-check"></i>Tile plots</a><ul>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#tile-plots"><i class="fa fa-check"></i>Tile plots</a>
+<ul>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#per-individual"><i class="fa fa-check"></i>Per individual</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#sorted-individual"><i class="fa fa-check"></i>Sorted individual</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#group-averages"><i class="fa fa-check"></i>Group averages</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#bar-tiles"><i class="fa fa-check"></i>Bar tiles</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#population-plots"><i class="fa fa-check"></i>Population plots</a><ul>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#population-plots"><i class="fa fa-check"></i>Population plots</a>
+<ul>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#one-population"><i class="fa fa-check"></i>One population</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#several-populations"><i class="fa fa-check"></i>Several populations</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#wrapping-data"><i class="fa fa-check"></i>Wrapping data</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#double-plotted-actograms"><i class="fa fa-check"></i>Double-plotted actograms</a></li>
-<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#faceting-by-id"><i class="fa fa-check"></i>Faceting by ID</a><ul>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#faceting-by-id"><i class="fa fa-check"></i>Faceting by ID</a>
+<ul>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#default"><i class="fa fa-check"></i>Default</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#custom-labeller"><i class="fa fa-check"></i>Custom labeller</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#numerical-labelling"><i class="fa fa-check"></i>Numerical labelling</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#ld-annotations"><i class="fa fa-check"></i>LD annotations</a><ul>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#ld-annotations"><i class="fa fa-check"></i>LD annotations</a>
+<ul>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#basics"><i class="fa fa-check"></i>Basics</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#changing-ld-colours"><i class="fa fa-check"></i>Changing LD colours</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#ld-in-the-background"><i class="fa fa-check"></i>LD in the background</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#phase-and-period"><i class="fa fa-check"></i>Phase and period</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#regime-change"><i class="fa fa-check"></i>Regime change</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#coordinate-and-scales"><i class="fa fa-check"></i>Coordinate and scales</a><ul>
+<li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#coordinate-and-scales"><i class="fa fa-check"></i>Coordinate and scales</a>
+<ul>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#plot-limits"><i class="fa fa-check"></i>Plot limits</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#time-scale-units"><i class="fa fa-check"></i>Time scale units</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#coordinate-systems"><i class="fa fa-check"></i>Coordinate systems</a></li>
@@ -234,26 +286,31 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#take-home-message-1"><i class="fa fa-check"></i>Take home message</a></li>
 <li class="chapter" data-level="" data-path="ggetho.html"><a href="ggetho.html#next-steps-2"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html"><i class="fa fa-check"></i>Sleep analysis</a><ul>
+<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html"><i class="fa fa-check"></i>Sleep analysis</a>
+<ul>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#aims-3"><i class="fa fa-check"></i>Aims</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#prerequisites-3"><i class="fa fa-check"></i>Prerequisites</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#background-2"><i class="fa fa-check"></i>Background</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#getting-the-data-2"><i class="fa fa-check"></i>Getting the data</a></li>
-<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#data-curation"><i class="fa fa-check"></i>Data curation</a><ul>
+<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#data-curation"><i class="fa fa-check"></i>Data curation</a>
+<ul>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#dead-animals"><i class="fa fa-check"></i>Dead animals</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#animals-that-died-too-early"><i class="fa fa-check"></i>Animals that died too early</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#trimming"><i class="fa fa-check"></i>Trimming</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#population-plots-1"><i class="fa fa-check"></i>Population plots</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#summarise-data-per-animal"><i class="fa fa-check"></i>Summarise data per animal</a></li>
-<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#day-sleep-night-sleep"><i class="fa fa-check"></i>Day sleep☼ – Night sleep☾</a><ul>
+<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#day-sleep-night-sleep"><i class="fa fa-check"></i>Day sleep☼ – Night sleep☾</a>
+<ul>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#adding-some-phase-information"><i class="fa fa-check"></i>Adding some phase information</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#statistics"><i class="fa fa-check"></i>Statistics</a><ul>
+<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#statistics"><i class="fa fa-check"></i>Statistics</a>
+<ul>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#pairwise-wilcoxon-tests"><i class="fa fa-check"></i>Pairwise Wilcoxon tests</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#two-way-anova"><i class="fa fa-check"></i>Two way anova</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#sleep-architecture"><i class="fa fa-check"></i>Sleep architecture</a><ul>
+<li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#sleep-architecture"><i class="fa fa-check"></i>Sleep architecture</a>
+<ul>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#bout-analysis"><i class="fa fa-check"></i>Bout analysis</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#bout-length-vs-time-of-the-day"><i class="fa fa-check"></i>Bout length vs time of the day</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#architecture-description"><i class="fa fa-check"></i>Architecture description</a></li>
@@ -263,18 +320,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#take-home-message-2"><i class="fa fa-check"></i>Take home message</a></li>
 <li class="chapter" data-level="" data-path="sleepr.html"><a href="sleepr.html#next-steps-3"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html"><i class="fa fa-check"></i>Circadian rhythm analysis</a><ul>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html"><i class="fa fa-check"></i>Circadian rhythm analysis</a>
+<ul>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#aims-4"><i class="fa fa-check"></i>Aims</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#prerequisites-4"><i class="fa fa-check"></i>Prerequisites</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#background-3"><i class="fa fa-check"></i>Background</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#getting-the-data-3"><i class="fa fa-check"></i>Getting the data</a></li>
-<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#quality-control-2"><i class="fa fa-check"></i>Quality control</a><ul>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#quality-control-2"><i class="fa fa-check"></i>Quality control</a>
+<ul>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#regime-changes"><i class="fa fa-check"></i>Regime changes</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#data-enrichment"><i class="fa fa-check"></i>Data enrichment</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#overview-plots"><i class="fa fa-check"></i>Overview plots</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#double-plotted-actograms-1"><i class="fa fa-check"></i>Double plotted actograms</a></li>
-<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#periodograms-1"><i class="fa fa-check"></i>Periodograms</a><ul>
+<li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#periodograms-1"><i class="fa fa-check"></i>Periodograms</a>
+<ul>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#computation"><i class="fa fa-check"></i>Computation</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#peaks-finding"><i class="fa fa-check"></i>Peaks finding</a></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#visualisation"><i class="fa fa-check"></i>Visualisation</a></li>
@@ -282,10 +342,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="" data-path="zeitgebr.html"><a href="zeitgebr.html#next-steps-4"><i class="fa fa-check"></i>Next steps</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="community.html"><a href="community.html"><i class="fa fa-check"></i>Issues and community</a><ul>
+<li class="chapter" data-level="" data-path="community.html"><a href="community.html"><i class="fa fa-check"></i>Issues and community</a>
+<ul>
 <li class="chapter" data-level="" data-path="community.html"><a href="community.html#citation"><i class="fa fa-check"></i>Citation</a></li>
 <li class="chapter" data-level="" data-path="community.html"><a href="community.html#having-troubles"><i class="fa fa-check"></i>Having troubles</a></li>
 <li class="chapter" data-level="" data-path="community.html"><a href="community.html#contributing"><i class="fa fa-check"></i>Contributing</a></li>
+<li class="chapter" data-level="" data-path="community.html"><a href="community.html#related-projects"><i class="fa fa-check"></i>Related projects</a></li>
 </ul></li>
 <li class="divider"></li>
 <li>
@@ -332,26 +394,35 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>You have read about <a href="behavr.html">behavr tables</a></li>
 <li>You are familiar with <a href="ggetho.html">ggetho</a>, our vidualisation tool</li>
 <li>You have already read the <a href="damr.html">damr tutorial</a></li>
-<li>Ensure you have <a href="intro.html#installing-rethomics-packages">installed</a> <code>behavr</code>, <code>damr</code> and <code>ggetho</code> packages:</li>
+<li>Ensure you have <a href="intro.html#installing-rethomics-packages">installed</a>
+<code>behavr</code>, <code>damr</code> and <code>ggetho</code> packages:</li>
 </ul>
 </div>
 <div id="background-2" class="section level2 unnumbered">
 <h2>Background</h2>
-<p>This tutorial focused on sleep in <em>Drosophila</em>. Traditionally, activity is first scored (e.g. through beam crosses/video tracking). Then any bouts of inactivity longer than five minutes count as sleep. You can easily adapt this tutorial to scoring other models/behaviours as long as you can define <strong>two discrete states</strong> (e.g. sleep vs asleep, moving vs immobile, left vs right, …).</p>
-<p>In the <a href="damr.html">DAM tutorial</a>, we have learnt how to load data from a real DAM expriment. Since we already described it in length, it makes sense to use this experiment as an example for our sleep analysis. <strong>I will assume that you have already read and understood the <a href="damr.html">DAM tutorial</a></strong>. The last thing we did then was loading data and scoring sleep:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sleepr)
-dt &lt;-<span class="st"> </span><span class="kw">load_dam</span>(metadata, <span class="dt">FUN =</span> sleepr<span class="op">::</span>sleep_dam_annotation)
-dt</code></pre></div>
+<p>This tutorial focused on sleep in <em>Drosophila</em>.
+Traditionally, activity is first scored (e.g. through beam crosses/video tracking).
+Then any bouts of inactivity longer than five minutes count as sleep.
+You can easily adapt this tutorial to scoring other models/behaviours as long as you can define <strong>two discrete states</strong> (e.g. sleep vs asleep, moving vs immobile, left vs right, …).</p>
+<p>In the <a href="damr.html">DAM tutorial</a>, we have learnt how to load data from a real DAM expriment.
+Since we already described it in length, it makes sense to use this experiment as an example for our sleep analysis.
+<strong>I will assume that you have already read and understood the <a href="damr.html">DAM tutorial</a></strong>.
+The last thing we did then was loading data and scoring sleep:</p>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="sleepr.html#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sleepr)</span>
+<span id="cb130-2"><a href="sleepr.html#cb130-2" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">&lt;-</span> <span class="fu">load_dam</span>(metadata, <span class="at">FUN =</span> sleepr<span class="sc">::</span>sleep_dam_annotation)</span>
+<span id="cb130-3"><a href="sleepr.html#cb130-3" aria-hidden="true" tabindex="-1"></a>dt</span></code></pre></div>
 </div>
 <div id="getting-the-data-2" class="section level2 unnumbered">
 <h2>Getting the data</h2>
-<p>Instead of going through the whole <code>damr</code> tutorial again, I thought I would put the resulting data table online. Importantly, for simplicity, <strong>I have just kept replicate 1</strong>. We just need to download it and load it:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sleepr)
-<span class="kw">library</span>(ggetho)
-
-URL &lt;-<span class="st"> &quot;https://github.com/rethomics/rethomics.github.io/raw/source/material/sleep_dam.RData&quot;</span>
-<span class="kw">load</span>(<span class="kw">url</span>(URL))
-<span class="kw">summary</span>(dt)</code></pre></div>
+<p>Instead of going through the whole <code>damr</code> tutorial again, I thought I would put the resulting data table online.
+Importantly, for simplicity, <strong>I have just kept replicate 1</strong>.
+We just need to download it and load it:</p>
+<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="sleepr.html#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sleepr)</span>
+<span id="cb131-2"><a href="sleepr.html#cb131-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggetho)</span>
+<span id="cb131-3"><a href="sleepr.html#cb131-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb131-4"><a href="sleepr.html#cb131-4" aria-hidden="true" tabindex="-1"></a>URL <span class="ot">&lt;-</span> <span class="st">&quot;https://github.com/rethomics/rethomics.github.io/raw/source/material/sleep_dam.RData&quot;</span></span>
+<span id="cb131-5"><a href="sleepr.html#cb131-5" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">url</span>(URL))</span>
+<span id="cb131-6"><a href="sleepr.html#cb131-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dt)</span></code></pre></div>
 <pre><code>## behavr table with:
 ##  96  individuals
 ##  8   metavariables
@@ -361,43 +432,49 @@ URL &lt;-<span class="st"> &quot;https://github.com/rethomics/rethomics.github.i
 </div>
 <div id="data-curation" class="section level2 unnumbered">
 <h2>Data curation</h2>
-<p>First of all, lets visualise all our sleep data. It is important to <strong>pay critical attention to this graph</strong> in order to assess if anything has gone wrong:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggetho</span>(dt, <span class="kw">aes</span>(<span class="dt">z=</span>asleep)) <span class="op">+</span>
-<span class="st">      </span><span class="kw">stat_ld_annotations</span>(<span class="dt">height =</span> <span class="dv">1</span>)<span class="op">+</span>
-<span class="st">      </span><span class="kw">stat_tile_etho</span>() </code></pre></div>
+<p>First of all, lets visualise all our sleep data.
+It is important to <strong>pay critical attention to this graph</strong> in order to assess if anything has gone wrong:</p>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="sleepr.html#cb133-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggetho</span>(dt, <span class="fu">aes</span>(<span class="at">z=</span>asleep)) <span class="sc">+</span></span>
+<span id="cb133-2"><a href="sleepr.html#cb133-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">stat_ld_annotations</span>(<span class="at">height =</span> <span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb133-3"><a href="sleepr.html#cb133-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">stat_tile_etho</span>() </span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-100-1.png" width="864" /></p>
 <div id="dead-animals" class="section level3 unnumbered">
 <h3>Dead animals</h3>
-<p>Some animals may have died during the experiment, and could be wrongly scored as asleep for very long durations. <code>sleepr</code> has an utility function to remove data from dead animals:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># we give our curated data another name so we can see the difference</span>
-dt_curated &lt;-<span class="st"> </span><span class="kw">curate_dead_animals</span>(dt)
-<span class="kw">summary</span>(dt_curated)</code></pre></div>
+<p>Some animals may have died during the experiment, and could be wrongly scored as asleep for very long durations.
+<code>sleepr</code> has an utility function to remove data from dead animals:</p>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="sleepr.html#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we give our curated data another name so we can see the difference</span></span>
+<span id="cb134-2"><a href="sleepr.html#cb134-2" aria-hidden="true" tabindex="-1"></a>dt_curated <span class="ot">&lt;-</span> <span class="fu">curate_dead_animals</span>(dt)</span>
+<span id="cb134-3"><a href="sleepr.html#cb134-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dt_curated)</span></code></pre></div>
 <pre><code>## behavr table with:
 ##  95  individuals
 ##  8   metavariables
 ##  4   variables
 ##  3.57436e+05 measurements
 ##  1   key (id)</code></pre>
-<p>As you can see, we now have 95 individuals vs 96 in the original data. To see which animals have been removed, we could run something like:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setdiff</span>(dt[, id, <span class="dt">meta=</span>T],
-        dt_curated[, id, <span class="dt">meta=</span>T])</code></pre></div>
+<p>As you can see, we now have 95 individuals vs 96 in the original data.
+To see which animals have been removed, we could run something like:</p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="sleepr.html#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setdiff</span>(dt[, id, <span class="at">meta=</span>T],</span>
+<span id="cb136-2"><a href="sleepr.html#cb136-2" aria-hidden="true" tabindex="-1"></a>        dt_curated[, id, <span class="at">meta=</span>T])</span></code></pre></div>
 <pre><code>## [1] &quot;2017-07-01 08:00:00|Monitor64.txt|26&quot;</code></pre>
-<p>Indeed, from the tile plot nothing seem to have happened in this channel. Now let us look at the data after curation:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggetho</span>(dt_curated, <span class="kw">aes</span>(<span class="dt">z=</span>asleep)) <span class="op">+</span>
-<span class="st">      </span><span class="kw">stat_ld_annotations</span>(<span class="dt">ypos =</span> <span class="st">&quot;top&quot;</span>)<span class="op">+</span>
-<span class="st">      </span><span class="kw">stat_tile_etho</span>() </code></pre></div>
+<p>Indeed, from the tile plot nothing seem to have happened in this channel.
+Now let us look at the data after curation:</p>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="sleepr.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggetho</span>(dt_curated, <span class="fu">aes</span>(<span class="at">z=</span>asleep)) <span class="sc">+</span></span>
+<span id="cb138-2"><a href="sleepr.html#cb138-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">stat_ld_annotations</span>(<span class="at">ypos =</span> <span class="st">&quot;top&quot;</span>)<span class="sc">+</span></span>
+<span id="cb138-3"><a href="sleepr.html#cb138-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">stat_tile_etho</span>() </span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-103-1.png" width="864" /></p>
 </div>
 <div id="animals-that-died-too-early" class="section level3 unnumbered">
 <h3>Animals that died too early</h3>
-<p>In addition, we could want to, for instance, <strong>remove animals that did not live say longer than 2 days</strong>. Of course, you need to have a good reason to exclude some animals, and that depends on your specific experiment (this is just showing you how to do it). To remove animals that did not live longer that 2 days, we use the power of <code>behavr</code> tables:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># we make a summary table of all lifespan for each animals</span>
-lifespan_dt &lt;-<span class="st"> </span>dt_curated[, .(<span class="dt">lifespan =</span> <span class="kw">max</span>(t)), by=id]
-<span class="co"># we filter this table for lifespan&gt;2 and we keep the id</span>
-valid_ids &lt;-<span class="st"> </span>lifespan_dt[lifespan <span class="op">&gt;</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">2</span>), id]
-<span class="co"># we apply this filter</span>
-dt_curated &lt;-<span class="st"> </span>dt_curated[id <span class="op">%in%</span><span class="st"> </span>valid_ids]
-<span class="kw">summary</span>(dt_curated)</code></pre></div>
+<p>In addition, we could want to, for instance, <strong>remove animals that did not live say longer than 2 days</strong>.
+Of course, you need to have a good reason to exclude some animals, and that depends on your specific experiment (this is just showing you how to do it).
+To remove animals that did not live longer that 2 days, we use the power of <code>behavr</code> tables:</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="sleepr.html#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we make a summary table of all lifespan for each animals</span></span>
+<span id="cb139-2"><a href="sleepr.html#cb139-2" aria-hidden="true" tabindex="-1"></a>lifespan_dt <span class="ot">&lt;-</span> dt_curated[, .(<span class="at">lifespan =</span> <span class="fu">max</span>(t)), by<span class="ot">=</span>id]</span>
+<span id="cb139-3"><a href="sleepr.html#cb139-3" aria-hidden="true" tabindex="-1"></a><span class="co"># we filter this table for lifespan&gt;2 and we keep the id</span></span>
+<span id="cb139-4"><a href="sleepr.html#cb139-4" aria-hidden="true" tabindex="-1"></a>valid_ids <span class="ot">&lt;-</span> lifespan_dt[lifespan <span class="sc">&gt;</span> <span class="fu">days</span>(<span class="dv">2</span>), id]</span>
+<span id="cb139-5"><a href="sleepr.html#cb139-5" aria-hidden="true" tabindex="-1"></a><span class="co"># we apply this filter</span></span>
+<span id="cb139-6"><a href="sleepr.html#cb139-6" aria-hidden="true" tabindex="-1"></a>dt_curated <span class="ot">&lt;-</span> dt_curated[id <span class="sc">%in%</span> valid_ids]</span>
+<span id="cb139-7"><a href="sleepr.html#cb139-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dt_curated)</span></code></pre></div>
 <pre><code>## behavr table with:
 ##  94  individuals
 ##  8   metavariables
@@ -407,9 +484,10 @@ dt_curated &lt;-<span class="st"> </span>dt_curated[id <span class="op">%in%</sp
 </div>
 <div id="trimming" class="section level3 unnumbered">
 <h3>Trimming</h3>
-<p>Generally, we want to remove a point according the experimental time. For instance, lets say we would like to keep only the first 60 hours of data (i.e. 2.5 days)</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt_curated &lt;-<span class="st"> </span>dt_curated[t <span class="op">%between%</span><span class="st"> </span><span class="kw">c</span>(<span class="kw">days</span>(<span class="dv">0</span>), <span class="kw">days</span>(<span class="fl">2.5</span>))]
-<span class="kw">summary</span>(dt_curated)</code></pre></div>
+<p>Generally, we want to remove a point according the experimental time.
+For instance, lets say we would like to keep only the first 60 hours of data (i.e. 2.5 days)</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="sleepr.html#cb141-1" aria-hidden="true" tabindex="-1"></a>dt_curated <span class="ot">&lt;-</span> dt_curated[t <span class="sc">%between%</span> <span class="fu">c</span>(<span class="fu">days</span>(<span class="dv">0</span>), <span class="fu">days</span>(<span class="fl">2.5</span>))]</span>
+<span id="cb141-2"><a href="sleepr.html#cb141-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dt_curated)</span></code></pre></div>
 <pre><code>## behavr table with:
 ##  94  individuals
 ##  8   metavariables
@@ -422,45 +500,47 @@ dt_curated &lt;-<span class="st"> </span>dt_curated[id <span class="op">%in%</sp
 </div>
 <div id="population-plots-1" class="section level2 unnumbered">
 <h2>Population plots</h2>
-<p>Now that we have curated our data, we can start looking at the biology. First, we make a global population plot:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggetho</span>(dt_curated, <span class="kw">aes</span>(<span class="dt">y=</span>asleep, <span class="dt">colour=</span>sex)) <span class="op">+</span>
-<span class="st">      </span><span class="kw">stat_pop_etho</span>() <span class="op">+</span>
-<span class="st">      </span><span class="kw">stat_ld_annotations</span>() <span class="op">+</span>
-<span class="st">      </span><span class="kw">facet_grid</span>(genotype <span class="op">~</span><span class="st"> </span>.)</code></pre></div>
+<p>Now that we have curated our data, we can start looking at the biology.
+First, we make a global population plot:</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="sleepr.html#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggetho</span>(dt_curated, <span class="fu">aes</span>(<span class="at">y=</span>asleep, <span class="at">colour=</span>sex)) <span class="sc">+</span></span>
+<span id="cb143-2"><a href="sleepr.html#cb143-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">stat_pop_etho</span>() <span class="sc">+</span></span>
+<span id="cb143-3"><a href="sleepr.html#cb143-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">stat_ld_annotations</span>() <span class="sc">+</span></span>
+<span id="cb143-4"><a href="sleepr.html#cb143-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">facet_grid</span>(genotype <span class="sc">~</span> .)</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-106-1.png" width="672" /></p>
 <p>The y axis shows the proportion of time sent sleeping, averaged for each animal within a 30min (default) time window.</p>
 <p>Then, we can wrap (average) that over one day. We also polish the y axis label:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggetho</span>(dt_curated, <span class="kw">aes</span>(<span class="dt">y=</span>asleep, <span class="dt">colour=</span>sex), <span class="dt">time_wrap =</span> <span class="kw">hours</span>(<span class="dv">24</span>)) <span class="op">+</span>
-<span class="st">      </span><span class="kw">stat_pop_etho</span>() <span class="op">+</span>
-<span class="st">      </span><span class="kw">stat_ld_annotations</span>() <span class="op">+</span>
-<span class="st">      </span><span class="kw">facet_grid</span>(genotype <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span>
-<span class="st">      </span><span class="kw">scale_y_continuous</span>(<span class="dt">name=</span> <span class="st">&quot;Fraction of time sleeping&quot;</span>,<span class="dt">labels =</span> scales<span class="op">::</span>percent)</code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="sleepr.html#cb144-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggetho</span>(dt_curated, <span class="fu">aes</span>(<span class="at">y=</span>asleep, <span class="at">colour=</span>sex), <span class="at">time_wrap =</span> <span class="fu">hours</span>(<span class="dv">24</span>)) <span class="sc">+</span></span>
+<span id="cb144-2"><a href="sleepr.html#cb144-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">stat_pop_etho</span>() <span class="sc">+</span></span>
+<span id="cb144-3"><a href="sleepr.html#cb144-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">stat_ld_annotations</span>() <span class="sc">+</span></span>
+<span id="cb144-4"><a href="sleepr.html#cb144-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">facet_grid</span>(genotype <span class="sc">~</span> .) <span class="sc">+</span></span>
+<span id="cb144-5"><a href="sleepr.html#cb144-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">scale_y_continuous</span>(<span class="at">name=</span> <span class="st">&quot;Fraction of time sleeping&quot;</span>,<span class="at">labels =</span> scales<span class="sc">::</span>percent)</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-107-1.png" width="672" /></p>
 <p>That gives us a good understanding of what happens at the population level.</p>
 </div>
 <div id="summarise-data-per-animal" class="section level2 unnumbered">
 <h2>Summarise data per animal</h2>
-<p>Most likely, we want to summarise sleep amount so that we have <strong>one number per animal</strong>. For instance, we can compute the overall average proportion of time spent sleeping:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">summary_dt &lt;-<span class="st"> </span>
-<span class="st">  </span><span class="kw">rejoin</span>(dt_curated[,
-           .(
-             <span class="co"># this is where the computation happens</span>
-             <span class="dt">sleep_fraction =</span> <span class="kw">mean</span>(asleep)
-             ),
-           <span class="dt">by=</span>id])
-summary_dt</code></pre></div>
+<p>Most likely, we want to summarise sleep amount so that we have <strong>one number per animal</strong>.
+For instance, we can compute the overall average proportion of time spent sleeping:</p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="sleepr.html#cb145-1" aria-hidden="true" tabindex="-1"></a>summary_dt <span class="ot">&lt;-</span> </span>
+<span id="cb145-2"><a href="sleepr.html#cb145-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rejoin</span>(dt_curated[,</span>
+<span id="cb145-3"><a href="sleepr.html#cb145-3" aria-hidden="true" tabindex="-1"></a>           .(</span>
+<span id="cb145-4"><a href="sleepr.html#cb145-4" aria-hidden="true" tabindex="-1"></a>             <span class="co"># this is where the computation happens</span></span>
+<span id="cb145-5"><a href="sleepr.html#cb145-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">sleep_fraction =</span> <span class="fu">mean</span>(asleep)</span>
+<span id="cb145-6"><a href="sleepr.html#cb145-6" aria-hidden="true" tabindex="-1"></a>             ),</span>
+<span id="cb145-7"><a href="sleepr.html#cb145-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">by=</span>id])</span>
+<span id="cb145-8"><a href="sleepr.html#cb145-8" aria-hidden="true" tabindex="-1"></a>summary_dt</span></code></pre></div>
 <pre><code>##                                       id file_info region_id
-##  1: 2017-07-01 08:00:00|Monitor11.txt|01    &lt;list&gt;         1
-##  2: 2017-07-01 08:00:00|Monitor11.txt|02    &lt;list&gt;         2
-##  3: 2017-07-01 08:00:00|Monitor11.txt|03    &lt;list&gt;         3
-##  4: 2017-07-01 08:00:00|Monitor11.txt|04    &lt;list&gt;         4
-##  5: 2017-07-01 08:00:00|Monitor11.txt|05    &lt;list&gt;         5
+##  1: 2017-07-01 08:00:00|Monitor11.txt|01 &lt;list[2]&gt;         1
+##  2: 2017-07-01 08:00:00|Monitor11.txt|02 &lt;list[2]&gt;         2
+##  3: 2017-07-01 08:00:00|Monitor11.txt|03 &lt;list[2]&gt;         3
+##  4: 2017-07-01 08:00:00|Monitor11.txt|04 &lt;list[2]&gt;         4
+##  5: 2017-07-01 08:00:00|Monitor11.txt|05 &lt;list[2]&gt;         5
 ## ---                                                         
-## 90: 2017-07-01 08:00:00|Monitor64.txt|27    &lt;list&gt;        27
-## 91: 2017-07-01 08:00:00|Monitor64.txt|29    &lt;list&gt;        29
-## 92: 2017-07-01 08:00:00|Monitor64.txt|30    &lt;list&gt;        30
-## 93: 2017-07-01 08:00:00|Monitor64.txt|31    &lt;list&gt;        31
-## 94: 2017-07-01 08:00:00|Monitor64.txt|32    &lt;list&gt;        32
+## 90: 2017-07-01 08:00:00|Monitor64.txt|27 &lt;list[2]&gt;        27
+## 91: 2017-07-01 08:00:00|Monitor64.txt|29 &lt;list[2]&gt;        29
+## 92: 2017-07-01 08:00:00|Monitor64.txt|30 &lt;list[2]&gt;        30
+## 93: 2017-07-01 08:00:00|Monitor64.txt|31 &lt;list[2]&gt;        31
+## 94: 2017-07-01 08:00:00|Monitor64.txt|32 &lt;list[2]&gt;        32
 ##                         experiment_id      start_datetime stop_datetime sex
 ##  1: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04   M
 ##  2: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04   M
@@ -485,12 +565,13 @@ summary_dt</code></pre></div>
 ## 92:        C         1      0.7622883
 ## 93:        C         1      0.7967231
 ## 94:        C         1      0.9208553</code></pre>
-<p>With <code>rejoin</code>, we have put our summary and metadata together, which is suitable for standars graphics/statictics. For instance, if we are interested in the effect of sleep and genotype on sleep amount, we can make a faceted boxplot, and also add individual points to show all data.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(summary_dt, <span class="kw">aes</span>(<span class="dt">x=</span>sex, <span class="dt">y=</span>sleep_fraction, <span class="dt">fill=</span>sex)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">outlier.colour =</span> <span class="ot">NA</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">alpha=</span>.<span class="dv">5</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">facet_grid</span>( genotype <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">name=</span> <span class="st">&quot;Fraction of time sleeping&quot;</span>,<span class="dt">labels =</span> scales<span class="op">::</span>percent)</code></pre></div>
+<p>With <code>rejoin</code>, we have put our summary and metadata together, which is suitable for standars graphics/statictics.
+For instance, if we are interested in the effect of sleep and genotype on sleep amount, we can make a faceted boxplot, and also add individual points to show all data.</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="sleepr.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(summary_dt, <span class="fu">aes</span>(<span class="at">x=</span>sex, <span class="at">y=</span>sleep_fraction, <span class="at">fill=</span>sex)) <span class="sc">+</span> </span>
+<span id="cb147-2"><a href="sleepr.html#cb147-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.colour =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb147-3"><a href="sleepr.html#cb147-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha=</span>.<span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb147-4"><a href="sleepr.html#cb147-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>( genotype <span class="sc">~</span> .) <span class="sc">+</span></span>
+<span id="cb147-5"><a href="sleepr.html#cb147-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name=</span> <span class="st">&quot;Fraction of time sleeping&quot;</span>,<span class="at">labels =</span> scales<span class="sc">::</span>percent)</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-109-1.png" width="672" /></p>
 </div>
 <div id="day-sleep-night-sleep" class="section level2 unnumbered">
@@ -503,35 +584,36 @@ summary_dt</code></pre></div>
 <li><strong>L phase</strong> (light) should be any point <strong>between ZT0 and ZT12</strong> – [0,12), [24,36), …</li>
 <li><strong>D phase</strong> (dark) should be any point <strong>between ZT12 and ZT24</strong> – [12,24), [36,48), …</li>
 </ul>
-<p>Numerically, this can be done very simply using a <a href="https://en.wikipedia.org/wiki/Modulo_operation">modulo operation</a> on time. In <code>R</code>, modulo is <code>%%</code>. The following line creates a new variable in dt. This variable is:</p>
+<p>Numerically, this can be done very simply using a <a href="https://en.wikipedia.org/wiki/Modulo_operation">modulo operation</a> on time. In <code>R</code>, modulo is <code>%%</code>.
+The following line creates a new variable in dt. This variable is:</p>
 <ul>
-<li><code>&quot;L&quot;</code> when the remainder of the division of (the corresponding) <code>t</code> by 24h is lower than 12h</li>
-<li><code>&quot;D&quot;</code> otherwise</li>
+<li><code>"L"</code> when the remainder of the division of (the corresponding) <code>t</code> by 24h is lower than 12h</li>
+<li><code>"D"</code> otherwise</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dt_curated[, phase <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">ifelse</span>(t <span class="op">%%</span><span class="st"> </span><span class="kw">hours</span>(<span class="dv">24</span>) <span class="op">&lt;</span><span class="st"> </span><span class="kw">hours</span>(<span class="dv">12</span>), <span class="st">&quot;L&quot;</span>, <span class="st">&quot;D&quot;</span>)]</code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="sleepr.html#cb148-1" aria-hidden="true" tabindex="-1"></a>dt_curated[, phase <span class="sc">:</span><span class="er">=</span> <span class="fu">ifelse</span>(t <span class="sc">%%</span> <span class="fu">hours</span>(<span class="dv">24</span>) <span class="sc">&lt;</span> <span class="fu">hours</span>(<span class="dv">12</span>), <span class="st">&quot;L&quot;</span>, <span class="st">&quot;D&quot;</span>)]</span></code></pre></div>
 <p>Since we have this column, we can make an improved summary (pay special attention to the last columns):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">summary_dt &lt;-<span class="st"> </span>
-<span class="st">  </span><span class="kw">rejoin</span>(dt_curated[,
-           .(
-             <span class="co"># this is where the computation happens</span>
-             <span class="dt">sleep_fraction_all =</span> <span class="kw">mean</span>(asleep),
-             <span class="dt">sleep_fraction_l =</span> <span class="kw">mean</span>(asleep[phase <span class="op">==</span><span class="st"> &quot;L&quot;</span>]),
-             <span class="dt">sleep_fraction_d =</span> <span class="kw">mean</span>(asleep[phase <span class="op">==</span><span class="st"> &quot;D&quot;</span>])
-             ),
-           ,<span class="dt">by=</span>id])
-summary_dt</code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="sleepr.html#cb149-1" aria-hidden="true" tabindex="-1"></a>summary_dt <span class="ot">&lt;-</span> </span>
+<span id="cb149-2"><a href="sleepr.html#cb149-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rejoin</span>(dt_curated[,</span>
+<span id="cb149-3"><a href="sleepr.html#cb149-3" aria-hidden="true" tabindex="-1"></a>           .(</span>
+<span id="cb149-4"><a href="sleepr.html#cb149-4" aria-hidden="true" tabindex="-1"></a>             <span class="co"># this is where the computation happens</span></span>
+<span id="cb149-5"><a href="sleepr.html#cb149-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">sleep_fraction_all =</span> <span class="fu">mean</span>(asleep),</span>
+<span id="cb149-6"><a href="sleepr.html#cb149-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">sleep_fraction_l =</span> <span class="fu">mean</span>(asleep[phase <span class="sc">==</span> <span class="st">&quot;L&quot;</span>]),</span>
+<span id="cb149-7"><a href="sleepr.html#cb149-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">sleep_fraction_d =</span> <span class="fu">mean</span>(asleep[phase <span class="sc">==</span> <span class="st">&quot;D&quot;</span>])</span>
+<span id="cb149-8"><a href="sleepr.html#cb149-8" aria-hidden="true" tabindex="-1"></a>             ),</span>
+<span id="cb149-9"><a href="sleepr.html#cb149-9" aria-hidden="true" tabindex="-1"></a>           ,<span class="at">by=</span>id])</span>
+<span id="cb149-10"><a href="sleepr.html#cb149-10" aria-hidden="true" tabindex="-1"></a>summary_dt</span></code></pre></div>
 <pre><code>##                                       id file_info region_id
-##  1: 2017-07-01 08:00:00|Monitor11.txt|01    &lt;list&gt;         1
-##  2: 2017-07-01 08:00:00|Monitor11.txt|02    &lt;list&gt;         2
-##  3: 2017-07-01 08:00:00|Monitor11.txt|03    &lt;list&gt;         3
-##  4: 2017-07-01 08:00:00|Monitor11.txt|04    &lt;list&gt;         4
-##  5: 2017-07-01 08:00:00|Monitor11.txt|05    &lt;list&gt;         5
+##  1: 2017-07-01 08:00:00|Monitor11.txt|01 &lt;list[2]&gt;         1
+##  2: 2017-07-01 08:00:00|Monitor11.txt|02 &lt;list[2]&gt;         2
+##  3: 2017-07-01 08:00:00|Monitor11.txt|03 &lt;list[2]&gt;         3
+##  4: 2017-07-01 08:00:00|Monitor11.txt|04 &lt;list[2]&gt;         4
+##  5: 2017-07-01 08:00:00|Monitor11.txt|05 &lt;list[2]&gt;         5
 ## ---                                                         
-## 90: 2017-07-01 08:00:00|Monitor64.txt|27    &lt;list&gt;        27
-## 91: 2017-07-01 08:00:00|Monitor64.txt|29    &lt;list&gt;        29
-## 92: 2017-07-01 08:00:00|Monitor64.txt|30    &lt;list&gt;        30
-## 93: 2017-07-01 08:00:00|Monitor64.txt|31    &lt;list&gt;        31
-## 94: 2017-07-01 08:00:00|Monitor64.txt|32    &lt;list&gt;        32
+## 90: 2017-07-01 08:00:00|Monitor64.txt|27 &lt;list[2]&gt;        27
+## 91: 2017-07-01 08:00:00|Monitor64.txt|29 &lt;list[2]&gt;        29
+## 92: 2017-07-01 08:00:00|Monitor64.txt|30 &lt;list[2]&gt;        30
+## 93: 2017-07-01 08:00:00|Monitor64.txt|31 &lt;list[2]&gt;        31
+## 94: 2017-07-01 08:00:00|Monitor64.txt|32 &lt;list[2]&gt;        32
 ##                         experiment_id      start_datetime stop_datetime sex
 ##  1: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04   M
 ##  2: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04   M
@@ -556,40 +638,49 @@ summary_dt</code></pre></div>
 ## 92:        C         1          0.7622883        0.7523148        0.7772380
 ## 93:        C         1          0.7967231        0.7773148        0.8258154
 ## 94:        C         1          0.9208553        0.9643519        0.8556558</code></pre>
-<p>Now, we have three new variables: <code>sleep_fraction_all</code>, <code>sleep_fraction_l</code> and <code>sleep_fraction_d</code>. We can just replace the y axis with our variable of interest (e.g. sleep in D phase):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(summary_dt, <span class="kw">aes</span>(<span class="dt">x=</span>sex, <span class="dt">y=</span>sleep_fraction_d, <span class="dt">fill=</span>sex)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">outlier.colour =</span> <span class="ot">NA</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">alpha=</span>.<span class="dv">5</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">facet_grid</span>(genotype <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">name=</span> <span class="st">&quot;Fraction of time sleeping&quot;</span>,<span class="dt">labels =</span> scales<span class="op">::</span>percent)</code></pre></div>
+<p>Now, we have three new variables: <code>sleep_fraction_all</code>, <code>sleep_fraction_l</code> and <code>sleep_fraction_d</code>.
+We can just replace the y axis with our variable of interest (e.g. sleep in D phase):</p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="sleepr.html#cb151-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(summary_dt, <span class="fu">aes</span>(<span class="at">x=</span>sex, <span class="at">y=</span>sleep_fraction_d, <span class="at">fill=</span>sex)) <span class="sc">+</span> </span>
+<span id="cb151-2"><a href="sleepr.html#cb151-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.colour =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb151-3"><a href="sleepr.html#cb151-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha=</span>.<span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb151-4"><a href="sleepr.html#cb151-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(genotype <span class="sc">~</span> .) <span class="sc">+</span></span>
+<span id="cb151-5"><a href="sleepr.html#cb151-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name=</span> <span class="st">&quot;Fraction of time sleeping&quot;</span>,<span class="at">labels =</span> scales<span class="sc">::</span>percent)</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-112-1.png" width="672" /></p>
-<p>If we wanted a plot with all three values, we could <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-reshape.html">“melt”</a> our data, picking all columns starting with <code>&quot;sleep_fraction_&quot;</code> as “measurment variables”:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">summary_dt_melted &lt;-<span class="st"> </span><span class="kw">melt</span>(summary_dt, <span class="dt">measure.vars =</span> <span class="kw">patterns</span>(<span class="st">&quot;sleep_fraction_&quot;</span>),
-                          <span class="dt">variable.name =</span> <span class="st">&quot;phase&quot;</span>, <span class="dt">value.name =</span> <span class="st">&quot;sleep_fraction&quot;</span>)</code></pre></div>
-<p>Now, instead of three columns for the three variables, we have two columns, one for the actual value and one to describe the phase (all vs L vs D). This makes it convenient to use with ggplot:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(summary_dt_melted, <span class="kw">aes</span>(<span class="dt">x=</span>phase, <span class="dt">y=</span>sleep_fraction, <span class="dt">fill=</span>sex)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">outlier.colour =</span> <span class="ot">NA</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">alpha=</span>.<span class="dv">5</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">facet_grid</span>(genotype <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">name=</span> <span class="st">&quot;Fraction of time sleeping&quot;</span>,<span class="dt">labels =</span> scales<span class="op">::</span>percent)</code></pre></div>
+<p>If we wanted a plot with all three values, we could <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-reshape.html">“melt”</a> our data,
+picking all columns starting with <code>"sleep_fraction_"</code> as “measurment variables”:</p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="sleepr.html#cb152-1" aria-hidden="true" tabindex="-1"></a>summary_dt_melted <span class="ot">&lt;-</span> <span class="fu">melt</span>(summary_dt, <span class="at">measure.vars =</span> <span class="fu">patterns</span>(<span class="st">&quot;sleep_fraction_&quot;</span>),</span>
+<span id="cb152-2"><a href="sleepr.html#cb152-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">variable.name =</span> <span class="st">&quot;phase&quot;</span>, <span class="at">value.name =</span> <span class="st">&quot;sleep_fraction&quot;</span>)</span></code></pre></div>
+<p>Now, instead of three columns for the three variables, we have two columns, one for the actual value and one to describe the phase (all vs L vs D).
+This makes it convenient to use with ggplot:</p>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="sleepr.html#cb153-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(summary_dt_melted, <span class="fu">aes</span>(<span class="at">x=</span>phase, <span class="at">y=</span>sleep_fraction, <span class="at">fill=</span>sex)) <span class="sc">+</span> </span>
+<span id="cb153-2"><a href="sleepr.html#cb153-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.colour =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb153-3"><a href="sleepr.html#cb153-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha=</span>.<span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb153-4"><a href="sleepr.html#cb153-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(genotype <span class="sc">~</span> .) <span class="sc">+</span></span>
+<span id="cb153-5"><a href="sleepr.html#cb153-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name=</span> <span class="st">&quot;Fraction of time sleeping&quot;</span>,<span class="at">labels =</span> scales<span class="sc">::</span>percent)</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-114-1.png" width="672" /></p>
 </div>
 </div>
 <div id="statistics" class="section level2 unnumbered">
 <h2>Statistics</h2>
-<p>Often, you want to go further than representing the data, and compute statistics. <code>R</code> was designed primarilly as statistical progamming language. As a result, a tremendous variety of simple and elaborate statics are implemented. This section will not go in the details of what you can do in terms of stats, many authors have already published fantastic resources on this subject. Instead, we present very simple examples of what can be done. At this stage, what you do depends very much on your question, your knowledge of statistics and how much effort you want to invest.</p>
+<p>Often, you want to go further than representing the data, and compute statistics.
+<code>R</code> was designed primarilly as statistical progamming language.
+As a result, a tremendous variety of simple and elaborate statics are implemented.
+This section will not go in the details of what you can do in terms of stats, many authors have already published fantastic resources on this subject.
+Instead, we present very simple examples of what can be done.
+At this stage, what you do depends very much on your question, your knowledge of statistics and how much effort you
+want to invest.</p>
 <div id="pairwise-wilcoxon-tests" class="section level3 unnumbered">
 <h3>Pairwise Wilcoxon tests</h3>
 <p>Say we wanted to compute, for <strong>females only</strong>, all pairwise tests between all genotype groups (A vs B, B vs C and C vs A). This could be formulated as:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pairwise.wilcox.test</span>(summary_dt[sex<span class="op">==</span><span class="st">&quot;F&quot;</span>, sleep_fraction_all], 
-                     summary_dt[sex<span class="op">==</span><span class="st">&quot;F&quot;</span>, genotype])</code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="sleepr.html#cb154-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairwise.wilcox.test</span>(summary_dt[sex<span class="sc">==</span><span class="st">&quot;F&quot;</span>, sleep_fraction_all], </span>
+<span id="cb154-2"><a href="sleepr.html#cb154-2" aria-hidden="true" tabindex="-1"></a>                     summary_dt[sex<span class="sc">==</span><span class="st">&quot;F&quot;</span>, genotype])</span></code></pre></div>
 <pre><code>## Warning in wilcox.test.default(xi, xj, paired = paired, ...): cannot compute
 ## exact p-value with ties
 
 ## Warning in wilcox.test.default(xi, xj, paired = paired, ...): cannot compute
 ## exact p-value with ties</code></pre>
 <pre><code>## 
-##  Pairwise comparisons using Wilcoxon rank sum test 
+##  Pairwise comparisons using Wilcoxon rank sum test with continuity correction 
 ## 
 ## data:  summary_dt[sex == &quot;F&quot;, sleep_fraction_all] and summary_dt[sex == &quot;F&quot;, genotype] 
 ## 
@@ -598,13 +689,15 @@ summary_dt</code></pre></div>
 ## C 4.1e-08 0.0018
 ## 
 ## P value adjustment method: holm</code></pre>
-<p>We get a matrix showing us all p-values. You could do that also within males, as long as we replace <code>sex == &quot;F&quot;</code> by <code>sex == &quot;M&quot;</code></p>
+<p>We get a matrix showing us all p-values.
+You could do that also within males, as long as we replace <code>sex == "F"</code> by <code>sex == "M"</code></p>
 </div>
 <div id="two-way-anova" class="section level3 unnumbered">
 <h3>Two way anova</h3>
-<p>If we are interested in the effect of <strong>sex AND genotype</strong>, as well as <strong>their interaction</strong>, we can model our response variable with a formula: <code>sleep_fraction_all ~ sex * genotype</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model &lt;-<span class="st"> </span><span class="kw">aov</span>(sleep_fraction_all <span class="op">~</span><span class="st"> </span>sex <span class="op">*</span><span class="st"> </span>genotype, summary_dt)
-<span class="kw">summary</span>(model)</code></pre></div>
+<p>If we are interested in the effect of <strong>sex AND genotype</strong>, as well as <strong>their interaction</strong>,
+we can model our response variable with a formula: <code>sleep_fraction_all ~ sex * genotype</code>:</p>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="sleepr.html#cb157-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">aov</span>(sleep_fraction_all <span class="sc">~</span> sex <span class="sc">*</span> genotype, summary_dt)</span>
+<span id="cb157-2"><a href="sleepr.html#cb157-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div>
 <pre><code>##              Df Sum Sq Mean Sq F value   Pr(&gt;F)    
 ## sex           1 0.3235  0.3235   26.39 1.66e-06 ***
 ## genotype      2 0.4417  0.2209   18.02 2.76e-07 ***
@@ -612,16 +705,20 @@ summary_dt</code></pre></div>
 ## Residuals    88 1.0786  0.0123                     
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<p>This shows a strong affect of sex, genotype and their interaction on sleep amount. There are several way to follow up. For instance see this <a href="https://www.r-bloggers.com/two-way-analysis-of-variance-anova/">short tutorial</a>.</p>
+<p>This shows a strong affect of sex, genotype and their interaction on sleep amount.
+There are several way to follow up.
+For instance see this <a href="https://www.r-bloggers.com/two-way-analysis-of-variance-anova/">short tutorial</a>.</p>
 </div>
 </div>
 <div id="sleep-architecture" class="section level2 unnumbered">
 <h2>Sleep architecture</h2>
-<p>Proportion alone is not always a sufficent measure to fully descibe the dynamics of sleep. One way to go further is to study sleep as a series of bouts.</p>
+<p>Proportion alone is not always a sufficent measure to fully descibe the dynamics of sleep.
+One way to go further is to study sleep as a series of bouts.</p>
 <div id="bout-analysis" class="section level3 unnumbered">
 <h3>Bout analysis</h3>
-<p>The function <code>bout_analysis()</code>, in <code>sleepr</code> is designed for that. We would use it like that:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bout_dt &lt;-<span class="st"> </span><span class="kw">bout_analysis</span>(asleep, dt_curated)</code></pre></div>
+<p>The function <code>bout_analysis()</code>, in <code>sleepr</code> is designed for that.
+We would use it like that:</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="sleepr.html#cb159-1" aria-hidden="true" tabindex="-1"></a>bout_dt <span class="ot">&lt;-</span> <span class="fu">bout_analysis</span>(asleep, dt_curated)</span></code></pre></div>
 <p>The result is a new behavr table, with a few differences compared to the ones we used before:</p>
 <ul>
 <li>Each row in the data describes a bout</li>
@@ -629,42 +726,44 @@ summary_dt</code></pre></div>
 <li><code>t</code> is the onset of the bout (in seconds)</li>
 <li><code>duration</code> is length of the bout (in seconds)</li>
 </ul>
-<p>Note that you can use this function to study bouts of other discrete behaviours. For now, we are only interested in <strong>sleep bout</strong>, so we filter for <code>asleep == TRUE</code>. We also remove the, now redundant, <code>asleep</code> column:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bout_dt &lt;-<span class="st"> </span>bout_dt[asleep <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>, <span class="op">-</span><span class="st">&quot;asleep&quot;</span>]</code></pre></div>
+<p>Note that you can use this function to study bouts of other discrete behaviours.
+For now, we are only interested in <strong>sleep bout</strong>, so we filter for <code>asleep == TRUE</code>.
+We also remove the, now redundant, <code>asleep</code> column:</p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="sleepr.html#cb160-1" aria-hidden="true" tabindex="-1"></a>bout_dt <span class="ot">&lt;-</span> bout_dt[asleep <span class="sc">==</span> <span class="cn">TRUE</span>, <span class="sc">-</span><span class="st">&quot;asleep&quot;</span>]</span></code></pre></div>
 </div>
 <div id="bout-length-vs-time-of-the-day" class="section level3 unnumbered">
 <h3>Bout length vs time of the day</h3>
 <p>We can use <code>ggetho</code> to show how the average bout length depends on the time of the onset of the bout.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggetho</span>(bout_dt, <span class="kw">aes</span>(<span class="dt">y=</span>duration <span class="op">/</span><span class="st"> </span><span class="dv">60</span>, <span class="dt">colour=</span>sex), <span class="dt">time_wrap =</span> <span class="kw">hours</span>(<span class="dv">24</span>)) <span class="op">+</span><span class="st"> </span>
-<span class="st">      </span><span class="kw">stat_pop_etho</span>() <span class="op">+</span><span class="st"> </span>
-<span class="st">      </span><span class="kw">facet_grid</span>(genotype <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span>
-<span class="st">      </span><span class="kw">scale_y_continuous</span>(<span class="dt">name=</span> <span class="st">&quot;Bout length (min)&quot;</span>)</code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="sleepr.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggetho</span>(bout_dt, <span class="fu">aes</span>(<span class="at">y=</span>duration <span class="sc">/</span> <span class="dv">60</span>, <span class="at">colour=</span>sex), <span class="at">time_wrap =</span> <span class="fu">hours</span>(<span class="dv">24</span>)) <span class="sc">+</span> </span>
+<span id="cb161-2"><a href="sleepr.html#cb161-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">stat_pop_etho</span>() <span class="sc">+</span> </span>
+<span id="cb161-3"><a href="sleepr.html#cb161-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">facet_grid</span>(genotype <span class="sc">~</span> .) <span class="sc">+</span></span>
+<span id="cb161-4"><a href="sleepr.html#cb161-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">scale_y_continuous</span>(<span class="at">name=</span> <span class="st">&quot;Bout length (min)&quot;</span>)</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-119-1.png" width="672" /></p>
 <p>Note that this is a bit noisy as we only have a few animals per combination of treatment.</p>
 </div>
 <div id="architecture-description" class="section level3 unnumbered">
 <h3>Architecture description</h3>
 <p>One can count the total number of bouts and average bout duration for each individual like so:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bout_dt[,
-        .(<span class="dt">n_bouts =</span> .N,
-          <span class="dt">mean_bout_length =</span> <span class="kw">mean</span>(duration)),
-        by=id]</code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="sleepr.html#cb162-1" aria-hidden="true" tabindex="-1"></a>bout_dt[,</span>
+<span id="cb162-2"><a href="sleepr.html#cb162-2" aria-hidden="true" tabindex="-1"></a>        .(<span class="at">n_bouts =</span> .N,</span>
+<span id="cb162-3"><a href="sleepr.html#cb162-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">mean_bout_length =</span> <span class="fu">mean</span>(duration)),</span>
+<span id="cb162-4"><a href="sleepr.html#cb162-4" aria-hidden="true" tabindex="-1"></a>        by<span class="ot">=</span>id]</span></code></pre></div>
 <pre><code>## 
 ##  ==== METADATA ====
 ## 
 ##                                       id file_info region_id
 ##                                   &lt;fctr&gt;    &lt;list&gt;     &lt;int&gt;
-##  1: 2017-07-01 08:00:00|Monitor11.txt|01    &lt;list&gt;         1
-##  2: 2017-07-01 08:00:00|Monitor11.txt|02    &lt;list&gt;         2
-##  3: 2017-07-01 08:00:00|Monitor11.txt|03    &lt;list&gt;         3
-##  4: 2017-07-01 08:00:00|Monitor11.txt|04    &lt;list&gt;         4
-##  5: 2017-07-01 08:00:00|Monitor11.txt|05    &lt;list&gt;         5
+##  1: 2017-07-01 08:00:00|Monitor11.txt|01 &lt;list[2]&gt;         1
+##  2: 2017-07-01 08:00:00|Monitor11.txt|02 &lt;list[2]&gt;         2
+##  3: 2017-07-01 08:00:00|Monitor11.txt|03 &lt;list[2]&gt;         3
+##  4: 2017-07-01 08:00:00|Monitor11.txt|04 &lt;list[2]&gt;         4
+##  5: 2017-07-01 08:00:00|Monitor11.txt|05 &lt;list[2]&gt;         5
 ## ---                                                         
-## 90: 2017-07-01 08:00:00|Monitor64.txt|27    &lt;list&gt;        27
-## 91: 2017-07-01 08:00:00|Monitor64.txt|29    &lt;list&gt;        29
-## 92: 2017-07-01 08:00:00|Monitor64.txt|30    &lt;list&gt;        30
-## 93: 2017-07-01 08:00:00|Monitor64.txt|31    &lt;list&gt;        31
-## 94: 2017-07-01 08:00:00|Monitor64.txt|32    &lt;list&gt;        32
+## 90: 2017-07-01 08:00:00|Monitor64.txt|27 &lt;list[2]&gt;        27
+## 91: 2017-07-01 08:00:00|Monitor64.txt|29 &lt;list[2]&gt;        29
+## 92: 2017-07-01 08:00:00|Monitor64.txt|30 &lt;list[2]&gt;        30
+## 93: 2017-07-01 08:00:00|Monitor64.txt|31 &lt;list[2]&gt;        31
+## 94: 2017-07-01 08:00:00|Monitor64.txt|32 &lt;list[2]&gt;        32
 ##                         experiment_id      start_datetime stop_datetime    sex
 ##                                &lt;char&gt;              &lt;POSc&gt;        &lt;char&gt; &lt;char&gt;
 ##  1: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04      M
@@ -711,36 +810,38 @@ summary_dt</code></pre></div>
 </div>
 <div id="latency-to-sleep" class="section level3 unnumbered">
 <h3>Latency to sleep</h3>
-<p>The latency describes how long it takes for an animal to initiate its <strong>first sleep bout</strong>. Some researchers are also interested in the latency to the <strong>longest bout</strong>. In this example, lets say we focus on the second day (and not the night – 24 to 36 hours).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bout_dt_second_day &lt;-<span class="st"> </span>bout_dt[t <span class="op">%between%</span><span class="st">  </span><span class="kw">c</span>(<span class="kw">days</span>(<span class="dv">1</span>), <span class="kw">days</span>(<span class="dv">1</span>) <span class="op">+</span><span class="st"> </span><span class="kw">hours</span>(<span class="dv">12</span>))]
-<span class="co"># We express t relatively to the first day</span>
-bout_dt_second_day[, t<span class="op">:</span><span class="er">=</span><span class="st"> </span>t <span class="op">-</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">1</span>)]
-bout_summary &lt;-<span class="st"> </span>bout_dt_second_day[,.(
-                      <span class="dt">latency =</span> t[<span class="dv">1</span>], <span class="co"># the first bout is at t[1] </span>
-                      <span class="dt">first_bout_length =</span> duration[<span class="dv">1</span>],
-                      <span class="dt">latency_to_longest_bout =</span> t[<span class="kw">which.max</span>(duration)],
-                      <span class="dt">length_longest_bout =</span> <span class="kw">max</span>(duration),
-                      <span class="dt">n_bouts =</span> .N,
-                      <span class="dt">mean_bout_length =</span> <span class="kw">mean</span>(duration)
-                      ),
-                      by=id]
-bout_summary</code></pre></div>
+<p>The latency describes how long it takes for an animal to initiate its <strong>first sleep bout</strong>.
+Some researchers are also interested in the latency to the <strong>longest bout</strong>.
+In this example, lets say we focus on the second day (and not the night – 24 to 36 hours).</p>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="sleepr.html#cb164-1" aria-hidden="true" tabindex="-1"></a>bout_dt_second_day <span class="ot">&lt;-</span> bout_dt[t <span class="sc">%between%</span>  <span class="fu">c</span>(<span class="fu">days</span>(<span class="dv">1</span>), <span class="fu">days</span>(<span class="dv">1</span>) <span class="sc">+</span> <span class="fu">hours</span>(<span class="dv">12</span>))]</span>
+<span id="cb164-2"><a href="sleepr.html#cb164-2" aria-hidden="true" tabindex="-1"></a><span class="co"># We express t relatively to the first day</span></span>
+<span id="cb164-3"><a href="sleepr.html#cb164-3" aria-hidden="true" tabindex="-1"></a>bout_dt_second_day[, t<span class="sc">:</span><span class="er">=</span> t <span class="sc">-</span> <span class="fu">days</span>(<span class="dv">1</span>)]</span>
+<span id="cb164-4"><a href="sleepr.html#cb164-4" aria-hidden="true" tabindex="-1"></a>bout_summary <span class="ot">&lt;-</span> bout_dt_second_day[,.(</span>
+<span id="cb164-5"><a href="sleepr.html#cb164-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">latency =</span> t[<span class="dv">1</span>], <span class="co"># the first bout is at t[1] </span></span>
+<span id="cb164-6"><a href="sleepr.html#cb164-6" aria-hidden="true" tabindex="-1"></a>                      <span class="at">first_bout_length =</span> duration[<span class="dv">1</span>],</span>
+<span id="cb164-7"><a href="sleepr.html#cb164-7" aria-hidden="true" tabindex="-1"></a>                      <span class="at">latency_to_longest_bout =</span> t[<span class="fu">which.max</span>(duration)],</span>
+<span id="cb164-8"><a href="sleepr.html#cb164-8" aria-hidden="true" tabindex="-1"></a>                      <span class="at">length_longest_bout =</span> <span class="fu">max</span>(duration),</span>
+<span id="cb164-9"><a href="sleepr.html#cb164-9" aria-hidden="true" tabindex="-1"></a>                      <span class="at">n_bouts =</span> .N,</span>
+<span id="cb164-10"><a href="sleepr.html#cb164-10" aria-hidden="true" tabindex="-1"></a>                      <span class="at">mean_bout_length =</span> <span class="fu">mean</span>(duration)</span>
+<span id="cb164-11"><a href="sleepr.html#cb164-11" aria-hidden="true" tabindex="-1"></a>                      ),</span>
+<span id="cb164-12"><a href="sleepr.html#cb164-12" aria-hidden="true" tabindex="-1"></a>                      by<span class="ot">=</span>id]</span>
+<span id="cb164-13"><a href="sleepr.html#cb164-13" aria-hidden="true" tabindex="-1"></a>bout_summary</span></code></pre></div>
 <pre><code>## 
 ##  ==== METADATA ====
 ## 
 ##                                       id file_info region_id
 ##                                   &lt;fctr&gt;    &lt;list&gt;     &lt;int&gt;
-##  1: 2017-07-01 08:00:00|Monitor11.txt|01    &lt;list&gt;         1
-##  2: 2017-07-01 08:00:00|Monitor11.txt|02    &lt;list&gt;         2
-##  3: 2017-07-01 08:00:00|Monitor11.txt|03    &lt;list&gt;         3
-##  4: 2017-07-01 08:00:00|Monitor11.txt|04    &lt;list&gt;         4
-##  5: 2017-07-01 08:00:00|Monitor11.txt|05    &lt;list&gt;         5
+##  1: 2017-07-01 08:00:00|Monitor11.txt|01 &lt;list[2]&gt;         1
+##  2: 2017-07-01 08:00:00|Monitor11.txt|02 &lt;list[2]&gt;         2
+##  3: 2017-07-01 08:00:00|Monitor11.txt|03 &lt;list[2]&gt;         3
+##  4: 2017-07-01 08:00:00|Monitor11.txt|04 &lt;list[2]&gt;         4
+##  5: 2017-07-01 08:00:00|Monitor11.txt|05 &lt;list[2]&gt;         5
 ## ---                                                         
-## 89: 2017-07-01 08:00:00|Monitor64.txt|27    &lt;list&gt;        27
-## 90: 2017-07-01 08:00:00|Monitor64.txt|29    &lt;list&gt;        29
-## 91: 2017-07-01 08:00:00|Monitor64.txt|30    &lt;list&gt;        30
-## 92: 2017-07-01 08:00:00|Monitor64.txt|31    &lt;list&gt;        31
-## 93: 2017-07-01 08:00:00|Monitor64.txt|32    &lt;list&gt;        32
+## 89: 2017-07-01 08:00:00|Monitor64.txt|27 &lt;list[2]&gt;        27
+## 90: 2017-07-01 08:00:00|Monitor64.txt|29 &lt;list[2]&gt;        29
+## 91: 2017-07-01 08:00:00|Monitor64.txt|30 &lt;list[2]&gt;        30
+## 92: 2017-07-01 08:00:00|Monitor64.txt|31 &lt;list[2]&gt;        31
+## 93: 2017-07-01 08:00:00|Monitor64.txt|32 &lt;list[2]&gt;        32
 ##                         experiment_id      start_datetime stop_datetime    sex
 ##                                &lt;char&gt;              &lt;POSc&gt;        &lt;char&gt; &lt;char&gt;
 ##  1: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04      M
@@ -796,33 +897,40 @@ bout_summary</code></pre></div>
 ## 91:                   35820                4560      25        1329.6000
 ## 92:                   21360               14760      19        1664.2105
 ## 93:                   26820               15360       6        6690.0000</code></pre>
-<p>For good measure, I also added number of bouts and average bout length as we have seen before. You can, of course, use these results to plot things like the relationship between bout length and bout number:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="kw">rejoin</span>(bout_summary), <span class="kw">aes</span>(n_bouts, mean_bout_length, <span class="dt">colour=</span>sex)) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
-<span class="st">    </span><span class="kw">facet_grid</span>(genotype <span class="op">~</span><span class="st"> </span>.) <span class="op">+</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">scale_x_continuous</span>(<span class="dt">name=</span><span class="st">&quot;Number of bouts&quot;</span>) <span class="op">+</span>
-<span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">name=</span><span class="st">&quot;Average bout duration (s)&quot;</span>)</code></pre></div>
+<p>For good measure, I also added number of bouts and average bout length as we have seen before.
+You can, of course, use these results to plot things like the relationship between bout length and bout number:</p>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="sleepr.html#cb166-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">rejoin</span>(bout_summary), <span class="fu">aes</span>(n_bouts, mean_bout_length, <span class="at">colour=</span>sex)) <span class="sc">+</span></span>
+<span id="cb166-2"><a href="sleepr.html#cb166-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb166-3"><a href="sleepr.html#cb166-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid</span>(genotype <span class="sc">~</span> .) <span class="sc">+</span> </span>
+<span id="cb166-4"><a href="sleepr.html#cb166-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">name=</span><span class="st">&quot;Number of bouts&quot;</span>) <span class="sc">+</span></span>
+<span id="cb166-5"><a href="sleepr.html#cb166-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">name=</span><span class="st">&quot;Average bout duration (s)&quot;</span>)</span></code></pre></div>
 <p><img src="rethomics_files/figure-html/achitecture-1.png" width="672" /></p>
-<p>Always <strong>be critical</strong> about what you do. For instance, what whould be the latency to sleep of an animal that, in the period of observation, does not sleep?</p>
+<p>Always <strong>be critical</strong> about what you do.
+For instance, what whould be the latency to sleep of an animal that, in the period of observation, does not sleep?</p>
 </div>
 </div>
 <div id="merging-all-statistics" class="section level2 unnumbered">
 <h2>Merging all statistics</h2>
-<p>Earlier, we made a <code>summary_dt</code> in which we computed some statitics such as sleep fraction in L and D phase. In addition, we have now a <code>bout_summary</code> where we have other variables. These data have both one row per animal. Ideally, we could <strong>“merge” them into a single table</strong> that has all the individual statistics. This way we can study the relationship, say, between sleep amount and latency. In order to do that, we perform a so called “join”:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">overall_summary &lt;-<span class="st"> </span>summary_dt[bout_summary]
-overall_summary</code></pre></div>
+<p>Earlier, we made a <code>summary_dt</code> in which we computed some statitics such as sleep fraction in L and D phase.
+In addition, we have now a <code>bout_summary</code> where we have other variables.
+These data have both one row per animal.
+Ideally, we could <strong>“merge” them into a single table</strong> that has all the individual statistics.
+This way we can study the relationship, say, between sleep amount and latency.
+In order to do that, we perform a so called “join”:</p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="sleepr.html#cb167-1" aria-hidden="true" tabindex="-1"></a>overall_summary <span class="ot">&lt;-</span> summary_dt[bout_summary]</span>
+<span id="cb167-2"><a href="sleepr.html#cb167-2" aria-hidden="true" tabindex="-1"></a>overall_summary</span></code></pre></div>
 <pre><code>##                                       id file_info region_id
-##  1: 2017-07-01 08:00:00|Monitor11.txt|01    &lt;list&gt;         1
-##  2: 2017-07-01 08:00:00|Monitor11.txt|02    &lt;list&gt;         2
-##  3: 2017-07-01 08:00:00|Monitor11.txt|03    &lt;list&gt;         3
-##  4: 2017-07-01 08:00:00|Monitor11.txt|04    &lt;list&gt;         4
-##  5: 2017-07-01 08:00:00|Monitor11.txt|05    &lt;list&gt;         5
+##  1: 2017-07-01 08:00:00|Monitor11.txt|01 &lt;list[2]&gt;         1
+##  2: 2017-07-01 08:00:00|Monitor11.txt|02 &lt;list[2]&gt;         2
+##  3: 2017-07-01 08:00:00|Monitor11.txt|03 &lt;list[2]&gt;         3
+##  4: 2017-07-01 08:00:00|Monitor11.txt|04 &lt;list[2]&gt;         4
+##  5: 2017-07-01 08:00:00|Monitor11.txt|05 &lt;list[2]&gt;         5
 ## ---                                                         
-## 89: 2017-07-01 08:00:00|Monitor64.txt|27    &lt;list&gt;        27
-## 90: 2017-07-01 08:00:00|Monitor64.txt|29    &lt;list&gt;        29
-## 91: 2017-07-01 08:00:00|Monitor64.txt|30    &lt;list&gt;        30
-## 92: 2017-07-01 08:00:00|Monitor64.txt|31    &lt;list&gt;        31
-## 93: 2017-07-01 08:00:00|Monitor64.txt|32    &lt;list&gt;        32
+## 89: 2017-07-01 08:00:00|Monitor64.txt|27 &lt;list[2]&gt;        27
+## 90: 2017-07-01 08:00:00|Monitor64.txt|29 &lt;list[2]&gt;        29
+## 91: 2017-07-01 08:00:00|Monitor64.txt|30 &lt;list[2]&gt;        30
+## 92: 2017-07-01 08:00:00|Monitor64.txt|31 &lt;list[2]&gt;        31
+## 93: 2017-07-01 08:00:00|Monitor64.txt|32 &lt;list[2]&gt;        32
 ##                         experiment_id      start_datetime stop_datetime sex
 ##  1: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04   M
 ##  2: 2017-07-01 08:00:00|Monitor11.txt 2017-07-01 08:00:00    2017-07-04   M
@@ -871,16 +979,19 @@ overall_summary</code></pre></div>
 ## 91:      25        1329.6000
 ## 92:      19        1664.2105
 ## 93:       6        6690.0000</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(overall_summary, <span class="kw">aes</span>(latency <span class="op">/</span><span class="st"> </span><span class="dv">60</span>, sleep_fraction_l, <span class="dt">colour=</span>sex)) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">alpha=</span>.<span class="dv">1</span>)<span class="op">+</span>
-<span class="st">    </span><span class="kw">facet_grid</span>(genotype <span class="op">~</span><span class="st"> </span>.)</code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="sleepr.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(overall_summary, <span class="fu">aes</span>(latency <span class="sc">/</span> <span class="dv">60</span>, sleep_fraction_l, <span class="at">colour=</span>sex)) <span class="sc">+</span></span>
+<span id="cb169-2"><a href="sleepr.html#cb169-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb169-3"><a href="sleepr.html#cb169-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">alpha=</span>.<span class="dv">1</span>)<span class="sc">+</span></span>
+<span id="cb169-4"><a href="sleepr.html#cb169-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_grid</span>(genotype <span class="sc">~</span> .)</span></code></pre></div>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
 <p><img src="rethomics_files/figure-html/unnamed-chunk-123-1.png" width="672" /></p>
 </div>
 <div id="take-home-message-2" class="section level2 unnumbered">
 <h2>Take home message</h2>
-<p>Data analysis and visualisation is about <strong>translating your biological questions to another language</strong>. Problems in emerging areas of science can be very rich so they should be matched with the equally rich grammar that only a programming language can provide. This tutorial was very simple and does not pretend to provied a canonical sleep analysis. Instead, see it as a set of building blocks that you can use and rearrange to address your own questions.</p>
+<p>Data analysis and visualisation is about <strong>translating your biological questions to another language</strong>.
+Problems in emerging areas of science can be very rich so they should be matched with the equally rich grammar that only a programming language can provide.
+This tutorial was very simple and does not pretend to provied a canonical sleep analysis.
+Instead, see it as a set of building blocks that you can use and rearrange to address your own questions.</p>
 </div>
 <div id="next-steps-3" class="section level2 unnumbered">
 <h2>Next steps</h2>
@@ -901,7 +1012,6 @@ overall_summary</code></pre></div>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -920,6 +1030,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -940,6 +1051,10 @@ gitbook.start({
 "text": null
 },
 "download": ["rethomics.pdf", "rethomics.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "section"
 }
@@ -952,7 +1067,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))

@@ -689,11 +689,17 @@ Ensure you have installed <code>sleepr</code> as well (<code>devtools::install_g
 <ul>
 <li>The activity in each 10s of data will be scored</li>
 <li>The position will be kept</li>
-<li>Sleep will be scored according to the “five minute rule”</li>
+<li>Sleep will be scored according to the rule you choose</li>
 </ul>
+<p>Since <code>sleepr</code> 0.4.0, <code>sleep_annotation</code> needs a sleep rule (extra arguments of <code>load_ethoscope</code> are passed to <code>FUN</code>):</p>
+<ul>
+<li><code>rule = "classic"</code> – the “five minute rule”: any frame faster than the velocity threshold counts as movement. Use it to reproduce earlier analyses.</li>
+<li><code>rule = "k"</code> – counts movement only when it is sustained or walking, ignoring tracking noise (flickers and isolated micro-movements). It matches video ground truth at night, and flies it scores asleep respond to stimuli like sleeping flies. Recommended for new analyses.</li>
+</ul>
+<p>Rather than passing it every time, you can declare it once per session with <code>options(sleepr.sleep_rule = "classic")</code> (or <code>SLEEPR_SLEEP_RULE=classic</code> in <code>.Renviron</code>). Here we use the classic rule, as in the rest of this tutorial.</p>
 <p>To apply a function to <strong>all individual data, as they are loaded</strong>, we can use the <code>FUN</code> argument:</p>
 <div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="scopr.html#cb62-1" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">&lt;-</span> <span class="fu">load_ethoscope</span>(metadata,</span>
-<span id="cb62-2"><a href="scopr.html#cb62-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">FUN =</span> sleepr<span class="sc">::</span>sleep_annotation, </span>
+<span id="cb62-2"><a href="scopr.html#cb62-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">FUN =</span> sleepr<span class="sc">::</span>sleep_annotation, <span class="at">rule =</span> <span class="st">"classic"</span>, </span>
 <span id="cb62-3"><a href="scopr.html#cb62-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">verbose=</span><span class="cn">FALSE</span>)</span>
 <span id="cb62-4"><a href="scopr.html#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dt)</span></code></pre></div>
 <pre><code>## behavr table with:
@@ -796,7 +802,7 @@ In our lab, it is at <strong>09:00:00, GMT</strong>.
 In <code>load_ethoscope</code>, we translate that by using the argument <code>reference_hour=9.0</code>:</p>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="scopr.html#cb66-1" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">&lt;-</span> <span class="fu">load_ethoscope</span>(metadata,</span>
 <span id="cb66-2"><a href="scopr.html#cb66-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">reference_hour=</span><span class="fl">9.0</span>, </span>
-<span id="cb66-3"><a href="scopr.html#cb66-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">FUN =</span> sleepr<span class="sc">::</span>sleep_annotation, </span>
+<span id="cb66-3"><a href="scopr.html#cb66-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">FUN =</span> sleepr<span class="sc">::</span>sleep_annotation, <span class="at">rule =</span> <span class="st">"classic"</span>, </span>
 <span id="cb66-4"><a href="scopr.html#cb66-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">verbose=</span><span class="cn">FALSE</span>)</span></code></pre></div>
 </div>
 <div id="cache-directory" class="section level3 unnumbered">
@@ -813,7 +819,7 @@ This way you will load data one or two orders of magnitude faster!</p>
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="scopr.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(</span>
 <span id="cb67-2"><a href="scopr.html#cb67-2" aria-hidden="true" tabindex="-1"></a>  dt <span class="ot">&lt;-</span> <span class="fu">load_ethoscope</span>(metadata,</span>
 <span id="cb67-3"><a href="scopr.html#cb67-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">reference_hour=</span><span class="fl">9.0</span>, </span>
-<span id="cb67-4"><a href="scopr.html#cb67-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">FUN =</span> sleepr<span class="sc">::</span>sleep_annotation, </span>
+<span id="cb67-4"><a href="scopr.html#cb67-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">FUN =</span> sleepr<span class="sc">::</span>sleep_annotation, <span class="at">rule =</span> <span class="st">"classic"</span>, </span>
 <span id="cb67-5"><a href="scopr.html#cb67-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">cache =</span> <span class="st">&quot;ethoscope_cache&quot;</span>, </span>
 <span id="cb67-6"><a href="scopr.html#cb67-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">verbose=</span><span class="cn">FALSE</span>)</span>
 <span id="cb67-7"><a href="scopr.html#cb67-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
@@ -823,7 +829,7 @@ This way you will load data one or two orders of magnitude faster!</p>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="scopr.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system.time</span>(</span>
 <span id="cb69-2"><a href="scopr.html#cb69-2" aria-hidden="true" tabindex="-1"></a>  dt <span class="ot">&lt;-</span> <span class="fu">load_ethoscope</span>(metadata,</span>
 <span id="cb69-3"><a href="scopr.html#cb69-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">reference_hour=</span><span class="fl">9.0</span>, </span>
-<span id="cb69-4"><a href="scopr.html#cb69-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">FUN =</span> sleepr<span class="sc">::</span>sleep_annotation, </span>
+<span id="cb69-4"><a href="scopr.html#cb69-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">FUN =</span> sleepr<span class="sc">::</span>sleep_annotation, <span class="at">rule =</span> <span class="st">"classic"</span>, </span>
 <span id="cb69-5"><a href="scopr.html#cb69-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">cache =</span> <span class="st">&quot;ethoscope_cache&quot;</span>, </span>
 <span id="cb69-6"><a href="scopr.html#cb69-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">verbose=</span><span class="cn">FALSE</span>)</span>
 <span id="cb69-7"><a href="scopr.html#cb69-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>

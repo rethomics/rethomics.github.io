@@ -266,13 +266,21 @@ When running this function:
 
 * The activity in each 10s of data will be scored
 * The position will be kept
-* Sleep will be scored according to the "five minute rule"
+* Sleep will be scored according to the rule you choose
+
+Since `sleepr` 0.4.0, `sleep_annotation` needs a sleep rule (extra arguments of `load_ethoscope` are passed to `FUN`):
+
+* `rule = "classic"` -- the "five minute rule": any frame faster than the velocity threshold counts as movement. Use it to reproduce earlier analyses.
+* `rule = "k"` -- counts movement only when it is sustained or walking, ignoring tracking noise (flickers and isolated micro-movements). It matches video ground truth at night, and flies it scores asleep respond to stimuli like sleeping flies. Recommended for new analyses.
+
+Rather than passing it every time, you can declare it once per session with `options(sleepr.sleep_rule = "classic")` (or `SLEEPR_SLEEP_RULE=classic` in `.Renviron`).
+Here we use the classic rule, as in the rest of this tutorial.
 
 To apply a function to **all individual data, as they are loaded**, we can use the `FUN` argument:
 
 ```{r, cache=TRUE}
 dt <- load_ethoscope(metadata,
-					   FUN = sleepr::sleep_annotation, 
+					   FUN = sleepr::sleep_annotation, rule = "classic", 
 					   verbose=FALSE)
 summary(dt)
 ```
@@ -306,7 +314,7 @@ In `load_ethoscope`, we translate that by using the argument `reference_hour=9.0
 ```{r,eval=FALSE}
 dt <- load_ethoscope(metadata,
              reference_hour=9.0, 
-					   FUN = sleepr::sleep_annotation, 
+					   FUN = sleepr::sleep_annotation, rule = "classic", 
 					   verbose=FALSE)
 ```
 
@@ -329,7 +337,7 @@ The first time, everything will take as long:
 system.time(
   dt <- load_ethoscope(metadata,
              reference_hour=9.0, 
-					   FUN = sleepr::sleep_annotation, 
+					   FUN = sleepr::sleep_annotation, rule = "classic", 
              cache = "ethoscope_cache", 
 					   verbose=FALSE)
 )
@@ -341,7 +349,7 @@ However, the next time, we do the same thing way faster:
 system.time(
   dt <- load_ethoscope(metadata,
              reference_hour=9.0, 
-					   FUN = sleepr::sleep_annotation, 
+					   FUN = sleepr::sleep_annotation, rule = "classic", 
              cache = "ethoscope_cache", 
 					   verbose=FALSE)
 )
